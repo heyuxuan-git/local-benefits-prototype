@@ -2,4 +2,5 @@
 
 主仓库（私有）: https://github.com/heyuxuan-git/local-benefits-miniapp
 
-打开 `index.html` 或访问本仓库 GitHub Pages 即可演示。
+- v0.2：轮播首页 · Tab「我的」 · 图标去 emoji
+- 打开 index.html 或访问 GitHub Pages

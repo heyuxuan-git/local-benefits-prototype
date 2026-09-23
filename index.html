@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>本机福利 · 交互原型 v0.1</title>
+  <title>本机福利 · 交互原型 v0.2</title>
   <style>
     :root {
       --brand: #ff6600;
@@ -17,63 +17,42 @@
       --price: #ff3b30;
       --ok: #00b578;
       --radius: 16px;
-      --safe: 0px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     html, body { height: 100%; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: #0f1218;
-      color: var(--ink);
-      display: flex;
-      flex-direction: column;
-      min-height: 100%;
+      background: #0f1218; color: var(--ink);
+      display: flex; flex-direction: column; min-height: 100%;
     }
 
-    /* ===== 顶部说明条（给老板看的） ===== */
+    /* SVG icon defaults */
+    .ico { width: 1em; height: 1em; display: inline-block; vertical-align: -0.12em; flex-shrink: 0; }
+    .ico-lg { width: 1.35em; height: 1.35em; }
+    .ico-xl { width: 1.8em; height: 1.8em; }
+
     .brief {
-      color: #c9cdd4;
-      font-size: 13px;
-      line-height: 1.5;
-      padding: 14px 18px 10px;
-      max-width: 960px;
-      margin: 0 auto;
-      width: 100%;
+      color: #c9cdd4; font-size: 13px; line-height: 1.5;
+      padding: 14px 18px 10px; max-width: 960px; margin: 0 auto; width: 100%;
     }
     .brief strong { color: #fff; font-weight: 600; }
     .brief .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
     .brief .chip {
-      background: #1c2230;
-      border: 1px solid #2a3348;
-      color: #9fb0d0;
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 12px;
+      background: #1c2230; border: 1px solid #2a3348; color: #9fb0d0;
+      border-radius: 999px; padding: 4px 10px; font-size: 12px;
     }
     .brief .chip b { color: var(--gold); font-weight: 600; }
 
-    /* ===== 手机壳 ===== */
     .stage {
-      flex: 1;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 28px;
-      padding: 8px 16px 40px;
-      flex-wrap: wrap;
+      flex: 1; display: flex; align-items: flex-start; justify-content: center;
+      gap: 28px; padding: 8px 16px 40px; flex-wrap: wrap;
     }
     .phone {
-      width: 390px;
-      height: 844px;
-      background: var(--bg);
-      border-radius: 44px;
-      border: 10px solid #1a1f2b;
+      width: 390px; height: 844px; background: var(--bg);
+      border-radius: 44px; border: 10px solid #1a1f2b;
       box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 0 0 2px #2a3142;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
+      overflow: hidden; position: relative;
+      display: flex; flex-direction: column; flex-shrink: 0;
     }
     .notch {
       position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -82,12 +61,11 @@
     }
     .status {
       height: 44px; display: flex; align-items: flex-end; justify-content: space-between;
-      padding: 0 22px 4px; font-size: 13px; font-weight: 600; color: var(--ink);
+      padding: 0 22px 4px; font-size: 13px; font-weight: 600;
       background: #fff; flex-shrink: 0; z-index: 40;
     }
     .status .dots { letter-spacing: 1px; }
 
-    /* 导航栏 */
     .navbar {
       height: 44px; background: #fff; display: flex; align-items: center; justify-content: center;
       position: relative; flex-shrink: 0; border-bottom: 1px solid #f0f1f3; z-index: 30;
@@ -107,28 +85,25 @@
       background: rgba(255,255,255,.6); font-size: 12px; color: #646a73;
     }
 
-    /* 内容区 */
     .screen { flex: 1; overflow-y: auto; overflow-x: hidden; background: var(--bg); position: relative; }
     .screen::-webkit-scrollbar { width: 0; }
     .view { display: none; min-height: 100%; padding-bottom: 76px; animation: fade .18s ease; }
     .view.active { display: block; }
     @keyframes fade { from { opacity: .4; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
-    /* TabBar */
     .tabbar {
       position: absolute; left: 0; right: 0; bottom: 0; height: 64px;
       background: #fff; border-top: 1px solid #eceef1;
-      display: flex; z-index: 45; padding-bottom: env(safe-area-inset-bottom);
+      display: flex; z-index: 45;
     }
     .tab {
       flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 2px; color: var(--ink-3); font-size: 11px; cursor: pointer; border: none; background: none;
+      gap: 3px; color: var(--ink-3); font-size: 11px; cursor: pointer; border: none; background: none;
       padding-top: 6px;
     }
-    .tab .ico { font-size: 20px; line-height: 1; }
+    .tab .ico { font-size: 20px; width: 22px; height: 22px; }
     .tab.on { color: var(--brand); font-weight: 600; }
 
-    /* ===== 通用 ===== */
     .card { background: var(--card); border-radius: var(--radius); margin: 12px 16px; padding: 16px; }
     .btn {
       border: none; cursor: pointer; border-radius: 999px; font-weight: 600;
@@ -144,7 +119,7 @@
     .muted { color: var(--ink-3); font-size: 12px; }
     .section-title {
       display: flex; align-items: center; justify-content: center;
-      margin: 18px 0 12px; font-size: 15px; font-weight: 600; color: var(--ink);
+      margin: 18px 0 12px; font-size: 15px; font-weight: 600;
     }
     .section-title::before, .section-title::after {
       content: ""; width: 28px; height: 3px; background: var(--brand); border-radius: 2px; margin: 0 10px;
@@ -157,34 +132,155 @@
     }
     .toast.show { opacity: 1; }
 
-    /* ===== 权益页 ===== */
+    /* ===== 首页 ===== */
+    .home-swiper {
+      position: relative; margin: 12px 16px 0; height: 160px;
+      border-radius: 16px; overflow: hidden; background: #1a1f2b;
+    }
+    .home-swiper .slides {
+      display: flex; height: 100%;
+      transition: transform .35s ease;
+    }
+    .home-swiper .slide {
+      min-width: 100%; height: 100%; padding: 22px 24px;
+      display: flex; flex-direction: column; justify-content: center; color: #fff;
+      position: relative;
+    }
+    .home-swiper .slide .tag {
+      align-self: flex-start; font-size: 11px; background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.45); padding: 2px 10px; border-radius: 999px;
+    }
+    .home-swiper .slide h3 { font-size: 22px; font-weight: 800; margin-top: 10px; line-height: 1.3; }
+    .home-swiper .slide p { font-size: 13px; opacity: .9; margin-top: 6px; }
+    .home-swiper .slide .cta {
+      margin-top: 14px; align-self: flex-start; background: #fff; color: var(--brand);
+      font-size: 12px; font-weight: 700; padding: 7px 16px; border-radius: 999px; border: none; cursor: pointer;
+    }
+    .s1 { background: linear-gradient(135deg, #ff6600, #ff3b30); }
+    .s2 { background: linear-gradient(135deg, #2f7cf6, #6c5ce7); }
+    .s3 { background: linear-gradient(135deg, #ffb800, #ff6600); color: #1f2329; }
+    .s3 .tag { border-color: rgba(0,0,0,.2); background: rgba(0,0,0,.1); }
+    .s3 .cta { background: #1f2329; color: #ffb800; }
+    .dots {
+      position: absolute; right: 14px; bottom: 12px; display: flex; gap: 5px;
+    }
+    .dots i {
+      width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.4);
+      display: block; cursor: pointer;
+    }
+    .dots i.on { background: #fff; width: 14px; border-radius: 3px; }
+    .s3 ~ .dots i.on { background: #1f2329; }
+
+    .quick {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: #fff; margin: 12px 16px; border-radius: 16px; padding: 16px 8px;
+    }
+    .quick-item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--ink); cursor: pointer;
+    }
+    .quick-item .qi {
+      width: 44px; height: 44px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      background: #fff4e8; color: var(--brand);
+    }
+    .quick-item .qi .ico { font-size: 22px; width: 24px; height: 24px; }
+    .quick-item .qi.b2 { background: #eef5ff; color: #2f7cf6; }
+    .quick-item .qi.b3 { background: #e8faf3; color: #00b578; }
+    .quick-item .qi.b4 { background: #fff7e6; color: #ff9500; }
+
+    .home-points {
+      margin: 0 16px 12px; padding: 14px 16px; border-radius: 14px;
+      background: linear-gradient(135deg, #fff4e8, #ffe8cc);
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer;
+    }
+    .home-points .l { display: flex; align-items: center; gap: 10px; }
+    .home-points .ico { font-size: 26px; color: var(--brand); width: 28px; height: 28px; }
+    .home-points .n { font-size: 20px; font-weight: 800; color: var(--brand); }
+    .home-points .u { font-size: 12px; color: var(--brand); }
+    .home-points .go {
+      background: var(--brand); color: #fff; font-size: 12px; font-weight: 600;
+      border: none; padding: 8px 14px; border-radius: 999px; cursor: pointer;
+    }
+
+    .home-sec-head {
+      display: flex; justify-content: space-between; align-items: center;
+      margin: 4px 20px 10px; font-size: 15px; font-weight: 700;
+    }
+    .home-sec-head .more { font-size: 12px; color: var(--ink-3); font-weight: 400; cursor: pointer; }
+    .home-coupons {
+      display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 4px;
+      scrollbar-width: none;
+    }
+    .home-coupons::-webkit-scrollbar { display: none; }
+    .hc {
+      min-width: 150px; border-radius: 12px; padding: 12px; color: #fff;
+      cursor: pointer; position: relative;
+    }
+    .hc .bt { font-size: 11px; opacity: .9; }
+    .hc .tt { font-size: 14px; font-weight: 700; margin-top: 4px; }
+    .hc .ss { font-size: 11px; opacity: .9; margin-top: 2px; }
+    .hc .btn-s {
+      margin-top: 10px; background: #fff; color: var(--brand);
+      font-size: 11px; font-weight: 700; text-align: center;
+      padding: 6px 0; border-radius: 999px;
+    }
+    .th-orange { background: linear-gradient(160deg, #ff9a3c, #ff5a1f); }
+    .th-meituan { background: linear-gradient(160deg, #ffd100, #ffb800); color: #1f2329; }
+    .th-meituan .btn-s { background: #1f2329; color: #ffd100; }
+    .th-taobao { background: linear-gradient(160deg, #ff7a45, #ff3b30); }
+    .th-blue { background: linear-gradient(160deg, #4db7ff, #2f7cf6); }
+    .th-didi { background: linear-gradient(160deg, #ff7a45, #ff5a1f); }
+    .th-green { background: linear-gradient(160deg, #34c759, #00b578); }
+    .th-gold { background: linear-gradient(160deg, #ffc94d, #ff9500); color: #1f2329; }
+    .th-gold .btn-s { background: #1f2329; color: #ffc94d; }
+
+    .home-goods { padding: 0 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .hg {
+      background: #fff; border-radius: 12px; padding: 10px; cursor: pointer;
+    }
+    .hg .ph {
+      height: 90px; border-radius: 8px; background: linear-gradient(135deg, #fff4e8, #ffe8cc);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--brand); font-size: 12px; text-align: center; padding: 6px; line-height: 1.3;
+    }
+    .hg .t { font-size: 12.5px; font-weight: 600; margin-top: 8px; line-height: 1.35;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 34px; }
+    .hg .pr { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+    .hg .pt { color: var(--brand); font-size: 13px; font-weight: 700; }
+    .hg .cash { color: var(--price); font-size: 15px; font-weight: 800; }
+    .hg .cash span { font-size: 11px; }
+
+    /* ===== 权益 ===== */
     .top-bar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 10px 14px; background: #fff;
     }
     .points-pill {
-      display: flex; align-items: baseline; gap: 4px;
+      display: flex; align-items: center; gap: 5px;
       background: linear-gradient(135deg, #fff4e8, #ffe8cc);
       border-radius: 999px; padding: 8px 14px; color: var(--brand); cursor: pointer;
     }
+    .points-pill .ico { font-size: 18px; width: 18px; height: 18px; }
     .points-pill .n { font-size: 18px; font-weight: 700; }
     .points-pill .u { font-size: 11px; }
     .ad-entry {
       background: linear-gradient(135deg, var(--brand), var(--price));
       color: #fff; font-size: 12px; font-weight: 600;
       padding: 9px 14px; border-radius: 999px; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
     }
-    .benefit-layout { display: flex; height: calc(100% - 0px); min-height: 520px; }
+    .ad-entry .ico { width: 16px; height: 16px; }
+    .benefit-layout { display: flex; min-height: 520px; }
     .side {
-      width: 78px; background: #fff; flex-shrink: 0; overflow-y: auto;
-      padding-bottom: 80px;
+      width: 78px; background: #fff; flex-shrink: 0; overflow-y: auto; padding-bottom: 80px;
     }
     .side-item {
-      padding: 14px 4px; text-align: center; color: var(--ink-2);
-      font-size: 11px; cursor: pointer; border-left: 3px solid transparent;
-      line-height: 1.3;
+      padding: 13px 4px; text-align: center; color: var(--ink-2);
+      font-size: 11px; cursor: pointer; border-left: 3px solid transparent; line-height: 1.3;
     }
-    .side-item .ei { display: block; font-size: 22px; margin-bottom: 4px; }
+    .side-item .ico { font-size: 22px; width: 24px; height: 24px; margin: 0 auto 4px; display: block; color: inherit; }
     .side-item.on { background: var(--bg); color: var(--brand); font-weight: 600; border-left-color: var(--brand); }
     .main-col { flex: 1; overflow-y: auto; padding: 8px 10px 80px; }
     .coupon {
@@ -201,19 +297,10 @@
     .coupon .t { font-size: 17px; font-weight: 700; margin-top: 4px; }
     .coupon .s { font-size: 12px; opacity: .92; margin-top: 2px; }
     .coupon .act {
-      margin-top: auto; align-self: center; background: #fff; color: var(--brand);
+      margin-top: 12px; align-self: center; background: #fff; color: var(--brand);
       font-size: 12px; font-weight: 700; padding: 7px 22px; border-radius: 999px;
-      margin-top: 12px;
     }
-    .th-orange { background: linear-gradient(160deg, #ff9a3c, #ff5a1f); }
-    .th-meituan { background: linear-gradient(160deg, #ffd100, #ffb800); color: #1f2329; }
-    .th-meituan .act { background: #1f2329; color: #ffd100; }
-    .th-taobao { background: linear-gradient(160deg, #ff7a45, #ff3b30); }
-    .th-blue { background: linear-gradient(160deg, #4db7ff, #2f7cf6); }
-    .th-gold { background: linear-gradient(160deg, #ffc94d, #ff9500); color: #1f2329; }
-    .th-gold .act { background: #1f2329; color: #ffc94d; }
-    .th-green { background: linear-gradient(160deg, #34c759, #00b578); }
-    .th-didi { background: linear-gradient(160deg, #ff7a45, #ff5a1f); }
+    .th-orange.coupon .act { color: var(--brand); }
 
     /* ===== 商城 ===== */
     .mall-hero {
@@ -248,9 +335,7 @@
     .goods {
       display: flex; gap: 12px; background: #fff; border-radius: 14px;
       margin: 0 16px 12px; padding: 12px; cursor: pointer;
-      transition: box-shadow .15s;
     }
-    .goods:active { box-shadow: 0 2px 8px rgba(0,0,0,.06); }
     .goods .thumb {
       width: 92px; height: 92px; border-radius: 10px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
@@ -279,7 +364,7 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 8px; color: var(--brand); padding: 24px; text-align: center;
     }
-    .detail-hero .emoji { font-size: 56px; }
+    .detail-hero .ico { font-size: 56px; width: 64px; height: 64px; }
     .detail-hero .name { font-size: 16px; font-weight: 700; color: var(--ink); }
     .detail-hero .cat { font-size: 12px; color: var(--ink-2); }
     .detail-price-row { display: flex; align-items: baseline; gap: 10px; margin-top: 10px; }
@@ -349,7 +434,7 @@
       font-size: 12px; padding: 6px 14px; border-radius: 999px;
     }
 
-    /* ===== 推广 ===== */
+    /* ===== 我的 ===== */
     .agent-head {
       background: linear-gradient(160deg, #ff6600, #ff3b30);
       color: #fff; padding: 20px 16px 22px;
@@ -362,10 +447,9 @@
     .pts-mini {
       font-size: 12px; background: rgba(255,255,255,.18);
       padding: 6px 12px; border-radius: 999px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 4px;
     }
-    .invite {
-      margin-top: 16px; display: flex; gap: 10px; align-items: center;
-    }
+    .invite { margin-top: 16px; display: flex; gap: 10px; align-items: center; }
     .invite .code {
       flex: 1; background: rgba(255,255,255,.15);
       border: 1px dashed rgba(255,255,255,.6); border-radius: 8px;
@@ -374,7 +458,9 @@
     .invite .share {
       background: #fff; color: var(--brand); border: none; border-radius: 999px;
       font-size: 13px; font-weight: 700; padding: 10px 16px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
     }
+    .invite .share .ico { width: 14px; height: 14px; color: var(--brand); }
     .agent-sub { margin-top: 10px; font-size: 11px; opacity: .9; }
     .stat-bar {
       display: flex; background: #fff; border-radius: 14px;
@@ -397,8 +483,13 @@
       display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 16px;
     }
     .menu-item { text-align: center; cursor: pointer; }
-    .menu-item .mi { font-size: 22px; }
-    .menu-item .mn { font-size: 11px; margin-top: 4px; color: var(--ink); }
+    .menu-item .mi {
+      width: 36px; height: 36px; margin: 0 auto; border-radius: 10px;
+      background: var(--bg); display: flex; align-items: center; justify-content: center;
+      color: var(--ink-2);
+    }
+    .menu-item .mi .ico { font-size: 20px; width: 20px; height: 20px; }
+    .menu-item .mn { font-size: 11px; margin-top: 6px; color: var(--ink); }
     .cta {
       display: flex; align-items: center; justify-content: space-between;
       background: linear-gradient(135deg, #fff9f0, #fff4e8);
@@ -437,25 +528,26 @@
     .ad-hero p { font-size: 12px; opacity: .9; margin-top: 4px; }
     .ad-hero .bal { font-size: 36px; font-weight: 800; margin-top: 12px; }
     .prog { margin: 0 16px 12px; background: #fff; border-radius: 14px; padding: 16px; }
-    .prog .bar {
-      height: 10px; background: #f0f1f3; border-radius: 999px; overflow: hidden;
-    }
+    .prog .bar { height: 10px; background: #f0f1f3; border-radius: 999px; overflow: hidden; }
     .prog .fill {
       height: 100%; background: linear-gradient(90deg, var(--gold), var(--brand));
       border-radius: 999px; transition: width .3s;
     }
     .prog .txt { text-align: center; font-size: 12px; color: var(--ink-2); margin-top: 8px; }
-    .slot {
-      margin: 0 16px 12px; background: #fff; border-radius: 14px; padding: 16px;
-    }
+    .slot { margin: 0 16px 12px; background: #fff; border-radius: 14px; padding: 16px; }
     .slot-box {
       display: flex; flex-direction: column; align-items: center; gap: 6px;
       padding: 28px 0; background: var(--bg); border-radius: 10px;
       border: 1.5px dashed #c9cdd4; margin-bottom: 14px; color: var(--ink-2);
     }
-    .slot-box .ic { font-size: 36px; }
+    .slot-box .ico { font-size: 40px; width: 44px; height: 44px; color: var(--ink-3); }
     .slot-box .tt { font-size: 13px; }
     .slot-box .id { font-size: 10px; color: var(--ink-3); }
+    .rule-item {
+      font-size: 12.5px; color: var(--ink-2); padding: 7px 0;
+      border-bottom: 1px solid #f0f1f3; line-height: 1.45;
+    }
+    .rule-item:last-child { border: none; }
 
     /* ===== 积分明细 ===== */
     .pts-hero {
@@ -465,11 +557,6 @@
     .pts-hero .lab { font-size: 12px; opacity: .9; }
     .pts-hero .n { font-size: 44px; font-weight: 800; line-height: 1.15; }
     .pts-hero .acts { display: flex; gap: 10px; margin-top: 12px; }
-    .rule-item {
-      font-size: 12.5px; color: var(--ink-2); padding: 7px 0;
-      border-bottom: 1px solid #f0f1f3; line-height: 1.45;
-    }
-    .rule-item:last-child { border: none; }
     .log-row {
       display: flex; justify-content: space-between; padding: 12px 0;
       border-bottom: 1px solid #f0f1f3;
@@ -491,8 +578,9 @@
     .player .btn-play {
       width: 56px; height: 56px; border-radius: 50%;
       background: rgba(255,102,0,.95); display: flex; align-items: center;
-      justify-content: center; font-size: 22px; padding-left: 3px;
+      justify-content: center; color: #fff;
     }
+    .player .btn-play .ico { font-size: 28px; width: 28px; height: 28px; }
     .player .tip { font-size: 12px; opacity: .8; }
     .unlock-box {
       display: flex; align-items: center; justify-content: space-between;
@@ -501,17 +589,22 @@
     .chap {
       display: flex; align-items: center; justify-content: space-between;
       padding: 12px 0; border-bottom: 1px solid #f0f1f3; font-size: 13.5px;
-      cursor: pointer;
+      cursor: pointer; gap: 8px;
     }
     .chap:last-child { border: none; }
+    .chap .nm { display: flex; align-items: center; gap: 6px; }
+    .chap .nm .ico { width: 14px; height: 14px; color: var(--ink-3); }
     .chap .free { color: var(--ok); font-size: 11px; }
     .chap .need { color: var(--brand); font-size: 11px; }
     .chap .play { color: #2f7cf6; font-size: 11px; }
+    .ok-line {
+      color: var(--ok); font-weight: 700; text-align: center; width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .ok-line .ico { width: 16px; height: 16px; }
 
-    /* ===== 侧边说明（桌面） ===== */
     .notes {
-      width: 300px; color: #c9cdd4; font-size: 13px; line-height: 1.65;
-      padding-top: 12px;
+      width: 300px; color: #c9cdd4; font-size: 13px; line-height: 1.65; padding-top: 12px;
     }
     .notes h3 { color: #fff; font-size: 15px; margin-bottom: 10px; font-weight: 600; }
     .notes .box {
@@ -521,48 +614,203 @@
     .notes ol { padding-left: 18px; }
     .notes li { margin-bottom: 6px; }
     .notes .k { color: var(--gold); font-weight: 600; }
-    .notes a { color: #6cb2ff; }
 
     @media (max-width: 900px) {
       .notes { width: min(390px, 100%); padding-bottom: 24px; }
       .stage { flex-direction: column; align-items: center; }
-      .phone { transform-origin: top center; }
     }
   </style>
 </head>
 <body>
+  <!-- ===== SVG 图标库（无 emoji） ===== -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5h4v5"/>
+    </symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="7" width="18" height="10" rx="2"/><path d="M12 7v10"/><circle cx="16.5" cy="12" r="1.5"/>
+    </symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/>
+    </symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 4 3 8.5 12 13l9-4.5L12 4z"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/><path d="M21 8.5V14"/>
+    </symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="8" r="3.5"/><path d="M5 19.5c1.5-3 4-4.5 7-4.5s5.5 1.5 7 4.5"/>
+    </symbol>
+    <symbol id="i-bowl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 11h16c0 5-3.5 8-8 8s-8-3-8-8z"/><path d="M10 7v2M14 6v3"/><path d="M3 11h18"/>
+    </symbol>
+    <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 14h16v3H4v-3z"/><path d="M6 14l1.5-4h9L18 14"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>
+    </symbol>
+    <symbol id="i-hotel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="4" width="14" height="17" rx="1"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2"/><path d="M10 21v-4h4v4"/>
+    </symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 6h10l-1.2 13H8.2L7 6z"/><path d="M6 9h12"/><path d="M14 6l2-3"/>
+    </symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 6h2l2 10h9l2-7H7"/><circle cx="10" cy="19" r="1.3"/><circle cx="16" cy="19" r="1.3"/>
+    </symbol>
+    <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="8" width="14" height="12" rx="1"/><path d="M5 12h14M12 8v4"/><path d="M8 8l4-3 4 3"/>
+    </symbol>
+    <symbol id="i-movie" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="7" width="18" height="10" rx="2"/><path d="M10 10.5v3l3-1.5-3-1.5z" fill="currentColor" stroke="none"/><path d="M16 10.5v3"/>
+    </symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="9" r="3"/><path d="M3.5 19c1-2.5 3-4 5.5-4s4.5 1.5 5.5 4"/><circle cx="16.5" cy="10" r="2.2"/><path d="M15 15.5c2 .2 3.8 1.5 4.8 3.5"/>
+    </symbol>
+    <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.5"/><path d="M5 17l4-4 3 3 3-3 4 4"/>
+    </symbol>
+    <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 11h18"/><circle cx="16.5" cy="14.5" r="1.2"/>
+      <path d="M7 7V5.5A1.5 1.5 0 0 1 8.5 4H17"/>
+    </symbol>
+    <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10 14a4 4 0 0 0 6 0l2.5-2.5a4 4 0 1 0-5.7-5.7L11.5 7"/><path d="M14 10a4 4 0 0 0-6 0L5.5 12.5a4 4 0 1 0 5.7 5.7L12.5 17"/>
+    </symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 3h7l4 4v14H7V3z"/><path d="M14 3v4h4"/><path d="M10 12h6M10 16h6"/>
+    </symbol>
+    <symbol id="i-headset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 13v-1a7 7 0 0 1 14 0v1"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 17v1a2 2 0 0 1-2 2h-2"/>
+    </symbol>
+    <symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="12" rx="2"/><path d="M10 9.5v3l3-1.5-3-1.5z" fill="currentColor" stroke="none"/><path d="M8 20h8"/><path d="M12 17v3"/>
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="6" y="11" width="12" height="9" rx="1.5"/><path d="M9 11V8a3 3 0 0 1 6 0v3"/><circle cx="12" cy="15.5" r="1.2"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M9 7.5v9l7.5-4.5L9 7.5z"/>
+    </symbol>
+    <symbol id="i-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5.5"/><path d="M12 8.5v7M10 10.5h4M10 13.5h4"/>
+    </symbol>
+    <symbol id="i-ad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="8" width="9" height="8" rx="1.5"/><path d="M12 10.5l6-3v9l-6-3"/><path d="M6 16v2.5M4.5 18.5h3"/>
+    </symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="11" width="14" height="9" rx="1"/><path d="M4 11h16v3H4v-3z"/><path d="M12 11v9"/><path d="M12 11c-2 0-4-1-4-2.5S10 7 12 11c0-4 2-4.5 4-3.5S14 11 12 11z"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+      <path d="M12 4l2.2 5.2 5.6.4-4.3 3.6 1.4 5.4L12 15.8 7.1 18.6l1.4-5.4-4.3-3.6 5.6-.4L12 4z"/>
+    </symbol>
+    <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="18" cy="6" r="2.2"/><circle cx="6" cy="12" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M8 13l8 4M8 11l8-4"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12.5l4.5 4.5L19 7.5"/>
+    </symbol>
+    <symbol id="i-box-pkg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="7" width="14" height="13" rx="1.5"/><path d="M5 11h14M12 7v4"/><path d="M9 7l3-2.5L15 7"/>
+    </symbol>
+  </svg>
+
   <div class="brief">
-    <strong>本机福利 · 可点击原型 v0.1</strong>
-    — 本地生活权益聚合小程序（积分 × 看广告 × 0元课 × 推手分佣）。在手机壳内切换底部 Tab，可走进详情/看广告/推广分段。
+    <strong>本机福利 · 可点击原型 v0.2</strong>
+    — 新增轮播首页 · Tab「推广」已改回「我的」· 图标全部去 emoji。手机壳内可切换演示。
     <div class="chips">
-      <span class="chip">看广告 <b>+10</b> 分 / 日上限 <b>10</b> 条</span>
+      <span class="chip">轮播 Banner <b>×3</b></span>
+      <span class="chip">看广告 <b>+10</b> 分 / 日上限 <b>10</b></span>
       <span class="chip">快消约 <b>300</b> 积分</span>
-      <span class="chip">现金 <b>¥1≈10</b> 分 / 会员加成</span>
-      <span class="chip">C端一键变 <b>推手B端</b></span>
+      <span class="chip">「我的」内嵌 <b>推手 B 端</b></span>
     </div>
   </div>
 
   <div class="stage">
     <div class="phone" id="phone">
       <div class="notch"></div>
-      <div class="status">
-        <span>9:41</span>
-        <span class="dots">●●●● 5G ▮</span>
-      </div>
+      <div class="status"><span>9:41</span><span class="dots">•••• 5G ▮</span></div>
       <div class="navbar">
         <button class="back" id="backBtn" aria-label="返回">‹</button>
-        <span class="title" id="navTitle">权益</span>
-        <div class="capsule"><span>⋯</span><span>◉</span></div>
+        <span class="title" id="navTitle">首页</span>
+        <div class="capsule"><span>⋯</span><span>●</span></div>
       </div>
 
       <div class="screen" id="screen">
+        <!-- ========== 首页（轮播） ========== -->
+        <div class="view active" id="view-home" data-tab="home">
+          <div class="home-swiper" id="swiper">
+            <div class="slides" id="slides">
+              <div class="slide s1">
+                <span class="tag">限时</span>
+                <h3>看广告就能白嫖<br/>外卖 · 打车大额券</h3>
+                <p>每日 10 条，单条 +10 积分</p>
+                <button class="cta" onclick="go('watch-ad')">立即去赚</button>
+              </div>
+              <div class="slide s2">
+                <span class="tag">0元课</span>
+                <h3>AI 免费课上新<br/>积分解锁 · 首课免费</h3>
+                <p>零基础 3 天做出 AI 周报</p>
+                <button class="cta" onclick="switchTab('courses')">去选课</button>
+              </div>
+              <div class="slide s3">
+                <span class="tag">商城</span>
+                <h3>300 积分兑好物<br/>也可全网低价直购</h3>
+                <p>快消日用 · 宠物生活 · 健康个护</p>
+                <button class="cta" onclick="switchTab('mall')">逛商城</button>
+              </div>
+            </div>
+            <div class="dots" id="swDots">
+              <i class="on" data-i="0"></i><i data-i="1"></i><i data-i="2"></i>
+            </div>
+          </div>
+
+          <div class="quick">
+            <div class="quick-item" onclick="go('watch-ad')">
+              <div class="qi"><svg class="ico"><use href="#i-ad"/></svg></div><span>看广告</span>
+            </div>
+            <div class="quick-item" onclick="switchTab('benefits')">
+              <div class="qi b2"><svg class="ico"><use href="#i-ticket"/></svg></div><span>领券</span>
+            </div>
+            <div class="quick-item" onclick="switchTab('mall')">
+              <div class="qi b3"><svg class="ico"><use href="#i-bag"/></svg></div><span>积分兑</span>
+            </div>
+            <div class="quick-item" onclick="switchTab('courses')">
+              <div class="qi b4"><svg class="ico"><use href="#i-cap"/></svg></div><span>0元课</span>
+            </div>
+          </div>
+
+          <div class="home-points" onclick="go('points')">
+            <div class="l">
+              <svg class="ico"><use href="#i-coin"/></svg>
+              <div>
+                <div><span class="n" data-bind="points">20</span> <span class="u">积分可用</span></div>
+                <div class="muted" style="color:var(--brand);font-size:11px">明细 · 购买 · 会员加成</div>
+              </div>
+            </div>
+            <button class="go">去查看</button>
+          </div>
+
+          <div class="home-sec-head">
+            <span>热门权益</span>
+            <span class="more" onclick="switchTab('benefits')">全部 ›</span>
+          </div>
+          <div class="home-coupons" id="homeCoupons"></div>
+
+          <div class="home-sec-head" style="margin-top:18px">
+            <span>积分好物</span>
+            <span class="more" onclick="switchTab('mall')">更多 ›</span>
+          </div>
+          <div class="home-goods" id="homeGoods"></div>
+          <div style="height:12px"></div>
+        </div>
+
         <!-- ========== 权益 ========== -->
-        <div class="view active" id="view-benefits" data-tab="benefits">
+        <div class="view" id="view-benefits" data-tab="benefits">
           <div class="top-bar">
             <div class="points-pill" onclick="go('points')">
-              <span>◎</span><span class="n" data-bind="points">20</span><span class="u">积分</span>
+              <svg class="ico"><use href="#i-coin"/></svg>
+              <span class="n" data-bind="points">20</span><span class="u">积分</span>
             </div>
-            <button class="ad-entry" onclick="go('watch-ad')">看广告赚积分 ›</button>
+            <button class="ad-entry" onclick="go('watch-ad')">
+              <svg class="ico"><use href="#i-ad"/></svg>看广告赚积分 ›
+            </button>
           </div>
           <div class="benefit-layout">
             <div class="side" id="benefitSide"></div>
@@ -609,18 +857,22 @@
           </div>
         </div>
 
-        <!-- ========== 推广中心 ========== -->
-        <div class="view" id="view-agent" data-tab="agent">
+        <!-- ========== 我的（原推广） ========== -->
+        <div class="view" id="view-mine" data-tab="mine">
           <div class="agent-head">
             <div class="row">
               <div class="level-badge">L1 推手</div>
-              <div class="pts-mini" onclick="go('points')">积分 <span data-bind="points">20</span> ›</div>
+              <div class="pts-mini" onclick="go('points')">
+                积分 <span data-bind="points">20</span> ›
+              </div>
             </div>
             <div class="invite">
               <div class="code" onclick="copyCode()">邀请码 LB8888（点按复制）</div>
-              <button class="share" onclick="toast('已生成分享卡片（mock）')">分享拉新</button>
+              <button class="share" onclick="toast('已生成分享卡片（mock）')">
+                <svg class="ico"><use href="#i-share"/></svg>分享拉新
+              </button>
             </div>
-            <div class="agent-sub">成为推手 / 代理 · 地推拿分成 · C端一键升级B端</div>
+            <div class="agent-sub">在「我的」里一键成为推手 / 代理 · 地推拿分成 · C端升级B端</div>
           </div>
           <div class="stat-bar">
             <div class="cell"><div class="v">¥1286.50</div><div class="l">累计佣金</div></div>
@@ -663,7 +915,7 @@
         <!-- ========== 课程详情 ========== -->
         <div class="view" id="view-course-detail" data-tab="courses">
           <div class="player">
-            <div class="btn-play">▶</div>
+            <div class="btn-play"><svg class="ico"><use href="#i-play"/></svg></div>
             <div class="tip" id="cdPlayTip">首课免费试看</div>
           </div>
           <div class="card" id="cdInfo"></div>
@@ -672,7 +924,7 @@
         </div>
 
         <!-- ========== 看广告 ========== -->
-        <div class="view" id="view-watch-ad" data-tab="benefits">
+        <div class="view" id="view-watch-ad" data-tab="home">
           <div class="ad-hero">
             <h2>看广告，轻松攒积分</h2>
             <p>每条 +10 积分 · 今日已看 <span id="adWatched">0</span>/10</p>
@@ -684,7 +936,7 @@
           </div>
           <div class="slot">
             <div class="slot-box">
-              <span class="ic">📺</span>
+              <svg class="ico"><use href="#i-video"/></svg>
               <span class="tt">激励视频广告位</span>
               <span class="id">正式环境接入微信激励视频</span>
             </div>
@@ -700,7 +952,7 @@
         </div>
 
         <!-- ========== 积分明细 ========== -->
-        <div class="view" id="view-points" data-tab="benefits">
+        <div class="view" id="view-points" data-tab="home">
           <div class="pts-hero">
             <div class="lab">当前可用积分</div>
             <div class="n" data-bind="points">20</div>
@@ -726,17 +978,20 @@
       </div>
 
       <div class="tabbar" id="tabbar">
-        <button class="tab on" data-tab="benefits" onclick="switchTab('benefits')">
-          <span class="ico">🎁</span><span>权益</span>
+        <button class="tab on" data-tab="home" onclick="switchTab('home')">
+          <svg class="ico"><use href="#i-home"/></svg><span>首页</span>
+        </button>
+        <button class="tab" data-tab="benefits" onclick="switchTab('benefits')">
+          <svg class="ico"><use href="#i-ticket"/></svg><span>权益</span>
         </button>
         <button class="tab" data-tab="mall" onclick="switchTab('mall')">
-          <span class="ico">🛍️</span><span>积分商城</span>
+          <svg class="ico"><use href="#i-bag"/></svg><span>积分商城</span>
         </button>
         <button class="tab" data-tab="courses" onclick="switchTab('courses')">
-          <span class="ico">🎓</span><span>0元课</span>
+          <svg class="ico"><use href="#i-cap"/></svg><span>0元课</span>
         </button>
-        <button class="tab" data-tab="agent" onclick="switchTab('agent')">
-          <span class="ico">📣</span><span>推广</span>
+        <button class="tab" data-tab="mine" onclick="switchTab('mine')">
+          <svg class="ico"><use href="#i-user"/></svg><span>我的</span>
         </button>
       </div>
 
@@ -747,53 +1002,41 @@
       <h3>沟通时怎么点</h3>
       <div class="box">
         <ol>
-          <li><span class="k">权益</span>：左侧分类切换外卖/打车等红包墙</li>
-          <li><span class="k">积分商城</span>：点商品 → 详情里「积分兑 / 现金购」双按钮</li>
-          <li><span class="k">看广告</span>：完整看完 +10 分，今日 10 条封顶</li>
-          <li><span class="k">0元课</span>：首课免费，积分解锁全章节</li>
-          <li><span class="k">推广</span>：C端工作台 / 佣金订单 / L1-L3 分佣规则</li>
+          <li><span class="k">首页</span>：轮播 Banner 自动切换，快捷入口 / 热门权益 / 积分好物</li>
+          <li><span class="k">权益</span>：左侧分类切换红包墙</li>
+          <li><span class="k">积分商城</span>：点商品 → 积分兑 / 现金购</li>
+          <li><span class="k">0元课</span>：积分解锁，首课免费</li>
+          <li><span class="k">我的</span>：内嵌推手工作台 / 佣金 / 分佣规则（原「推广」）</li>
         </ol>
       </div>
       <div class="box">
-        <strong style="color:#fff">业务参数（暂定）</strong><br/>
-        广告 10 分 × 10 条/日 · 快消 300 分<br/>
-        会员/现金购积分 · 推手地推分成
+        <strong style="color:#fff">v0.2 变更</strong><br/>
+        新增首页轮播 · 推广→我的 · 全站图标去 emoji
       </div>
       <div class="box">
-        仓库与版本见项目 README / CHANGELOG。<br/>
-        本页为纯静态原型，可直接转发截图或链接会议演示。
+        仓库与版本见 README / CHANGELOG。可直接转发本页链接会议演示。
       </div>
     </aside>
   </div>
 
   <script>
-    /* ========== 状态 ========== */
     const state = {
-      points: 20,
-      adToday: 0,
-      adLimit: 10,
-      tab: 'benefits',
-      view: 'benefits',
-      history: [],
-      cat: 'takeout',
-      mallTab: 'all',
-      agentSeg: 'home',
-      unlocked: new Set(),
-      logs: [
-        { note: '新用户赠送', source: 'init', amount: 20, balance: 20, time: '首次进入' }
-      ],
-      goodsId: null,
-      courseId: null
+      points: 20, adToday: 0, adLimit: 10,
+      tab: 'home', view: 'home', history: [],
+      cat: 'takeout', mallTab: 'all', agentSeg: 'home',
+      unlocked: new Set(), goodsId: null, courseId: null,
+      swIndex: 0, swTimer: null,
+      logs: [{ note: '新用户赠送', source: 'init', amount: 20, balance: 20, time: '首次进入' }]
     };
 
     const CATS = [
-      { id: 'takeout', name: '外卖红包', icon: '🍜' },
-      { id: 'taxi', name: '打车红包', icon: '🚕' },
-      { id: 'hotel', name: '特惠酒店', icon: '🏨' },
-      { id: 'order', name: '在线点餐', icon: '🥤' },
-      { id: 'grocery', name: '买菜下午茶', icon: '🛒' },
-      { id: 'express', name: '打折寄快递', icon: '📦' },
-      { id: 'movie', name: '折扣电影票', icon: '🎬' }
+      { id: 'takeout', name: '外卖红包', icon: 'i-bowl' },
+      { id: 'taxi', name: '打车红包', icon: 'i-car' },
+      { id: 'hotel', name: '特惠酒店', icon: 'i-hotel' },
+      { id: 'order', name: '在线点餐', icon: 'i-cup' },
+      { id: 'grocery', name: '买菜下午茶', icon: 'i-cart' },
+      { id: 'express', name: '打折寄快递', icon: 'i-box' },
+      { id: 'movie', name: '折扣电影票', icon: 'i-movie' }
     ];
 
     const COUPONS = [
@@ -804,7 +1047,7 @@
       { id:5, cat:'taxi', brand:'腾讯地图', title:'大额打车神券', subtitle:'抢腾讯地图/滴滴出行神券', theme:'didi', action:'点击领取' },
       { id:6, cat:'taxi', brand:'通用', title:'打车叠加券', subtitle:'行程更省一点', theme:'orange', action:'点击下单' },
       { id:7, cat:'hotel', brand:'酒店', title:'特惠酒店 8 折起', subtitle:'周末出游提前订', theme:'gold', action:'去预订' },
-      { id:8, cat:'order', brand:'到店', title:'到店点餐满 30 减 5', subtitle:'扫码点单直减', theme:'orange', action: '去点餐' },
+      { id:8, cat:'order', brand:'到店', title:'到店点餐满 30 减 5', subtitle:'扫码点单直减', theme:'orange', action:'去点餐' },
       { id:9, cat:'grocery', brand:'买菜', title:'买菜新人券包', subtitle:'含 5 张无门槛', theme:'green', tag:'NEW', action:'立即领取' },
       { id:10, cat:'express', brand:'快递', title:'寄快递 5 折起', subtitle:'多家快递比价', theme:'blue', action:'去下单' },
       { id:11, cat:'movie', brand:'电影', title:'电影票立减 10 元', subtitle:'全国影院通用', theme:'gold', action:'选座购票' }
@@ -830,14 +1073,14 @@
     ];
 
     const MENUS = [
-      { id:'team', name:'我的客户', icon:'👥' },
-      { id:'poster', name:'海报中心', icon:'🖼️' },
-      { id:'settle', name:'佣金提现', icon:'💰' },
-      { id:'material', name:'地推素材', icon:'📦' },
-      { id:'link', name:'推广链接', icon:'🔗' },
-      { id:'rule', name:'分佣规则', icon:'📜' },
-      { id:'train', name:'推手培训', icon:'🎓' },
-      { id:'service', name:'联系客服', icon:'🎧' }
+      { id:'team', name:'我的客户', icon:'i-users' },
+      { id:'poster', name:'海报中心', icon:'i-image' },
+      { id:'settle', name:'佣金提现', icon:'i-wallet' },
+      { id:'material', name:'地推素材', icon:'i-box' },
+      { id:'link', name:'推广链接', icon:'i-link' },
+      { id:'rule', name:'分佣规则', icon:'i-doc' },
+      { id:'train', name:'推手培训', icon:'i-cap' },
+      { id:'service', name:'联系客服', icon:'i-headset' }
     ];
 
     const ORDERS = [
@@ -854,42 +1097,78 @@
     ];
 
     const TITLES = {
-      benefits: '权益',
-      mall: '积分商城',
-      courses: '0元课',
-      agent: '推广中心',
-      'goods-detail': '商品详情',
-      'course-detail': '课程详情',
-      'watch-ad': '看广告赚积分',
-      points: '我的积分'
+      home: '首页', benefits: '权益', mall: '积分商城', courses: '0元课',
+      mine: '我的', 'goods-detail': '商品详情', 'course-detail': '课程详情',
+      'watch-ad': '看广告赚积分', points: '我的积分'
     };
 
-    /* ========== 渲染 ========== */
+    function ico(id, cls) {
+      return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
+    }
+
     function bindPoints() {
-      document.querySelectorAll('[data-bind="points"]').forEach(el => {
-        el.textContent = state.points;
-      });
+      document.querySelectorAll('[data-bind="points"]').forEach(el => { el.textContent = state.points; });
       document.getElementById('adWatched').textContent = state.adToday;
       document.getElementById('adRemain').textContent = Math.max(0, state.adLimit - state.adToday);
       document.getElementById('adFill').style.width = (state.adToday / state.adLimit * 100) + '%';
       document.getElementById('ptsAdToday').textContent = state.adToday;
       const btn = document.getElementById('adBtn');
       if (state.adToday >= state.adLimit) {
-        btn.textContent = '今日已看满';
-        btn.disabled = true;
-        btn.style.opacity = '.5';
+        btn.textContent = '今日已看满'; btn.disabled = true; btn.style.opacity = '.5';
       } else {
-        btn.textContent = '看视频 +10 积分';
-        btn.disabled = false;
-        btn.style.opacity = '1';
+        btn.textContent = '看视频 +10 积分'; btn.disabled = false; btn.style.opacity = '1';
       }
     }
 
+    /* ---- 首页 ---- */
+    function renderHome() {
+      document.getElementById('homeCoupons').innerHTML = COUPONS.slice(0, 6).map(c => `
+        <div class="hc th-${c.theme}" onclick="toast('${c.brand}：${c.title}（正式版跳转渠道）')">
+          <div class="bt">${c.brand}</div>
+          <div class="tt">${c.title}</div>
+          <div class="ss">${c.subtitle}</div>
+          <div class="btn-s">${c.action}</div>
+        </div>`).join('');
+      document.getElementById('homeGoods').innerHTML = GOODS.slice(0, 4).map(g => `
+        <div class="hg" onclick="openGoods('${g.id}')">
+          <div class="ph">${g.cat}</div>
+          <div class="t">${g.title}</div>
+          <div class="pr">
+            <span class="pt">${g.points} 分</span>
+            <span class="cash"><span>¥</span>${g.cash}</span>
+          </div>
+        </div>`).join('');
+      startSwiper();
+    }
+
+    function setSlide(i) {
+      state.swIndex = ((i % 3) + 3) % 3;
+      document.getElementById('slides').style.transform = `translateX(-${state.swIndex * 100}%)`;
+      document.querySelectorAll('#swDots i').forEach((d, idx) => d.classList.toggle('on', idx === state.swIndex));
+      // dots on light slide
+      const onLight = state.swIndex === 2;
+      document.querySelectorAll('#swDots i').forEach(d => {
+        if (d.classList.contains('on')) d.style.background = onLight ? '#1f2329' : '#fff';
+        else d.style.background = onLight ? 'rgba(0,0,0,.25)' : 'rgba(255,255,255,.4)';
+      });
+    }
+
+    function startSwiper() {
+      clearInterval(state.swTimer);
+      setSlide(0);
+      state.swTimer = setInterval(() => setSlide(state.swIndex + 1), 3500);
+    }
+
+    document.getElementById('swDots').addEventListener('click', e => {
+      const i = e.target.dataset.i;
+      if (i != null) { setSlide(Number(i)); startSwiper(); }
+    });
+
+    /* ---- 权益 ---- */
     function renderBenefits() {
-      const side = document.getElementById('benefitSide');
-      side.innerHTML = CATS.map(c => `
+      document.getElementById('benefitSide').innerHTML = CATS.map(c => `
         <div class="side-item ${c.id===state.cat?'on':''}" onclick="setCat('${c.id}')">
-          <span class="ei">${c.icon}</span>${c.name}
+          ${ico(c.icon)}${c.name}
         </div>`).join('');
       const list = COUPONS.filter(c => c.cat === state.cat);
       document.getElementById('benefitList').innerHTML = list.map(c => `
@@ -901,19 +1180,14 @@
           <div class="act">${c.action}</div>
         </div>`).join('') || '<div class="muted" style="text-align:center;padding:40px 0">暂无权益</div>';
     }
+    function setCat(id) { state.cat = id; renderBenefits(); }
 
-    function setCat(id) {
-      state.cat = id;
-      renderBenefits();
-    }
-
+    /* ---- 商城 ---- */
     function renderMall() {
       let list = GOODS.slice();
       if (state.mallTab === 'points') list = list.filter(g => g.points);
       if (state.mallTab === 'cash') list = list.filter(g => g.cash);
-      document.querySelectorAll('#mallTabs .t').forEach(t => {
-        t.classList.toggle('on', t.dataset.mtab === state.mallTab);
-      });
+      document.querySelectorAll('#mallTabs .t').forEach(t => t.classList.toggle('on', t.dataset.mtab === state.mallTab));
       document.getElementById('mallList').innerHTML = list.map(g => `
         <div class="goods" onclick="openGoods('${g.id}')">
           <div class="thumb">${g.cat}</div>
@@ -927,14 +1201,13 @@
           </div>
         </div>`).join('');
     }
-
     document.getElementById('mallTabs').addEventListener('click', e => {
       const t = e.target.closest('[data-mtab]');
       if (!t) return;
-      state.mallTab = t.dataset.mtab;
-      renderMall();
+      state.mallTab = t.dataset.mtab; renderMall();
     });
 
+    /* ---- 课程 ---- */
     function renderCourses() {
       document.getElementById('courseList').innerHTML = COURSES.map(c => `
         <div class="course" onclick="openCourse('${c.id}')">
@@ -950,10 +1223,11 @@
         </div>`).join('');
     }
 
+    /* ---- 我的 ---- */
     function renderAgent() {
       document.getElementById('agentMenus').innerHTML = MENUS.map(m => `
         <div class="menu-item" onclick="agentMenu('${m.id}')">
-          <div class="mi">${m.icon}</div>
+          <div class="mi">${ico(m.icon)}</div>
           <div class="mn">${m.name}</div>
         </div>`).join('');
       document.getElementById('agentOrders').innerHTML = ORDERS.map(o => `
@@ -971,12 +1245,9 @@
         </div>`).join('');
       setSeg(state.agentSeg);
     }
-
     document.getElementById('agentSeg').addEventListener('click', e => {
-      const s = e.target.closest('[data-seg]');
-      if (s) setSeg(s.dataset.seg);
+      const s = e.target.closest('[data-seg]'); if (s) setSeg(s.dataset.seg);
     });
-
     function setSeg(seg) {
       state.agentSeg = seg;
       document.querySelectorAll('#agentSeg .s').forEach(x => x.classList.toggle('on', x.dataset.seg === seg));
@@ -984,7 +1255,6 @@
       document.getElementById('agentOrders').style.display = seg === 'orders' ? '' : 'none';
       document.getElementById('agentTier').style.display = seg === 'tier' ? '' : 'none';
     }
-
     function agentMenu(id) {
       if (id === 'rule') return setSeg('tier');
       if (id === 'link') {
@@ -996,11 +1266,10 @@
     }
 
     function openGoods(id) {
-      const g = GOODS.find(x => x.id === id);
-      if (!g) return;
+      const g = GOODS.find(x => x.id === id); if (!g) return;
       state.goodsId = id;
       document.getElementById('gdHero').innerHTML = `
-        <div class="emoji">📦</div>
+        ${ico('i-box-pkg', 'ico-xl')}
         <div class="name">${g.title}</div>
         <div class="cat">${g.cat}</div>`;
       document.getElementById('gdInfo').innerHTML = `
@@ -1025,12 +1294,8 @@
     }
 
     function redeemGoods() {
-      const g = GOODS.find(x => x.id === state.goodsId);
-      if (!g) return;
-      if (state.points < g.points) {
-        toast('积分不足，先去看广告');
-        return;
-      }
+      const g = GOODS.find(x => x.id === state.goodsId); if (!g) return;
+      if (state.points < g.points) { toast('积分不足，先去看广告'); return; }
       if (confirm(`消耗 ${g.points} 积分兑换「${g.title}」？`)) {
         addPoints(-g.points, '兑换商品', g.title);
         toast('兑换成功（原型模拟）');
@@ -1038,8 +1303,7 @@
     }
 
     function openCourse(id) {
-      const c = COURSES.find(x => x.id === id);
-      if (!c) return;
+      const c = COURSES.find(x => x.id === id); if (!c) return;
       state.courseId = id;
       const unlocked = state.unlocked.has(id);
       document.getElementById('cdPlayTip').textContent = unlocked ? '已解锁 · 点击章节播放' : '首课免费试看';
@@ -1048,8 +1312,9 @@
         <div class="muted" style="margin-top:6px">${c.lessons} 课时 · ${c.duration} · ${c.teacher} · ${c.level}</div>
         <div style="margin-top:10px;font-size:13.5px;color:var(--ink-2);line-height:1.6">${c.desc}</div>`;
       const box = document.getElementById('cdUnlock');
+      box.style.display = '';
       if (!unlocked) {
-        box.style.display = '';
+        box.style.background = '';
         box.innerHTML = `
           <div><div class="pt">${c.points} 积分解锁</div><div class="tip">当前积分 ${state.points}</div></div>
           <div style="display:flex;gap:8px">
@@ -1057,9 +1322,8 @@
             <button class="btn btn-primary" style="font-size:12px;padding:8px 14px" onclick="unlockCourse()">立即解锁</button>
           </div>`;
       } else {
-        box.style.display = '';
         box.style.background = '#fff';
-        box.innerHTML = `<div style="color:var(--ok);font-weight:700;text-align:center;width:100%">✓ 已解锁，可回看全部章节</div>`;
+        box.innerHTML = `<div class="ok-line">${ico('i-check')} 已解锁，可回看全部章节</div>`;
       }
       renderChapters(c, unlocked);
       go('course-detail');
@@ -1068,28 +1332,24 @@
     function renderChapters(c, unlocked) {
       document.getElementById('cdChapters').innerHTML =
         `<div style="font-size:14px;font-weight:600;margin-bottom:6px">章节目录</div>` +
-        c.chapters.map((ch, i) => {
-          let right = '';
-          if (ch.free) right = `<span class="free">免费</span>`;
-          else if (unlocked) right = `<span class="play">播放</span>`;
-          else right = `<span class="need">🔒 解锁</span>`;
-          return `<div class="chap" onclick="playCh('${ch.t}', ${!!ch.free || unlocked})"><span>${ch.t}</span>${right}</div>`;
+        c.chapters.map(ch => {
+          let right = ch.free ? `<span class="free">免费</span>`
+            : unlocked ? `<span class="play">播放</span>`
+            : `<span class="need">解锁</span>`;
+          const lock = (!ch.free && !unlocked) ? ico('i-lock') : '';
+          return `<div class="chap" onclick="playCh('${ch.t}', ${!!ch.free || unlocked})">
+            <span class="nm">${lock}${ch.t}</span>${right}</div>`;
         }).join('');
     }
-
-    function playCh(title, ok) {
-      toast(ok ? `播放：${title}` : '请先用积分解锁全课');
-    }
+    function playCh(title, ok) { toast(ok ? `播放：${title}` : '请先用积分解锁全课'); }
 
     function unlockCourse() {
-      const c = COURSES.find(x => x.id === state.courseId);
-      if (!c) return;
+      const c = COURSES.find(x => x.id === state.courseId); if (!c) return;
       if (state.points < c.points) { toast('积分不足，先去看广告'); return; }
       if (confirm(`消耗 ${c.points} 积分解锁「${c.title}」？`)) {
         addPoints(-c.points, '解锁课程', c.title);
         state.unlocked.add(c.id);
-        openCourse(c.id);
-        toast('解锁成功');
+        openCourse(c.id); toast('解锁成功');
       }
     }
 
@@ -1114,8 +1374,7 @@
         time: new Date().toLocaleString('zh-CN', { hour12: false })
       });
       if (state.logs.length > 50) state.logs.pop();
-      bindPoints();
-      renderLogs();
+      bindPoints(); renderLogs();
     }
 
     function watchAd() {
@@ -1124,22 +1383,18 @@
       setTimeout(() => {
         state.adToday += 1;
         addPoints(10, 'watch_ad', '观看激励广告');
-        bindPoints();
-        toast('+10 积分');
+        bindPoints(); toast('+10 积分');
       }, 900);
     }
 
-    function buyPoints() {
-      toast('现金购 ¥1=10 分 / 会员套餐（收银台对接中）');
-    }
-
+    function buyPoints() { toast('现金购 ¥1=10 分 / 会员套餐（收银台对接中）'); }
     function copyCode() {
       try { navigator.clipboard.writeText('LB8888'); } catch(e) {}
       toast('邀请码已复制');
     }
 
-    /* ========== 导航 ========== */
-    const TAB_VIEWS = ['benefits', 'mall', 'courses', 'agent'];
+    /* ---- 导航 ---- */
+    const TAB_VIEWS = ['home', 'benefits', 'mall', 'courses', 'mine'];
 
     function showView(id) {
       document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -1150,7 +1405,6 @@
       const isTab = TAB_VIEWS.includes(id);
       document.getElementById('backBtn').classList.toggle('show', !isTab);
       if (el) document.getElementById('screen').scrollTop = 0;
-      // tab 高亮跟随归属 tab
       const tab = el ? (el.dataset.tab || id) : id;
       if (TAB_VIEWS.includes(tab)) {
         state.tab = tab;
@@ -1158,51 +1412,43 @@
       }
       bindPoints();
       if (id === 'points') renderLogs();
+      if (id === 'home') startSwiper();
+      else clearInterval(state.swTimer);
     }
 
     function switchTab(tab) {
       state.history = [];
       showView(tab);
+      if (tab === 'home') renderHome();
       if (tab === 'mall') renderMall();
       if (tab === 'courses') renderCourses();
-      if (tab === 'agent') renderAgent();
+      if (tab === 'mine') renderAgent();
       if (tab === 'benefits') renderBenefits();
     }
 
-    function go(view) {
-      state.history.push(state.view);
-      showView(view);
-      if (view === 'points') renderLogs();
-    }
-
+    function go(view) { state.history.push(state.view); showView(view); if (view === 'points') renderLogs(); }
     function back() {
       const prev = state.history.pop() || state.tab;
       showView(prev);
       if (prev === 'mall') renderMall();
       if (prev === 'benefits') renderBenefits();
       if (prev === 'courses') renderCourses();
-      if (prev === 'agent') renderAgent();
+      if (prev === 'mine') renderAgent();
+      if (prev === 'home') renderHome();
     }
-
     document.getElementById('backBtn').onclick = back;
 
     let toastTimer;
     function toast(msg, ms) {
       const el = document.getElementById('toast');
-      el.textContent = msg;
-      el.classList.add('show');
+      el.textContent = msg; el.classList.add('show');
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => el.classList.remove('show'), ms || 1600);
     }
 
-    /* ========== 启动 ========== */
-    renderBenefits();
-    renderMall();
-    renderCourses();
-    renderAgent();
-    renderLogs();
-    bindPoints();
-    showView('benefits');
+    /* 启动 */
+    renderHome(); renderBenefits(); renderMall(); renderCourses(); renderAgent(); renderLogs();
+    bindPoints(); showView('home');
   </script>
 </body>
 </html>
