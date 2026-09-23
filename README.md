@@ -1,7 +1,5 @@
-# 本机福利 · 可点击原型预览
+# 本机福利 · 可点击原型
 
-主仓库（私有）: https://github.com/heyuxuan-git/local-benefits-miniapp
+主仓库: https://github.com/heyuxuan-git/local-benefits-miniapp
 
-- v0.2：轮播首页 · 我的 · 图标
-- 手机端：≤480px 全屏交互，横滑轮播，安全区适配
-- 打开 index.html 或访问 GitHub Pages
+- v0.2 权益页扁平拼贴：品牌挂签 / 双列開字红包 / 区块标题 / 横幅

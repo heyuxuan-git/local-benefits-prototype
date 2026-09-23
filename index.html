@@ -275,7 +275,7 @@
     .hg .cash { color: var(--price); font-size: 15px; font-weight: 800; }
     .hg .cash span { font-size: 11px; }
 
-    /* ===== 权益 ===== */
+    /* ===== 权益 · 扁平拼贴 ===== */
     .top-bar {
       display: flex; align-items: center; justify-content: space-between;
       padding: 10px 14px; background: #fff;
@@ -295,35 +295,196 @@
       display: inline-flex; align-items: center; gap: 6px;
     }
     .ad-entry .ico { width: 16px; height: 16px; }
-    .benefit-layout { display: flex; min-height: 520px; }
+    .benefit-layout { display: flex; min-height: 520px; background: #fff; }
     .side {
-      width: 78px; background: #fff; flex-shrink: 0; overflow-y: auto; padding-bottom: 80px;
+      width: 78px; background: #f7f8fa; flex-shrink: 0; overflow-y: auto; padding-bottom: 80px;
+      border-right: 1px solid #eceef1;
     }
     .side-item {
-      padding: 13px 4px; text-align: center; color: var(--ink-2);
+      padding: 14px 4px; text-align: center; color: var(--ink-2);
       font-size: 11px; cursor: pointer; border-left: 3px solid transparent; line-height: 1.3;
     }
     .side-item .ico { font-size: 22px; width: 24px; height: 24px; margin: 0 auto 4px; display: block; color: inherit; }
-    .side-item.on { background: var(--bg); color: var(--brand); font-weight: 600; border-left-color: var(--brand); }
-    .main-col { flex: 1; overflow-y: auto; padding: 8px 10px 80px; }
-    .coupon {
-      position: relative; border-radius: 14px; padding: 16px 14px 14px;
-      color: #fff; margin-bottom: 12px; min-height: 120px;
-      display: flex; flex-direction: column; cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,.08);
+    .side-item.on {
+      background: #fff; color: var(--ink); font-weight: 700;
+      border-left-color: transparent;
     }
-    .coupon .badge {
-      position: absolute; top: 0; left: 0; background: var(--price);
-      font-size: 10px; padding: 2px 8px; border-radius: 12px 0 10px 0;
+    .side-item.on .ico { color: var(--brand); }
+
+    .main-col {
+      flex: 1; overflow-y: auto; padding: 12px 8px 80px 6px;
+      background: #fff; min-width: 0;
     }
-    .coupon .brand { font-size: 11px; opacity: .9; margin-top: 4px; }
-    .coupon .t { font-size: 17px; font-weight: 700; margin-top: 4px; }
-    .coupon .s { font-size: 12px; opacity: .92; margin-top: 2px; }
-    .coupon .act {
-      margin-top: 12px; align-self: center; background: #fff; color: var(--brand);
-      font-size: 12px; font-weight: 700; padding: 7px 22px; border-radius: 999px;
+
+    /* 品牌挂签头 */
+    .brand-tag {
+      position: relative;
+      margin: 4px 4px 0;
+      background: linear-gradient(180deg, #ffe566, #ffd000);
+      border: 2px solid #1a1a1a;
+      border-radius: 999px 999px 18px 18px;
+      padding: 8px 14px 10px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      color: #1a1a1a; font-weight: 800; font-size: 15px;
+      z-index: 2;
+      box-shadow: 0 3px 0 #1a1a1a;
     }
-    .th-orange.coupon .act { color: var(--brand); }
+    .brand-tag::before,
+    .brand-tag::after {
+      content: '';
+      position: absolute; top: -10px; width: 3px; height: 14px;
+      background: #8b7355; border-radius: 2px;
+    }
+    .brand-tag::before { left: 22%; }
+    .brand-tag::after { right: 22%; }
+    .brand-tag .logo {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: #ff5000; color: #fff; font-size: 11px;
+      display: flex; align-items: center; justify-content: center; font-weight: 800;
+      flex-shrink: 0;
+    }
+    .brand-tag .logo.mt { background: #ffd100; color: #1a1a1a; }
+    .brand-tag .logo.tb { background: #ff5000; }
+    .brand-tag .logo.flash { background: #00a6ff; }
+    .brand-tag .logo.jd { background: #e1251b; }
+    .brand-tag .logo.generic { background: #ff6600; }
+
+    /* 双列拼贴 */
+    .collage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 6px 4px 4px;
+      align-items: start;
+    }
+    .collage .span2 { grid-column: 1 / -1; }
+
+    .pcard {
+      position: relative;
+      border: 2px solid #1a1a1a;
+      border-radius: 14px;
+      min-height: 118px;
+      padding: 12px 10px 12px;
+      display: flex; flex-direction: column;
+      color: #fff; cursor: pointer;
+      overflow: hidden;
+      -webkit-user-select: none; user-select: none;
+    }
+    .pcard:active { transform: scale(0.98); }
+    .pcard .corner {
+      position: absolute; top: 0; left: 0;
+      background: #ff2d2d; color: #fff;
+      font-size: 9px; font-weight: 700;
+      padding: 2px 8px;
+      border-bottom-right-radius: 8px;
+      border: 1px solid #1a1a1a;
+      border-top: none; border-left: none;
+      z-index: 1;
+    }
+    .pcard .ptitle {
+      font-size: 15px; font-weight: 800; line-height: 1.25;
+      text-align: center; margin-top: 4px;
+    }
+    .pcard .psub {
+      font-size: 11px; text-align: center; opacity: 0.95; margin-top: 4px;
+      font-weight: 600;
+    }
+    .pcard .open-btn {
+      margin: auto auto 0;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(180deg, #ffe566, #ffc800);
+      border: 2px solid #1a1a1a;
+      color: #c41a1a; font-weight: 900; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 0 #1a1a1a;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .pcard .open-btn.small { width: 40px; height: 40px; font-size: 15px; }
+    .pcard .pill-btn {
+      margin: auto auto 0;
+      width: 88%;
+      background: linear-gradient(180deg, #ffe566, #ffc400);
+      border: 2px solid #1a1a1a;
+      color: #1a1a1a; font-weight: 800; font-size: 13px;
+      text-align: center;
+      padding: 8px 0;
+      border-radius: 999px;
+      box-shadow: 0 3px 0 #1a1a1a;
+    }
+    .pcard .pill-btn.blue {
+      background: linear-gradient(180deg, #5ec4ff, #1a9bff);
+      color: #fff;
+    }
+    .pcard .pill-btn.wide { width: 92%; }
+
+    /* 主题色块（扁平） */
+    .pcard.th-taobao { background: #ff5000; }
+    .pcard.th-meituan { background: #ffd100; color: #1a1a1a; border-color: #1a1a1a; }
+    .pcard.th-meituan .psub { color: #5a4a00; }
+    .pcard.th-orange { background: #ff6b00; }
+    .pcard.th-blue { background: #1a9bff; }
+    .pcard.th-deepred { background: #c41a1a; }
+    .pcard.th-gold { background: #ffc400; color: #1a1a1a; }
+    .pcard.th-gold .psub { color: #6a5000; }
+    .pcard.th-green { background: #00b578; }
+    .pcard.th-didi { background: #ff5a1f; }
+    .pcard.th-try { background: #ff3b6b; }
+    .pcard.th-flash { background: #00a6ff; }
+    .pcard.th-jd { background: #e1251b; }
+
+    /* 宽横幅卡 */
+    .wide-banner {
+      margin: 10px 4px 4px;
+      border: 2px solid #1a1a1a;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fff5f0, #ffe0cc);
+      padding: 16px 14px;
+      display: flex; align-items: center; gap: 12px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .wide-banner .wb-ico {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: #ff5a1f; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .wide-banner .wb-ico .ico { width: 24px; height: 24px; }
+    .wide-banner .wb-body { flex: 1; min-width: 0; }
+    .wide-banner .wb-t { font-size: 17px; font-weight: 800; color: #1a1a1a; }
+    .wide-banner .wb-s { font-size: 12px; color: #ff5a1f; margin-top: 2px; font-weight: 600; }
+    .wide-banner .wb-btn {
+      margin-top: 8px;
+      display: inline-block;
+      background: #ff5a1f; color: #fff;
+      font-size: 12px; font-weight: 700;
+      padding: 6px 14px; border-radius: 999px;
+      border: 2px solid #1a1a1a;
+    }
+    .wide-banner .wb-deco {
+      position: absolute; right: -8px; bottom: -8px;
+      width: 88px; height: 88px; border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #ffd100, #ff5a1f 70%);
+      opacity: 0.35;
+    }
+
+    .sec-div {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin: 16px 4px 8px;
+      color: #1a1a1a; font-size: 15px; font-weight: 800;
+    }
+    .sec-div::before,
+    .sec-div::after {
+      content: ''; width: 24px; height: 3px; background: #1a1a1a; border-radius: 2px;
+    }
+
+    /* 双联小卡行（先领券/再下单） */
+    .pair-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      padding: 4px;
+    }
+    .pair-row .pcard { min-height: 130px; }
 
     /* ===== 商城 ===== */
     .mall-hero {
@@ -1160,6 +1321,79 @@
       { id: 'movie', name: '折扣电影票', icon: 'i-movie' }
     ];
 
+    /* 扁平拼贴结构化权益数据（按分类） */
+    const COLLAGE = {
+      takeout: [
+        { type: 'brand-tag', brand: '淘宝红包', logo: 'tb', logoText: '淘' },
+        { type: 'grid', cards: [
+          { id: 'tb1', theme: 'taobao', corner: '特价', title: '10-18元百亿补贴', sub: '疯抢大额补贴', cta: 'open', btn: '開', tag: 'NEW' },
+          { id: 'mt1', theme: 'meituan', corner: '特价', title: '美团9元红包', sub: '天天都能领', cta: 'open', btn: '開' }
+        ]},
+        { type: 'brand-tag', brand: '通用红包', logo: 'generic', logoText: '券' },
+        { type: 'grid', cards: [
+          { id: 'stk1', theme: 'orange', title: '叠加红包', sub: '同时使用更优惠', cta: 'pill', btn: '点击下单' },
+          { id: 'stk2', theme: 'meituan', title: '叠加红包', sub: '同时使用更优惠', cta: 'pill', btn: '点击下单' }
+        ]},
+        { type: 'brand-tag', brand: '淘宝闪购红包', logo: 'flash', logoText: '闪' },
+        { type: 'grid', cards: [
+          { id: 'fl1', theme: 'flash', title: '天天领红包', sub: '天天必领', cta: 'open', btn: '開', tag: 'NEW' },
+          { id: 'fl2', theme: 'flash', title: '单单立减红包', sub: '惊喜红包', cta: 'open', btn: '開' },
+          { id: 'fl3', theme: 'blue', title: '叠加红包', sub: '同时使用更优惠', cta: 'pill', btn: '点击下单', span: true, pillBlue: true }
+        ]},
+        { type: 'brand-tag', brand: '试吃 / 京东', logo: 'jd', logoText: '京' },
+        { type: 'grid', cards: [
+          { id: 'try1', theme: 'try', title: '美团试吃官', sub: '最低1元', cta: 'pill', btn: '点击下单' },
+          { id: 'jd1', theme: 'jd', title: '先领券', sub: '外卖新势力', cta: 'open', btn: '開' },
+          { id: 'jd2', theme: 'jd', title: '再下单', sub: '享优惠', cta: 'open', btn: '開' }
+        ]}
+      ],
+      taxi: [
+        { type: 'brand-tag', brand: '打车红包', logo: 'generic', logoText: '车' },
+        { type: 'grid', cards: [
+          { id: 'tx1', theme: 'didi', corner: '爆款', title: '大额打车神券', sub: '腾讯地图 / 滴滴出行', cta: 'open', btn: '開' },
+          { id: 'tx2', theme: 'orange', title: '打车叠加券', sub: '行程更省一点', cta: 'pill', btn: '点击下单' }
+        ]},
+        { type: 'section', text: '打车红包' },
+        { type: 'banner', id: 'taxi_banner', title: '大额打车神券', sub: '抢滴滴出行神券', btn: '点击领取', icon: 'i-car' }
+      ],
+      hotel: [
+        { type: 'brand-tag', brand: '特惠酒店', logo: 'generic', logoText: '店' },
+        { type: 'grid', cards: [
+          { id: 'ht1', theme: 'gold', title: '酒店 8 折起', sub: '周末出游提前订', cta: 'pill', btn: '去预订' },
+          { id: 'ht2', theme: 'orange', title: '连住立减', sub: '多住多省', cta: 'open', btn: '開' }
+        ]}
+      ],
+      order: [
+        { type: 'brand-tag', brand: '在线点餐', logo: 'generic', logoText: '餐' },
+        { type: 'grid', cards: [
+          { id: 'od1', theme: 'orange', title: '满 30 减 5', sub: '扫码点单直减', cta: 'pill', btn: '去点餐' },
+          { id: 'od2', theme: 'gold', title: '新客立减', sub: '到店专享', cta: 'open', btn: '開' }
+        ]}
+      ],
+      grocery: [
+        { type: 'brand-tag', brand: '买菜下午茶', logo: 'generic', logoText: '菜' },
+        { type: 'grid', cards: [
+          { id: 'gr1', theme: 'green', corner: 'NEW', title: '新人券包', sub: '含 5 张无门槛', cta: 'pill', btn: '立即领取' },
+          { id: 'gr2', theme: 'flash', title: '下午茶立减', sub: '天天可领', cta: 'open', btn: '開' }
+        ]}
+      ],
+      express: [
+        { type: 'brand-tag', brand: '打折寄快递', logo: 'generic', logoText: '递' },
+        { type: 'grid', cards: [
+          { id: 'ex1', theme: 'blue', title: '寄快递 5 折起', sub: '多家快递比价', cta: 'pill', btn: '去下单' },
+          { id: 'ex2', theme: 'orange', title: '首重 1 元', sub: '新客专享', cta: 'open', btn: '開' }
+        ]}
+      ],
+      movie: [
+        { type: 'brand-tag', brand: '折扣电影票', logo: 'generic', logoText: '影' },
+        { type: 'grid', cards: [
+          { id: 'mv1', theme: 'gold', title: '立减 10 元', sub: '全国影院通用', cta: 'pill', btn: '选座购票' },
+          { id: 'mv2', theme: 'deepred', title: '特惠场次', sub: '低至 19.9', cta: 'open', btn: '開' }
+        ]}
+      ]
+    };
+
+    // 旧结构仍供首页横滑使用
     const COUPONS = [
       { id:1, cat:'takeout', brand:'美团', title:'美团9元红包', subtitle:'天天都能领', theme:'meituan', tag:'爆款', action:'点击领取' },
       { id:2, cat:'takeout', brand:'淘宝闪购', title:'10-18元百亿补贴', subtitle:'疯抢大额补贴', theme:'taobao', tag:'NEW', action:'点击领取' },
@@ -1315,22 +1549,78 @@
       el.addEventListener('touchcancel', () => { tracking = false; startSwiper(); }, { passive: true });
     })();
 
-    /* ---- 权益 ---- */
+    /* ---- 权益 · 拼贴渲染 ---- */
+    function renderPCard(c) {
+      const cls = [
+        'pcard',
+        'th-' + (c.theme || 'orange'),
+        c.span ? 'span2' : ''
+      ].filter(Boolean).join(' ');
+      const corner = c.corner ? `<span class="corner">${c.corner}</span>` : '';
+      const newBadge = c.tag && !c.corner ? `<span class="corner">${c.tag}</span>` : (c.tag && c.corner ? `<span class="corner" style="left:auto;right:0;border-radius:0 0 0 8px;border-right:none;border-bottom-left-radius:8px;background:#ff2d2d">${c.tag}</span>` : '');
+      let foot = '';
+      if (c.cta === 'open') {
+        foot = `<div class="open-btn ${c.span ? '' : ''}">${c.btn || '開'}</div>`;
+      } else {
+        foot = `<div class="pill-btn ${c.pillBlue ? 'blue' : ''} ${c.span ? 'wide' : ''}">${c.btn || '点击下单'}</div>`;
+      }
+      return `
+        <div class="${cls}" onclick="tapCollageCard('${c.id}', '${(c.title || '').replace(/'/g, '')}')">
+          ${corner}${newBadge && !corner ? newBadge : (corner && c.tag && c.corner ? newBadge : '')}
+          <div class="ptitle">${c.title}</div>
+          <div class="psub">${c.sub || ''}</div>
+          ${foot}
+        </div>`;
+    }
+
+    function renderBrandTag(b) {
+      return `
+        <div class="brand-tag" style="grid-column:1/-1">
+          <span class="logo ${b.logo}">${b.logoText || '券'}</span>
+          <span>${b.brand}</span>
+        </div>`;
+    }
+
+    function renderCollageBlock(block) {
+      if (block.type === 'brand-tag') {
+        return `<div class="collage">${renderBrandTag(block)}</div>`;
+      }
+      if (block.type === 'grid') {
+        return `<div class="collage">${block.cards.map(renderPCard).join('')}</div>`;
+      }
+      if (block.type === 'section') {
+        return `<div class="sec-div">${block.text}</div>`;
+      }
+      if (block.type === 'banner') {
+        return `
+          <div class="wide-banner" onclick="tapCollageCard('${block.id}', '${block.title}')">
+            <div class="wb-ico">${ico(block.icon || 'i-car')}</div>
+            <div class="wb-body">
+              <div class="wb-t">${block.title}</div>
+              <div class="wb-s">${block.sub}</div>
+              <div class="wb-btn">${block.btn}</div>
+            </div>
+            <div class="wb-deco"></div>
+          </div>`;
+      }
+      return '';
+    }
+
     function renderBenefits() {
       document.getElementById('benefitSide').innerHTML = CATS.map(c => `
         <div class="side-item ${c.id===state.cat?'on':''}" onclick="setCat('${c.id}')">
           ${ico(c.icon)}${c.name}
         </div>`).join('');
-      const list = COUPONS.filter(c => c.cat === state.cat);
-      document.getElementById('benefitList').innerHTML = list.map(c => `
-        <div class="coupon th-${c.theme}" onclick="toast('${c.brand}：${c.title}（正式版跳转渠道）')">
-          ${c.tag ? `<span class="badge">${c.tag}</span>` : ''}
-          <div class="brand">${c.brand}</div>
-          <div class="t">${c.title}</div>
-          <div class="s">${c.subtitle}</div>
-          <div class="act">${c.action}</div>
-        </div>`).join('') || '<div class="muted" style="text-align:center;padding:40px 0">暂无权益</div>';
+      const blocks = COLLAGE[state.cat] || [];
+      const html = blocks.map(renderCollageBlock).join('');
+      document.getElementById('benefitList').innerHTML =
+        html || '<div class="muted" style="text-align:center;padding:40px 0">暂无权益</div>';
     }
+
+    function tapCollageCard(id, title) {
+      toast(title + '（正式版跳转渠道）');
+    }
+
     function setCat(id) { state.cat = id; renderBenefits(); }
 
     /* ---- 商城 ---- */
