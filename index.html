@@ -1217,21 +1217,8 @@
     }
     .ok-line .ico { width: 16px; height: 16px; }
 
-    .notes {
-      width: 300px; color: #c9cdd4; font-size: 13px; line-height: 1.65; padding-top: 12px;
-    }
-    .notes h3 { color: #fff; font-size: 15px; margin-bottom: 10px; font-weight: 600; }
-    .notes .box {
-      background: #151a24; border: 1px solid #252c3d; border-radius: 12px;
-      padding: 14px 16px; margin-bottom: 12px;
-    }
-    .notes ol { padding-left: 18px; }
-    .notes li { margin-bottom: 6px; }
-    .notes .k { color: var(--gold); font-weight: 600; }
-
     /* 平板/窄桌面：仍用手机壳 */
     @media (max-width: 900px) and (min-width: 481px) {
-      .notes { width: min(390px, 100%); padding-bottom: 24px; }
       .stage { flex-direction: column; align-items: center; }
       .phone {
         width: min(390px, calc(100vw - 32px));
@@ -1249,9 +1236,7 @@
       }
       body { display: block; }
 
-      /* 隐藏桌面说明与 AI 标记 */
-      .notes,
-      body > p[data-aigc-mark],
+      /* 手机端隐藏刘海装饰 */
       .notch { display: none !important; }
 
       .stage {
@@ -1329,8 +1314,6 @@
   </style>
 </head>
 <body>
-<p data-aigc-mark="1" style="margin:0 0 8px;font-size:10px;line-height:1.3;color:#6b6560;font-weight:400;">AI生成</p>
-
   <!-- ===== SVG 图标库（无 emoji） ===== -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1922,26 +1905,6 @@
 
       <div class="toast" id="toast"></div>
     </div>
-
-    <aside class="notes">
-      <h3>沟通时怎么点</h3>
-      <div class="box">
-        <ol>
-          <li><span class="k">首页</span>：轮播 Banner 自动切换，快捷入口 / 热门权益 / 积分好物</li>
-          <li><span class="k">权益</span>：左侧分类切换红包墙</li>
-          <li><span class="k">积分商城</span>：点商品 → 积分兑 / 现金购</li>
-          <li><span class="k">0元课</span>：积分解锁，首课免费</li>
-          <li><span class="k">我的</span>：内嵌推手工作台 / 佣金 / 分佣规则（原「推广」）</li>
-        </ol>
-      </div>
-      <div class="box">
-        <strong style="color:#fff">v0.2 变更</strong><br/>
-        新增首页轮播 · 推广→我的 · 全站图标去 emoji
-      </div>
-      <div class="box">
-        仓库与版本见 README / CHANGELOG。可直接转发本页链接会议演示。
-      </div>
-    </aside>
   </div>
 
   <script>
@@ -2109,7 +2072,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261015.3';
+    const APP_VERSION = 'v20261015.4';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
