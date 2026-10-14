@@ -43,22 +43,11 @@
     .ico-lg { width: 1.35em; height: 1.35em; }
     .ico-xl { width: 1.8em; height: 1.8em; }
 
-    .brief {
-      color: #c9cdd4; font-size: 13px; line-height: 1.5;
-      padding: 14px 18px 10px; max-width: 960px; margin: 0 auto; width: 100%;
-    }
-    .brief strong { color: #fff; font-weight: 600; }
-    .brief .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-    .brief .chip {
-      background: #1c2230; border: 1px solid #2a3348; color: #9fb0d0;
-      border-radius: 999px; padding: 4px 10px; font-size: 12px;
-    }
-    .brief .chip b { color: var(--gold); font-weight: 600; }
-
     .stage {
       flex: 1; display: flex; align-items: flex-start; justify-content: center;
-      gap: 28px; padding: 8px 16px 40px; flex-wrap: wrap;
+      padding: 16px 16px 40px;
     }
+    .stage > .phone { margin: 0 auto; }
     .phone {
       width: 390px; height: 844px; background: var(--bg);
       border-radius: 44px; border: 10px solid #1a1f2b;
@@ -882,18 +871,18 @@
 
     /* 商品卡片：数字价格 + 右侧加购列 */
     .goods { padding-right: 8px; }
-    .goods .prices { gap: 12px; align-items: baseline; }
+    .goods .prices { gap: 6px; align-items: baseline; }
     .goods .pbox { flex: 0 0 auto; background: none !important; text-align: left; padding: 0; color: inherit !important; display: flex; align-items: baseline; gap: 4px; }
     .goods .pbox.l .v { color: var(--brand); }
     .goods .pbox.r .v { color: #ff3b30; }
     .goods .pbox .h { display: none; }
+    .goods .p-slash { color: var(--ink-3); font-size: 13px; font-weight: 400; }
     .goods .prices .v { font-size: 15px; font-weight: 700; }
     .goods .prices .v::first-letter { font-size: 11px; font-weight: 400; }
     .goods .cart-col { position: absolute; right: 12px; bottom: 14px; text-align: center; }
     .goods { position: relative; }
     .lab-link { font-size: 11px; color: rgba(255,255,255,.85); font-weight: 400; cursor: pointer; }
-    .add-btn { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,#ff9500,#ff6600); box-shadow: 0 3px 10px rgba(255,102,0,.35); display: flex; align-items: center; justify-content: center; font-size: 16px; }
-    .add-text { font-size: 10px; color: var(--brand); margin-top: 3px; display: block; }
+    .add-btn { width: 30px; height: 30px; border-radius: 50%; background: var(--brand); box-shadow: 0 3px 8px rgba(255,102,0,.3); display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 300; color: #fff; line-height: 1; }
 
     /* 购物车悬浮球 */
     .fab { position: fixed; right: 16px; bottom: 92px; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg,#ff9500,#ff6600); box-shadow: 0 6px 18px rgba(255,102,0,.4); display: flex; align-items: center; justify-content: center; font-size: 24px; z-index: 60; cursor: pointer; transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
@@ -1261,7 +1250,6 @@
       body { display: block; }
 
       /* 隐藏桌面说明与 AI 标记 */
-      .brief,
       .notes,
       body > p[data-aigc-mark],
       .notch { display: none !important; }
@@ -1431,17 +1419,6 @@
       <rect x="5" y="7" width="14" height="13" rx="1.5"/><path d="M5 11h14M12 7v4"/><path d="M9 7l3-2.5L15 7"/>
     </symbol>
   </svg>
-
-  <div class="brief">
-    <strong>潮匠 TrendCraft · 可点击原型 v0.5</strong>
-    — 新增轮播首页 · Tab「推广」已改回「我的」· 图标全部去 emoji。手机壳内可切换演示。
-    <div class="chips">
-      <span class="chip">轮播 Banner <b>×3</b></span>
-      <span class="chip">看广告 <b>+10</b> 分 / 日上限 <b>10</b></span>
-      <span class="chip">快消约 <b>300</b> 积分</span>
-      <span class="chip">「我的」内嵌 <b>推手 B 端</b></span>
-    </div>
-  </div>
 
   <div class="stage">
     <div class="phone" id="phone">
@@ -2132,7 +2109,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261015.1';
+    const APP_VERSION = 'v20261015.2';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -2723,12 +2700,12 @@
             <div class="title">${g.title}</div>
             <div class="meta"><span class="retail">建议零售 ¥${g.retail}</span><span>已售 ${g.sales}</span></div>
             <div class="prices">
-              ${g.points ? `<div class="pbox l"><div class="v">◎${g.points} 积分</div></div>` : ''}
-              <div class="pbox r"><div class="v">¥${g.cash}</div></div>
+              ${g.points ? `<div class="pbox l"><div class="v">◎${g.points} 积分</div></div><span class="p-slash">/</span>` : ''}
+              <div class="pbox r"><div class="v">¥${g.cash} 直购</div></div>
             </div>
           </div>
           <div class="cart-col" onclick="event.stopPropagation();cartAdd('${g.id}',1)">
-            <div class="add-btn">🛒</div><span class="add-text">加购</span>
+            <div class="add-btn">＋</div>
           </div>
         </div>`).join('');
     }
