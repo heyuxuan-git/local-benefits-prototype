@@ -898,6 +898,11 @@
     /* 购物车悬浮球 */
     .fab { position: fixed; right: 16px; bottom: 92px; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg,#ff9500,#ff6600); box-shadow: 0 6px 18px rgba(255,102,0,.4); display: flex; align-items: center; justify-content: center; font-size: 24px; z-index: 60; cursor: pointer; transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
     .fab:active { transform: scale(.85); transition: transform .08s; }
+    /* 新版本提醒条 */
+    .update-bar { position: fixed; top: 0; left: 0; right: 0; background: #111827; color: #fff; display: flex; align-items: center; gap: 10px; padding: 9px 14px; font-size: 12.5px; z-index: 99; animation: ub-drop .25s ease; }
+    @keyframes ub-drop { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+    .update-bar .ub-btn { margin-left: auto; background: #ff6600; border-radius: 99px; padding: 3px 14px; font-size: 12px; font-weight: 700; cursor: pointer; }
+    .update-bar .ub-close { color: rgba(255,255,255,.6); cursor: pointer; padding: 0 2px; }
     .fab-badge { position: absolute; top: -5px; right: -5px; min-width: 18px; height: 18px; line-height: 18px; text-align: center; background: #ff3b30; color: #fff; font-size: 11px; font-weight: 700; border-radius: 99px; padding: 0 4px; border: 2px solid #fff; box-sizing: border-box; }
     .fab-badge.bump { animation: badge-pop .4s ease; }
     @keyframes badge-pop { 0%{transform:scale(1)} 40%{transform:scale(1.5)} 100%{transform:scale(1)} }
@@ -1785,6 +1790,11 @@
         </div>
 
         <!-- ========== 购物车悬浮球 + 抽屉 ========== -->
+        <div class="update-bar hide" id="updateBar">
+          <span>✨ 检测到新版本</span>
+          <span class="ub-btn" onclick="forceUpdate()">立即更新</span>
+          <span class="ub-close" onclick="this.parentNode.classList.add('hide')">✕</span>
+        </div>
         <div class="fab" id="cartFab" onclick="toggleFab()">
           <span>🛒</span>
           <span class="fab-badge hide" id="fabBadge">0</span>
@@ -2120,6 +2130,9 @@
       'order-detail': '订单详情', 'aftersale-apply': '申请售后',
       address: '收货地址', 'address-edit': '编辑地址'
     };
+
+    /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
+    const APP_VERSION = 'v20261015.1';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -3484,6 +3497,25 @@
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => el.classList.remove('show'), ms || 1600);
     }
+
+    /* ---- 版本自检：定时 + 切回前台时拉取最新页面，绕过 CDN 缓存比对版本号 ---- */
+    async function checkUpdate() {
+      try {
+        const res = await fetch(location.pathname + '?_t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return;
+        const html = await res.text();
+        const m = html.match(/const APP_VERSION = '([^']+)'/);
+        if (m && m[1] !== APP_VERSION) {
+          document.getElementById('updateBar').classList.remove('hide');
+        }
+      } catch (e) { /* 离线/网络异常忽略 */ }
+    }
+    function forceUpdate() {
+      location.href = location.pathname + '?_r=' + Date.now();
+    }
+    setInterval(checkUpdate, 30000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) checkUpdate(); });
+    setTimeout(checkUpdate, 5000);
 
     /* 启动 */
     renderHome(); renderBenefits(); renderMall(); renderCourses(); renderAgent(); renderLogs();
