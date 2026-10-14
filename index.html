@@ -880,6 +880,102 @@
     .goods .pbox .h { font-size: 10px; color: var(--ink-3); }
     .goods .pbox.r .h { color: rgba(255,255,255,.85); }
 
+    /* 商品卡片：数字价格 + 右侧加购列 */
+    .goods { padding-right: 8px; }
+    .goods .prices { gap: 12px; align-items: baseline; }
+    .goods .pbox { flex: 0 0 auto; background: none !important; text-align: left; padding: 0; color: inherit !important; display: flex; align-items: baseline; gap: 4px; }
+    .goods .pbox.l .v { color: var(--brand); }
+    .goods .pbox.r .v { color: #ff3b30; }
+    .goods .pbox .h { display: none; }
+    .goods .prices .v { font-size: 15px; font-weight: 700; }
+    .goods .prices .v::first-letter { font-size: 11px; font-weight: 400; }
+    .goods .cart-col { position: absolute; right: 12px; bottom: 14px; text-align: center; }
+    .goods { position: relative; }
+    .lab-link { font-size: 11px; color: rgba(255,255,255,.85); font-weight: 400; cursor: pointer; }
+    .add-btn { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,#ff9500,#ff6600); box-shadow: 0 3px 10px rgba(255,102,0,.35); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .add-text { font-size: 10px; color: var(--brand); margin-top: 3px; display: block; }
+
+    /* 购物车悬浮球 */
+    .fab { position: fixed; right: 16px; bottom: 92px; width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg,#ff9500,#ff6600); box-shadow: 0 6px 18px rgba(255,102,0,.4); display: flex; align-items: center; justify-content: center; font-size: 24px; z-index: 60; cursor: pointer; transition: transform .3s cubic-bezier(.34,1.56,.64,1); }
+    .fab:active { transform: scale(.85); transition: transform .08s; }
+    .fab-badge { position: absolute; top: -5px; right: -5px; min-width: 18px; height: 18px; line-height: 18px; text-align: center; background: #ff3b30; color: #fff; font-size: 11px; font-weight: 700; border-radius: 99px; padding: 0 4px; border: 2px solid #fff; box-sizing: border-box; }
+    .fab-badge.bump { animation: badge-pop .4s ease; }
+    @keyframes badge-pop { 0%{transform:scale(1)} 40%{transform:scale(1.5)} 100%{transform:scale(1)} }
+    .fab-mask { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 61; }
+    .fab-drawer { position: fixed; left: 0; right: 0; bottom: 0; max-height: 75vh; background: #fff; border-radius: 16px 16px 0 0; z-index: 62; display: flex; flex-direction: column; animation: drawer-up .22s ease; }
+    @keyframes drawer-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .fd-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px 10px; border-bottom: 1px solid var(--line); }
+    .fd-close { color: var(--ink-3); font-size: 22px; line-height: 1; padding: 0 6px; cursor: pointer; }
+    .fd-body { overflow-y: auto; padding: 4px 16px; max-height: 50vh; }
+    .fd-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+    .fd-item .thumb { width: 54px; height: 54px; border-radius: 8px; background: #f4f5f7; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--ink-3); flex-shrink: 0; text-align: center; padding: 2px; }
+    .fd-info { flex: 1; min-width: 0; }
+    .fd-t { font-size: 13px; line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .fd-b { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
+    .fd-p { font-size: 14px; font-weight: 700; }
+    .fd-p.pts { color: var(--brand); } .fd-p.cs { color: #ff3b30; }
+    .stepper { display: flex; align-items: center; background: #f7f8fa; border-radius: 6px; }
+    .stepper .stp { width: 26px; height: 26px; line-height: 26px; text-align: center; font-size: 15px; cursor: pointer; }
+    .stepper .stp.off { color: var(--ink-3); }
+    .stepper .qty { min-width: 28px; text-align: center; font-size: 12.5px; }
+    .fd-bar { display: flex; align-items: center; gap: 10px; border-top: 1px solid var(--line); padding: 10px 16px; background: #fff; }
+    .fd-total { flex: 1; font-size: 12.5px; color: var(--ink-2); }
+    .fd-total b { font-size: 15px; }
+    .fd-total .pts { color: var(--brand); } .fd-total .cs { color: #ff3b30; }
+
+    /* 勾选圈 */
+    .cbox { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--ink-3); flex-shrink: 0; cursor: pointer; box-sizing: border-box; }
+    .cbox.on { background: var(--brand); border-color: var(--brand); position: relative; }
+    .cbox.on::after { content: '✓'; position: absolute; inset: 0; color: #fff; font-size: 11px; text-align: center; line-height: 14px; }
+
+    /* 订单 / 表单通用 */
+    .order-card { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+    .oc-head { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-3); padding-bottom: 8px; }
+    .oc-head .st { font-weight: 700; font-size: 13px; color: var(--brand); }
+    .oc-head .st.unpaid { color: #ff3b30; } .oc-head .st.shipped { color: #2f7cf6; } .oc-head .st.done { color: #34c759; }
+    .oc-goods { display: flex; gap: 10px; border-top: 1px solid var(--line); padding-top: 8px; }
+    .oc-goods .thumb { width: 52px; height: 52px; border-radius: 8px; background: #f4f5f7; font-size: 10px; color: var(--ink-3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-align: center; padding: 2px; }
+    .oc-total { text-align: right; font-size: 12.5px; margin-top: 6px; }
+    .oc-total b.pts { color: var(--brand); font-size: 14px; } .oc-total b.cs { color: #ff3b30; font-size: 14px; }
+    .oc-acts { display: flex; justify-content: flex-end; gap: 8px; border-top: 1px solid var(--line); margin-top: 8px; padding-top: 8px; flex-wrap: wrap; }
+    .oc-acts .btn { font-size: 12px; padding: 6px 14px; }
+    .aft-tag { display: inline-block; font-size: 10.5px; color: var(--ink-2); background: #f2f3f5; border-radius: 4px; padding: 1px 7px; margin-top: 4px; }
+    .empty-state { text-align: center; color: var(--ink-3); padding: 50px 0; font-size: 13px; }
+    .addr-card { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; position: relative; }
+    .addr-card .top { display: flex; align-items: baseline; gap: 10px; }
+    .addr-card .nm { font-weight: 700; font-size: 14.5px; }
+    .addr-card .ph { font-size: 13px; color: var(--ink-2); }
+    .addr-card .def-tag { font-size: 10px; color: var(--brand); background: #fff4e8; border-radius: 4px; padding: 1px 6px; }
+    .addr-card .dt { font-size: 13px; margin-top: 5px; line-height: 1.5; }
+    .addr-card .acts { display: flex; gap: 16px; border-top: 1px solid var(--line); margin-top: 8px; padding-top: 7px; font-size: 12.5px; color: var(--ink-2); }
+    .addr-card .acts span { cursor: pointer; } .addr-card .acts span:hover { color: var(--brand); }
+    .addr-card .acts .dgr { color: #ff3b30; }
+    .form-row { display: flex; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--line); gap: 12px; }
+    .form-row:last-child { border-bottom: none; }
+    .f-label { width: 88px; flex-shrink: 0; font-size: 13.5px; font-weight: 600; }
+    .f-input { flex: 1; border: none; outline: none; font-size: 13.5px; background: transparent; }
+    .f-val { flex: 1; display: flex; gap: 14px; font-size: 13.5px; color: var(--ink-2); }
+    .f-val select { border: none; background: transparent; font-size: 13.5px; outline: none; flex: 1; }
+    .f-textarea { width: 100%; min-height: 80px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; font-size: 13px; box-sizing: border-box; outline: none; resize: none; }
+    .oc-bar { position: fixed; left: 0; right: 0; bottom: 0; background: #fff; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); z-index: 55; }
+    .oc-bar .sum { flex: 1; text-align: right; font-size: 13px; }
+    .oc-bar .sum b { font-size: 15.5px; } .oc-bar .sum .pts { color: var(--brand); } .oc-bar .sum .cs { color: #ff3b30; }
+    .tl { position: relative; padding-left: 4px; }
+    .tl-item { display: flex; gap: 12px; padding-bottom: 14px; position: relative; }
+    .tl-item::before { content: ''; position: absolute; left: 5px; top: 14px; bottom: 0; width: 1.5px; background: var(--line); }
+    .tl-item:last-child { padding-bottom: 0; } .tl-item:last-child::before { display: none; }
+    .tl-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--ink-3); flex-shrink: 0; margin-top: 4px; z-index: 1; }
+    .tl-dot.cur { background: var(--brand); box-shadow: 0 0 0 4px rgba(255,102,0,.15); }
+    .tl-t { font-size: 13px; color: var(--ink-2); } .tl-t.cur { color: #111827; font-weight: 600; }
+    .tl-tm { font-size: 11px; color: var(--ink-3); margin-top: 3px; }
+    .status-head { padding: 20px 16px; border-radius: 12px; color: #fff; margin-bottom: 10px; background: linear-gradient(135deg,#ff9500,#ff6600); }
+    .status-head.shipped { background: linear-gradient(135deg,#5aa2ff,#2f7cf6); }
+    .status-head.done { background: linear-gradient(135deg,#5edb8b,#34c759); }
+    .status-head .st-t { font-size: 21px; font-weight: 700; }
+    .status-head .st-h { font-size: 12.5px; opacity: .92; margin-top: 5px; }
+    .info-row { display: flex; justify-content: space-between; font-size: 13.5px; padding: 6px 0; }
+    .info-row .k { color: var(--ink-3); } .info-row .v { max-width: 60%; text-align: right; word-break: break-all; }
+
     /* ===== 商品详情 ===== */
     .detail-hero {
       height: 240px; background: linear-gradient(160deg, #fff4e8, #ffe8cc);
@@ -1505,13 +1601,12 @@
         <div class="view" id="view-mall" data-tab="mall">
           <div class="mall-hero">
             <div>
-              <div class="lab">我的积分</div>
+              <div class="lab">我的积分 <span class="lab-link" onclick="go('points')">明细 ›</span></div>
               <div class="n" data-bind="points">20</div>
               <div class="sub">看广告 / 完成任务 / 会员加成可得 · 不可提现</div>
             </div>
             <div class="acts">
               <button class="btn w" onclick="go('watch-ad')">赚积分</button>
-              <button class="btn l" onclick="go('points')">积分明细</button>
             </div>
           </div>
           <div class="tabs-row" id="mallTabs">
@@ -1557,6 +1652,18 @@
             </div>
             <div class="agent-sub">团队长 / 社群裂变 · 适配微商直销地推 · C端一键升级B端</div>
           </div>
+          <div class="card" style="margin:0 16px 10px">
+            <div style="display:flex;justify-content:space-between;font-size:14.5px;font-weight:700">
+              <span onclick="state.orderTab='all';go('orders')" style="cursor:pointer">我的商城 ›</span>
+            </div>
+            <div style="display:flex;gap:18px;margin-top:12px;font-size:12.5px;color:var(--ink-2)">
+              <span onclick="event.stopPropagation();state.orderTab='unpaid';go('orders')">待付款</span>
+              <span onclick="event.stopPropagation();state.orderTab='pending_ship';go('orders')">待发货</span>
+              <span onclick="event.stopPropagation();state.orderTab='shipped';go('orders')">已发货</span>
+              <span onclick="event.stopPropagation();state.orderTab='done';go('orders')">已完成</span>
+              <span style="margin-left:auto;color:var(--brand)" onclick="event.stopPropagation();go('address')">收货地址</span>
+            </div>
+          </div>
           <div class="stat-bar">
             <div class="cell"><div class="v">¥1286.50</div><div class="l">累计佣金</div></div>
             <div class="cell"><div class="v">¥320.00</div><div class="l">本月佣金</div></div>
@@ -1593,6 +1700,103 @@
           <div class="card compare" id="gdCompare"></div>
           <div style="height:70px"></div>
           <div class="detail-footer" id="gdFooter"></div>
+        </div>
+
+        <!-- ========== 购物车 ========== -->
+        <div class="view" id="view-cart" data-tab="mall">
+          <div id="cartList"></div>
+          <div id="cartBar"></div>
+        </div>
+
+        <!-- ========== 确认订单 ========== -->
+        <div class="view" id="view-order-confirm" data-tab="mall">
+          <div id="ocAddr"></div>
+          <div id="ocGroups"></div>
+          <div id="ocBar" class="oc-bar"></div>
+        </div>
+
+        <!-- ========== 我的订单 ========== -->
+        <div class="view" id="view-orders" data-tab="mall">
+          <div class="tabs-row" id="orderTabs">
+            <div class="t on" data-otab="all">全部</div>
+            <div class="t" data-otab="unpaid">待付款</div>
+            <div class="t" data-otab="pending_ship">待发货</div>
+            <div class="t" data-otab="shipped">已发货</div>
+            <div class="t" data-otab="done">已完成</div>
+          </div>
+          <div id="orderList"></div>
+        </div>
+
+        <!-- ========== 订单详情 ========== -->
+        <div class="view" id="view-order-detail" data-tab="mall">
+          <div id="odHead"></div>
+          <div id="odBody"></div>
+          <div id="odBar" class="detail-footer" style="display:none"></div>
+        </div>
+
+        <!-- ========== 申请售后 ========== -->
+        <div class="view" id="view-aftersale-apply" data-tab="mall">
+          <div id="asGoods"></div>
+          <div class="card">
+            <div class="form-row"><span class="f-label">售后类型</span>
+              <span class="f-val"><label><input type="radio" name="asType" value="refund" checked> 仅退款</label>
+              <label><input type="radio" name="asType" value="return"> 退货退款</label></span>
+            </div>
+            <div class="form-row"><span class="f-label">退款原因</span>
+              <span class="f-val"><select id="asReason">
+                <option>商品与描述不符</option><option>商品破损/质量问题</option>
+                <option>少件/漏发</option><option>不想要了</option><option>其他</option>
+              </select></span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="f-label" style="margin-bottom:8px">补充说明（选填）</div>
+            <textarea id="asNote" class="f-textarea" placeholder="请描述遇到的问题，有助于更快审核"></textarea>
+          </div>
+          <div style="height:80px"></div>
+          <div class="detail-footer">
+            <button class="btn btn-primary" style="flex:1" onclick="submitAftersaleView()">提交申请</button>
+          </div>
+        </div>
+
+        <!-- ========== 收货地址 ========== -->
+        <div class="view" id="view-address" data-tab="mall">
+          <div id="addrList"></div>
+          <div style="height:80px"></div>
+          <div class="detail-footer">
+            <button class="btn btn-primary" style="flex:1" onclick="editAddress(null)">＋ 新增收货地址</button>
+          </div>
+        </div>
+
+        <!-- ========== 编辑地址 ========== -->
+        <div class="view" id="view-address-edit" data-tab="mall">
+          <div class="card">
+            <div class="form-row"><span class="f-label">收货人</span><input class="f-input" id="afName" placeholder="请输入姓名" maxlength="20"></div>
+            <div class="form-row"><span class="f-label">手机号</span><input class="f-input" id="afPhone" type="tel" placeholder="请输入手机号" maxlength="11"></div>
+            <div class="form-row"><span class="f-label">所在地区</span><input class="f-input" id="afRegion" placeholder="省 市 区（空格分隔）" value="广东省 深圳市 南山区"></div>
+            <div class="form-row"><span class="f-label">详细地址</span><input class="f-input" id="afDetail" placeholder="街道、楼牌号等"></div>
+            <div class="form-row"><span class="f-label">设为默认地址</span><input type="checkbox" id="afDef"></div>
+          </div>
+          <div id="afRemove" style="text-align:center;margin-top:16px"></div>
+          <div style="height:80px"></div>
+          <div class="detail-footer">
+            <button class="btn btn-primary" style="flex:1" onclick="saveAddressView()">保存</button>
+          </div>
+        </div>
+
+        <!-- ========== 购物车悬浮球 + 抽屉 ========== -->
+        <div class="fab" id="cartFab" onclick="toggleFab()">
+          <span>🛒</span>
+          <span class="fab-badge hide" id="fabBadge">0</span>
+        </div>
+        <div class="fab-mask hide" id="fabMask" onclick="toggleFab()"></div>
+        <div class="fab-drawer hide" id="fabDrawer">
+          <div class="fd-head">
+            <b>购物车 <span id="fdCount" style="font-weight:400;color:var(--ink-2);font-size:12px"></span></b>
+            <span class="fd-close" onclick="toggleFab()">×</span>
+          </div>
+          <div class="fd-body" id="fdBody"></div>
+          <div class="fd-bar" id="fdBar"></div>
         </div>
 
         <!-- ========== 课程详情 ========== -->
@@ -1761,7 +1965,10 @@
       unlocked: new Set(), goodsId: null, courseId: null,
       swIndex: 0, swTimer: null,
       grabDate: null, grabClaimed: false, grabPlaying: false, grab: null,
-      logs: [{ note: '新用户赠送', source: 'init', amount: 20, balance: 20, time: '首次进入' }]
+      logs: [{ note: '新用户赠送', source: 'init', amount: 20, balance: 20, time: '首次进入' }],
+      cart: [], orderTab: 'all', orderId: null, addrEditId: null,
+      addresses: [{ id: 'a1', name: '张三', phone: '13800138000', region: ['广东省', '深圳市', '南山区'], detail: '科技园南路 XX 号 XX 大厦 8 层', def: true }],
+      orders: [] // 首次使用时由 seedOrders() 填充
     };
 
     const CATS = [
@@ -1908,7 +2115,10 @@
       home: '首页', benefits: '权益', mall: '积分商城', courses: '0元课',
       mine: '我的', 'goods-detail': '商品详情', 'course-detail': '课程详情',
       'watch-ad': '看广告赚积分', points: '我的积分',
-      life: '本地生活', bounty: '悬赏任务'
+      life: '本地生活', bounty: '悬赏任务',
+      cart: '购物车', 'order-confirm': '确认订单', orders: '我的订单',
+      'order-detail': '订单详情', 'aftersale-apply': '申请售后',
+      address: '收货地址', 'address-edit': '编辑地址'
     };
 
     function ico(id, cls) {
@@ -2500,9 +2710,12 @@
             <div class="title">${g.title}</div>
             <div class="meta"><span class="retail">建议零售 ¥${g.retail}</span><span>已售 ${g.sales}</span></div>
             <div class="prices">
-              <div class="pbox l"><div class="v">${g.points}</div><div class="h">积分兑换</div></div>
-              <div class="pbox r"><div class="v">¥${g.cash}</div><div class="h">全网低价直购</div></div>
+              ${g.points ? `<div class="pbox l"><div class="v">◎${g.points} 积分</div></div>` : ''}
+              <div class="pbox r"><div class="v">¥${g.cash}</div></div>
             </div>
+          </div>
+          <div class="cart-col" onclick="event.stopPropagation();cartAdd('${g.id}',1)">
+            <div class="add-btn">🛒</div><span class="add-text">加购</span>
           </div>
         </div>`).join('');
     }
@@ -2595,18 +2808,521 @@
         <div class="cell"><div class="k">利润参考</div><div class="v">¥${g.profit}</div></div>
         <div class="cell"><div class="k">相对零售</div><div class="v">${g.cash}/${g.retail}</div></div>`;
       document.getElementById('gdFooter').innerHTML = `
-        <button class="btn btn-ghost" onclick="redeemGoods()">${g.points} 积分兑</button>
-        <button class="btn btn-primary" onclick="toast('下单支付（供应链对接后开通）')">¥${g.cash} 直购</button>`;
+        <button class="btn btn-ghost" onclick="cartAdd('${g.id}',1,'${g.points ? 'points' : 'cash'}')">加入购物车</button>
+        <button class="btn btn-ghost" onclick="redeemGoods()">${g.points ? g.points + ' 积分兑' : '积分兑换'}</button>
+        <button class="btn btn-primary" onclick="buyNow('${g.id}')">¥${g.cash} 直购</button>`;
       go('goods-detail');
     }
 
     function redeemGoods() {
       const g = GOODS.find(x => x.id === state.goodsId); if (!g) return;
+      const addr = defaultAddr(); if (!addr) { go('address'); toast('请先添加收货地址'); return; }
       if (state.points < g.points) { toast('积分不足，先去看广告'); return; }
       if (confirm(`消耗 ${g.points} 积分兑换「${g.title}」？`)) {
-        addPoints(-g.points, '兑换商品', g.title);
-        toast('兑换成功（原型模拟）');
+        addPoints(-g.points, 'redeem_goods', '兑换商品：' + g.title);
+        const o = makeOrder('points', 'pending_ship', [{ gid: g.id, qty: 1 }], g.points, 0, addr);
+        state.orderId = o.id;
+        toast('兑换成功，订单待发货');
+        go('order-detail');
       }
+    }
+
+    /* ========== 购物车 / 订单（原型 mock） ========== */
+    function defaultAddr() { return state.addresses.find(a => a.def) || state.addresses[0] || null; }
+
+    function cartAdd(gid, qty, pay) {
+      const g = GOODS.find(x => x.id === gid); if (!g) return;
+      pay = pay || (g.points ? 'points' : 'cash');
+      const hit = state.cart.find(c => c.gid === gid && c.pay === pay);
+      if (hit) hit.qty += (qty || 1);
+      else state.cart.unshift({ gid, qty: qty || 1, selected: true, pay });
+      updateFab(); toast('已加入购物车');
+    }
+    function cartSetQty(cid, pay, qty) {
+      const c = state.cart.find(x => x.gid === cid && x.pay === pay); if (!c) return;
+      c.qty = Math.max(1, Math.min(99, qty)); updateFab();
+    }
+    function cartToggle(cid, pay) {
+      const c = state.cart.find(x => x.gid === cid && x.pay === pay); if (c) c.selected = !c.selected;
+      updateFab();
+    }
+    function cartToggleAll() {
+      const all = state.cart.length && state.cart.every(c => c.selected);
+      state.cart.forEach(c => c.selected = !all); updateFab();
+    }
+    function cartCount() { return state.cart.reduce((n, c) => n + c.qty, 0); }
+
+    function cartSummary() {
+      let p = 0, cash = 0, hasP = false, hasC = false, count = 0;
+      state.cart.filter(c => c.selected).forEach(c => {
+        const g = GOODS.find(x => x.id === c.gid); if (!g) return;
+        count += c.qty;
+        if (c.pay === 'points') { p += g.points * c.qty; hasP = true; }
+        else { cash += g.cash * c.qty; hasC = true; }
+      });
+      return { points: p, cash: +cash.toFixed(2), hasMixed: hasP && hasC, count };
+    }
+
+    function checkoutFromCart() {
+      const s = cartSummary();
+      if (!s.count) { toast('请先选择商品'); return; }
+      if (!defaultAddr()) { toast('请先添加收货地址'); go('address'); return; }
+      if (s.hasMixed && !confirm('积分商品与现金商品将拆成两笔订单，继续结算？')) return;
+      go('order-confirm');
+    }
+
+    function makeOrder(type, status, items, pointsTotal, cashTotal, addr) {
+      const o = {
+        id: 'o' + Date.now().toString().slice(-8) + Math.floor(Math.random() * 90 + 10),
+        type, status, items: items.map(it => {
+          const g = GOODS.find(x => x.id === it.gid);
+          return { gid: g.id, title: g.title, cat: g.cat, points: g.points, cash: g.cash, qty: it.qty };
+        }),
+        pointsTotal, cashTotal,
+        address: { name: addr.name, phone: addr.phone, region: addr.region, detail: addr.detail },
+        createdAt: Date.now(), aftersale: null, logistics: null
+      };
+      state.orders.unshift(o);
+      return o;
+    }
+
+    function submitOrderConfirm() {
+      const addr = defaultAddr(); if (!addr) { toast('请选择收货地址'); return; }
+      const sel = state.cart.filter(c => c.selected);
+      const pItems = sel.filter(c => c.pay === 'points');
+      const cItems = sel.filter(c => c.pay === 'cash');
+      const pTotal = pItems.reduce((s, c) => s + GOODS.find(x => x.id === c.gid).points * c.qty, 0);
+      const cTotal = +cItems.reduce((s, c) => s + GOODS.find(x => x.id === c.gid).cash * c.qty, 0).toFixed(2);
+      if (pItems.length && state.points < pTotal) { toast('积分不足，先去赚积分'); return; }
+      const created = [];
+      if (pItems.length) {
+        addPoints(-pTotal, 'redeem_goods', '积分商城兑换');
+        created.push(makeOrder('points', 'pending_ship', pItems, pTotal, 0, addr));
+      }
+      if (cItems.length) created.push(makeOrder('cash', 'unpaid', cItems, 0, cTotal, addr));
+      state.cart = state.cart.filter(c => !c.selected);
+      updateFab();
+      if (created.length > 1) { toast(`已生成 ${created.length} 笔订单`); go('orders'); }
+      else { state.orderId = created[0].id; toast('下单成功'); go('order-detail'); }
+    }
+
+    function payOrder(id) {
+      const o = state.orders.find(x => x.id === id); if (!o || o.status !== 'unpaid') return;
+      o.status = 'pending_ship'; o.paidAt = Date.now();
+      toast('支付成功（原型模拟）'); renderOrders(); renderOrderDetail();
+    }
+    function shipOrder(id) {
+      const o = state.orders.find(x => x.id === id); if (!o || o.status !== 'pending_ship') return;
+      o.status = 'shipped'; o.shippedAt = Date.now();
+      o.logistics = { company: ['顺丰速运', '中通快递', '京东物流'][Math.floor(Math.random() * 3)], no: 'MOCK' + Date.now().toString().slice(-10) };
+      toast('已发货（原型模拟）'); renderOrders(); renderOrderDetail();
+    }
+    function receiveOrder(id) {
+      const o = state.orders.find(x => x.id === id); if (!o || o.status !== 'shipped') return;
+      if (!confirm('确认已收到商品？')) return;
+      o.status = 'done'; o.doneAt = Date.now();
+      toast('交易完成'); renderOrders(); renderOrderDetail();
+    }
+    function cancelOrder(id) {
+      const o = state.orders.find(x => x.id === id); if (!o || o.status !== 'unpaid') return;
+      if (!confirm('确定取消该订单？')) return;
+      state.orders = state.orders.filter(x => x.id !== id);
+      toast('已取消'); if (state.view === 'order-detail') back(); else renderOrders();
+    }
+    function viewLogistics(id) {
+      const o = state.orders.find(x => x.id === id); if (!o || !o.logistics) return;
+      alert(`${o.logistics.company}\n运单号 ${o.logistics.no}\n\n（原型 mock，接入供应链后展示真实轨迹）`);
+    }
+
+    /* ---- 售后：提交后置为审核中，详情页「模拟审核通过」退回 ---- */
+    function submitAftersale(id, type, reason) {
+      const o = state.orders.find(x => x.id === id); if (!o) return;
+      o.aftersale = { status: 'reviewing', type, reason, at: Date.now() };
+      toast('申请已提交，等待审核');
+      back();
+    }
+    function approveAftersale(id) {
+      const o = state.orders.find(x => x.id === id); if (!o || !o.aftersale) return;
+      if (o.type === 'points' && o.pointsTotal) {
+        addPoints(o.pointsTotal, 'aftersale_refund', '售后退款：' + o.items[0].title);
+      }
+      o.aftersale.status = 'approved';
+      o.aftersale.result = o.type === 'points'
+        ? `退回 ${o.pointsTotal} 积分`
+        : `退款 ¥${o.cashTotal.toFixed(2)} 已原路退回（原型模拟）`;
+      toast('售后已通过'); renderOrderDetail(); renderOrders();
+    }
+
+    /* ---- 种子订单：覆盖 4 种状态，便于演示 ---- */
+    function seedOrders() {
+      if (state.orders.length) return;
+      const addr = defaultAddr() || { name: '张三', phone: '13800138000', region: ['广东省', '深圳市', '南山区'], detail: '演示地址' };
+      const day = 86400000, now = Date.now();
+      const mk = (type, status, gids, at, extra) => {
+        const items = gids.map(x => ({ gid: x[0], qty: x[1] }));
+        const pT = items.reduce((s, it) => s + (GOODS.find(g => g.id === it.gid).points || 0) * it.qty, 0);
+        const cT = +items.reduce((s, it) => s + GOODS.find(g => g.id === it.gid).cash * it.qty, 0).toFixed(2);
+        const o = makeOrder(type, status, items, type === 'points' ? pT : 0, type === 'cash' ? cT : 0, addr);
+        o.createdAt = at;
+        return Object.assign(o, extra || {});
+      };
+      const seeded = [
+        mk('points', 'pending_ship', [['g1', 1]], now - day, {}),
+        mk('cash', 'unpaid', [['g6', 1]], now - 2 * 3600000, {}),
+        mk('points', 'shipped', [['g2', 1]], now - 4 * day, { shippedAt: now - 2 * day, logistics: { company: '顺丰速运', no: 'SF1234567890' } }),
+        mk('cash', 'done', [['g7', 2]], now - 9 * day, { paidAt: now - 9 * day, shippedAt: now - 8 * day, doneAt: now - 6 * day, logistics: { company: '中通快递', no: 'ZT9876543210' } })
+      ];
+      const done = seeded[3];
+      done.aftersale = { status: 'approved', type: 'refund', reason: '商品与描述不符', at: now - 5 * day, result: '退款 ¥' + done.cashTotal.toFixed(2) + ' 已原路退回（原型模拟）' };
+      state.orders = seeded;
+    }
+
+    /* ---- 地址 ---- */
+    function saveAddress(id, name, phone, region, detail, def) {
+      if (!name.trim()) { toast('请填写收货人'); return; }
+      if (!/^1\d{10}$/.test(phone.trim())) { toast('请填写正确手机号'); return; }
+      if (def) state.addresses.forEach(a => a.def = false);
+      if (id) {
+        const a = state.addresses.find(x => x.id === id);
+        Object.assign(a, { name: name.trim(), phone: phone.trim(), region, detail: detail.trim(), def });
+      } else {
+        state.addresses.push({ id: 'a' + Date.now(), name: name.trim(), phone: phone.trim(), region, detail: detail.trim(), def: def || state.addresses.length === 0 });
+      }
+      toast('已保存'); back(); renderAddress();
+    }
+    function removeAddress(id) {
+      if (!confirm('确定删除该地址？')) return;
+      state.addresses = state.addresses.filter(a => a.id !== id);
+      if (!state.addresses.some(a => a.def) && state.addresses[0]) state.addresses[0].def = true;
+      renderAddress();
+    }
+    function setDefaultAddr(id) { state.addresses.forEach(a => a.def = a.id === id); renderAddress(); }
+
+    /* ---- 各页面渲染 ---- */
+    const STATUS_TEXT = { unpaid: '待付款', pending_ship: '待发货', shipped: '已发货', done: '已完成' };
+    const fmtTime = t => new Date(t).toLocaleString('zh-CN', { hour12: false });
+
+    function cartRows() {
+      return state.cart.map(c => ({ g: GOODS.find(x => x.id === c.gid), c })).filter(r => r.g);
+    }
+
+    function renderCart() {
+      const rows = cartRows();
+      const listEl = document.getElementById('cartList');
+      const barEl = document.getElementById('cartBar');
+      if (!rows.length) {
+        listEl.innerHTML = '<div class="empty-state">购物车还是空的</div>';
+        barEl.innerHTML = '';
+        return;
+      }
+      listEl.innerHTML = rows.map(({ g, c }) => `
+        <div class="fd-item" style="margin:0 16px;background:#fff;border-radius:12px;margin-bottom:8px;padding:12px">
+          <div class="cbox ${c.selected ? 'on' : ''}" onclick="cartToggle('${g.id}','${c.pay}');renderCart()"></div>
+          <div class="thumb">${g.cat}</div>
+          <div class="fd-info">
+            <div class="fd-t">${g.title}</div>
+            <div class="fd-b">
+              <span class="fd-p ${c.pay === 'points' ? 'pts' : 'cs'}">${c.pay === 'points' ? g.points + ' 积分' : '¥' + g.cash}</span>
+              <span class="stepper">
+                <span class="stp ${c.qty <= 1 ? 'off' : ''}" onclick="cartSetQty('${g.id}','${c.pay}',${c.qty - 1});renderCart()">−</span>
+                <span class="qty">${c.qty}</span>
+                <span class="stp" onclick="cartSetQty('${g.id}','${c.pay}',${c.qty + 1});renderCart()">＋</span>
+              </span>
+            </div>
+          </div>
+        </div>`).join('');
+      const s = cartSummary();
+      const all = state.cart.every(c => c.selected);
+      barEl.innerHTML = `
+        <div class="oc-bar">
+          <span class="cbox ${all ? 'on' : ''}" style="position:static" onclick="cartToggleAll();renderCart()"></span>
+          <span style="font-size:13px;margin-right:6px" onclick="cartToggleAll();renderCart()">全选</span>
+          <span class="sum">
+            ${s.points ? `<span class="pts"><b>${s.points}</b> 积分</span>` : ''}
+            ${s.cash ? `<span class="cs"> <b>¥${s.cash}</b></span>` : ''}
+          </span>
+          <button class="btn btn-primary" onclick="checkoutFromCart()">结算（${s.count}）</button>
+        </div>`;
+    }
+
+    function renderOrderConfirm() {
+      const addr = defaultAddr();
+      document.getElementById('ocAddr').innerHTML = `
+        <div class="addr-card" style="margin:10px 16px" onclick="go('address')">
+          ${addr
+            ? `<div class="top"><span class="nm">${addr.name}</span><span class="ph">${addr.phone}</span></div>
+               <div class="dt">${addr.region.join('')} ${addr.detail}</div>`
+            : `<div class="dt" style="color:var(--brand);font-weight:600">请选择收货地址</div>`}
+          <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink-3)">›</span>
+        </div>`;
+      const sel = state.cart.filter(c => c.selected);
+      const groups = [
+        { key: 'points', title: '积分兑换商品', items: sel.filter(c => c.pay === 'points') },
+        { key: 'cash', title: '现金直购商品', items: sel.filter(c => c.pay === 'cash') }
+      ].filter(g => g.items.length);
+      document.getElementById('ocGroups').innerHTML = groups.map(gp => {
+        const total = gp.items.reduce((s, c) => s + (gp.key === 'points' ? GOODS.find(x => x.id === c.gid).points : GOODS.find(x => x.id === c.gid).cash) * c.qty, 0);
+        return `
+        <div class="card" style="margin:10px 16px">
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px">${gp.title}</div>
+          ${gp.items.map(c => { const g = GOODS.find(x => x.id === c.gid); return `
+            <div class="oc-goods" style="border-top:none;padding-top:4px">
+              <div class="thumb">${g.cat}</div>
+              <div style="flex:1">
+                <div style="font-size:13px;line-height:1.4">${g.title}</div>
+                <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:13px">
+                  <span style="font-weight:700;color:${gp.key === 'points' ? 'var(--brand)' : '#ff3b30'}">${gp.key === 'points' ? g.points + ' 积分' : '¥' + g.cash}</span>
+                  <span style="color:var(--ink-3)">×${c.qty}</span>
+                </div>
+              </div>
+            </div>`; }).join('')}
+          <div class="oc-total" style="border-top:1px solid var(--line);padding-top:8px;margin-top:8px">
+            ${gp.key === 'points' ? '积分合计' : '现金合计'}：
+            <b class="${gp.key === 'points' ? 'pts' : 'cs'}">${gp.key === 'points' ? total : '¥' + total.toFixed(2)}</b>
+          </div>
+          ${gp.key === 'cash' ? '<div style="font-size:11.5px;color:var(--ink-3);margin-top:6px">下单后进入「待付款」，可在订单列表模拟支付</div>' : ''}
+        </div>`;
+      }).join('') + (groups.length > 1
+        ? `<div class="card" style="margin:10px 16px;text-align:center;color:var(--brand);font-size:12.5px;background:#fff4e8">积分与现金将拆成两笔订单</div>` : '');
+      const s = cartSummary();
+      document.getElementById('ocBar').innerHTML = `
+        <span class="sum">
+          ${s.points ? `<span class="pts"><b>${s.points}</b> 积分</span>` : ''}
+          ${s.cash ? `<span class="cs"> <b>¥${s.cash}</b></span>` : ''}
+        </span>
+        <button class="btn btn-primary" onclick="submitOrderConfirm()">提交订单</button>`;
+    }
+
+    function renderOrders() {
+      const tabs = document.querySelectorAll('#orderTabs .t');
+      tabs.forEach(t => t.classList.toggle('on', t.dataset.otab === state.orderTab));
+      let list = state.orders.filter(o => state.orderTab === 'all' ? o.status !== 'closed' : o.status === state.orderTab);
+      const el = document.getElementById('orderList');
+      if (!list.length) { el.innerHTML = '<div class="empty-state">暂无订单</div>'; return; }
+      el.innerHTML = list.map(o => {
+        const qty = o.items.reduce((s, i) => s + i.qty, 0);
+        const sum = o.items.map(i => i.title).join('、');
+        const price = o.type === 'points' ? `${o.pointsTotal} 积分` : `¥${o.cashTotal.toFixed(2)}`;
+        const aft = o.aftersale ? (o.aftersale.status === 'reviewing' ? '售后审核中' : '售后已完成') : '';
+        return `
+        <div class="order-card" style="margin:10px 16px">
+          <div class="oc-head" onclick="openOrder('${o.id}')"><span>订单号 ${o.id}</span><span class="st ${o.status}">${STATUS_TEXT[o.status]}</span></div>
+          <div class="oc-goods" onclick="openOrder('${o.id}')">
+            ${o.items.slice(0, 3).map(i => `<div class="thumb">${i.cat}</div>`).join('')}
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${sum}</div>
+              <div style="font-size:12px;color:var(--ink-3);margin-top:4px">共 ${qty} 件</div>
+            </div>
+          </div>
+          <div class="oc-total">合计：<b class="${o.type === 'points' ? 'pts' : 'cs'}">${price}</b></div>
+          ${aft ? `<span class="aft-tag">${aft}</span>` : ''}
+          <div class="oc-acts">
+            ${o.status === 'unpaid' ? `<button class="btn btn-ghost" onclick="cancelOrder('${o.id}')">取消订单</button><button class="btn btn-primary" onclick="payOrder('${o.id}')">去支付</button>` : ''}
+            ${o.status === 'pending_ship' ? `<button class="btn btn-primary" onclick="shipOrder('${o.id}')">模拟发货</button>` : ''}
+            ${o.status === 'shipped' ? `<button class="btn btn-ghost" onclick="viewLogistics('${o.id}')">查看物流</button><button class="btn btn-primary" onclick="receiveOrder('${o.id}')">确认收货</button>` : ''}
+            <button class="btn btn-ghost" onclick="openOrder('${o.id}')">订单详情</button>
+          </div>
+        </div>`;
+      }).join('');
+    }
+    document.getElementById('orderTabs').addEventListener('click', e => {
+      const t = e.target.closest('[data-otab]'); if (!t) return;
+      state.orderTab = t.dataset.otab; renderOrders();
+    });
+
+    function openOrder(id) { state.orderId = id; go('order-detail'); }
+
+    function renderOrderDetail() {
+      const o = state.orders.find(x => x.id === state.orderId);
+      const head = document.getElementById('odHead');
+      const body = document.getElementById('odBody');
+      const bar = document.getElementById('odBar');
+      if (!o) { head.innerHTML = ''; body.innerHTML = '<div class="empty-state">订单不存在</div>'; bar.style.display = 'none'; return; }
+      const hint = { unpaid: '请在 24 小时内完成支付（原型模拟）', pending_ship: '商家备货中，可点「模拟发货」演示', shipped: '包裹运输中，请注意查收', done: '交易已完成，感谢惠顾' }[o.status] || '';
+      head.innerHTML = `<div class="status-head ${o.status}"><div class="st-t">${STATUS_TEXT[o.status]}</div><div class="st-h">${hint}</div></div>`;
+
+      const timeline = [];
+      if (o.paidAt) timeline.push({ t: o.type === 'points' ? '兑换成功' : '支付成功', tm: fmtTime(o.paidAt) });
+      if (o.shippedAt && o.logistics) timeline.push({ t: `${o.logistics.company}已揽收（运单号 ${o.logistics.no}）`, tm: fmtTime(o.shippedAt) });
+      if (o.doneAt) timeline.push({ t: '已签收，交易完成', tm: fmtTime(o.doneAt) });
+
+      body.innerHTML = `
+        ${o.aftersale ? `
+        <div class="card" style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700">
+            <span>售后：${o.aftersale.type === 'refund' ? '仅退款' : '退货退款'}</span>
+            <span style="color:${o.aftersale.status === 'approved' ? '#34c759' : 'var(--ink-3)'};font-size:13px">${o.aftersale.status === 'reviewing' ? '审核中' : '已通过'}</span>
+          </div>
+          <div style="font-size:13px;color:var(--ink-2);margin-top:7px">原因：${o.aftersale.reason}</div>
+          ${o.aftersale.result ? `<div style="font-size:13px;color:var(--ink-2);margin-top:5px">结果：${o.aftersale.result}</div>` : ''}
+          ${o.aftersale.status === 'reviewing' ? `<button class="btn btn-ghost" style="margin-top:10px;font-size:12px" onclick="approveAftersale('${o.id}')">模拟审核通过</button>` : ''}
+        </div>` : ''}
+        ${timeline.length ? `
+        <div class="card" style="margin-bottom:10px">
+          <div style="font-size:14px;font-weight:700;margin-bottom:10px">物流信息</div>
+          <div class="tl">${timeline.map((it, i) => `
+            <div class="tl-item"><div class="tl-dot ${i === timeline.length - 1 ? 'cur' : ''}"></div>
+              <div><div class="tl-t ${i === timeline.length - 1 ? 'cur' : ''}">${it.t}</div><div class="tl-tm">${it.tm}</div></div>
+            </div>`).join('')}</div>
+        </div>` : ''}
+        <div class="card" style="margin-bottom:10px">
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px">收货信息</div>
+          <div class="addr-card" style="padding:0;background:none">
+            <div class="top"><span class="nm">${o.address.name}</span><span class="ph">${o.address.phone}</span></div>
+            <div class="dt">${o.address.region.join('')} ${o.address.detail}</div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:10px">
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px">商品清单</div>
+          ${o.items.map(i => `
+            <div class="oc-goods" style="border-top:none;padding-top:4px">
+              <div class="thumb">${i.cat}</div>
+              <div style="flex:1">
+                <div style="font-size:13px">${i.title}</div>
+                <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:13px">
+                  <span style="font-weight:700;color:${o.type === 'points' ? 'var(--brand)' : '#ff3b30'}">${o.type === 'points' ? i.points + ' 积分' : '¥' + i.cash}</span>
+                  <span style="color:var(--ink-3)">×${i.qty}</span>
+                </div>
+              </div>
+            </div>`).join('')}
+        </div>
+        <div class="card" style="margin-bottom:10px">
+          <div class="info-row"><span class="k">订单编号</span><span class="v">${o.id}</span></div>
+          <div class="info-row"><span class="k">下单时间</span><span class="v">${fmtTime(o.createdAt)}</span></div>
+          <div class="info-row"><span class="k">支付方式</span><span class="v">${o.type === 'points' ? '积分兑换' : '现金支付'}</span></div>
+          <div class="info-row"><span class="k">订单金额</span><span class="v" style="font-weight:700;color:${o.type === 'points' ? 'var(--brand)' : '#ff3b30'}">${o.type === 'points' ? o.pointsTotal + ' 积分' : '¥' + o.cashTotal.toFixed(2)}</span></div>
+        </div>
+        <div style="height:70px"></div>`;
+
+      const canAftersale = (o.status === 'shipped' || o.status === 'done') && !o.aftersale;
+      let btns = '';
+      if (o.status === 'unpaid') btns = `<button class="btn btn-ghost" onclick="cancelOrder('${o.id}')">取消订单</button><button class="btn btn-primary" onclick="payOrder('${o.id}')">去支付</button>`;
+      else if (o.status === 'pending_ship') btns = `<button class="btn btn-primary" onclick="shipOrder('${o.id}')">模拟发货</button>`;
+      else if (o.status === 'shipped') btns = `<button class="btn btn-ghost" onclick="viewLogistics('${o.id}')">查看物流</button>${canAftersale ? `<button class="btn btn-ghost" onclick="go('aftersale-apply')">申请售后</button>` : ''}<button class="btn btn-primary" onclick="receiveOrder('${o.id}')">确认收货</button>`;
+      else if (o.status === 'done') btns = `<button class="btn btn-ghost" onclick="viewLogistics('${o.id}')">查看物流</button>${canAftersale ? `<button class="btn btn-primary" onclick="go('aftersale-apply')">申请售后</button>` : ''}`;
+      bar.style.display = btns ? '' : 'none';
+      bar.innerHTML = btns;
+    }
+
+    function submitAftersaleView() {
+      const type = (document.querySelector('input[name="asType"]:checked') || {}).value || 'refund';
+      const reason = document.getElementById('asReason').value;
+      submitAftersale(state.orderId, type, reason);
+    }
+    function renderAftersaleApply() {
+      const o = state.orders.find(x => x.id === state.orderId); if (!o) return;
+      document.getElementById('asGoods').innerHTML = `
+        <div class="card" style="margin:10px 16px">
+          ${o.items.map(i => `
+            <div class="oc-goods" style="border-top:none;padding-top:4px">
+              <div class="thumb">${i.cat}</div>
+              <div style="flex:1"><div style="font-size:13px">${i.title}</div>
+              <div style="font-size:12.5px;color:var(--ink-3);margin-top:5px">×${i.qty}</div></div>
+            </div>`).join('')}
+          <div class="oc-total" style="border-top:1px solid var(--line);padding-top:8px;margin-top:6px">
+            可退：<b class="${o.type === 'points' ? 'pts' : 'cs'}">${o.type === 'points' ? o.pointsTotal + ' 积分' : '¥' + o.cashTotal.toFixed(2)}</b>
+          </div>
+        </div>`;
+      document.querySelectorAll('input[name="asType"]')[0].checked = o.type === 'points';
+      document.querySelectorAll('input[name="asType"]')[1].checked = o.type !== 'points';
+    }
+
+    function renderAddress() {
+      const el = document.getElementById('addrList');
+      if (!state.addresses.length) { el.innerHTML = '<div class="empty-state">还没有收货地址</div>'; return; }
+      el.innerHTML = state.addresses.map(a => `
+        <div class="addr-card" style="margin:10px 16px">
+          <div class="top"><span class="nm">${a.name}</span><span class="ph">${a.phone}</span>${a.def ? '<span class="def-tag">默认</span>' : ''}</div>
+          <div class="dt">${a.region.join('')} ${a.detail}</div>
+          <div class="acts">
+            <span onclick="setDefaultAddr('${a.id}')" style="${a.def ? 'color:var(--brand)' : ''}">设为默认</span>
+            <span onclick="editAddress('${a.id}')">编辑</span>
+            <span class="dgr" onclick="removeAddress('${a.id}')">删除</span>
+          </div>
+        </div>`).join('');
+    }
+
+    function editAddress(id) {
+      state.addrEditId = id;
+      const a = id ? state.addresses.find(x => x.id === id) : null;
+      document.getElementById('afName').value = a ? a.name : '';
+      document.getElementById('afPhone').value = a ? a.phone : '';
+      document.getElementById('afRegion').value = a ? a.region.join(' ') : '广东省 深圳市 南山区';
+      document.getElementById('afDetail').value = a ? a.detail : '';
+      document.getElementById('afDef').checked = a ? !!a.def : false;
+      document.getElementById('afRemove').innerHTML = a
+        ? `<button class="btn btn-ghost" style="color:#ff3b30;border-color:#ff3b30;font-size:13px" onclick="removeAddress('${a.id}');back()">删除该地址</button>` : '';
+      go('address-edit');
+    }
+    function saveAddressView() {
+      const region = document.getElementById('afRegion').value.trim().split(/\s+/);
+      saveAddress(
+        state.addrEditId,
+        document.getElementById('afName').value,
+        document.getElementById('afPhone').value,
+        region,
+        document.getElementById('afDetail').value,
+        document.getElementById('afDef').checked
+      );
+    }
+
+    /* ---- 悬浮球抽屉 ---- */
+    function updateFab() {
+      const n = cartCount();
+      const badge = document.getElementById('fabBadge');
+      badge.textContent = n;
+      badge.classList.toggle('hide', n === 0);
+      badge.classList.remove('bump'); void badge.offsetWidth; badge.classList.add('bump');
+      if (document.getElementById('fabDrawer').classList.contains('hide') === false) renderFabDrawer();
+    }
+    function toggleFab() {
+      const drawer = document.getElementById('fabDrawer');
+      const mask = document.getElementById('fabMask');
+      const open = drawer.classList.contains('hide');
+      drawer.classList.toggle('hide', !open);
+      mask.classList.toggle('hide', !open);
+      if (open) renderFabDrawer();
+    }
+    function renderFabDrawer() {
+      const rows = cartRows();
+      document.getElementById('fdCount').textContent = rows.length ? `（${rows.length} 种商品）` : '';
+      document.getElementById('fdBody').innerHTML = rows.length ? rows.map(({ g, c }) => `
+        <div class="fd-item">
+          <div class="cbox ${c.selected ? 'on' : ''}" onclick="cartToggle('${g.id}','${c.pay}')"></div>
+          <div class="thumb">${g.cat}</div>
+          <div class="fd-info">
+            <div class="fd-t">${g.title}</div>
+            <div class="fd-b">
+              <span class="fd-p ${c.pay === 'points' ? 'pts' : 'cs'}">${c.pay === 'points' ? g.points + ' 积分' : '¥' + g.cash}</span>
+              <span class="stepper">
+                <span class="stp ${c.qty <= 1 ? 'off' : ''}" onclick="cartSetQty('${g.id}','${c.pay}',${c.qty - 1})">−</span>
+                <span class="qty">${c.qty}</span>
+                <span class="stp" onclick="cartSetQty('${g.id}','${c.pay}',${c.qty + 1})">＋</span>
+              </span>
+            </div>
+          </div>
+        </div>`).join('') + `<div style="text-align:center;color:var(--brand);font-size:12px;padding:12px 0 6px;cursor:pointer" onclick="toggleFab();go('cart')">管理购物车 ›</div>`
+        : '<div class="empty-state">购物车还是空的</div>';
+      const s = cartSummary();
+      const all = state.cart.length && state.cart.every(c => c.selected);
+      document.getElementById('fdBar').innerHTML = `
+        <span class="cbox ${all ? 'on' : ''}" onclick="cartToggleAll()"></span>
+        <span style="font-size:13px" onclick="cartToggleAll()">全选</span>
+        <span class="fd-total">
+          ${s.points ? `积分 <b class="pts">${s.points}</b>` : ''}
+          ${s.cash ? ` 现金 <b class="cs">¥${s.cash}</b>` : ''}
+        </span>
+        <button class="btn btn-primary" onclick="checkoutFromCart()">结算（${s.count}）</button>`;
+    }
+
+    /* ---- 详情页立即直购：走确认订单（现金单下单后待付款） ---- */
+    function buyNow(id) {
+      const g = GOODS.find(x => x.id === id); if (!g) return;
+      if (!state.cart.some(c => c.gid === id)) cartAdd(id, 1, 'cash');
+      state.cart.forEach(c => { c.selected = c.gid === id && c.pay === 'cash'; });
+      if (!defaultAddr()) { go('address'); toast('请先添加收货地址'); return; }
+      updateFab();
+      go('order-confirm');
     }
 
     function openCourse(id) {
@@ -2723,6 +3439,20 @@
       if (id === 'bounty') renderBounty();
       if (id === 'home') startSwiper();
       else clearInterval(state.swTimer);
+      if (id === 'mall') renderMall();
+      if (id === 'cart') renderCart();
+      if (id === 'order-confirm') renderOrderConfirm();
+      if (id === 'orders') renderOrders();
+      if (id === 'order-detail') renderOrderDetail();
+      if (id === 'aftersale-apply') renderAftersaleApply();
+      if (id === 'address') renderAddress();
+      /* 悬浮球仅在浏览态页面展示，底部有操作栏的页面隐藏避免遮挡 */
+      const fabViews = ['mall', 'goods-detail', 'cart'];
+      document.getElementById('cartFab').classList.toggle('hide', !fabViews.includes(id));
+      if (!fabViews.includes(id)) {
+        document.getElementById('fabDrawer').classList.add('hide');
+        document.getElementById('fabMask').classList.add('hide');
+      }
     }
 
     function switchTab(tab) {
@@ -2757,7 +3487,7 @@
 
     /* 启动 */
     renderHome(); renderBenefits(); renderMall(); renderCourses(); renderAgent(); renderLogs();
-    renderLife(); renderBounty();
+    renderLife(); renderBounty(); seedOrders(); updateFab();
     bindPoints(); showView('home');
   </script>
 </body>
