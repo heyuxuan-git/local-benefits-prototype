@@ -744,29 +744,35 @@
     }
     .pcard .pill-btn.wide { width: 92%; }
 
-    /* 白底轻主题：顶色条区分 */
-    .pcard.th-taobao { background: #fff; border-top: 4px solid #ff5000; }
-    .pcard.th-taobao .ptitle { color: #ff5000; }
-    .pcard.th-meituan { background: #fff; border-top: 4px solid #ffd100; }
-    .pcard.th-meituan .ptitle { color: #c9a000; }
-    .pcard.th-orange { background: #fff; border-top: 4px solid #ff6b00; }
-    .pcard.th-orange .ptitle { color: #ff6b00; }
-    .pcard.th-blue { background: #fff; border-top: 4px solid #2f7cf6; }
-    .pcard.th-blue .ptitle { color: #2f7cf6; }
-    .pcard.th-deepred { background: #fff; border-top: 4px solid #c41a1a; }
-    .pcard.th-deepred .ptitle { color: #c41a1a; }
-    .pcard.th-gold { background: #fff; border-top: 4px solid var(--brand); }
-    .pcard.th-gold .ptitle { color: var(--brand); }
-    .pcard.th-green { background: #fff; border-top: 4px solid #00b578; }
-    .pcard.th-green .ptitle { color: #00b578; }
-    .pcard.th-didi { background: #fff; border-top: 4px solid #ff5a1f; }
-    .pcard.th-didi .ptitle { color: #ff5a1f; }
-    .pcard.th-try { background: #fff; border-top: 4px solid #ff3b6b; }
-    .pcard.th-try .ptitle { color: #ff3b6b; }
-    .pcard.th-flash { background: #fff; border-top: 4px solid #00a6ff; }
-    .pcard.th-flash .ptitle { color: #00a6ff; }
-    .pcard.th-jd { background: #fff; border-top: 4px solid #e1251b; }
-    .pcard.th-jd .ptitle { color: #e1251b; }
+    /* 白底圆角矩形：去掉顶色点缀，仅统一浅边框 */
+    .pcard.th-taobao,
+    .pcard.th-meituan,
+    .pcard.th-orange,
+    .pcard.th-blue,
+    .pcard.th-deepred,
+    .pcard.th-gold,
+    .pcard.th-green,
+    .pcard.th-didi,
+    .pcard.th-try,
+    .pcard.th-flash,
+    .pcard.th-jd {
+      background: #fff;
+      border: 1px solid #eceef1;
+      border-top: 1px solid #eceef1;
+    }
+    .pcard.th-taobao .ptitle,
+    .pcard.th-meituan .ptitle,
+    .pcard.th-orange .ptitle,
+    .pcard.th-blue .ptitle,
+    .pcard.th-deepred .ptitle,
+    .pcard.th-gold .ptitle,
+    .pcard.th-green .ptitle,
+    .pcard.th-didi .ptitle,
+    .pcard.th-try .ptitle,
+    .pcard.th-flash .ptitle,
+    .pcard.th-jd .ptitle {
+      color: var(--ink);
+    }
 
     /* 宽横幅卡 */
     .wide-banner {
