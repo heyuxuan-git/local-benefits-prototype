@@ -2,4 +2,4 @@
 
 https://heyuxuan-git.github.io/local-benefits-prototype/
 
-- v0.5 品牌：潮匠 TrendCraft
+- v0.6 限时抢15分钟 · 金刚区调整 · 权益白底金

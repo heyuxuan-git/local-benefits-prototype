@@ -225,7 +225,8 @@
     }
     .grab-card:active { transform: translateY(2px); box-shadow: 0 2px 0 #1a1a1a; }
     .grab-card.grab-before,
-    .grab-card.grab-closed {
+    .grab-card.grab-closed,
+    .grab-card.grab-cooldown {
       background: linear-gradient(135deg, #6b7280, #374151);
     }
     .grab-card.grab-claimed {
@@ -634,139 +635,146 @@
     }
     .side-item .ico { font-size: 22px; width: 24px; height: 24px; margin: 0 auto 4px; display: block; color: inherit; }
     .side-item.on {
-      background: #fff; color: var(--ink); font-weight: 700;
-      border-left-color: transparent;
+      background: #fff; color: var(--brand); font-weight: 700;
+      border-left-color: var(--brand);
     }
     .side-item.on .ico { color: var(--brand); }
 
     .main-col {
-      flex: 1; overflow-y: auto; padding: 12px 8px 80px 6px;
+      flex: 1; overflow-y: auto; padding: 8px 0 80px;
       background: #fff; min-width: 0;
     }
 
-    /* 品牌挂签头 */
+    /* 活动秒杀条 */
+    .activity-bar {
+      margin: 12px 14px 0;
+      padding: 12px 14px;
+      background: #faf6eb;
+      border: 1px solid #efe4c8;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer;
+    }
+    .activity-bar .at { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .activity-bar .as { font-size: 11px; color: var(--brand); margin-top: 2px; }
+    .activity-bar .ago { font-size: 12px; color: var(--brand); font-weight: 600; }
+
+    /* 品牌分区：白底金边 */
     .brand-tag {
-      position: relative;
-      margin: 4px 4px 0;
-      background: linear-gradient(180deg, #ffe566, #ffc800);
-      border: 2px solid #1a1a1a;
-      border-radius: 999px 999px 18px 18px;
-      padding: 8px 14px 10px;
+      margin: 16px 14px 0;
+      background: #fff;
+      border: 1.5px solid var(--brand);
+      border-radius: 999px;
+      padding: 8px 14px;
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      color: #1a1a1a; font-weight: 800; font-size: 15px;
-      z-index: 2;
-      box-shadow: 0 3px 0 #1a1a1a;
+      color: var(--ink); font-weight: 700; font-size: 14px;
     }
-    .brand-tag::before,
-    .brand-tag::after {
-      content: '';
-      position: absolute; top: -10px; width: 3px; height: 14px;
-      background: #8b7355; border-radius: 2px;
-    }
-    .brand-tag::before { left: 22%; }
-    .brand-tag::after { right: 22%; }
     .brand-tag .logo {
       width: 22px; height: 22px; border-radius: 6px;
-      background: #ff5000; color: #fff; font-size: 11px;
+      background: #faf6eb; color: var(--brand); font-size: 11px;
       display: flex; align-items: center; justify-content: center; font-weight: 800;
       flex-shrink: 0;
     }
-    .brand-tag .logo.mt { background: #ffd100; color: #1a1a1a; }
-    .brand-tag .logo.tb { background: #ff5000; }
-    .brand-tag .logo.flash { background: #00a6ff; }
-    .brand-tag .logo.jd { background: #e1251b; }
-    .brand-tag .logo.generic { background: #ff6600; }
+    .brand-tag .logo.mt { background: #fff8e0; color: #c9a000; }
+    .brand-tag .logo.tb { background: #fff4f0; color: #ff5000; }
+    .brand-tag .logo.flash { background: #eef7ff; color: #00a6ff; }
+    .brand-tag .logo.jd { background: #ffecec; color: #e1251b; }
+    .brand-tag .logo.generic { background: #faf6eb; color: var(--brand); }
 
-    /* 双列拼贴 */
+    /* 双列白卡 */
     .collage {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      padding: 6px 4px 4px;
+      gap: 10px;
+      padding: 10px 14px 4px;
       align-items: start;
     }
     .collage .span2 { grid-column: 1 / -1; }
 
     .pcard {
       position: relative;
-      border: 2px solid #1a1a1a;
+      border: 1px solid #eceef1;
       border-radius: 14px;
       min-height: 118px;
-      padding: 12px 10px 12px;
+      padding: 14px 10px 12px;
       display: flex; flex-direction: column;
-      color: #fff; cursor: pointer;
+      color: var(--ink); cursor: pointer;
       overflow: hidden;
+      background: #fff;
       -webkit-user-select: none; user-select: none;
     }
     .pcard:active { transform: scale(0.98); }
     .pcard .corner {
       position: absolute; top: 0; left: 0;
-      background: #ff2d2d; color: #fff;
+      background: var(--brand); color: #fff;
       font-size: 9px; font-weight: 700;
       padding: 2px 8px;
       border-bottom-right-radius: 8px;
-      border: 1px solid #1a1a1a;
-      border-top: none; border-left: none;
       z-index: 1;
     }
     .pcard .ptitle {
-      font-size: 15px; font-weight: 800; line-height: 1.25;
+      font-size: 14px; font-weight: 700; line-height: 1.25;
       text-align: center; margin-top: 4px;
     }
     .pcard .psub {
-      font-size: 11px; text-align: center; opacity: 0.95; margin-top: 4px;
-      font-weight: 600;
+      font-size: 11px; text-align: center; color: var(--ink-3); margin-top: 4px;
+      font-weight: 400;
     }
     .pcard .open-btn {
       margin: auto auto 0;
-      width: 48px; height: 48px; border-radius: 50%;
-      background: linear-gradient(180deg, #ffe566, #ffc800);
-      border: 2px solid #1a1a1a;
-      color: #c41a1a; font-weight: 900; font-size: 18px;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--brand);
+      color: #fff; font-weight: 800; font-size: 17px;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 3px 0 #1a1a1a;
-      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
     }
-    .pcard .open-btn.small { width: 40px; height: 40px; font-size: 15px; }
     .pcard .pill-btn {
       margin: auto auto 0;
       width: 88%;
-      background: linear-gradient(180deg, #ffe566, #ffc400);
-      border: 2px solid #1a1a1a;
-      color: #1a1a1a; font-weight: 800; font-size: 13px;
+      background: #faf6eb;
+      border: 1px solid var(--brand);
+      color: var(--brand); font-weight: 700; font-size: 12px;
       text-align: center;
       padding: 8px 0;
       border-radius: 999px;
-      box-shadow: 0 3px 0 #1a1a1a;
     }
     .pcard .pill-btn.blue {
-      background: linear-gradient(180deg, #5ec4ff, #1a9bff);
-      color: #fff;
+      background: #eef5ff;
+      border-color: #2f7cf6;
+      color: #2f7cf6;
     }
     .pcard .pill-btn.wide { width: 92%; }
 
-    /* 主题色块（扁平） */
-    .pcard.th-taobao { background: #ff5000; }
-    .pcard.th-meituan { background: #ffd100; color: #1a1a1a; border-color: #1a1a1a; }
-    .pcard.th-meituan .psub { color: #5a4a00; }
-    .pcard.th-orange { background: #ff6b00; }
-    .pcard.th-blue { background: #1a9bff; }
-    .pcard.th-deepred { background: #c41a1a; }
-    .pcard.th-gold { background: #ffc400; color: #1a1a1a; }
-    .pcard.th-gold .psub { color: #6a5000; }
-    .pcard.th-green { background: #00b578; }
-    .pcard.th-didi { background: #ff5a1f; }
-    .pcard.th-try { background: #ff3b6b; }
-    .pcard.th-flash { background: #00a6ff; }
-    .pcard.th-jd { background: #e1251b; }
+    /* 白底轻主题：顶色条区分 */
+    .pcard.th-taobao { background: #fff; border-top: 4px solid #ff5000; }
+    .pcard.th-taobao .ptitle { color: #ff5000; }
+    .pcard.th-meituan { background: #fff; border-top: 4px solid #ffd100; }
+    .pcard.th-meituan .ptitle { color: #c9a000; }
+    .pcard.th-orange { background: #fff; border-top: 4px solid #ff6b00; }
+    .pcard.th-orange .ptitle { color: #ff6b00; }
+    .pcard.th-blue { background: #fff; border-top: 4px solid #2f7cf6; }
+    .pcard.th-blue .ptitle { color: #2f7cf6; }
+    .pcard.th-deepred { background: #fff; border-top: 4px solid #c41a1a; }
+    .pcard.th-deepred .ptitle { color: #c41a1a; }
+    .pcard.th-gold { background: #fff; border-top: 4px solid var(--brand); }
+    .pcard.th-gold .ptitle { color: var(--brand); }
+    .pcard.th-green { background: #fff; border-top: 4px solid #00b578; }
+    .pcard.th-green .ptitle { color: #00b578; }
+    .pcard.th-didi { background: #fff; border-top: 4px solid #ff5a1f; }
+    .pcard.th-didi .ptitle { color: #ff5a1f; }
+    .pcard.th-try { background: #fff; border-top: 4px solid #ff3b6b; }
+    .pcard.th-try .ptitle { color: #ff3b6b; }
+    .pcard.th-flash { background: #fff; border-top: 4px solid #00a6ff; }
+    .pcard.th-flash .ptitle { color: #00a6ff; }
+    .pcard.th-jd { background: #fff; border-top: 4px solid #e1251b; }
+    .pcard.th-jd .ptitle { color: #e1251b; }
 
     /* 宽横幅卡 */
     .wide-banner {
-      margin: 10px 4px 4px;
-      border: 2px solid #1a1a1a;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #fff5f0, #ffe0cc);
-      padding: 16px 14px;
+      margin: 12px 14px 4px;
+      border: 1px solid #eceef1;
+      border-radius: 14px;
+      background: #fff;
+      padding: 14px;
       display: flex; align-items: center; gap: 12px;
       cursor: pointer;
       position: relative;
@@ -774,37 +782,36 @@
     }
     .wide-banner .wb-ico {
       width: 44px; height: 44px; border-radius: 12px;
-      background: #c4881f; color: #fff;
+      background: #faf6eb; color: var(--brand);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
     .wide-banner .wb-ico .ico { width: 24px; height: 24px; }
     .wide-banner .wb-body { flex: 1; min-width: 0; }
-    .wide-banner .wb-t { font-size: 17px; font-weight: 800; color: #1a1a1a; }
-    .wide-banner .wb-s { font-size: 12px; color: #c4881f; margin-top: 2px; font-weight: 600; }
+    .wide-banner .wb-t { font-size: 16px; font-weight: 700; color: var(--ink); }
+    .wide-banner .wb-s { font-size: 12px; color: var(--brand); margin-top: 2px; font-weight: 600; }
     .wide-banner .wb-btn {
       margin-top: 8px;
       display: inline-block;
-      background: #c4881f; color: #fff;
+      background: var(--brand); color: #fff;
       font-size: 12px; font-weight: 700;
       padding: 6px 14px; border-radius: 999px;
-      border: 2px solid #1a1a1a;
     }
     .wide-banner .wb-deco {
       position: absolute; right: -8px; bottom: -8px;
       width: 88px; height: 88px; border-radius: 50%;
-      background: radial-gradient(circle at 40% 40%, #e6b85a, #c4881f 70%);
-      opacity: 0.35;
+      background: #faf6eb;
+      opacity: 0.9;
     }
 
     .sec-div {
       display: flex; align-items: center; justify-content: center;
-      gap: 10px; margin: 16px 4px 8px;
-      color: #1a1a1a; font-size: 15px; font-weight: 800;
+      gap: 10px; margin: 20px 14px 6px;
+      color: var(--ink); font-size: 14px; font-weight: 700;
     }
     .sec-div::before,
     .sec-div::after {
-      content: ''; width: 24px; height: 3px; background: #1a1a1a; border-radius: 2px;
+      content: ''; width: 24px; height: 3px; background: var(--brand); border-radius: 2px;
     }
 
     /* 双联小卡行（先领券/再下单） */
@@ -1488,8 +1495,11 @@
           </div>
 
           <div class="quick">
+            <div class="quick-item" onclick="go('life')">
+              <div class="qi b6"><svg class="ico"><use href="#i-hotel"/></svg></div><span>本地生活</span>
+            </div>
             <div class="quick-item" onclick="go('watch-ad'); setAdMode('normal')">
-              <div class="qi b1"><svg class="ico"><use href="#i-ad"/></svg></div><span>看广告</span>
+              <div class="qi b1"><svg class="ico"><use href="#i-ad"/></svg></div><span>赚积分</span>
             </div>
             <div class="quick-item" onclick="go('watch-ad'); setAdMode('grab')">
               <div class="qi b2"><svg class="ico"><use href="#i-gift"/></svg></div><span>限时抢</span>
@@ -1503,14 +1513,11 @@
             <div class="quick-item" onclick="switchTab('courses')">
               <div class="qi b5"><svg class="ico"><use href="#i-cap"/></svg></div><span>0元课</span>
             </div>
-            <div class="quick-item" onclick="go('life')">
-              <div class="qi b6"><svg class="ico"><use href="#i-hotel"/></svg></div><span>本地生活</span>
-            </div>
             <div class="quick-item" onclick="go('bounty')">
               <div class="qi b7"><svg class="ico"><use href="#i-star"/></svg></div><span>悬赏任务</span>
             </div>
-            <div class="quick-item" onclick="go('points')">
-              <div class="qi b8"><svg class="ico"><use href="#i-doc"/></svg></div><span>积分明细</span>
+            <div class="quick-item" onclick="go('orders')">
+              <div class="qi b8"><svg class="ico"><use href="#i-box-pkg"/></svg></div><span>我的订单</span>
             </div>
           </div>
 
@@ -1520,7 +1527,7 @@
               <span class="grab-badge" id="homeGrabBadge">LIVE</span>
               <div class="grab-body">
                 <div class="grab-title">限时抢积分</div>
-                <div class="grab-tip" id="homeGrabTip">每日 09:00–20:00</div>
+                <div class="grab-tip" id="homeGrabTip">每 15 分钟可抢 1 次</div>
               </div>
             </div>
             <div class="grab-cta" id="homeGrabCta">立即抢</div>
@@ -1564,7 +1571,16 @@
           </div>
           <div class="benefit-layout">
             <div class="side" id="benefitSide"></div>
-            <div class="main-col" id="benefitList"></div>
+            <div class="main-col">
+              <div class="activity-bar" onclick="toast('限时秒杀 / 砍价 / 拼团（业态位，mock）')">
+                <div>
+                  <div class="at">限时秒杀 · 活动专区</div>
+                  <div class="as">砍价 / 拼团 / 秒杀 同步入口</div>
+                </div>
+                <span class="ago">去逛 ›</span>
+              </div>
+              <div id="benefitList"></div>
+            </div>
           </div>
         </div>
 
@@ -1669,7 +1685,7 @@
                 <svg class="ico"><use href="#i-share"/></svg>分享拉新
               </button>
             </div>
-            <div class="agent-sub">团队长 / 社群裂变 · 适配微商直销地推 · C端一键升级B端</div>
+            <div class="agent-sub">团队长 / 社群裂变 · 带参进入自动绑定推荐人（spid）· C端一键升级B端</div>
           </div>
           <div class="card" style="margin:0 16px 10px">
             <div style="display:flex;justify-content:space-between;font-size:14.5px;font-weight:700">
@@ -1826,12 +1842,12 @@
             <div class="ad-hero grab-hero">
               <div class="grab-live" id="grabLiveLabel">抢积分进行中</div>
               <h2>看 1 条广告，抢 <span id="grabReward">20</span> 积分</h2>
-              <p>每日 09:00–20:00 · 限 1 次 · 加码奖励</p>
+              <p>每 15 分钟可抢 1 次 · 加码奖励</p>
               <div class="bal">当前积分 <span data-bind="points">20</span></div>
             </div>
             <div class="card grab-panel">
-              <div class="gp-row"><span class="gp-k">时间窗</span><span class="gp-v">每日 09:00 – 20:00</span></div>
-              <div class="gp-row"><span class="gp-k">规则</span><span class="gp-v">完整看完 1 条视频 · 每天限 1 次</span></div>
+              <div class="gp-row"><span class="gp-k">节奏</span><span class="gp-v">每 15 分钟 1 次，全天可抢</span></div>
+              <div class="gp-row"><span class="gp-k">规则</span><span class="gp-v">完整看完 1 条视频</span></div>
               <div class="gp-row"><span class="gp-k">状态</span><span class="gp-v accent" id="grabStatusTip">—</span></div>
               <div class="slot-box" style="margin-top:14px">
                 <svg class="ico"><use href="#i-video"/></svg>
@@ -1856,7 +1872,7 @@
           </div>
           <div class="card grab-nudge hide" id="grabNudge" onclick="setAdMode('grab')">
             <span class="gn-t">限时抢 +20 分</span>
-            <span class="gn-s" id="grabNudgeTip">每日 09:00–20:00</span>
+            <span class="gn-s" id="grabNudgeTip">每 15 分钟可抢 1 次</span>
             <button class="gn-btn">去抢</button>
           </div>
           <div class="slot">
@@ -1905,7 +1921,7 @@
             <div class="rule-item" style="color:#ff3b30;font-weight:600;background:#fff5f5;border-radius:6px;padding:8px;border-bottom:none">积分仅用于兑换商城商品 / 生活权益，不可提现、不可转账</div>
             <div class="rule-item">获取：看广告 +10/条（每日最多 10 条，今日已看 <b id="ptsAdToday">0</b>）</div>
             <div class="rule-item">获取：完成悬赏任务，审核通过后发放积分</div>
-            <div class="rule-item">限时抢：每日 09:00–20:00 看 1 条广告抢 +20 积分（限 1 次）</div>
+            <div class="rule-item">限时抢：每 15 分钟看 1 条广告抢 +20 积分（冷却后可再抢）</div>
             <div class="rule-item">获取：开通会员可得赠送积分 + 每日加成（可选）</div>
             <div class="rule-item">消耗：商城兑换商品（约 300 积分/件起）</div>
             <div class="rule-item">消耗：0 元 AI 课积分解锁；生活缴费抵扣</div>
@@ -1968,7 +1984,7 @@
       cat: 'takeout', mallTab: 'all', mallSort: { sales: 'desc', price: 'asc' }, mallCat: '全部', agentSeg: 'home',
       unlocked: new Set(), goodsId: null, courseId: null,
       swIndex: 0, swTimer: null,
-      grabDate: null, grabClaimed: false, grabPlaying: false, grab: null,
+      grabAt: 0, grabPlaying: false, grab: null,
       logs: [{ note: '新用户赠送', source: 'init', amount: 20, balance: 20, time: '首次进入' }],
       cart: [], orderTab: 'all', orderId: null, addrEditId: null,
       addresses: [{ id: 'a1', name: '张三', phone: '13800138000', region: ['广东省', '深圳市', '南山区'], detail: '科技园南路 XX 号 XX 大厦 8 层', def: true }],
@@ -2147,58 +2163,51 @@
       refreshGrabUI();
     }
 
-    /* ===== 限时抢积分（9:00–20:00，每日 1 次 +20） ===== */
-    const GRAB = { START: 9, END: 20, REWARD: 20 };
+    /* ===== 限时抢积分（每 15 分钟 1 次 +20） ===== */
+    const GRAB = { INTERVAL_MS: 15 * 60 * 1000, REWARD: 20, INTERVAL_MIN: 15 };
 
-    function grabDayKey(d) {
-      return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    function formatRemain(ms) {
+      const total = Math.max(0, Math.ceil(ms / 1000));
+      const m = Math.floor(total / 60);
+      const s = total % 60;
+      return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
     }
 
     function getGrabStatus() {
-      const d = new Date();
-      const key = grabDayKey(d);
-      const claimed = state.grabDate === key && state.grabClaimed;
-      const h = d.getHours() + d.getMinutes() / 60;
-      let phase;
-      if (claimed) phase = 'claimed';
-      else if (h < GRAB.START) phase = 'before';
-      else if (h < GRAB.END) phase = 'open';
-      else phase = 'closed';
-      const win = '09:00–20:00';
-      const tip = phase === 'before' ? '09:00 开抢 · 每天 1 次'
-        : phase === 'open' ? '限时 ' + win + ' · 看 1 条广告抢 +' + GRAB.REWARD + ' 分'
-        : phase === 'claimed' ? '今日已抢到 ' + GRAB.REWARD + ' 积分'
-        : '今日 ' + win + ' 已结束';
-      const cta = phase === 'before' ? '09:00 开抢'
-        : phase === 'open' ? '立即抢 +' + GRAB.REWARD
-        : phase === 'claimed' ? '明日再来'
-        : '明日 09:00 开抢';
+      const now = Date.now();
+      const lastAt = state.grabAt || 0;
+      const remainMs = lastAt ? Math.max(0, GRAB.INTERVAL_MS - (now - lastAt)) : 0;
+      const canClaim = remainMs <= 0;
+      const remainText = formatRemain(remainMs);
+      const tip = canClaim
+        ? '每 ' + GRAB.INTERVAL_MIN + ' 分钟可抢 1 次 · 看 1 条广告抢 +' + GRAB.REWARD + ' 分'
+        : '冷却中 · ' + remainText + ' 后可再抢';
+      const cta = canClaim
+        ? '立即抢 +' + GRAB.REWARD
+        : remainText + ' 后再抢';
       return {
-        phase, canClaim: phase === 'open', reward: GRAB.REWARD,
-        tip, cta, dayKey: key
+        phase: canClaim ? 'open' : 'cooldown',
+        canClaim, reward: GRAB.REWARD,
+        remainMs, remainText, tip, cta
       };
     }
 
     function refreshGrabUI() {
       const g = getGrabStatus();
       state.grab = g;
-      // 首页卡
       const card = document.getElementById('homeGrab');
       if (card) {
         card.className = 'grab-card grab-' + g.phase;
         document.getElementById('homeGrabBadge').textContent =
-          g.phase === 'open' ? 'LIVE' : g.phase === 'claimed' ? 'DONE' : 'SOON';
+          g.phase === 'open' ? 'LIVE' : 'WAIT';
         document.getElementById('homeGrabTip').textContent = g.tip;
         const cta = document.getElementById('homeGrabCta');
         cta.textContent = g.cta;
         cta.classList.toggle('on', g.canClaim);
       }
-      // 看广告页
       const label = document.getElementById('grabLiveLabel');
       if (label) {
-        label.textContent = g.phase === 'open' ? '抢积分进行中'
-          : g.phase === 'claimed' ? '今日已抢到'
-          : g.phase === 'before' ? '还未开抢' : '今日已结束';
+        label.textContent = g.phase === 'open' ? '抢积分进行中' : ('冷却中 ' + g.remainText);
         document.getElementById('grabStatusTip').textContent = g.tip;
         document.getElementById('grabReward').textContent = g.reward;
         const gb = document.getElementById('grabBtn');
@@ -2206,25 +2215,19 @@
         gb.disabled = !g.canClaim;
         gb.classList.toggle('disabled', !g.canClaim);
         document.getElementById('grabFoot').textContent = g.canClaim
-          ? '完整观看才可到账 · 每天限 1 次'
-          : g.tip;
+          ? '完整观看才可到账 · 每 15 分钟可再抢'
+          : '冷却结束后自动可抢 · 可先看日常广告';
         const nudge = document.getElementById('grabNudge');
         document.getElementById('grabNudgeTip').textContent = g.tip;
-        nudge.classList.toggle('hide', g.phase === 'claimed');
-        // 未开抢/已结束时 nudge 仍显示提醒
-        if (g.phase === 'claimed') nudge.classList.add('hide');
-        else nudge.classList.remove('hide');
+        nudge.classList.toggle('hide', false);
       }
     }
 
     function tapHomeGrab() {
       const g = getGrabStatus();
-      if (g.canClaim) {
-        go('watch-ad');
-        setAdMode('grab');
-        return;
-      }
-      toast(g.tip);
+      go('watch-ad');
+      setAdMode('grab');
+      if (!g.canClaim) toast(g.tip);
     }
 
     function setAdMode(mode) {
@@ -2245,19 +2248,17 @@
       toast('模拟播放限时抢视频…', 900);
       setTimeout(() => {
         state.grabPlaying = false;
-        // 复检（可能刚好跨窗口）
         const g2 = getGrabStatus();
         if (!g2.canClaim) { toast(g2.tip); refreshGrabUI(); return; }
-        state.grabDate = g2.dayKey;
-        state.grabClaimed = true;
+        state.grabAt = Date.now();
         addPoints(GRAB.REWARD, 'grab_ad', '限时抢积分（看广告）');
         refreshGrabUI();
-        toast('抢到 +' + GRAB.REWARD + ' 积分！');
+        toast('抢到 +' + GRAB.REWARD + ' 积分！15 分钟后可再抢');
       }, 1000);
     }
 
-    // 状态 30s 轮询
-    setInterval(() => { refreshGrabUI(); }, 30000);
+    // 冷却倒计时：1s 刷新
+    setInterval(() => { refreshGrabUI(); }, 1000);
 
     /* ---- 首页 ---- */
     function renderHome() {
