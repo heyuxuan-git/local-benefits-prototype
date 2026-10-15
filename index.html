@@ -1577,8 +1577,8 @@
           </div>
           <div class="tabs-row" id="mallTabs">
             <div class="t on" data-mtab="all">全部</div>
-            <div class="t" data-mtab="points">积分兑换</div>
-            <div class="t" data-mtab="cash">直购低价</div>
+            <div class="t" data-mtab="sales">销量排行</div>
+            <div class="t" data-mtab="price">价格排行</div>
           </div>
           <div class="hint-bar">对接外部供应链 · 海量 SKU 积分兑换 · 约 300 积分/件起 · 积分不可提现</div>
           <div id="mallList"></div>
@@ -2073,7 +2073,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261015.8';
+    const APP_VERSION = 'v20261015.9';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -2654,8 +2654,8 @@
     /* ---- 商城 ---- */
     function renderMall() {
       let list = GOODS.slice();
-      if (state.mallTab === 'points') list = list.filter(g => g.points);
-      if (state.mallTab === 'cash') list = list.filter(g => g.cash);
+      if (state.mallTab === 'sales') list.sort((a, b) => b.sales - a.sales);
+      if (state.mallTab === 'price') list.sort((a, b) => a.cash - b.cash);
       document.querySelectorAll('#mallTabs .t').forEach(t => t.classList.toggle('on', t.dataset.mtab === state.mallTab));
       document.getElementById('mallList').innerHTML = list.map(g => `
         <div class="goods" onclick="openGoods('${g.id}')">
