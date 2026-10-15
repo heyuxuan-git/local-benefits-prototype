@@ -840,6 +840,13 @@
       content: ""; position: absolute; left: 28%; right: 28%; bottom: 0;
       height: 3px; background: var(--brand); border-radius: 2px;
     }
+    /* 排序箭头 */
+    .tabs-row .t .arrows {
+      display: inline-flex; flex-direction: column; margin-left: 5px;
+      vertical-align: -1px; gap: 2px;
+    }
+    .tabs-row .t .arrows i { font-size: 8px; line-height: 1; color: #d3d6dc; font-style: normal; transition: color .15s; }
+    .tabs-row .t .arrows i.on { color: var(--brand); }
     .hint-bar {
       margin: 0 16px 10px; padding: 9px 12px; background: #faf3e2;
       color: var(--brand); font-size: 12px; border-radius: 0 0 12px 12px;
@@ -1577,8 +1584,8 @@
           </div>
           <div class="tabs-row" id="mallTabs">
             <div class="t on" data-mtab="all">全部</div>
-            <div class="t" data-mtab="sales">销量排行</div>
-            <div class="t" data-mtab="price">价格排行</div>
+            <div class="t" data-mtab="sales">销量<span class="arrows" data-f="sales"><i class="au">▲</i><i class="ad">▼</i></span></div>
+            <div class="t" data-mtab="price">价格<span class="arrows" data-f="price"><i class="au">▲</i><i class="ad">▼</i></span></div>
           </div>
           <div class="hint-bar">对接外部供应链 · 海量 SKU 积分兑换 · 约 300 积分/件起 · 积分不可提现</div>
           <div id="mallList"></div>
@@ -1912,7 +1919,7 @@
     const state = {
       points: 20, adToday: 0, adLimit: 10,
       tab: 'home', view: 'home', history: [],
-      cat: 'takeout', mallTab: 'all', agentSeg: 'home',
+      cat: 'takeout', mallTab: 'all', mallSort: { sales: 'desc', price: 'asc' }, agentSeg: 'home',
       unlocked: new Set(), goodsId: null, courseId: null,
       swIndex: 0, swTimer: null,
       grabDate: null, grabClaimed: false, grabPlaying: false, grab: null,
@@ -2073,7 +2080,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261015.9';
+    const APP_VERSION = 'v20261015.10';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -2654,9 +2661,14 @@
     /* ---- 商城 ---- */
     function renderMall() {
       let list = GOODS.slice();
-      if (state.mallTab === 'sales') list.sort((a, b) => b.sales - a.sales);
-      if (state.mallTab === 'price') list.sort((a, b) => a.cash - b.cash);
+      if (state.mallTab === 'sales') list.sort((a, b) => state.mallSort.sales === 'desc' ? b.sales - a.sales : a.sales - b.sales);
+      if (state.mallTab === 'price') list.sort((a, b) => state.mallSort.price === 'asc' ? a.cash - b.cash : b.cash - a.cash);
       document.querySelectorAll('#mallTabs .t').forEach(t => t.classList.toggle('on', t.dataset.mtab === state.mallTab));
+      document.querySelectorAll('#mallTabs .arrows').forEach(ar => {
+        const dir = state.mallSort[ar.dataset.f];
+        ar.querySelector('.au').classList.toggle('on', dir === 'asc');
+        ar.querySelector('.ad').classList.toggle('on', dir === 'desc');
+      });
       document.getElementById('mallList').innerHTML = list.map(g => `
         <div class="goods" onclick="openGoods('${g.id}')">
           <div class="thumb">${g.cat}</div>
@@ -2676,7 +2688,13 @@
     document.getElementById('mallTabs').addEventListener('click', e => {
       const t = e.target.closest('[data-mtab]');
       if (!t) return;
-      state.mallTab = t.dataset.mtab; renderMall();
+      const field = t.dataset.mtab;
+      // 点击已选中的排序项：切换升降序
+      if (state.mallTab === field && state.mallSort[field]) {
+        state.mallSort[field] = state.mallSort[field] === 'asc' ? 'desc' : 'asc';
+      }
+      state.mallTab = field;
+      renderMall();
     });
 
     /* ---- 课程 ---- */
