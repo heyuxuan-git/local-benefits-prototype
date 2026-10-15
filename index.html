@@ -840,12 +840,13 @@
       content: ""; position: absolute; left: 28%; right: 28%; bottom: 0;
       height: 3px; background: var(--brand); border-radius: 2px;
     }
-    /* 排序箭头 */
+    /* 排序箭头：仅在该项被选中时显示 */
     .tabs-row .t { display: flex; align-items: center; justify-content: center; }
     .tabs-row .t .arrows {
-      display: inline-flex; flex-direction: column; margin-left: 5px;
+      display: none; flex-direction: column; margin-left: 5px;
       gap: 2px;
     }
+    .tabs-row .t.on .arrows { display: inline-flex; }
     .tabs-row .t .arrows i { font-size: 8px; line-height: 1; color: #d3d6dc; font-style: normal; transition: color .15s; }
     .tabs-row .t .arrows i.on { color: var(--brand); }
     .hint-bar {
@@ -870,6 +871,7 @@
       width: 3px; height: 18px; background: var(--brand); border-radius: 0 3px 3px 0;
     }
     .mall-right { flex: 1; min-width: 0; padding-right: 8px; }
+    .mall-right .tabs-row { margin: 0; border-radius: 10px 10px 0 0; padding: 0 4px; }
     .mall-right .goods { margin-left: 0; margin-right: 0; padding: 10px; gap: 9px; }
     .mall-right .goods .thumb { width: 70px; height: 70px; font-size: 11px; }
     .goods {
@@ -1617,15 +1619,17 @@
               <button class="btn w" onclick="go('watch-ad')">赚积分</button>
             </div>
           </div>
-          <div class="tabs-row" id="mallTabs">
-            <div class="t on" data-mtab="all">全部</div>
-            <div class="t" data-mtab="sales">销量<span class="arrows" data-f="sales"><i class="au">▲</i><i class="ad">▼</i></span></div>
-            <div class="t" data-mtab="price">价格<span class="arrows" data-f="price"><i class="au">▲</i><i class="ad">▼</i></span></div>
-          </div>
           <div class="hint-bar">对接外部供应链 · 海量 SKU 积分兑换 · 约 300 积分/件起 · 积分不可提现</div>
           <div class="mall-body">
             <div class="mall-cats" id="mallCats"></div>
-            <div class="mall-right"><div id="mallList"></div></div>
+            <div class="mall-right">
+              <div class="tabs-row" id="mallTabs">
+                <div class="t on" data-mtab="all">综合</div>
+                <div class="t" data-mtab="sales">销量<span class="arrows" data-f="sales"><i class="au">▲</i><i class="ad">▼</i></span></div>
+                <div class="t" data-mtab="price">价格<span class="arrows" data-f="price"><i class="au">▲</i><i class="ad">▼</i></span></div>
+              </div>
+              <div id="mallList"></div>
+            </div>
           </div>
         </div>
 
@@ -2122,7 +2126,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261015.13';
+    const APP_VERSION = 'v20261015.14';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
