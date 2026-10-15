@@ -2076,10 +2076,10 @@
       { id:'g1', title:'【蓝氏】成年期犬用零食罐头 80g', cat:'宠物生活', retail:15, cash:7.03, points:300, ws:6.83, profit:8.17, sales:3, stock:19998, tags:['积分兑换','直购低价'] },
       { id:'g2', title:'【仙森元】彩虹仙果粒 宠物冻干', cat:'宠物生活', retail:16, cash:8.4, points:300, ws:8.16, profit:7.84, sales:1, stock:9999, tags:['积分兑换','直购低价'] },
       { id:'g3', title:'【摩米特尔】冻干鸭小胸 60g', cat:'宠物生活', retail:30, cash:13.65, points:500, ws:13.26, profit:16.74, sales:2, stock:9999, tags:['直购低价'] },
-      { id:'g4', title:'【C3】全价主食罐 牛肉吞拿鱼 85g', cat:'宠物生活', retail:12, cash:4.72, points:300, ws:4.59, profit:7.41, sales:1, stock:9999, tags:['积分兑换','直购低价'] },
-      { id:'g5', title:'【帕特】猫主食餐盒全价猫粮（鹌鹑配方）', cat:'宠物生活', retail:99, cash:42.84, points:1200, ws:42.84, profit:56.16, sales:0, stock:9999, tags:['爆款','直购低价'] },
-      { id:'g6', title:'抽纸 3 层 100 抽 × 24 包', cat:'快消日用', retail:39.9, cash:19.9, points:300, ws:18.5, profit:20, sales:128, stock:5000, tags:['积分兑换','全网低价'] },
-      { id:'g7', title:'洗衣凝珠 52 颗 持久留香', cat:'快消日用', retail:49.9, cash:24.9, points:300, ws:23, profit:25, sales:86, stock:3000, tags:['积分兑换','全网低价'] },
+      { id:'g4', title:'【C3】全价主食罐 牛肉吞拿鱼 85g', cat:'宠物生活', retail:12, cash:4.72, points:300, ws:4.59, profit:7.41, sales:1, stock:9999, tags:['积分兑换','直购低价'], flash:true },
+      { id:'g5', title:'【帕特】猫主食餐盒全价猫粮（鹌鹑配方）', cat:'宠物生活', retail:99, cash:42.84, points:1200, ws:42.84, profit:56.16, sales:0, stock:9999, tags:['爆款','直购低价'], flash:true },
+      { id:'g6', title:'抽纸 3 层 100 抽 × 24 包', cat:'快消日用', retail:39.9, cash:19.9, points:300, ws:18.5, profit:20, sales:128, stock:5000, tags:['积分兑换','全网低价'], flash:true },
+      { id:'g7', title:'洗衣凝珠 52 颗 持久留香', cat:'快消日用', retail:49.9, cash:24.9, points:300, ws:23, profit:25, sales:86, stock:3000, tags:['积分兑换','全网低价'], flash:true },
       { id:'g8', title:'维生素 C 泡腾片 20 片', cat:'健康个护', retail:29.9, cash:12.9, points:300, ws:11.5, profit:17, sales:45, stock:2000, tags:['积分兑换'] },
       { id:'g9', title:'便携雨伞 折叠自动', cat:'家居好物', retail:59, cash:29, points:500, ws:26, profit:30, sales:12, stock:800, tags:['直购低价'] }
     ];
@@ -2126,7 +2126,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261015.14';
+    const APP_VERSION = 'v20261016.1';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -2707,13 +2707,14 @@
     /* ---- 商城 ---- */
     function renderMall() {
       // 左侧分类（含数量）
-      const cats = ['全部', ...new Set(GOODS.map(g => g.cat))];
+      const cats = ['秒杀品', '全部', ...new Set(GOODS.map(g => g.cat))];
+      const inCat = g => state.mallCat === '秒杀品' ? g.flash : state.mallCat === '全部' || g.cat === state.mallCat;
       document.getElementById('mallCats').innerHTML = cats.map(c => {
-        const n = c === '全部' ? GOODS.length : GOODS.filter(g => g.cat === c).length;
+        const n = c === '全部' ? GOODS.length : c === '秒杀品' ? GOODS.filter(g => g.flash).length : GOODS.filter(g => g.cat === c).length;
         return `<div class="c ${state.mallCat === c ? 'on' : ''}" data-mcat="${c}"><div>${c}</div><div class="n">${n}件</div></div>`;
       }).join('');
       // 右侧列表：分类过滤 + 排序
-      let list = GOODS.filter(g => state.mallCat === '全部' || g.cat === state.mallCat);
+      let list = GOODS.filter(inCat);
       if (state.mallTab === 'sales') list.sort((a, b) => state.mallSort.sales === 'desc' ? b.sales - a.sales : a.sales - b.sales);
       if (state.mallTab === 'price') list.sort((a, b) => state.mallSort.price === 'asc' ? a.cash - b.cash : b.cash - a.cash);
       document.querySelectorAll('#mallTabs .t').forEach(t => t.classList.toggle('on', t.dataset.mtab === state.mallTab));
