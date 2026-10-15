@@ -841,9 +841,10 @@
       height: 3px; background: var(--brand); border-radius: 2px;
     }
     /* 排序箭头 */
+    .tabs-row .t { display: flex; align-items: center; justify-content: center; }
     .tabs-row .t .arrows {
       display: inline-flex; flex-direction: column; margin-left: 5px;
-      vertical-align: -1px; gap: 2px;
+      gap: 2px;
     }
     .tabs-row .t .arrows i { font-size: 8px; line-height: 1; color: #d3d6dc; font-style: normal; transition: color .15s; }
     .tabs-row .t .arrows i.on { color: var(--brand); }
@@ -2080,7 +2081,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261015.10';
+    const APP_VERSION = 'v20261015.11';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
