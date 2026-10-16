@@ -424,6 +424,62 @@
     .life-order .m .off { color: #c1841a; }
     .life-order .tm { font-size: 10px; color: var(--ink-3); margin-top: 4px; }
 
+    /* 到店点单品牌卡（横向滑动） */
+    .life-brands {
+      display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 4px;
+      scrollbar-width: none;
+    }
+    .life-brands::-webkit-scrollbar { display: none; }
+    .lb-card {
+      min-width: 168px; flex-shrink: 0; border-radius: 14px; padding: 12px;
+      color: #fff; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.14);
+    }
+    .lb-top { display: flex; justify-content: space-between; align-items: center; }
+    .lb-name { font-size: 14px; font-weight: 800; }
+    .lb-tag {
+      font-size: 10px; background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.5); padding: 1px 7px; border-radius: 999px;
+    }
+    .lb-item { font-size: 11px; opacity: .92; margin-top: 9px; }
+    .lb-price { display: flex; align-items: baseline; gap: 6px; margin-top: 2px; }
+    .lb-price .old { font-size: 11px; text-decoration: line-through; opacity: .75; }
+    .lb-price .new { font-size: 21px; font-weight: 800; }
+    .lb-cta {
+      margin-top: 8px; background: #fff; color: var(--ink);
+      font-size: 11px; font-weight: 700; text-align: center;
+      padding: 6px 0; border-radius: 999px;
+    }
+    /* 点单弹层：挂 .phone 层级，保持在手机边框内 */
+    .bs-mask { position: absolute; inset: 0; background: rgba(0,0,0,.45); z-index: 70; }
+    .bs-sheet {
+      position: absolute; left: 0; right: 0; bottom: 0; background: #fff;
+      border-radius: 18px 18px 0 0; z-index: 71; padding: 16px 16px 24px;
+      max-height: 80%; overflow-y: auto; animation: drawer-up .22s ease;
+    }
+    .bs-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .bs-title { font-size: 16px; font-weight: 800; }
+    .bs-sub { font-size: 11px; color: var(--ink-3); margin-top: 2px; }
+    .bs-close {
+      width: 26px; height: 26px; border-radius: 50%; background: #f2f3f5;
+      color: var(--ink-2); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 14px; flex-shrink: 0;
+    }
+    .bs-list { margin-top: 12px; }
+    .bs-item {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 11px 12px; border: 1.5px solid #f0f1f3; border-radius: 12px;
+      margin-bottom: 8px; cursor: pointer;
+    }
+    .bs-item.on { border-color: #c1841a; background: #faf3e2; }
+    .bs-item .n { font-size: 13px; font-weight: 600; }
+    .bs-item .p { font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+    .bs-item .p b { color: #ff3b30; font-size: 15px; margin-left: 6px; }
+    .bs-pay { background: #f8f9fb; border-radius: 10px; padding: 10px; font-size: 12px; }
+    .bs-pay .r { display: flex; justify-content: space-between; padding: 4px 0; }
+    .bs-pay .save { color: #00b578; font-weight: 700; }
+    .bs-pay .cash { color: #ff3b30; font-weight: 800; font-size: 15px; }
+    .bs-pay .tip { color: var(--ink-3); font-size: 10px; margin-top: 4px; }
+
     /* ===== 悬赏任务 ===== */
     .by-hero {
       margin: 12px 16px; padding: 16px; border-radius: 16px;
@@ -1665,13 +1721,25 @@
                 <div class="lab">可用积分</div>
                 <div class="n" data-bind="points">20</div>
               </div>
-              <div class="rule-pill">100 积分 = 1 元<br/>最高抵 50%</div>
+              <div class="rule-pill">到店点单低至 6 折<br/>缴费最高抵 50%</div>
             </div>
-            <div class="sub">水电燃 · 加油 · 充电，积分直接当钱花</div>
+            <div class="sub">咖啡点单 · 水电燃气 · 加油充电，线下生活一站搞定</div>
+          </div>
+
+          <div class="home-sec-head" style="margin-top:4px">
+            <span>到店点单</span>
+            <span class="more">云上供应链 · 门店价 6 折起</span>
+          </div>
+          <div class="life-brands" id="lifeBrands"></div>
+
+          <div class="home-sec-head" style="margin-top:14px">
+            <span>生活缴费</span>
+            <span class="more">积分抵扣</span>
           </div>
           <div class="svc-grid" id="lifeSvc"></div>
           <div class="life-card" id="lifeForm"></div>
-          <div class="section-title">缴费记录</div>
+
+          <div class="section-title">消费记录</div>
           <div id="lifeOrders"></div>
         </div>
 
@@ -2065,6 +2133,10 @@
         <div class="fd-bar" id="fdBar"></div>
       </div>
 
+      <!-- 到店点单弹层：挂 .phone 层级，保持在手机边框内 -->
+      <div class="bs-mask hide" id="brandMask" onclick="closeBrandSheet()"></div>
+      <div class="bs-sheet hide" id="brandSheet" onclick="event.stopPropagation()"></div>
+
       <div class="tabbar" id="tabbar">
         <button class="tab on" data-tab="home" onclick="switchTab('home')">
           <svg class="ico"><use href="#i-home"/></svg><span>首页</span>
@@ -2263,7 +2335,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261016.1';
+    const APP_VERSION = 'v20261016.2';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -2456,6 +2528,17 @@
     })();
 
     /* ---- 本地生活 ---- */
+    // 到店点单：云上供应链门店价，下单按门店价（约 6 折）直购
+    const LIFE_BRANDS = [
+      { id: 'starbucks', name: '星巴克', color: 'linear-gradient(135deg,#0a5c3f,#00754a)', store: '门店价 6 折', items: [ { n: '大杯拿铁（热/冰）', retail: 33 }, { n: '大杯美式（热/冰）', retail: 30 }, { n: '燕麦丝绒拿铁', retail: 36 } ] },
+      { id: 'luckin', name: '瑞幸咖啡', color: 'linear-gradient(135deg,#2b5fd9,#0044ff)', store: '门店价 6 折', items: [ { n: '生椰拿铁', retail: 29 }, { n: '酱香拿铁', retail: 32 }, { n: '美式咖啡', retail: 25 } ] },
+      { id: 'kfc', name: '肯德基', color: 'linear-gradient(135deg,#c8102e,#e4002b)', store: '门店价 65 折', items: [ { n: '香辣鸡腿堡套餐', retail: 39.5 }, { n: '吮指原味鸡 2 块', retail: 15.5 } ] },
+      { id: 'mixue', name: '蜜雪冰城', color: 'linear-gradient(135deg,#d92b2b,#ff5a2c)', store: '门店价 7 折', items: [ { n: '冰鲜柠檬水', retail: 4 }, { n: '珍珠奶茶', retail: 7 } ] }
+    ];
+    const LIFE_BRAND_RATE = { starbucks: 0.6, luckin: 0.6, kfc: 0.65, mixue: 0.7 };
+    let lifeBrandId = null;
+    let lifeBrandItem = 0;
+
     const LIFE_SERVICES = [
       { id: 'water', name: '水费', icon: 'i-cup', desc: '支持多城市生活用水缴费', ph: '请输入缴费户号', bill: '3301********28', amount: 48.6 },
       { id: 'power', name: '电费', icon: 'i-ad', desc: '国家电网 / 南网 电费充值', ph: '请输入电费户号', bill: '4403********91', amount: 126.4 },
@@ -2468,7 +2551,8 @@
     let lifeAmount = 48.6;
     let lifeOrders = [
       { id: 'lo1', serviceName: '电费', amount: 126.4, offsetPoints: 5000, payCash: 76.4, statusText: '已缴费', time: '2025-06-01 10:22' },
-      { id: 'lo2', serviceName: '加油', amount: 200, offsetPoints: 8000, payCash: 120, statusText: '已核销', time: '2025-06-02 18:05' }
+      { id: 'lo2', serviceName: '加油', amount: 200, offsetPoints: 8000, payCash: 120, statusText: '已核销', time: '2025-06-02 18:05' },
+      { id: 'lo3', serviceName: '星巴克 · 大杯拿铁', amount: 19.8, offsetPoints: 0, payCash: 19.8, statusText: '待到店核销', time: '2025-06-03 09:15' }
     ];
 
     function lifeCompute() {
@@ -2495,6 +2579,24 @@
 
       const svcGrid = document.getElementById('lifeSvc');
       if (!svcGrid) return;
+
+      // 到店点单品牌卡
+      const brandBox = document.getElementById('lifeBrands');
+      if (brandBox) {
+        brandBox.innerHTML = LIFE_BRANDS.map(b => {
+          const it = b.items[0];
+          const rate = LIFE_BRAND_RATE[b.id];
+          const price = Math.round(it.retail * rate * 100) / 100;
+          return `
+          <div class="lb-card" style="background:${b.color}" onclick="openBrandSheet('${b.id}')">
+            <div class="lb-top"><div class="lb-name">${b.name}</div><div class="lb-tag">${b.store}</div></div>
+            <div class="lb-item">招牌：${it.n}</div>
+            <div class="lb-price"><span class="old">¥${it.retail}</span><span class="new">¥${price}</span></div>
+            <div class="lb-cta">去点单</div>
+          </div>`;
+        }).join('');
+      }
+
       svcGrid.innerHTML = LIFE_SERVICES.map(s => `
         <div class="svc ${s.id === lifeActive ? 'on' : ''}" onclick="selectLife('${s.id}')">
           ${ico(s.icon)}<span class="svc-name">${s.name}</span>
@@ -2564,6 +2666,78 @@
       });
       renderLife();
       toast('支付成功（mock）');
+    }
+
+    /* ---- 到店点单弹层：选品 → 按门店价下单 → 生成待核销记录 ---- */
+    function openBrandSheet(id) {
+      lifeBrandId = id;
+      lifeBrandItem = 0;
+      renderBrandSheet();
+      document.getElementById('brandMask').classList.remove('hide');
+      document.getElementById('brandSheet').classList.remove('hide');
+    }
+
+    function closeBrandSheet() {
+      document.getElementById('brandMask').classList.add('hide');
+      document.getElementById('brandSheet').classList.add('hide');
+    }
+
+    function pickBrandItem(i) {
+      lifeBrandItem = i;
+      renderBrandSheet();
+    }
+
+    function renderBrandSheet() {
+      const b = LIFE_BRANDS.find(x => x.id === lifeBrandId);
+      if (!b) return;
+      const rate = LIFE_BRAND_RATE[b.id];
+      const it = b.items[lifeBrandItem];
+      const price = Math.round(it.retail * rate * 100) / 100;
+      const save = Math.round((it.retail - price) * 100) / 100;
+      document.getElementById('brandSheet').innerHTML = `
+        <div class="bs-head">
+          <div>
+            <div class="bs-title">${b.name}</div>
+            <div class="bs-sub">云上供应链直供 · ${b.store} · 到店出示核销</div>
+          </div>
+          <div class="bs-close" onclick="closeBrandSheet()">×</div>
+        </div>
+        <div class="bs-list">
+          ${b.items.map((x, i) => {
+            const p = Math.round(x.retail * rate * 100) / 100;
+            return `<div class="bs-item ${i === lifeBrandItem ? 'on' : ''}" onclick="pickBrandItem(${i})">
+              <span class="n">${x.n}</span>
+              <span class="p">门店 ¥${x.retail}<b>¥${p}</b></span>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="bs-pay">
+          <div class="r"><span>门店价</span><span>¥${it.retail.toFixed(2)}</span></div>
+          <div class="r"><span>供应链特价</span><span class="save">-¥${save.toFixed(2)}</span></div>
+          <div class="r"><span>实付</span><span class="cash">¥${price.toFixed(2)}</span></div>
+          <div class="tip">积分可抵扣，支付后生成核销码到店出示即可</div>
+        </div>
+        <button class="btn btn-primary btn-block" style="margin-top:12px" onclick="submitBrandOrder()">下单 ¥${price.toFixed(2)}</button>`;
+    }
+
+    function submitBrandOrder() {
+      const b = LIFE_BRANDS.find(x => x.id === lifeBrandId);
+      if (!b) return;
+      const rate = LIFE_BRAND_RATE[b.id];
+      const it = b.items[lifeBrandItem];
+      const price = Math.round(it.retail * rate * 100) / 100;
+      lifeOrders.unshift({
+        id: `lo_${Date.now()}`,
+        serviceName: `${b.name} · ${it.n}`,
+        amount: price,
+        offsetPoints: 0,
+        payCash: price,
+        statusText: '待到店核销',
+        time: new Date().toLocaleString('zh-CN', { hour12: false })
+      });
+      closeBrandSheet();
+      renderLife();
+      toast('下单成功，凭核销码到店取餐（mock）');
     }
 
     /* ---- 悬赏任务 ---- */
@@ -3633,6 +3807,7 @@
       bindPoints();
       if (id === 'points') renderLogs();
       if (id === 'life') renderLife();
+      else closeBrandSheet();
       if (id === 'bounty') renderBounty();
       if (id === 'member') renderMemberPlans();
       if (id === 'home') startSwiper();
