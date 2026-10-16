@@ -1135,7 +1135,36 @@
     .invite .share .ico { width: 14px; height: 14px; color: var(--brand); }
     .agent-sub { margin-top: 10px; font-size: 11px; opacity: .9; }
 
-    /* ===== 会员体系 ===== */
+    /* ===== 会员等级入口 / 二级页 ===== */
+    .member-level {
+      background: #fff;
+      margin: 14px 16px;
+      border-radius: 16px;
+      padding: 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      cursor: pointer;
+    }
+    .ml-lab { font-size: 11px; color: var(--ink-3); }
+    .ml-name { font-size: 18px; font-weight: 800; color: var(--brand); margin-top: 2px; }
+    .ml-note { font-size: 11px; color: var(--ink-3); margin-top: 3px; }
+    .ml-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--brand), #a8841a);
+      color: #fff; font-size: 12px; font-weight: 700;
+      padding: 9px 14px; border-radius: 999px;
+    }
+    .member-hero {
+      background: linear-gradient(135deg, #c9a227, #a8841a) !important;
+      margin: 14px 16px !important;
+      padding: 22px 18px !important;
+      border-radius: 16px !important;
+    }
+    .hero-lab { font-size: 11px; opacity: .9; }
+    .hero-level { font-size: 28px; font-weight: 800; margin-top: 4px; }
+    .hero-sub { font-size: 12px; opacity: .9; margin-top: 6px; }
+
+    /* ===== 会员套餐（二级页） ===== */
     .member-block {
       background: #fff;
       margin: 14px 16px;
@@ -1735,14 +1764,14 @@
             <div class="agent-sub">团队长 / 社群裂变拉新得积分 · C 端一键升级 B 端</div>
           </div>
 
-          <!-- 会员体系（原邀请码位） -->
-          <div class="member-block">
-            <div class="member-head">
-              <div class="member-title">会员中心</div>
-              <div class="member-note" id="memberNote">按月订阅 · 每月发放积分</div>
+          <!-- 会员等级入口（开通在二级页） -->
+          <div class="member-level" onclick="go('member')">
+            <div class="ml-l">
+              <div class="ml-lab">会员等级</div>
+              <div class="ml-name" id="mlName">普通用户</div>
+              <div class="ml-note" id="mlNote">查看套餐与权益</div>
             </div>
-            <div class="member-plans" id="memberPlans"></div>
-            <div class="member-foot">订阅按月发放 · 积分仅可兑换商城 · 福彩板块上线后自动到账</div>
+            <div class="ml-r"><span class="ml-cta">去开通 ›</span></div>
           </div>
 
           <div class="stat-bar" style="margin-top:0">
@@ -1800,6 +1829,24 @@
           </div>
           <div id="agentTier" style="display:none">
             <div class="section-hint" style="margin:0 16px 12px;font-size:12px;color:var(--ink-3)">拉新奖励积分，积分仅可兑换商城，不可提现</div>
+          </div>
+        </div>
+
+        <!-- ========== 会员中心（二级页） ========== -->
+        <div class="view" id="view-member" data-tab="mine">
+          <div class="hero member-hero">
+            <div class="hero-lab">当前等级</div>
+            <div class="hero-level" id="memLevel">普通用户</div>
+            <div class="hero-sub">可用积分 <span data-bind="points">20</span> · 按月订阅发放</div>
+          </div>
+          <div class="member-plans" id="memberPlans" style="margin:0 16px"></div>
+          <div class="member-foot" style="margin:12px 16px 0">订阅按月发放 · 积分仅可兑换商城 · 福彩板块上线后自动到账</div>
+          <div class="card" style="margin:16px">
+            <div style="font-size:14px;font-weight:700;margin-bottom:8px">会员说明</div>
+            <div class="rule-item">· 按月发放，mock 不自动续费</div>
+            <div class="rule-item">· 积分仅可兑换商城商品，不可提现</div>
+            <div class="rule-item">· 福彩一注：功能上线后到账</div>
+            <button class="btn btn-ghost btn-block" style="margin-top:12px" onclick="go('points')">查看积分明细</button>
           </div>
         </div>
 
@@ -2220,7 +2267,7 @@
       home: '潮匠 TrendCraft', benefits: '权益', mall: '积分商城', courses: '0元课',
       mine: '我的', 'goods-detail': '商品详情', 'course-detail': '课程详情',
       'watch-ad': '看广告赚积分', points: '我的积分',
-      life: '本地生活', bounty: '悬赏任务',
+      life: '本地生活', bounty: '悬赏任务', member: '会员中心',
       cart: '购物车', 'order-confirm': '确认订单', orders: '我的订单',
       'order-detail': '订单详情', 'aftersale-apply': '申请售后',
       address: '收货地址', 'address-edit': '编辑地址'
@@ -2860,6 +2907,16 @@
     }
 
     /* ---- 我的 ---- */
+    function renderMemberLevel() {
+      const name = memberSub ? memberSub.name : '普通用户';
+      const el = document.getElementById('mlName');
+      if (el) el.textContent = name;
+      const note = document.getElementById('mlNote');
+      if (note) note.textContent = memberSub ? '点击查看权益与续费' : '查看套餐与权益';
+      const lv = document.getElementById('memLevel');
+      if (lv) lv.textContent = name;
+    }
+
     function renderMemberPlans() {
       document.getElementById('memberPlans').innerHTML = MEMBER_PLANS.map(p => `
         <div class="mp-card ${p.highlight ? 'hot' : ''} ${memberSub && memberSub.id === p.id ? 'on' : ''}">
@@ -2875,9 +2932,7 @@
             ${memberSub && memberSub.id === p.id ? '本周期已开通' : '立即开通'}
           </button>
         </div>`).join('');
-      document.getElementById('memberNote').textContent = memberSub
-        ? `已开通 ${memberSub.name}`
-        : '按月订阅 · 每月发放积分';
+      renderMemberLevel();
     }
 
     function subscribeMember(id) {
@@ -3588,6 +3643,7 @@
       if (id === 'points') renderLogs();
       if (id === 'life') renderLife();
       if (id === 'bounty') renderBounty();
+      if (id === 'member') renderMemberPlans();
       if (id === 'home') startSwiper();
       else clearInterval(state.swTimer);
       if (id === 'mall') renderMall();
@@ -3616,7 +3672,7 @@
       if (tab === 'benefits') renderBenefits();
     }
 
-    function go(view) { state.history.push(state.view); showView(view); if (view === 'points') renderLogs(); if (view === 'life') renderLife(); if (view === 'bounty') renderBounty(); }
+    function go(view) { state.history.push(state.view); showView(view); if (view === 'points') renderLogs(); if (view === 'life') renderLife(); if (view === 'bounty') renderBounty(); if (view === 'member') renderMemberPlans(); }
     function back() {
       const prev = state.history.pop() || state.tab;
       showView(prev);
