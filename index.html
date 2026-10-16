@@ -1092,48 +1092,51 @@
       font-size: 12px; padding: 6px 14px; border-radius: 999px;
     }
 
-    /* ===== 我的 ===== */
+    /* ===== 我的：无顶部色块，与下方卡片左右对齐（16px） ===== */
     .agent-head {
-      background: linear-gradient(160deg, #c1841a, #ff3b30);
-      color: #fff; padding: 20px 16px 22px;
+      background: transparent;
+      color: var(--ink);
+      padding: 16px 16px 4px;
     }
-    /* 用户信息区：头像 + 昵称 + ID + 积分入口 */
     .agent-head .user-row { display: flex; align-items: center; gap: 12px; }
     .agent-head .avatar {
       width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
-      background: rgba(255,255,255,.2); border: 2px solid rgba(255,255,255,.6);
+      background: #faf6eb; border: 1.5px solid var(--brand);
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px; font-weight: 700; color: #fff;
+      font-size: 20px; font-weight: 700; color: var(--brand);
     }
     .agent-head .uinfo { flex: 1; min-width: 0; }
     .agent-head .uname {
-      font-size: 17px; font-weight: 700; display: flex; align-items: center; gap: 6px;
+      font-size: 17px; font-weight: 700; color: var(--ink);
+      display: flex; align-items: center; gap: 6px;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-    .agent-head .uid { font-size: 11.5px; opacity: .85; margin-top: 3px; }
+    .agent-head .uid { font-size: 11.5px; color: var(--ink-3); margin-top: 3px; }
     .agent-head .level-badge {
-      background: rgba(0,0,0,.2); border: 1px solid rgba(255,255,255,.5);
+      background: #faf6eb; border: 1px solid var(--brand);
+      color: var(--brand);
       padding: 1px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 600;
       flex-shrink: 0;
     }
     .pts-mini {
-      font-size: 12px; background: rgba(255,255,255,.18);
+      font-size: 12px; background: #faf6eb; color: var(--brand);
+      border: 1px solid #efe4c8;
       padding: 6px 12px; border-radius: 999px; cursor: pointer;
-      display: inline-flex; align-items: center; gap: 4px;
+      display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0;
     }
     .invite { margin-top: 16px; display: flex; gap: 10px; align-items: center; }
     .invite .code {
-      flex: 1; background: rgba(255,255,255,.15);
-      border: 1px dashed rgba(255,255,255,.6); border-radius: 8px;
-      padding: 12px; font-size: 13px; cursor: pointer;
+      flex: 1; background: #fff;
+      border: 1px dashed var(--brand); border-radius: 8px;
+      padding: 12px; font-size: 13px; cursor: pointer; color: var(--ink);
     }
     .invite .share {
-      background: #fff; color: var(--brand); border: none; border-radius: 999px;
+      background: var(--brand); color: #fff; border: none; border-radius: 999px;
       font-size: 13px; font-weight: 700; padding: 10px 16px; cursor: pointer;
       display: inline-flex; align-items: center; gap: 6px;
     }
-    .invite .share .ico { width: 14px; height: 14px; color: var(--brand); }
-    .agent-sub { margin-top: 10px; font-size: 11px; opacity: .9; }
+    .invite .share .ico { width: 14px; height: 14px; color: #fff; }
+    .agent-sub { margin-top: 12px; font-size: 11px; color: var(--ink-3); }
 
     /* ===== 会员等级入口 / 二级页 ===== */
     .member-level {
