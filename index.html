@@ -1562,10 +1562,10 @@
                 <button class="cta" onclick="go('watch-ad')">立即去赚</button>
               </div>
               <div class="slide s2">
-                <span class="tag">0元课</span>
-                <h3>AI 免费课上新<br/>积分解锁 · 首课免费</h3>
-                <p>零基础 3 天做出 AI 周报</p>
-                <button class="cta" onclick="switchTab('courses')">去选课</button>
+                <span class="tag">潮知馆</span>
+                <h3>AI 工具 × 文旅科普<br/>积分兑换观看</h3>
+                <p>看懂再注册 / 充值 / 购票 · B 端分佣</p>
+                <button class="cta" onclick="switchTab('courses')">去逛逛</button>
               </div>
               <div class="slide s3">
                 <span class="tag">商城</span>
@@ -1722,20 +1722,20 @@
           </div>
         </div>
 
-        <!-- ========== 0元课 ========== -->
+        <!-- ========== 潮知馆 ========== -->
         <div class="view" id="view-courses" data-tab="courses">
           <div class="course-hero">
-            <h2>AI 免费课 · 积分零撸</h2>
-            <p>看广告攒积分 → 解锁课程 → 白嫖学完</p>
+            <h2>潮知馆</h2>
+            <p>AI 工具 × 文旅科普 · 积分兑换观看 · 注册/充值/购票 B 端分佣</p>
             <div class="bar">
               <span>当前积分 <b data-bind="points">20</b></span>
               <span class="go" onclick="go('watch-ad')">去赚积分 ›</span>
             </div>
           </div>
-          <div class="section-title">精选课程</div>
+          <div class="section-title">积分兑换观看</div>
           <div id="courseList"></div>
           <div class="card" style="font-size:12.5px;color:var(--ink-2)">
-            提示：首课免费试看；解锁后永久回看。积分也可通过每日会员任务获得。
+            用积分解锁整集；试看免费。对内容感兴趣 → 经平台注册 AI 工具、充 Token、购景区门票，平台获得 B 端分佣。
           </div>
         </div>
 
@@ -2013,7 +2013,7 @@
             <div style="font-size:14px;font-weight:700;margin-bottom:8px">积分用途</div>
             <div class="rule-item">· 看广告 / 完成任务攒积分</div>
             <div class="rule-item">· 仅可兑换商城商品与生活权益（不可提现）</div>
-            <div class="rule-item">· 解锁 0 元 AI 课全章节</div>
+            <div class="rule-item">· 观看潮知馆 AI / 文旅视频</div>
             <div class="rule-item">· 异常行为触发风控，积分可能被回收</div>
             <button class="btn btn-ghost btn-block" style="margin-top:14px" onclick="switchTab('mall')">去积分商城</button>
           </div>
@@ -2038,7 +2038,7 @@
             <div class="rule-item">限时抢：每 15 分钟看 1 条广告抢 +20 积分（冷却后可再抢）</div>
             <div class="rule-item">获取：开通会员可得赠送积分 + 每日加成（可选）</div>
             <div class="rule-item">消耗：商城兑换商品（约 300 积分/件起）</div>
-            <div class="rule-item">消耗：0 元 AI 课积分解锁；生活缴费抵扣</div>
+            <div class="rule-item">消耗：潮知馆视频积分观看；生活缴费抵扣</div>
             <div class="rule-item">风控：异常刷广告 / 刷兑换将被拦截并回收积分</div>
           </div>
           <div class="section-title">积分明细</div>
@@ -2080,7 +2080,7 @@
           <svg class="ico"><use href="#i-bag"/></svg><span>积分商城</span>
         </button>
         <button class="tab" data-tab="courses" onclick="switchTab('courses')">
-          <svg class="ico"><use href="#i-cap"/></svg><span>0元课</span>
+          <svg class="ico"><use href="#i-cap"/></svg><span>潮知馆</span>
         </button>
         <button class="tab" data-tab="mine" onclick="switchTab('mine')">
           <svg class="ico"><use href="#i-user"/></svg><span>我的</span>
@@ -2215,10 +2215,12 @@
     ];
 
     const COURSES = [
-      { id:'ai1', title:'AI 零基础入门：从对话到提效', lessons:12, duration:'2.5 小时', points:100, teacher:'张老师', level:'入门', desc:'带你认识主流 AI 工具，掌握提示词基本功，3 天做出第一份 AI 辅助报告。', chapters:[{t:'第1课 认识大模型',free:true},{t:'第2课 提示词结构'},{t:'第3课 文档与表格提效'},{t:'第4课 实战：周报生成器'}] },
-      { id:'ai2', title:'AI 绘画实操：秒出商用海报', lessons:8, duration:'1.8 小时', points:150, teacher:'李老师', level:'进阶', desc:'从文生图到风格锁定，完成一套可商用的活动海报模板。', chapters:[{t:'第1课 工具与版权',free:true},{t:'第2课 提示词与构图'},{t:'第3课 批量出图工作流'}] },
-      { id:'ai3', title:'AI 副业：用智能体接单赚钱', lessons:10, duration:'3 小时', points:200, teacher:'王老师', level:'实战', desc:'拆解 5 类可变现场景，搭建你的第一个可交付智能体。', chapters:[{t:'第1课 副业地图',free:true},{t:'第2课 智能体搭建'},{t:'第3课 接单与交付'}] },
-      { id:'ai4', title:'职场 AI 办公：表格·PPT·邮件', lessons:6, duration:'1.2 小时', points:80, teacher:'陈老师', level:'入门', desc:'高频办公三件套的 AI 加速技巧，学完当天可用。', chapters:[{t:'第1课 表格公式助手',free:true},{t:'第2课 一键成稿 PPT'},{t:'第3课 邮件得体回复'}] }
+      { id:'ai1', category:'ai', categoryLabel:'AI 工具', title:'主流 AI 工具速览：怎么选、怎么省钱', lessons:8, duration:'18 分钟', points:80, teacher:'潮知编辑部', level:'科普', convertHint:'看懂后可经平台注册 AI 工具 / 充 Token', desc:'一集讲清大模型产品分层、场景匹配与计费方式，避免花冤枉钱。', chapters:[{t:'第1集 工具地图：对话 / 绘画 / 编程',free:true},{t:'第2集 计费与 Token 怎么看'},{t:'第3集 注册与充值避坑'},{t:'第4集 实测：一次完整的提效流程'}] },
+      { id:'ai2', category:'ai', categoryLabel:'AI 工具', title:'提示词入门：让 AI 听得懂人话', lessons:6, duration:'12 分钟', points:60, teacher:'潮知编辑部', level:'科普', convertHint:'配套工具注册链接，平台可计 B 端分佣', desc:'结构化提示词三板斧，写作、表格、海报场景即学即用。', chapters:[{t:'第1集 为什么 AI 听不懂你',free:true},{t:'第2集 角色 / 任务 / 约束'},{t:'第3集 批量改写与润色'}] },
+      { id:'ai3', category:'ai', categoryLabel:'AI 工具', title:'Token 充值指南：比例、发票与风控', lessons:5, duration:'10 分钟', points:50, teacher:'潮知编辑部', level:'科普', convertHint:'平台代充通道可享分佣结算', desc:'主流平台充值路径、折扣渠道与常见风控问题一次说明。', chapters:[{t:'第1集 Token 是什么',free:true},{t:'第2集 充值渠道对比'},{t:'第3集 发票与对账'}] },
+      { id:'tv1', category:'travel', categoryLabel:'文旅', title:'博物馆预约全攻略：旺季也能约到', lessons:6, duration:'14 分钟', points:60, teacher:'潮知旅图', level:'文旅', convertHint:'看后可跳转景区 / 文旅预订下单', desc:'开放时间、证件、捡漏时段与联程路线，适合第一次带娃出行。', chapters:[{t:'第1集 放票规则与证件',free:true},{t:'第2集 时段捡漏技巧'},{t:'第3集 周边动线怎么排'}] },
+      { id:'tv2', category:'travel', categoryLabel:'文旅', title:'小众古镇 48 小时：避开人潮的走法', lessons:7, duration:'16 分钟', points:70, teacher:'潮知旅图', level:'文旅', convertHint:'景区门票经平台购票享 B 端分佣', desc:'住宿、交通、夜景与出片点位清单，周末短途可直接抄作业。', chapters:[{t:'第1集 怎么选镇子',free:true},{t:'第2集 交通与住宿'},{t:'第3集 路线与机位'}] },
+      { id:'tv3', category:'travel', categoryLabel:'文旅', title:'景区门票怎么买更省：套票与二次消费', lessons:5, duration:'11 分钟', points:50, teacher:'潮知旅图', level:'文旅', convertHint:'平台购票通道，成交计分佣', desc:'大门票、项目套票、儿童老人票拆解，避免重复付费。', chapters:[{t:'第1集 票种地图',free:true},{t:'第2集 套票是否划算'},{t:'第3集 退改与实名'}] }
     ];
 
     const MENUS = [
@@ -2255,7 +2257,7 @@
     ];
 
     const TITLES = {
-      home: '潮匠 TrendCraft', benefits: '权益', mall: '积分商城', courses: '0元课',
+      home: '潮匠 TrendCraft', benefits: '权益', mall: '积分商城', courses: '潮知馆',
       mine: '我的', 'goods-detail': '商品详情', 'course-detail': '课程详情',
       'watch-ad': '看广告赚积分', points: '我的积分',
       life: '本地生活', bounty: '悬赏任务', member: '会员中心',
@@ -2881,17 +2883,18 @@
       renderMall();
     });
 
-    /* ---- 课程 ---- */
+    /* ---- 潮知馆 ---- */
     function renderCourses() {
       document.getElementById('courseList').innerHTML = COURSES.map(c => `
         <div class="course" onclick="openCourse('${c.id}')">
-          <div class="cover"><span class="ai">AI</span><span class="lv">${c.level}</span></div>
+          <div class="cover"><span class="ai">${c.category === 'ai' ? 'AI' : '旅'}</span><span class="lv">${c.level}</span></div>
           <div class="info">
             <div class="title">${c.title}</div>
-            <div class="meta">${c.lessons} 课时 · ${c.duration} · ${c.teacher}</div>
+            <div class="meta">${c.categoryLabel} · ${c.lessons} 集 · ${c.duration}</div>
+            ${c.convertHint ? `<div style="margin-top:6px;font-size:11px;background:#faf6eb;color:#c1841a;padding:3px 8px;border-radius:6px;align-self:flex-start">${c.convertHint}</div>` : ''}
             <div class="bottom">
-              <div class="cost">${c.points} <span>积分解锁</span></div>
-              <div class="go">去学习</div>
+              <div class="cost">${c.points} <span>积分观看</span></div>
+              <div class="go">去观看</div>
             </div>
           </div>
         </div>`).join('');
@@ -3526,24 +3529,25 @@
       const c = COURSES.find(x => x.id === id); if (!c) return;
       state.courseId = id;
       const unlocked = state.unlocked.has(id);
-      document.getElementById('cdPlayTip').textContent = unlocked ? '已解锁 · 点击章节播放' : '首课免费试看';
+      document.getElementById('cdPlayTip').textContent = unlocked ? '已解锁 · 点击剧集播放' : '试看免费 · 未解锁';
       document.getElementById('cdInfo').innerHTML = `
         <div style="font-size:17px;font-weight:700">${c.title}</div>
-        <div class="muted" style="margin-top:6px">${c.lessons} 课时 · ${c.duration} · ${c.teacher} · ${c.level}</div>
-        <div style="margin-top:10px;font-size:13.5px;color:var(--ink-2);line-height:1.6">${c.desc}</div>`;
+        <div class="muted" style="margin-top:6px">${c.categoryLabel || ''} · ${c.lessons} 集 · ${c.duration} · ${c.teacher}</div>
+        <div style="margin-top:10px;font-size:13.5px;color:var(--ink-2);line-height:1.6">${c.desc}</div>
+        ${c.convertHint ? `<div style="margin-top:10px;font-size:12px;background:#faf6eb;color:#c1841a;padding:8px 10px;border-radius:8px">${c.convertHint}</div>` : ''}`;
       const box = document.getElementById('cdUnlock');
       box.style.display = '';
       if (!unlocked) {
         box.style.background = '';
         box.innerHTML = `
-          <div><div class="pt">${c.points} 积分解锁</div><div class="tip">当前积分 ${state.points}</div></div>
+          <div><div class="pt">${c.points} 积分观看</div><div class="tip">当前积分 ${state.points}</div></div>
           <div style="display:flex;gap:8px">
             <button class="btn btn-ghost" style="font-size:12px;padding:8px 12px" onclick="go('watch-ad')">赚积分</button>
-            <button class="btn btn-primary" style="font-size:12px;padding:8px 14px" onclick="unlockCourse()">立即解锁</button>
+            <button class="btn btn-primary" style="font-size:12px;padding:8px 14px" onclick="unlockCourse()">立即观看</button>
           </div>`;
       } else {
         box.style.background = '#fff';
-        box.innerHTML = `<div class="ok-line">${ico('i-check')} 已解锁，可回看全部章节</div>`;
+        box.innerHTML = `<div class="ok-line">${ico('i-check')} 已解锁，可回看全部剧集</div>`;
       }
       renderChapters(c, unlocked);
       go('course-detail');
@@ -3551,7 +3555,7 @@
 
     function renderChapters(c, unlocked) {
       document.getElementById('cdChapters').innerHTML =
-        `<div style="font-size:14px;font-weight:600;margin-bottom:6px">章节目录</div>` +
+        `<div style="font-size:14px;font-weight:600;margin-bottom:6px">剧集目录</div>` +
         c.chapters.map(ch => {
           let right = ch.free ? `<span class="free">免费</span>`
             : unlocked ? `<span class="play">播放</span>`
@@ -3561,12 +3565,12 @@
             <span class="nm">${lock}${ch.t}</span>${right}</div>`;
         }).join('');
     }
-    function playCh(title, ok) { toast(ok ? `播放：${title}` : '请先用积分解锁全课'); }
+    function playCh(title, ok) { toast(ok ? `播放：${title}` : '请先用积分观看全集'); }
 
     function unlockCourse() {
       const c = COURSES.find(x => x.id === state.courseId); if (!c) return;
       if (state.points < c.points) { toast('积分不足，先去看广告'); return; }
-      if (confirm(`消耗 ${c.points} 积分解锁「${c.title}」？`)) {
+      if (confirm(`消耗 ${c.points} 积分观看「${c.title}」？`)) {
         addPoints(-c.points, '解锁课程', c.title);
         state.unlocked.add(c.id);
         openCourse(c.id); toast('解锁成功');
