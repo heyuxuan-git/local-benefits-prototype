@@ -3473,7 +3473,8 @@
     const MENUS = [
       { id:'points', name:'积分明细', icon:'i-doc' },
       { id:'material', name:'地推素材', icon:'i-box' },
-      { id:'train', name:'推手培训', icon:'i-cap' }
+      { id:'train', name:'推手培训', icon:'i-cap' },
+      { id:'shop', name:'商家后台', icon:'i-hotel' }
     ];
 
     /** 拉新积分记录（非佣金） */
@@ -5547,6 +5548,7 @@
     }
     function agentMenu(id) {
       if (id === 'points') return go('points');
+      if (id === 'shop') return toast('商家后台（功能规划中）');
       toast('「' + (MENUS.find(m => m.id === id) || {}).name + '」下期上线');
     }
 
