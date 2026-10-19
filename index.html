@@ -2757,9 +2757,9 @@
 
           <!-- banner 下：定位切换 + 我要入驻 -->
           <div class="fm-locbar">
-            <div class="lb-loc" onclick="fmCycleCity()" title="点击切换城市">
+            <div class="lb-loc" onclick="fmOpenAddr()" title="点击选择收货地址">
               <svg class="ico"><use href="#i-hotel"/></svg>
-              <span class="addr" id="fmCity">深圳 · 南山区</span>
+              <span class="addr" id="fmCity">读取收货地址…</span>
               <span class="switch">切换</span>
             </div>
             <button class="lb-mch" onclick="go('merchant')">我要入驻</button>
@@ -3796,6 +3796,7 @@
 
     /* ---- 落地页渲染 ---- */
     function renderFreeMeal() {
+      fmRenderLoc();
       if (!state.fmSlot) {
         const info = fmEntryInfo();
         state.fmSlot = info.phase === 'closed' ? MEAL_SLOTS[0].id : info.slot.id;
@@ -3918,13 +3919,31 @@
     }
     function sessSafeLabel(slot, idx) { return fmSessions(slot)[idx].label; }
 
-    /* ---- 定位/地址切换（原型） ---- */
-    const FM_CITIES = ['深圳 · 南山区', '深圳 · 福田区', '广州 · 天河区', '杭州 · 西湖区'];
-    let fmCityIdx = 0;
-    function fmCycleCity() {
-      fmCityIdx = (fmCityIdx + 1) % FM_CITIES.length;
-      document.getElementById('fmCity').textContent = FM_CITIES[fmCityIdx];
-      toast('已切换到 ' + FM_CITIES[fmCityIdx]);
+    /* ---- 定位：显示当前收货地址（默认/最近选用），点按从地址列表切换 ---- */
+    function fmAddrShort(a) {
+      if (!a) return '';
+      const region = Array.isArray(a.region) ? a.region.join('') : (a.region || '');
+      const detail = a.detail || '';
+      return region + ' ' + detail;
+    }
+    function fmRenderLoc() {
+      const el = document.getElementById('fmCity');
+      if (!el) return;
+      const a = currentAddr();
+      if (!a) {
+        el.textContent = '未设置收货地址，点此添加';
+        return;
+      }
+      const mark = a.def ? '默认' : '已选';
+      el.textContent = '【' + mark + '】' + fmAddrShort(a);
+    }
+    function fmOpenAddr() {
+      if (!state.addresses.length) {
+        toast('还没有收货地址');
+        go('address');
+        return;
+      }
+      addrPickSheet(() => fmRenderLoc());
     }
 
     /* ---- 商家入驻（静态演示，不真实提交） ---- */
@@ -6517,7 +6536,7 @@
       else if (id === 'life-bill') renderBill();
       else if (id === 'life-fuel') renderFuel();
       else if (id === 'life-charge') { const cm = document.getElementById('chgMenu'); if (cm) cm.classList.add('hide'); renderCharge(); }
-      else if (id === 'free-meal') { state.fmSlot = null; renderFreeMeal(); }
+      else if (id === 'free-meal') { state.fmSlot = null; renderFreeMeal(); fmRenderLoc(); }
       else if (id === 'merchant') { merchantReset(); }
       else if (id === 'store-pick') renderStorePick();
       else if (id === 'store-menu') renderStoreMenu();
