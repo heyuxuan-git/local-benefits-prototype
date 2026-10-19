@@ -473,6 +473,34 @@
       border-radius: 999px; white-space: nowrap;
     }
 
+    /* banner 下：定位/地址切换 + 我要入驻 */
+    .fm-locbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      margin: 0 16px 10px; padding: 10px 12px;
+      background: #fff; border-radius: 12px;
+      border: 1px solid #f0f1f3;
+    }
+    .fm-locbar .lb-loc {
+      display: flex; align-items: center; gap: 6px;
+      min-width: 0; flex: 1; cursor: pointer;
+      font-size: 13px; font-weight: 700; color: var(--ink);
+    }
+    .fm-locbar .lb-loc .ico { width: 16px; height: 16px; color: var(--brand); flex-shrink: 0; }
+    .fm-locbar .lb-loc .addr {
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .fm-locbar .lb-loc .switch {
+      flex-shrink: 0; font-size: 11px; font-weight: 600; color: var(--brand);
+      background: #faf3e2; padding: 3px 8px; border-radius: 999px;
+    }
+    .fm-locbar .lb-mch {
+      flex-shrink: 0; border: none; cursor: pointer;
+      background: linear-gradient(180deg, #f0d48c, #e0ae4e); color: #1a1a1a;
+      font-size: 12px; font-weight: 800; padding: 8px 12px;
+      border-radius: 999px; box-shadow: 0 2px 0 #1a1a1a;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+
     .mch-hero {
       margin: 12px 16px 10px; padding: 16px;
       border-radius: 16px; color: #fff; position: relative; overflow: hidden;
@@ -2726,6 +2754,17 @@
         <!-- ========== 饭点免单（王炸功能） ========== -->
         <div class="view" id="view-free-meal" data-tab="home">
           <div class="fm-hero" id="fmHero"></div>
+
+          <!-- banner 下：定位切换 + 我要入驻 -->
+          <div class="fm-locbar">
+            <div class="lb-loc" onclick="fmCycleCity()" title="点击切换城市">
+              <svg class="ico"><use href="#i-hotel"/></svg>
+              <span class="addr" id="fmCity">深圳 · 南山区</span>
+              <span class="switch">切换</span>
+            </div>
+            <button class="lb-mch" onclick="go('merchant')">我要入驻</button>
+          </div>
+
           <div class="fm-slots" id="fmSlots"></div>
           <div class="fm-sessions" id="fmSessions"></div>
           <div class="fm-note" id="fmNote"></div>
@@ -2740,15 +2779,6 @@
               <li>抢到即得免单券，请在时段下单窗内下单：午餐至 13:00 · 下午茶至 16:30 · 晚餐至 20:00，逾期作废</li>
               <li>每个时段每人限抢 1 餐，免单券不可转赠、不可折现</li>
             </ul>
-          </div>
-
-          <!-- 外卖秒杀 · 商家入驻入口（B 端供给侧） -->
-          <div class="mch-entry" onclick="go('merchant')">
-            <div class="me-l">
-              <div class="me-t">商家入驻 · 外卖秒杀</div>
-              <div class="me-s">餐饮门店自主提报场次，曝光获客</div>
-            </div>
-            <div class="me-b">我要入驻 ›</div>
           </div>
 
           <div class="fm-demo">原型演示 · <span onclick="fmToggleDemo()">跳到饭点开抢时刻</span></div>
@@ -3887,6 +3917,15 @@
       renderFreeMeal();
     }
     function sessSafeLabel(slot, idx) { return fmSessions(slot)[idx].label; }
+
+    /* ---- 定位/地址切换（原型） ---- */
+    const FM_CITIES = ['深圳 · 南山区', '深圳 · 福田区', '广州 · 天河区', '杭州 · 西湖区'];
+    let fmCityIdx = 0;
+    function fmCycleCity() {
+      fmCityIdx = (fmCityIdx + 1) % FM_CITIES.length;
+      document.getElementById('fmCity').textContent = FM_CITIES[fmCityIdx];
+      toast('已切换到 ' + FM_CITIES[fmCityIdx]);
+    }
 
     /* ---- 商家入驻（静态演示，不真实提交） ---- */
     function merchantSubmit() {
