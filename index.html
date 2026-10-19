@@ -493,6 +493,10 @@
       flex-shrink: 0; font-size: 11px; font-weight: 600; color: var(--brand);
       background: #faf3e2; padding: 3px 8px; border-radius: 999px;
     }
+    .fm-locbar .lb-caret {
+      flex-shrink: 0; width: 16px; height: 16px;
+      color: var(--ink-3); margin-left: 2px;
+    }
     .fm-locbar .lb-mch {
       flex-shrink: 0; border: none; cursor: pointer;
       background: linear-gradient(180deg, #f0d48c, #e0ae4e); color: #1a1a1a;
@@ -2418,6 +2422,9 @@
     <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M7 3h7l4 4v14H7V3z"/><path d="M14 3v4h4"/><path d="M10 12h6M10 16h6"/>
     </symbol>
+    <symbol id="i-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 9.5 12 15.5 18 9.5"/>
+    </symbol>
     <symbol id="i-headset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M5 13v-1a7 7 0 0 1 14 0v1"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 17v1a2 2 0 0 1-2 2h-2"/>
     </symbol>
@@ -2760,7 +2767,7 @@
             <div class="lb-loc" onclick="fmOpenAddr()" title="点击选择收货地址">
               <svg class="ico"><use href="#i-hotel"/></svg>
               <span class="addr" id="fmCity">读取收货地址…</span>
-              <span class="switch">切换</span>
+              <svg class="ico lb-caret" aria-hidden="true"><use href="#i-caret"/></svg>
             </div>
             <button class="lb-mch" onclick="go('merchant')">我要入驻</button>
           </div>
@@ -3934,8 +3941,7 @@
         el.textContent = '未设置收货地址，点此添加';
         return;
       }
-      const mark = a.def ? '默认' : '已选';
-      el.textContent = '【' + mark + '】' + fmAddrShort(a);
+      el.textContent = fmAddrShort(a);
     }
     function fmOpenAddr() {
       if (!state.addresses.length) {
