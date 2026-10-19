@@ -2964,7 +2964,6 @@
           <div class="stat-bar" style="margin-top:0">
             <div class="cell"><div class="v">3,260</div><div class="l">累计拉新积分</div></div>
             <div class="cell"><div class="v">860</div><div class="l">本月拉新积分</div></div>
-            <div class="cell"><div class="v">3</div><div class="l">社群数</div></div>
             <div class="cell"><div class="v">18</div><div class="l">团队人数</div></div>
           </div>
 
@@ -3472,13 +3471,8 @@
     ];
 
     const MENUS = [
-      { id:'team', name:'我的团队', icon:'i-users' },
-      { id:'group', name:'社群管理', icon:'i-link' },
-      { id:'leader', name:'团队长榜', icon:'i-star' },
-      { id:'poster', name:'海报中心', icon:'i-image' },
       { id:'points', name:'积分明细', icon:'i-doc' },
       { id:'material', name:'地推素材', icon:'i-box' },
-      { id:'rule', name:'积分规则', icon:'i-coin' },
       { id:'train', name:'推手培训', icon:'i-cap' }
     ];
 
@@ -5552,11 +5546,8 @@
       document.getElementById('agentTier').style.display = seg === 'tier' ? '' : 'none';
     }
     function agentMenu(id) {
-      if (id === 'rule') { state.agentSeg = 'tier'; go('pull'); return; }
       if (id === 'points') return go('points');
-      if (id === 'group') return toast('社群管理：建群、发素材、盯活跃（下期）');
-      if (id === 'leader') return toast('团队长榜：按拉新积分排名（下期）');
-      toast('「' + MENUS.find(m => m.id === id).name + '」下期上线');
+      toast('「' + (MENUS.find(m => m.id === id) || {}).name + '」下期上线');
     }
 
     function openGoods(id) {
