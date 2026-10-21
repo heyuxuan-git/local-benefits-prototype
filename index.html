@@ -3727,7 +3727,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261021.2';
+    const APP_VERSION = 'v20261021.3';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -3819,6 +3819,7 @@
 
     /* ===== 日常任务（赚积分 · 与潮知馆联动） ===== */
     const SIGN_REWARD = 5;
+    let adPlaying = false;
     function getDailyTaskState() {
       const key = new Date().toDateString();
       if (!state.dt || state.dt.date !== key) {
@@ -3831,12 +3832,13 @@
       const adDone = state.adToday;
       const adFull = adDone >= state.adLimit;
       return [
-        { id: 'sign', action: 'sign', icon: 'i-check', title: '签到领积分', sub: '每日签到 +' + SIGN_REWARD + ' 积分，连续签到奖励更多',
+        { id: 'sign', action: 'sign', icon: 'i-check', title: '签到领积分', sub: '观看 1 条激励广告后签到 +' + SIGN_REWARD + ' 积分',
           done: dt.sign, target: 1, rew: '+' + SIGN_REWARD + ' 积分',
-          cta: dt.sign ? '已签到' : '去签到', state: dt.sign ? 'done' : 'todo' },
+          cta: dt.sign ? '已签到' : (adPlaying ? '广告播放中…' : '看广告签到'),
+          state: dt.sign ? 'done' : 'todo' },
         { id: 'ad', action: 'ad', icon: 'i-ad', title: '看激励广告', sub: '每条 +10 积分，今日上限 10 条',
           done: adDone, target: state.adLimit, rew: '+10/条',
-          cta: adFull ? '明日再来' : '去观看', state: adFull ? 'done' : 'todo' },
+          cta: adFull ? '明日再来' : (adPlaying ? '广告播放中…' : '去观看'), state: adFull ? 'done' : 'todo' },
         { id: 'tz_watch', action: 'course', icon: 'i-cap', title: '观看 1 集潮知馆视频', sub: 'AI / 文旅任选，打开即记完成',
           done: dt.tz_watch, target: 1, rew: '+15 积分',
           cta: dt.tz_watch ? '已完成' : '去完成', state: dt.tz_watch ? 'done' : 'todo' },
@@ -3862,7 +3864,7 @@
           <div class="task-right">
             <span class="task-rew">${t.rew}</span>
             <button class="task-btn ${t.state === 'done' ? 'done' : ''}"
-              onclick="dtTaskTap('${t.id}')" ${t.state === 'done' ? 'disabled' : ''}>${t.cta}</button>
+              onclick="dtTaskTap('${t.id}')" ${(t.state === 'done' || ((t.id === 'sign' || t.id === 'ad') && adPlaying)) ? 'disabled' : ''}>${t.cta}</button>
           </div>
         </div>`).join('');
     }
@@ -3871,15 +3873,26 @@
       if (!t) return;
       if (id === 'sign') {
         if (t.state === 'done') { toast('今日已签到'); return; }
-        const dt = getDailyTaskState();
-        dt.sign = 1;
-        addPoints(SIGN_REWARD, 'daily_sign', '每日签到');
+        if (adPlaying) { toast('广告播放中，请稍候'); return; }
+        adPlaying = true;
         renderDailyTasks();
-        toast('签到成功 +' + SIGN_REWARD + ' 积分');
+        toast('模拟播放激励视频…', 900);
+        setTimeout(() => {
+          adPlaying = false;
+          const d = getDailyTaskState();
+          d.sign = 1;
+          addPoints(SIGN_REWARD, 'daily_sign', '每日签到');
+          renderDailyTasks();
+          toast('签到成功 +' + SIGN_REWARD + ' 积分');
+        }, 900);
         return;
       }
       if (t.state === 'done') { toast('今日已完成'); return; }
-      if (t.action === 'ad') { watchAd(); return; }
+      if (t.action === 'ad') {
+        if (adPlaying) { toast('广告播放中，请稍候'); return; }
+        watchAd();
+        return;
+      }
       if (t.action === 'course') { switchTab('courses'); return; }
       if (t.action === 'ai') { state.dtFocus = 'ai'; switchTab('courses'); }
     }
@@ -6550,11 +6563,15 @@
 
     function watchAd() {
       if (state.adToday >= state.adLimit) { toast('今日广告看满啦，明天再来'); return; }
+      if (adPlaying) { toast('广告播放中，请稍候'); return; }
+      adPlaying = true;
+      renderDailyTasks();
       toast('模拟播放激励视频…', 900);
       setTimeout(() => {
+        adPlaying = false;
         state.adToday += 1;
         addPoints(10, 'watch_ad', '观看激励广告');
-        bindPoints(); toast('+10 积分');
+        bindPoints(); renderDailyTasks(); toast('+10 积分');
       }, 900);
     }
 
