@@ -688,6 +688,12 @@
     .task-card .task-ico.tk-sign { background: #e8faf3; color: #00b578; }
     .task-body { flex: 1; min-width: 0; }
     .task-head { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+    .task-sum {
+      display: flex; align-items: center; justify-content: space-between;
+      margin: 0 16px 8px; font-size: 12px; font-weight: 600; color: var(--ink-3);
+    }
+    .task-sum .ts-r { color: var(--brand); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .task-sum.all .ts-l { color: #00b578; }
     .task-title { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.35; margin-top: 1px; }
     .task-count { flex: none; font-size: 11px; font-weight: 700; color: var(--brand); }
     .task-sub { font-size: 11px; color: var(--ink-3); margin-top: 4px; line-height: 1.4; }
@@ -3727,7 +3733,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261021.3';
+    const APP_VERSION = 'v20261021.4';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -3851,7 +3857,14 @@
       const box = document.getElementById('dailyTasks');
       if (!box) return;
       const tasks = dtTasks();
-      box.innerHTML = tasks.map(t => `
+      const doneCount = tasks.filter(t => t.done >= t.target).length;
+      const allDone = doneCount === tasks.length;
+      box.innerHTML = `
+        <div class="task-sum ${allDone ? 'all' : ''}">
+          <span class="ts-l">${allDone ? '今日任务已全部完成' : '今日任务'}</span>
+          <span class="ts-r">已完成 ${doneCount}/${tasks.length}${allDone ? ' · 明日再来' : ''}</span>
+        </div>` +
+        tasks.map(t => `
         <div class="card task-card">
           <div class="task-ico tk-${t.action}">${ico(t.icon)}</div>
           <div class="task-body">
@@ -3893,8 +3906,15 @@
         watchAd();
         return;
       }
-      if (t.action === 'course') { switchTab('courses'); return; }
-      if (t.action === 'ai') { state.dtFocus = 'ai'; switchTab('courses'); }
+      if (t.action === 'course') {
+        openCate('travel');
+        toast('打开任意 1 集即可完成任务', 1800);
+        return;
+      }
+      if (t.action === 'ai') {
+        openCate('ai');
+        toast('打开任意 1 节 AI 课程即可完成任务', 1800);
+      }
     }
     /** 打开潮知馆详情时联动打点 */
     function markCourseVisit(category) {
