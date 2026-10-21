@@ -675,15 +675,16 @@
 
     /* ===== 日常任务列表：统一顶对齐，图标与标题同线 ===== */
     .task-card { display: flex; gap: 10px; align-items: flex-start; margin: 0 16px 10px; padding: 14px 12px; }
-    .task-ico {
+    /* 注意：图标修饰类不能复用 .course / .ai 等业务组件类名，否则会被全局样式串改尺寸与间距 */
+    .task-card .task-ico {
       width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       background: #fff4e8; color: var(--brand);
-      margin-top: 0;
+      margin: 0; padding: 0; box-sizing: border-box;
     }
-    .task-ico .ico { width: 20px; height: 20px; }
-    .task-ico.course { background: #eef5ff; color: #2f7cf6; }
-    .task-ico.ai { background: #f3e8ff; color: #9333ea; }
+    .task-card .task-ico .ico { width: 20px; height: 20px; }
+    .task-card .task-ico.tk-course { background: #eef5ff; color: #2f7cf6; }
+    .task-card .task-ico.tk-ai { background: #f3e8ff; color: #9333ea; }
     .task-body { flex: 1; min-width: 0; }
     .task-title { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.35; margin-top: 1px; }
     .task-sub { font-size: 11px; color: var(--ink-3); margin-top: 4px; line-height: 1.4; }
@@ -3727,7 +3728,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261019.13';
+    const APP_VERSION = 'v20261021.1';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -3847,7 +3848,7 @@
       const tasks = dtTasks();
       box.innerHTML = tasks.map(t => `
         <div class="card task-card">
-          <div class="task-ico ${t.action}">${ico(t.icon)}</div>
+          <div class="task-ico tk-${t.action}">${ico(t.icon)}</div>
           <div class="task-body">
             <div class="task-title">${t.title}</div>
             <div class="task-sub">${t.sub}</div>
