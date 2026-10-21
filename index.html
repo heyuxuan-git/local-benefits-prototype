@@ -685,13 +685,12 @@
     .task-card .task-ico .ico { width: 20px; height: 20px; }
     .task-card .task-ico.tk-course { background: #eef5ff; color: #2f7cf6; }
     .task-card .task-ico.tk-ai { background: #f3e8ff; color: #9333ea; }
+    .task-card .task-ico.tk-sign { background: #e8faf3; color: #00b578; }
     .task-body { flex: 1; min-width: 0; }
+    .task-head { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
     .task-title { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.35; margin-top: 1px; }
+    .task-count { flex: none; font-size: 11px; font-weight: 700; color: var(--brand); }
     .task-sub { font-size: 11px; color: var(--ink-3); margin-top: 4px; line-height: 1.4; }
-    .task-prog { display: flex; align-items: center; gap: 8px; margin-top: 10px; width: 100%; box-sizing: border-box; }
-    .tp-num { font-size: 11px; color: var(--brand); font-weight: 700; flex-shrink: 0; min-width: 34px; }
-    .tp-bar { flex: 1; min-width: 0; height: 6px; background: #f0f1f3; border-radius: 99px; overflow: hidden; }
-    .tp-bar i { display: block; height: 100%; background: linear-gradient(90deg, #f0d48c, #c1841a); border-radius: 99px; transition: width .3s; }
     .task-right {
       flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end;
       gap: 8px; padding-top: 2px;
@@ -3728,7 +3727,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261021.1';
+    const APP_VERSION = 'v20261021.2';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -3819,10 +3818,11 @@
     }
 
     /* ===== 日常任务（赚积分 · 与潮知馆联动） ===== */
+    const SIGN_REWARD = 5;
     function getDailyTaskState() {
       const key = new Date().toDateString();
       if (!state.dt || state.dt.date !== key) {
-        state.dt = { date: key, tz_watch: 0, tz_ai: 0 };
+        state.dt = { date: key, sign: 0, tz_watch: 0, tz_ai: 0 };
       }
       return state.dt;
     }
@@ -3831,6 +3831,9 @@
       const adDone = state.adToday;
       const adFull = adDone >= state.adLimit;
       return [
+        { id: 'sign', action: 'sign', icon: 'i-check', title: '签到领积分', sub: '每日签到 +' + SIGN_REWARD + ' 积分，连续签到奖励更多',
+          done: dt.sign, target: 1, rew: '+' + SIGN_REWARD + ' 积分',
+          cta: dt.sign ? '已签到' : '去签到', state: dt.sign ? 'done' : 'todo' },
         { id: 'ad', action: 'ad', icon: 'i-ad', title: '看激励广告', sub: '每条 +10 积分，今日上限 10 条',
           done: adDone, target: state.adLimit, rew: '+10/条',
           cta: adFull ? '明日再来' : '去观看', state: adFull ? 'done' : 'todo' },
@@ -3850,12 +3853,11 @@
         <div class="card task-card">
           <div class="task-ico tk-${t.action}">${ico(t.icon)}</div>
           <div class="task-body">
-            <div class="task-title">${t.title}</div>
-            <div class="task-sub">${t.sub}</div>
-            <div class="task-prog">
-              <span class="tp-num">${t.done}/${t.target}</span>
-              <span class="tp-bar"><i style="width:${Math.min(100, t.done / t.target * 100)}%"></i></span>
+            <div class="task-head">
+              <span class="task-title">${t.title}</span>
+              <span class="task-count">${t.done}/${t.target}</span>
             </div>
+            <div class="task-sub">${t.sub}</div>
           </div>
           <div class="task-right">
             <span class="task-rew">${t.rew}</span>
@@ -3867,6 +3869,15 @@
     function dtTaskTap(id) {
       const t = dtTasks().find(x => x.id === id);
       if (!t) return;
+      if (id === 'sign') {
+        if (t.state === 'done') { toast('今日已签到'); return; }
+        const dt = getDailyTaskState();
+        dt.sign = 1;
+        addPoints(SIGN_REWARD, 'daily_sign', '每日签到');
+        renderDailyTasks();
+        toast('签到成功 +' + SIGN_REWARD + ' 积分');
+        return;
+      }
       if (t.state === 'done') { toast('今日已完成'); return; }
       if (t.action === 'ad') { watchAd(); return; }
       if (t.action === 'course') { switchTab('courses'); return; }
