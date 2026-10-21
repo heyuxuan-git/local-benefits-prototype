@@ -603,7 +603,7 @@
     .mch-faq .qa b { color: var(--ink); display: block; margin-bottom: 2px; }
 
     .mode-seg {
-      display: flex; background: #fff; margin: 12px 16px 0;
+      display: flex; background: #fff; margin: 0 16px 12px;
       border-radius: 14px; overflow: hidden; border: 1px solid #f0f1f3;
     }
     .mode-item {
@@ -613,14 +613,6 @@
     .mode-item.on {
       background: linear-gradient(135deg, #c1841a, #ff3b30);
       color: #fff; font-weight: 700;
-    }
-    .grab-hero { background: linear-gradient(135deg, #c1841a, #ff3b30) !important; }
-    .grab-live {
-      display: inline-block;
-      background: rgba(0,0,0,.22);
-      border: 1px solid rgba(255,255,255,.5);
-      font-size: 11px; font-weight: 700;
-      padding: 3px 10px; border-radius: 999px; margin-bottom: 8px;
     }
     .grab-panel {
       border: 2px solid #1a1a1a !important;
@@ -662,16 +654,7 @@
       padding: 6px 12px; border-radius: 999px; border: none;
     }
 
-    /* ===== 日常任务：紧凑积分条 ===== */
-    .pts-bar {
-      display: flex; align-items: center; gap: 8px;
-      margin: 12px 16px 10px; padding: 14px;
-      background: #fff; border-radius: 12px;
-      border: 1px solid #f0f1f3; cursor: pointer;
-    }
-    .pts-bar .pb-lab { font-size: 12px; color: var(--ink-3); }
-    .pts-bar .pb-num { font-size: 22px; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
-    .pts-bar .pb-more { margin-left: auto; font-size: 12px; color: var(--brand); font-weight: 600; }
+    /* ===== 日常任务：积分总览 ===== */
 
     /* ===== 日常任务列表：统一顶对齐，图标与标题同线 ===== */
     .task-card { display: flex; gap: 10px; align-items: flex-start; margin: 0 16px 10px; padding: 14px 12px; }
@@ -2370,13 +2353,6 @@
     }
 
     /* ===== 看广告 ===== */
-    .ad-hero {
-      margin: 12px 16px; padding: 22px; border-radius: 16px;
-      background: linear-gradient(135deg, #2f7cf6, #6c5ce7); color: #fff;
-    }
-    .ad-hero h2 { font-size: 18px; }
-    .ad-hero p { font-size: 12px; opacity: .9; margin-top: 4px; }
-    .ad-hero .bal { font-size: 36px; font-weight: 800; margin-top: 12px; }
     .prog { margin: 0 16px 12px; background: #fff; border-radius: 14px; padding: 16px; }
     .prog .bar { height: 10px; background: #f0f1f3; border-radius: 999px; overflow: hidden; }
     .prog .fill {
@@ -2407,6 +2383,16 @@
     .pts-hero .lab { font-size: 12px; opacity: .9; }
     .pts-hero .n { font-size: 44px; font-weight: 800; line-height: 1.15; }
     .pts-hero .acts { display: flex; gap: 10px; margin-top: 12px; }
+    /* 赚积分页顶部积分总览：左右布局，突出大数字 */
+    .pts-hero.pts-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin: 12px 16px 12px; padding: 18px 20px; cursor: pointer;
+    }
+    .pts-top .n { font-size: 34px; }
+    .pts-top .ph-more {
+      font-size: 12px; font-weight: 700; color: #fff;
+      background: rgba(255,255,255,.18); padding: 7px 12px; border-radius: 999px;
+    }
     .log-row {
       display: flex; justify-content: space-between; padding: 12px 0;
       border-bottom: 1px solid #f0f1f3;
@@ -3356,6 +3342,14 @@
 
         <!-- ========== 看广告 ========== -->
         <div class="view" id="view-watch-ad" data-tab="home">
+          <div class="pts-hero pts-top" onclick="go('points')" title="查看积分明细">
+            <div>
+              <div class="lab">当前可用积分</div>
+              <div class="n" data-bind="points">20</div>
+            </div>
+            <div class="ph-more">明细 ›</div>
+          </div>
+
           <div class="mode-seg">
             <div class="mode-item on" id="modeGrab" data-mode="grab" onclick="setAdMode('grab')">限时抢积分</div>
             <div class="mode-item" id="modeNormal" data-mode="normal" onclick="setAdMode('normal')">日常任务</div>
@@ -3363,12 +3357,6 @@
 
           <!-- 限时抢专区 -->
           <div id="adModeGrab">
-            <div class="ad-hero grab-hero">
-              <div class="grab-live" id="grabLiveLabel">抢积分进行中</div>
-              <h2>看 1 条广告，抢 <span id="grabReward">20</span> 积分</h2>
-              <p>每 15 分钟可抢 1 次 · 加码奖励</p>
-              <div class="bal">当前积分 <span data-bind="points">20</span></div>
-            </div>
             <div class="card grab-panel">
               <div class="gp-row"><span class="gp-k">节奏</span><span class="gp-v">每 15 分钟 1 次，全天可抢</span></div>
               <div class="gp-row"><span class="gp-k">规则</span><span class="gp-v">完整看完 1 条视频</span></div>
@@ -3385,12 +3373,6 @@
 
           <!-- 日常任务 -->
           <div id="adModeNormal" class="hide">
-          <div class="pts-bar" onclick="go('points')" title="查看积分明细">
-            <span class="pb-lab">积分</span>
-            <span class="pb-num" data-bind="points">20</span>
-            <span class="pb-more">明细 ›</span>
-          </div>
-
           <div id="dailyTasks"></div>
 
           <div class="card more-task" onclick="go('bounty')">
@@ -3733,7 +3715,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261021.4';
+    const APP_VERSION = 'v20261021.5';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -3790,11 +3772,9 @@
         cta.textContent = g.cta;
         cta.classList.toggle('on', g.canClaim);
       }
-      const label = document.getElementById('grabLiveLabel');
-      if (label) {
-        label.textContent = g.phase === 'open' ? '抢积分进行中' : ('冷却中 ' + g.remainText);
-        document.getElementById('grabStatusTip').textContent = g.tip;
-        document.getElementById('grabReward').textContent = g.reward;
+      const tipEl = document.getElementById('grabStatusTip');
+      if (tipEl) {
+        tipEl.textContent = g.tip;
         const gb = document.getElementById('grabBtn');
         gb.textContent = g.canClaim ? ('立即抢 +' + g.reward) : g.cta;
         gb.disabled = !g.canClaim;
