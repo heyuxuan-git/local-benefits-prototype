@@ -2037,6 +2037,126 @@
       font-size: 13px;
     }
     .course-hero .bar .go { color: var(--gold); font-weight: 600; cursor: pointer; }
+
+    /* ===== 潮知馆：板块大卡 + 资讯流 ===== */
+    .tc-top {
+      padding: 14px 16px 10px;
+      background: #fff;
+    }
+    .tc-h1 { font-size: 22px; font-weight: 800; color: var(--ink); letter-spacing: 1px; }
+    .tc-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 10px; padding: 10px 12px;
+      background: #faf6eb; border-radius: 10px;
+      font-size: 13px; color: var(--ink-2);
+    }
+    .tc-bar b { color: var(--brand); font-size: 18px; font-variant-numeric: tabular-nums; }
+    .tc-bar .go { color: var(--brand); font-weight: 700; cursor: pointer; }
+
+    .tc-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 12px 16px 4px;
+      background: #fff;
+    }
+    .tc-card {
+      border-radius: 14px;
+      min-height: 96px;
+      padding: 14px 12px;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+      -webkit-user-select: none; user-select: none;
+    }
+    .tc-card:active { transform: scale(0.98); }
+    .tc-card .tc-ico {
+      position: absolute; top: 10px; right: 10px;
+      width: 28px; height: 28px; opacity: 0.9;
+    }
+    .tc-card .tc-ico .ico { width: 28px; height: 28px; }
+    .tc-card .tc-name { font-size: 22px; font-weight: 800; letter-spacing: 2px; }
+    .tc-card .tc-sub { font-size: 11px; opacity: 0.9; margin-top: 4px; }
+    .tc-ai { background: linear-gradient(145deg, #2f7cf6, #1a4fd6); }
+    .tc-pet { background: linear-gradient(145deg, #ff8a4c, #e85d2c); }
+    .tc-travel { background: linear-gradient(145deg, #c9a227, #a8841a); }
+    .tc-more {
+      background: linear-gradient(145deg, #3d4450, #1f2329);
+      border: 2px dashed rgba(240,212,140,.55);
+    }
+    .tc-more .tc-name { color: #f0d48c; }
+
+    .tc-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 18px 16px 6px;
+      color: var(--ink); font-weight: 800; font-size: 15px;
+    }
+    .tc-divider::before, .tc-divider::after {
+      content: ''; flex: 1; height: 2px; background: var(--ink); opacity: 0.12;
+      border-radius: 2px;
+    }
+
+    .tc-news {
+      display: flex; gap: 12px;
+      background: #fff;
+      margin: 0 16px 8px;
+      padding: 14px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      align-items: flex-start;
+    }
+    .tc-news:active { background: #fafbfc; }
+    .tn-main { flex: 1; min-width: 0; }
+    .tn-cat {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      color: var(--brand); background: #faf6eb;
+      padding: 1px 7px; border-radius: 4px;
+    }
+    .tn-title {
+      font-size: 15px; font-weight: 700; color: var(--ink);
+      line-height: 1.4; margin-top: 6px;
+      display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+    }
+    .tn-meta { font-size: 11px; color: var(--ink-3); margin-top: 8px; }
+    .tn-thumb {
+      width: 88px; height: 66px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; color: #fff;
+      background: #eef0f3;
+    }
+    .tn-ai { background: linear-gradient(145deg, #2f7cf6, #1a4fd6); }
+    .tn-pet { background: linear-gradient(145deg, #ff8a4c, #e85d2c); }
+    .tn-travel { background: linear-gradient(145deg, #c9a227, #a8841a); }
+
+    .cate-head {
+      padding: 16px 16px 8px;
+      background: #fff;
+      border-bottom: 1px solid #f0f1f3;
+    }
+    .ch-title { font-size: 20px; font-weight: 800; }
+    .ch-sub { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+
+    .news-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin: 8px 16px 24px; padding: 14px;
+      background: linear-gradient(135deg, #fff9f0, #fff4e8);
+      border: 1.5px solid var(--brand);
+      border-radius: 14px; cursor: pointer;
+    }
+    .news-cta .nc-t { font-size: 14px; font-weight: 800; color: var(--ink); }
+    .news-cta .nc-s { font-size: 11.5px; color: var(--ink-3); margin-top: 3px; }
+    .news-cta .nc-b {
+      background: var(--brand); color: #fff;
+      font-size: 13px; font-weight: 800;
+      padding: 9px 14px; border-radius: 999px;
+      white-space: nowrap;
+    }
+
     .course {
       display: flex; gap: 12px; background: #fff; border-radius: 14px;
       margin: 0 16px 12px; padding: 14px; cursor: pointer;
@@ -2974,21 +3094,41 @@
           </div>
         </div>
 
-        <!-- ========== 潮知馆 ========== -->
+        <!-- ========== 潮知馆（板块大卡 + 资讯流） ========== -->
         <div class="view" id="view-courses" data-tab="courses">
-          <div class="course-hero">
-            <h2>潮知馆</h2>
-            <p>AI 工具 × 文旅科普 · 积分兑换观看 · 喜欢的内容一键跳转使用</p>
-            <div class="bar">
-              <span>当前积分 <b data-bind="points">20</b></span>
+          <div class="tc-top">
+            <div class="tc-h1">潮知馆</div>
+            <div class="tc-bar">
+              <span>积分 <b data-bind="points">20</b></span>
               <span class="go" onclick="go('watch-ad')">去赚积分 ›</span>
             </div>
           </div>
-          <div class="section-title">积分兑换观看</div>
-          <div id="courseList"></div>
-          <div class="card" style="font-size:12.5px;color:var(--ink-2)">
-            用积分解锁整集；试看免费。对内容感兴趣，可直接前往对应的工具或景区继续体验。
+
+          <!-- 板块大卡 -->
+          <div class="tc-cards" id="tcCards"></div>
+
+          <!-- 分隔线 -->
+          <div class="tc-divider"><span>资讯</span></div>
+
+          <!-- 今日头条式列表 -->
+          <div id="tcNews"></div>
+        </div>
+
+        <!-- ========== 分类视频页 ========== -->
+        <div class="view" id="view-cate" data-tab="courses">
+          <div class="cate-head">
+            <div class="ch-title" id="cateTitle">AI 工具</div>
+            <div class="ch-sub">积分兑换观看 · 试看免费</div>
           </div>
+          <div id="cateList"></div>
+          <div class="card" style="font-size:12.5px;color:var(--ink-2)">
+            对内容感兴趣，可一键前往对应工具或景区继续体验。
+          </div>
+        </div>
+
+        <!-- ========== 资讯详情 ========== -->
+        <div class="view" id="view-news" data-tab="courses">
+          <div id="newsBody"></div>
         </div>
 
         <!-- ========== 我的（原推广） ========== -->
@@ -3515,7 +3655,28 @@
       { id:'ai3', category:'ai', categoryLabel:'AI 工具', title:'Token 充值指南：比例、发票与常见问题', lessons:5, duration:'10 分钟', points:50, teacher:'潮知编辑部', level:'科普', convertHint:'看后可直达充值页', desc:'主流平台充值路径、折扣渠道与常见问题一次说明。', chapters:[{t:'第1集 Token 是什么',free:true},{t:'第2集 充值渠道对比'},{t:'第3集 发票与对账'}] },
       { id:'tv1', category:'travel', categoryLabel:'文旅', title:'博物馆预约全攻略：旺季也能约到', lessons:6, duration:'14 分钟', points:60, teacher:'潮知旅图', level:'文旅', convertHint:'看后可跳转景区 / 文旅预订下单', desc:'开放时间、证件、捡漏时段与联程路线，适合第一次带娃出行。', chapters:[{t:'第1集 放票规则与证件',free:true},{t:'第2集 时段捡漏技巧'},{t:'第3集 周边动线怎么排'}] },
       { id:'tv2', category:'travel', categoryLabel:'文旅', title:'小众古镇 48 小时：避开人潮的走法', lessons:7, duration:'16 分钟', points:70, teacher:'潮知旅图', level:'文旅', convertHint:'看后可一键预订门票', desc:'住宿、交通、夜景与出片点位清单，周末短途可直接抄作业。', chapters:[{t:'第1集 怎么选镇子',free:true},{t:'第2集 交通与住宿'},{t:'第3集 路线与机位'}] },
-      { id:'tv3', category:'travel', categoryLabel:'文旅', title:'景区门票怎么买更省：套票与二次消费', lessons:5, duration:'11 分钟', points:50, teacher:'潮知旅图', level:'文旅', convertHint:'看后可比价购票', desc:'大门票、项目套票、儿童老人票拆解，避免重复付费。', chapters:[{t:'第1集 票种地图',free:true},{t:'第2集 套票是否划算'},{t:'第3集 退改与实名'}] }
+      { id:'tv3', category:'travel', categoryLabel:'文旅', title:'景区门票怎么买更省：套票与二次消费', lessons:5, duration:'11 分钟', points:50, teacher:'潮知旅图', level:'文旅', convertHint:'看后可比价购票', desc:'大门票、项目套票、儿童老人票拆解，避免重复付费。', chapters:[{t:'第1集 票种地图',free:true},{t:'第2集 套票是否划算'},{t:'第3集 退改与实名'}] },
+      { id:'pt1', category:'pet', categoryLabel:'宠物', title:'幼猫接家前 7 天准备清单', lessons:5, duration:'12 分钟', points:50, teacher:'潮知萌宠', level:'宠物', convertHint:'看后可选购用品清单同款', desc:'疫苗、主食、环境应激一次讲清，新手铲屎官直接抄作业。', chapters:[{t:'第1集 接家前检查',free:true},{t:'第2集 物品与主食'},{t:'第3集 应激与适应'}] },
+      { id:'pt2', category:'pet', categoryLabel:'宠物', title:'猫粮怎么选：配料表三分钟看懂', lessons:6, duration:'13 分钟', points:55, teacher:'潮知萌宠', level:'宠物', convertHint:'看后可比价选购', desc:'蛋白来源、诱食剂、谷物争议，用一张表避开营销话术。', chapters:[{t:'第1集 配料表怎么读',free:true},{t:'第2集 主食罐 vs 干粮'},{t:'第3集 换粮过渡'}] },
+      { id:'pt3', category:'pet', categoryLabel:'宠物', title:'狗狗城市散步安全指南', lessons:4, duration:'10 分钟', points:40, teacher:'潮知萌宠', level:'宠物', convertHint:'看后可选购牵引装备', desc:'高温天、车流、社交距离，出门 30 分钟的安全底线。', chapters:[{t:'第1集 装备检查',free:true},{t:'第2集 路线与时段'},{t:'第3集 突发处理'}] }
+    ];
+
+    /* 潮知馆板块大卡（可扩展） */
+    const TC_CATS = [
+      { id: 'ai', name: 'AI', title: 'AI 工具', sub: '科普 · 提效 · 充值', icon: 'i-ad', theme: 'ai' },
+      { id: 'pet', name: '宠物', title: '宠物', sub: '养护 · 用品 · 健康', icon: 'i-star', theme: 'pet' },
+      { id: 'travel', name: '文旅', title: '文旅', sub: '景点 · 攻略 · 避坑', icon: 'i-hotel', theme: 'travel' },
+      { id: 'more', name: '等等', title: '更多板块', sub: '陆续上线中', icon: 'i-cap', theme: 'more' }
+    ];
+
+    /* 资讯（头条式，免费阅读） */
+    const TC_NEWS = [
+      { id: 'n1', cat: 'ai', catName: 'AI', title: '国内大模型价格再降，中小团队怎么选才不踩坑？', source: '潮知馆', time: '2 小时前', read: '1.2 万', digest: 'API 降价潮下，按场景分层采购、关注上下文与并发计费，比只看单价更省钱。三分钟给你一张决策表。', body: ['过去半年，主流大模型 API 单价持续下探，但“便宜”并不等于“总成本低”。', '真正影响账单的是：上下文长度、并发峰值、重试策略，以及是否把非关键链路切到更小的模型。', '建议按场景分层：客服闲聊用轻量模型，合同/代码用旗舰模型，并给关键接口加上预算告警。'] },
+      { id: 'n2', cat: 'travel', catName: '文旅', title: '暑期博物馆预约技巧：捡漏时段与证件准备', source: '潮知馆', time: '5 小时前', read: '8642', digest: '放票节点、退票回流、儿童证件，三大关键点决定你能不能约上。', body: ['大多数博物馆提前 7 天放票，整点回流票常出现在开馆前 1 小时。', '儿童没有身份证也可用户口本/护照登记，提前录入家庭成员可省现场时间。', '若热门时段约满，可看相邻馆区或夜场，通常竞争更小。'] },
+      { id: 'n3', cat: 'pet', catName: '宠物', title: '夏季猫咪饮水量不足？三个低成本改造方案', source: '潮知馆', time: '8 小时前', read: '6310', digest: '流动水、多点位、湿粮搭配——不用买贵设备也能提升饮水量。', body: ['猫天生对静止水不敏感，流动水能显著提高兴趣。', '把水碗远离食盆和猫砂盆，厨房/走廊多点位摆放。', '湿粮或温水泡粮可作为补水辅助，注意密封保存。'] },
+      { id: 'n4', cat: 'ai', catName: 'AI', title: '提示词里的“角色设定”到底有没有用？实测对比', source: '潮知馆', time: '昨天', read: '2.4 万', digest: '同一任务下，角色设定对结果稳定性的提升，比你想的大。', body: ['实测中，明确角色（领域、读者、文风）后，格式错误率明显下降。', '更重要的是约束：字数、结构、禁止编造数据。', '把“你是专家”换成“你是写给小白看的科普作者”，输出会完全不同。'] },
+      { id: 'n5', cat: 'pet', catName: '宠物', title: '狗绳长度怎么选？城市通勤场景对照表', source: '潮知馆', time: '昨天', read: '4188', digest: '1.2 米、1.8 米、伸缩绳——不同场景的安全边界。', body: ['人行道密集建议 1.2–1.5 米，控制狗狗贴近身侧。', '空旷公园可用 1.8 米，仍不建议完全放飞伸缩绳。', '夜间加反光扣，电梯内收紧绳。'] },
+      { id: 'n6', cat: 'travel', catName: '文旅', title: '小众古镇周末两日：交通与住宿怎么排', source: '潮知馆', time: '2 天前', read: '9902', digest: '高铁+接驳、住在镇内还是县城，一张时间表讲清楚。', body: ['高铁到邻近站再打车 30–40 分钟通常比直达大巴准点。', '住镇内方便拍晨雾，预算紧可住县城，次日早班进镇。', '把核心机位放在清晨与黄昏，白天逛室内与手作店。'] }
     ];
 
     const MENUS = [
@@ -3557,6 +3718,7 @@
       'order-checkout': '确认订单', 'store-paid': '支付成功',
       bounty: '悬赏任务', member: '会员中心',
       'free-meal': '潮匠 TrendCraft', merchant: '商家入驻',
+      cate: '板块内容', news: '资讯详情',
       lottery: '积分焕彩', 'lottery-realname': '实名认证',
       'lottery-records': '兑换记录', 'lottery-detail': '订单详情',
       pull: '拉新中心',
@@ -5521,11 +5683,40 @@
       renderMall();
     });
 
-    /* ---- 潮知馆 ---- */
+    /* ---- 潮知馆：板块大卡 + 资讯流 ---- */
     function renderCourses() {
-      document.getElementById('courseList').innerHTML = COURSES.map(c => `
+      document.getElementById('tcCards').innerHTML = TC_CATS.map(c => `
+        <div class="tc-card tc-${c.theme}" onclick="openCate('${c.id}')">
+          <div class="tc-ico">${ico(c.icon)}</div>
+          <div class="tc-name">${c.name}</div>
+          <div class="tc-sub">${c.sub}</div>
+        </div>`).join('');
+
+      document.getElementById('tcNews').innerHTML = TC_NEWS.map(n => `
+        <div class="tc-news" onclick="openNews('${n.id}')">
+          <div class="tn-main">
+            <div class="tn-cat">${n.catName}</div>
+            <div class="tn-title">${n.title}</div>
+            <div class="tn-meta">${n.source} · ${n.time} · ${n.read}阅读</div>
+          </div>
+          <div class="tn-thumb tn-${n.cat}">${n.catName}</div>
+        </div>`).join('');
+    }
+
+    function openCate(id) {
+      if (id === 'more') { toast('更多板块，敬请期待'); return; }
+      state.cateId = id;
+      renderCate();
+      go('cate');
+    }
+
+    function renderCate() {
+      const cat = TC_CATS.find(c => c.id === state.cateId) || TC_CATS[0];
+      document.getElementById('cateTitle').textContent = cat.title;
+      const list = COURSES.filter(c => c.category === cat.id);
+      document.getElementById('cateList').innerHTML = list.map(c => `
         <div class="course" onclick="openCourse('${c.id}')">
-          <div class="cover"><span class="ai">${c.category === 'ai' ? 'AI' : '旅'}</span><span class="lv">${c.level}</span></div>
+          <div class="cover"><span class="ai">${cat.name.slice(0, 2)}</span><span class="lv">${c.level}</span></div>
           <div class="info">
             <div class="title">${c.title}</div>
             <div class="meta">${c.categoryLabel} · ${c.lessons} 集 · ${c.duration}</div>
@@ -5535,7 +5726,36 @@
               <div class="go">去观看</div>
             </div>
           </div>
-        </div>`).join('');
+        </div>`).join('') || '<div class="muted" style="text-align:center;padding:40px 16px">该板块视频整理中</div>';
+    }
+
+    function openNews(id) {
+      const n = TC_NEWS.find(x => x.id === id);
+      if (!n) return;
+      const cat = TC_CATS.find(c => c.id === n.cat);
+      document.getElementById('newsBody').innerHTML = `
+        <div class="card" style="margin:12px 16px">
+          <div class="tn-cat" style="margin-bottom:8px">${n.catName}</div>
+          <div style="font-size:18px;font-weight:800;line-height:1.4">${n.title}</div>
+          <div class="tn-meta" style="margin-top:8px">${n.source} · ${n.time} · ${n.read}阅读</div>
+          <div style="margin-top:14px;font-size:13.5px;color:var(--ink-2);line-height:1.7;font-weight:600">${n.digest}</div>
+          ${n.body.map(p => `<div style="margin-top:12px;font-size:13.5px;color:var(--ink-2);line-height:1.75">${p}</div>`).join('')}
+        </div>
+        <div class="news-cta" onclick="newsToVideos('${n.cat}')">
+          <div class="nc-l">
+            <div class="nc-t">读完想学更多？</div>
+            <div class="nc-s">去看「${cat ? cat.title : n.catName}」板块视频</div>
+          </div>
+          <span class="nc-b">去看视频 ›</span>
+        </div>`;
+      go('news');
+    }
+
+    function newsToVideos(catId) {
+      if (catId === 'more' || !TC_CATS.find(c => c.id === catId)) { toast('该板块视频整理中'); return; }
+      state.cateId = catId;
+      renderCate();
+      go('cate');
     }
 
     /* ---- 我的 ---- */
@@ -6650,6 +6870,7 @@
       else if (id === 'order-checkout') renderCheckout();
       else if (id === 'store-paid') renderStorePaid();
       else if (id === 'lottery') { renderLottery(); ltStartTimer(); }
+      else if (id === 'cate') renderCate();
       else if (id === 'lottery-records') renderLotteryRecords();
       else if (id === 'lottery-detail') renderLotteryDetail();
       else if (id === 'pull') renderPull();
