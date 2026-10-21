@@ -661,6 +661,46 @@
       background: #c1841a; color: #fff; font-size: 11px; font-weight: 700;
       padding: 6px 12px; border-radius: 999px; border: none;
     }
+
+    /* ===== 日常任务列表 ===== */
+    .task-card { display: flex; gap: 10px; align-items: flex-start; margin: 0 16px 10px; padding: 13px 12px; }
+    .task-ico {
+      width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: #fff4e8; color: var(--brand);
+    }
+    .task-ico .ico { width: 20px; height: 20px; }
+    .task-ico.course { background: #eef5ff; color: #2f7cf6; }
+    .task-ico.ai { background: #f3e8ff; color: #9333ea; }
+    .task-body { flex: 1; min-width: 0; }
+    .task-title { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .task-sub { font-size: 11px; color: var(--ink-3); margin-top: 3px; line-height: 1.4; }
+    .task-prog { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+    .tp-num { font-size: 11px; color: var(--brand); font-weight: 700; }
+    .tp-bar { flex: 1; height: 6px; background: #f0f1f3; border-radius: 99px; overflow: hidden; }
+    .tp-bar i { display: block; height: 100%; background: linear-gradient(90deg, #f0d48c, #c1841a); border-radius: 99px; transition: width .3s; }
+    .task-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+    .task-rew { font-size: 11px; color: #ff6600; font-weight: 700; }
+    .task-btn {
+      border: none; border-radius: 999px; background: #2f7cf6; color: #fff;
+      font-size: 12px; font-weight: 700; padding: 7px 12px; cursor: pointer;
+    }
+    .task-btn.done, .task-btn:disabled { background: #f0f1f3; color: var(--ink-3); cursor: default; }
+    .more-task {
+      display: flex; align-items: center; justify-content: space-between;
+      margin: 0 16px 8px;
+      background: linear-gradient(135deg, #fff9f0, #fff4e8);
+      border: 1px solid #ffe0c2; cursor: pointer;
+    }
+    .more-task .mt-t { font-size: 14px; font-weight: 700; }
+    .more-task .mt-s { font-size: 11px; color: var(--ink-3); margin-top: 3px; }
+    .more-task .mt-go { font-size: 13px; color: #c1841a; font-weight: 700; }
+    .risk-note {
+      display: flex; align-items: center; gap: 6px;
+      margin: 4px 16px 10px; font-size: 11px; color: #00b578;
+    }
+    .risk-dot { width: 7px; height: 7px; border-radius: 50%; background: #00b578; display: inline-block; }
+
     .hide { display: none !important; }
 
     /* ===== 本地生活 ===== */
@@ -3157,7 +3197,7 @@
         <div class="view" id="view-watch-ad" data-tab="home">
           <div class="mode-seg">
             <div class="mode-item on" id="modeGrab" data-mode="grab" onclick="setAdMode('grab')">限时抢积分</div>
-            <div class="mode-item" id="modeNormal" data-mode="normal" onclick="setAdMode('normal')">日常看广告</div>
+            <div class="mode-item" id="modeNormal" data-mode="normal" onclick="setAdMode('normal')">日常任务</div>
           </div>
 
           <!-- 限时抢专区 -->
@@ -3182,35 +3222,32 @@
             </div>
           </div>
 
-          <!-- 日常广告 -->
+          <!-- 日常任务 -->
           <div id="adModeNormal" class="hide">
           <div class="ad-hero">
-            <h2>看广告，轻松攒积分</h2>
-            <p>每条 +10 积分 · 今日已看 <span id="adWatched">0</span>/10</p>
+            <h2>日常任务 · 赚积分</h2>
+            <p>看广告 / 潮知馆联动 · 仅发积分</p>
             <div class="bal">当前积分 <span data-bind="points">20</span></div>
-          </div>
-          <div class="prog">
-            <div class="bar"><div class="fill" id="adFill" style="width:0%"></div></div>
-            <div class="txt">今日剩余 <b id="adRemain">10</b> 条</div>
           </div>
           <div class="card grab-nudge hide" id="grabNudge" onclick="setAdMode('grab')">
             <span class="gn-t">限时抢 +20 分</span>
             <span class="gn-s" id="grabNudgeTip">每 15 分钟可抢 1 次</span>
             <button class="gn-btn">去抢</button>
           </div>
-          <div class="slot">
-            <div class="slot-box">
-              <svg class="ico"><use href="#i-video"/></svg>
-              <span class="tt">激励视频</span>
-              <span class="id">请完整观看视频</span>
+
+          <div id="dailyTasks"></div>
+
+          <div class="card more-task" onclick="go('bounty')">
+            <div class="mt-l">
+              <div class="mt-t">更多悬赏任务</div>
+              <div class="mt-s">截图审核类，单笔最高 +100 积分</div>
             </div>
-            <div class="card" style="margin:0 0 12px;padding:10px 12px;font-size:11px">
-              <div style="display:flex;gap:6px;align-items:center;color:#00b578">
-                <span style="width:8px;height:8px;border-radius:50%;background:#00b578;display:inline-block"></span>
-                请勿使用异常手段刷取，以免影响积分
-              </div>
-            </div>
-            <button class="btn btn-primary btn-block" id="adBtn" onclick="watchAd()">看视频 +10 积分</button>
+            <span class="mt-go">去大厅 ›</span>
+          </div>
+
+          <div class="risk-note">
+            <span class="risk-dot"></span>
+            <span>请勿使用异常手段刷取，以免影响积分</span>
           </div>
           </div>
 
@@ -3526,17 +3563,11 @@
 
     function bindPoints() {
       document.querySelectorAll('[data-bind="points"]').forEach(el => { el.textContent = state.points; });
-      document.getElementById('adWatched').textContent = state.adToday;
-      document.getElementById('adRemain').textContent = Math.max(0, state.adLimit - state.adToday);
-      document.getElementById('adFill').style.width = (state.adToday / state.adLimit * 100) + '%';
-      document.getElementById('ptsAdToday').textContent = state.adToday;
-      const btn = document.getElementById('adBtn');
-      if (state.adToday >= state.adLimit) {
-        btn.textContent = '今日已看满'; btn.disabled = true; btn.style.opacity = '.5';
-      } else {
-        btn.textContent = '看视频 +10 积分'; btn.disabled = false; btn.style.opacity = '1';
+      if (document.getElementById('ptsAdToday')) {
+        document.getElementById('ptsAdToday').textContent = state.adToday;
       }
       refreshGrabUI();
+      if (typeof renderDailyTasks === 'function') renderDailyTasks();
     }
 
     /* ===== 限时抢积分（每 15 分钟 1 次 +20） ===== */
@@ -3614,6 +3645,74 @@
       document.getElementById('adModeNormal').classList.toggle('hide', isGrab);
       refreshGrabUI();
       bindPoints();
+      if (!isGrab) renderDailyTasks();
+    }
+
+    /* ===== 日常任务（赚积分 · 与潮知馆联动） ===== */
+    function getDailyTaskState() {
+      const key = new Date().toDateString();
+      if (!state.dt || state.dt.date !== key) {
+        state.dt = { date: key, tz_watch: 0, tz_ai: 0 };
+      }
+      return state.dt;
+    }
+    function dtTasks() {
+      const dt = getDailyTaskState();
+      const adDone = state.adToday;
+      const adFull = adDone >= state.adLimit;
+      return [
+        { id: 'ad', action: 'ad', icon: 'i-ad', title: '看激励广告', sub: '每条 +10 积分，今日上限 10 条',
+          done: adDone, target: state.adLimit, rew: '+10/条',
+          cta: adFull ? '明日再来' : '去观看', state: adFull ? 'done' : 'todo' },
+        { id: 'tz_watch', action: 'course', icon: 'i-cap', title: '观看 1 集潮知馆视频', sub: 'AI / 文旅任选，打开即记完成',
+          done: dt.tz_watch, target: 1, rew: '+15 积分',
+          cta: dt.tz_watch ? '已完成' : '去完成', state: dt.tz_watch ? 'done' : 'todo' },
+        { id: 'tz_ai', action: 'ai', icon: 'i-star', title: '完成 1 次 AI 工具对话', sub: '潮知馆 · AI 工具内容联动',
+          done: dt.tz_ai, target: 1, rew: '+20 积分',
+          cta: dt.tz_ai ? '已完成' : '去完成', state: dt.tz_ai ? 'done' : 'todo' }
+      ];
+    }
+    function renderDailyTasks() {
+      const box = document.getElementById('dailyTasks');
+      if (!box) return;
+      const tasks = dtTasks();
+      box.innerHTML = tasks.map(t => `
+        <div class="card task-card">
+          <div class="task-ico ${t.action}">${ico(t.icon)}</div>
+          <div class="task-body">
+            <div class="task-title">${t.title}</div>
+            <div class="task-sub">${t.sub}</div>
+            <div class="task-prog">
+              <span class="tp-num">${t.done}/${t.target}</span>
+              <span class="tp-bar"><i style="width:${Math.min(100, t.done / t.target * 100)}%"></i></span>
+            </div>
+          </div>
+          <div class="task-right">
+            <span class="task-rew">${t.rew}</span>
+            <button class="task-btn ${t.state === 'done' ? 'done' : ''}"
+              onclick="dtTaskTap('${t.id}')" ${t.state === 'done' ? 'disabled' : ''}>${t.cta}</button>
+          </div>
+        </div>`).join('');
+    }
+    function dtTaskTap(id) {
+      const t = dtTasks().find(x => x.id === id);
+      if (!t) return;
+      if (t.state === 'done') { toast('今日已完成'); return; }
+      if (t.action === 'ad') { watchAd(); return; }
+      if (t.action === 'course') { switchTab('courses'); return; }
+      if (t.action === 'ai') { state.dtFocus = 'ai'; switchTab('courses'); }
+    }
+    /** 打开潮知馆详情时联动打点 */
+    function markCourseVisit(category) {
+      const dt = getDailyTaskState();
+      let got = 0;
+      if (!dt.tz_watch) { dt.tz_watch = 1; got += 15; }
+      if (category === 'ai' && !dt.tz_ai) { dt.tz_ai = 1; got += 20; }
+      if (got > 0) {
+        addPoints(got, 'daily_task', '潮知馆联动任务');
+        toast('任务完成 +' + got + ' 积分');
+      }
+      renderDailyTasks();
     }
 
     function startGrabAd() {
@@ -6136,6 +6235,7 @@
     function openCourse(id) {
       const c = COURSES.find(x => x.id === id); if (!c) return;
       state.courseId = id;
+      if (typeof markCourseVisit === 'function') markCourseVisit(c.category);
       const unlocked = state.unlocked.has(id);
       document.getElementById('cdPlayTip').textContent = unlocked ? '已解锁 · 点击剧集播放' : '试看免费 · 未解锁';
       document.getElementById('cdInfo').innerHTML = `
