@@ -662,28 +662,45 @@
       padding: 6px 12px; border-radius: 999px; border: none;
     }
 
+    /* ===== 日常任务：紧凑积分条 ===== */
+    .pts-bar {
+      display: flex; align-items: center; gap: 6px;
+      margin: 12px 16px 10px; padding: 12px 14px;
+      background: #fff; border-radius: 12px;
+      border: 1px solid #f0f1f3; cursor: pointer;
+    }
+    .pts-bar .pb-lab { font-size: 12px; color: var(--ink-3); }
+    .pts-bar .pb-num { font-size: 22px; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .pts-bar .pb-caret { width: 14px; height: 14px; color: var(--ink-3); }
+    .pts-bar .pb-more { margin-left: auto; font-size: 12px; color: var(--brand); font-weight: 600; }
+
     /* ===== 日常任务列表 ===== */
-    .task-card { display: flex; gap: 10px; align-items: flex-start; margin: 0 16px 10px; padding: 13px 12px; }
+    .task-card { display: flex; gap: 10px; align-items: center; margin: 0 16px 10px; padding: 13px 12px; }
     .task-ico {
       width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
       background: #fff4e8; color: var(--brand);
+      align-self: flex-start;
     }
     .task-ico .ico { width: 20px; height: 20px; }
     .task-ico.course { background: #eef5ff; color: #2f7cf6; }
     .task-ico.ai { background: #f3e8ff; color: #9333ea; }
-    .task-body { flex: 1; min-width: 0; }
-    .task-title { font-size: 14px; font-weight: 700; color: var(--ink); }
+    .task-body { flex: 1; min-width: 0; align-self: stretch; display: flex; flex-direction: column; justify-content: center; }
+    .task-title { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.3; }
     .task-sub { font-size: 11px; color: var(--ink-3); margin-top: 3px; line-height: 1.4; }
-    .task-prog { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
-    .tp-num { font-size: 11px; color: var(--brand); font-weight: 700; }
-    .tp-bar { flex: 1; height: 6px; background: #f0f1f3; border-radius: 99px; overflow: hidden; }
+    .task-prog { display: flex; align-items: center; gap: 8px; margin-top: 8px; width: 100%; box-sizing: border-box; }
+    .tp-num { font-size: 11px; color: var(--brand); font-weight: 700; flex-shrink: 0; }
+    .tp-bar { flex: 1; min-width: 0; height: 6px; background: #f0f1f3; border-radius: 99px; overflow: hidden; }
     .tp-bar i { display: block; height: 100%; background: linear-gradient(90deg, #f0d48c, #c1841a); border-radius: 99px; transition: width .3s; }
-    .task-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-    .task-rew { font-size: 11px; color: #ff6600; font-weight: 700; }
+    .task-right {
+      flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end;
+      gap: 8px; align-self: center;
+    }
+    .task-rew { font-size: 11px; color: #ff6600; font-weight: 700; white-space: nowrap; }
     .task-btn {
       border: none; border-radius: 999px; background: #2f7cf6; color: #fff;
       font-size: 12px; font-weight: 700; padding: 7px 12px; cursor: pointer;
+      white-space: nowrap;
     }
     .task-btn.done, .task-btn:disabled { background: #f0f1f3; color: var(--ink-3); cursor: default; }
     .more-task {
@@ -3224,15 +3241,11 @@
 
           <!-- 日常任务 -->
           <div id="adModeNormal" class="hide">
-          <div class="ad-hero">
-            <h2>日常任务 · 赚积分</h2>
-            <p>看广告 / 潮知馆联动 · 仅发积分</p>
-            <div class="bal">当前积分 <span data-bind="points">20</span></div>
-          </div>
-          <div class="card grab-nudge hide" id="grabNudge" onclick="setAdMode('grab')">
-            <span class="gn-t">限时抢 +20 分</span>
-            <span class="gn-s" id="grabNudgeTip">每 15 分钟可抢 1 次</span>
-            <button class="gn-btn">去抢</button>
+          <div class="pts-bar" onclick="go('points')" title="查看积分明细">
+            <span class="pb-lab">积分</span>
+            <span class="pb-num" data-bind="points">20</span>
+            <svg class="ico pb-caret"><use href="#i-caret"/></svg>
+            <span class="pb-more">明细 ›</span>
           </div>
 
           <div id="dailyTasks"></div>
@@ -3623,10 +3636,7 @@
         gb.classList.toggle('disabled', !g.canClaim);
         document.getElementById('grabFoot').textContent = g.canClaim
           ? '完整观看才可到账 · 每 15 分钟可再抢'
-          : '冷却结束后自动可抢 · 可先看日常广告';
-        const nudge = document.getElementById('grabNudge');
-        document.getElementById('grabNudgeTip').textContent = g.tip;
-        nudge.classList.toggle('hide', false);
+          : '冷却结束后自动可抢 · 可先看日常任务';
       }
     }
 
