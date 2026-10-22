@@ -2377,8 +2377,19 @@
 
     /* ===== 积分明细 ===== */
     .pts-hero {
-      margin: 12px 16px; padding: 22px; border-radius: 16px;
+      margin: 12px 16px; padding: 22px; border-radius: 16px; position: relative;
       background: linear-gradient(135deg, var(--gold), var(--brand)); color: #fff;
+    }
+    .pts-rule-link {
+      position: absolute; top: 12px; right: 14px;
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600; color: rgba(255,255,255,.94); cursor: pointer;
+    }
+    .pts-rule-link .prq {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.8);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 700; font-style: normal; line-height: 1;
     }
     .pts-hero .lab { font-size: 12px; opacity: .9; }
     .pts-hero .n { font-size: 44px; font-weight: 800; line-height: 1.15; }
@@ -3402,6 +3413,7 @@
         <!-- ========== 积分明细 ========== -->
         <div class="view" id="view-points" data-tab="home">
           <div class="pts-hero">
+            <span class="pts-rule-link" onclick="openPointsRules()"><i class="prq">?</i>积分规则</span>
             <div class="lab">当前可用积分</div>
             <div class="n" data-bind="points">20</div>
             <div style="display:inline-block;margin-top:6px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.45);font-size:11px;padding:3px 10px;border-radius:999px">仅限商城兑换 · 不可提现</div>
@@ -3409,17 +3421,6 @@
               <button class="btn" style="background:#fff;color:var(--brand)" onclick="go('watch-ad')">看广告赚积分</button>
               <button class="btn" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7)" onclick="switchTab('mall')">去兑换</button>
             </div>
-          </div>
-          <div class="card">
-            <div style="font-size:14px;font-weight:700;margin-bottom:6px">积分规则</div>
-            <div class="rule-item" style="color:#ff3b30;font-weight:600;background:#fff5f5;border-radius:6px;padding:8px;border-bottom:none">积分仅用于兑换商城商品 / 生活权益，不可提现、不可转账</div>
-            <div class="rule-item">获取：看广告 +10/条（每日最多 10 条，今日已看 <b id="ptsAdToday">0</b>）</div>
-            <div class="rule-item">获取：完成悬赏任务，审核通过后发放积分</div>
-            <div class="rule-item">限时抢：每 15 分钟看 1 条广告抢 +20 积分（冷却后可再抢）</div>
-            <div class="rule-item">获取：开通会员可得赠送积分 + 每日加成（可选）</div>
-            <div class="rule-item">消耗：商城兑换商品（约 300 积分/件起）</div>
-            <div class="rule-item">消耗：潮知馆视频积分观看；生活缴费抵扣</div>
-            <div class="rule-item">异常刷取积分将被限制，情节严重会回收</div>
           </div>
           <div class="section-title">积分明细</div>
           <div class="card" id="pointsLogs"></div>
@@ -3715,7 +3716,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261022.1';
+    const APP_VERSION = 'v20261022.2';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -6536,6 +6537,27 @@
         state.unlocked.add(c.id);
         openCourse(c.id); toast('解锁成功');
       });
+    }
+
+    /* 我的积分 · 积分规则弹层 */
+    function openPointsRules() {
+      document.getElementById('ltSheet').innerHTML = `
+        <div class="bs-head">
+          <div><div class="bs-title">积分规则</div><div class="bs-sub">积分获取与使用说明</div></div>
+          <div class="bs-close" onclick="closeLtSheet()">✕</div>
+        </div>
+        <div class="bs-list">
+          <div class="rule-item" style="color:#ff3b30;font-weight:600;background:#fff5f5;border-radius:8px;padding:8px 10px;border-bottom:none">积分仅用于兑换商城商品 / 生活权益，不可提现、不可转账</div>
+          <div class="rule-item">获取：看广告 +10/条（每日最多 10 条，今日已看 <b id="ptsAdToday">${state.adToday}</b>）</div>
+          <div class="rule-item">获取：完成悬赏任务，审核通过后发放积分</div>
+          <div class="rule-item">限时抢：每 15 分钟看 1 条广告抢 +20 积分（冷却后可再抢）</div>
+          <div class="rule-item">获取：开通会员可得赠送积分 + 每日加成（可选）</div>
+          <div class="rule-item">消耗：商城兑换商品（约 300 积分/件起）</div>
+          <div class="rule-item">消耗：潮知馆视频积分观看；生活缴费抵扣</div>
+          <div class="rule-item">异常刷取积分将被限制，情节严重会回收</div>
+        </div>`;
+      document.getElementById('ltMask').classList.remove('hide');
+      document.getElementById('ltSheet').classList.remove('hide');
     }
 
     /* 积分明细来源：内部 key → 用户可读文案（未知值原样显示） */
