@@ -2394,6 +2394,8 @@
     .pts-hero .lab { font-size: 12px; opacity: .9; }
     .pts-hero .n { font-size: 44px; font-weight: 800; line-height: 1.15; }
     .pts-hero .acts { display: flex; gap: 10px; margin-top: 12px; }
+    .log-more { font-size: 12px; font-weight: 600; color: var(--brand); cursor: pointer; }
+    .log-tabs { margin-top: 12px; }
     /* 赚积分页顶部积分总览：左右布局，突出大数字 */
     .pts-hero.pts-top {
       display: flex; align-items: center; justify-content: space-between;
@@ -3422,10 +3424,26 @@
               <button class="btn" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7)" onclick="switchTab('mall')">去兑换</button>
             </div>
           </div>
-          <div class="section-title">积分明细</div>
+          <div class="section-title" style="justify-content:space-between;padding:0 16px">
+            <span>积分明细</span>
+            <span class="log-more" onclick="go('points-logs')">查看全部 ›</span>
+          </div>
           <div class="card" id="pointsLogs"></div>
           <div style="text-align:center;padding:8px 0 24px">
             <button class="btn btn-ghost" onclick="switchTab('mall')">去积分商城 ›</button>
+          </div>
+        </div>
+
+        <!-- ========== 积分明细 · 全部记录 ========== -->
+        <div class="view" id="view-points-logs" data-tab="home">
+          <div class="mode-seg log-tabs">
+            <div class="mode-item on" data-log-tab="all" onclick="setLogTab('all')">全部</div>
+            <div class="mode-item" data-log-tab="in" onclick="setLogTab('in')">获取</div>
+            <div class="mode-item" data-log-tab="out" onclick="setLogTab('out')">消耗</div>
+          </div>
+          <div class="card" id="pointsLogsAll"></div>
+          <div id="logsEmpty" class="hide" style="text-align:center;padding:44px 16px;color:var(--ink-3);font-size:12.5px">
+            暂无相关积分记录
           </div>
         </div>
       </div>
@@ -3699,7 +3717,7 @@
     const TITLES = {
       home: '潮匠 TrendCraft', benefits: '权益', mall: '积分商城', courses: '潮知馆',
       mine: '我的', 'goods-detail': '商品详情', 'course-detail': '课程详情',
-      'watch-ad': '看广告赚积分', points: '我的积分',
+      'watch-ad': '看广告赚积分', points: '我的积分', 'points-logs': '积分明细',
       life: '本地生活', 'life-order': '到店点单', 'life-bill': '生活缴费',
       'life-fuel': '加油', 'life-charge': '充电',
       'store-pick': '选择门店', 'store-menu': '下单选品',
@@ -3716,7 +3734,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261022.2';
+    const APP_VERSION = 'v20261022.3';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -6568,8 +6586,7 @@
     };
     function logSourceLabel(s) { return LOG_SOURCE_LABELS[s] || s; }
 
-    function renderLogs() {
-      document.getElementById('pointsLogs').innerHTML = state.logs.map(l => `
+    const logRowHtml = l => `
         <div class="log-row">
           <div>
             <div class="note">${l.note}</div>
@@ -6579,7 +6596,25 @@
             ${l.amount > 0 ? '+' : ''}${l.amount}
             <div class="bal">余 ${l.balance}</div>
           </div>
-        </div>`).join('');
+        </div>`;
+
+    function renderLogs() {
+      document.getElementById('pointsLogs').innerHTML = state.logs.slice(0, 5).map(logRowHtml).join('');
+    }
+
+    /* 全部积分明细：全部 / 获取 / 消耗 三 tab */
+    let ptsLogTab = 'all';
+    function setLogTab(kind) {
+      ptsLogTab = kind;
+      renderLogsAll();
+    }
+    function renderLogsAll() {
+      const list = state.logs.filter(l => ptsLogTab === 'all' || (ptsLogTab === 'in' ? l.amount > 0 : l.amount < 0));
+      document.querySelectorAll('#view-points-logs .mode-item').forEach(el => {
+        el.classList.toggle('on', el.dataset.logTab === ptsLogTab);
+      });
+      document.getElementById('pointsLogsAll').innerHTML = list.map(logRowHtml).join('');
+      document.getElementById('logsEmpty').classList.toggle('hide', list.length > 0);
     }
 
     function addPoints(delta, source, note) {
@@ -6933,6 +6968,7 @@
       }
       bindPoints();
       if (id === 'points') renderLogs();
+      if (id === 'points-logs') renderLogsAll();
       if (id === 'life') renderLife();
       else if (id === 'life-order') renderLifeBrands();
       else if (id === 'life-bill') renderBill();
