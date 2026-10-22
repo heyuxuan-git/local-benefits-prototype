@@ -2394,7 +2394,13 @@
     .pts-hero .lab { font-size: 12px; opacity: .9; }
     .pts-hero .n { font-size: 44px; font-weight: 800; line-height: 1.15; }
     .pts-hero .acts { display: flex; gap: 10px; margin-top: 12px; }
-    .log-more { font-size: 12px; font-weight: 600; color: var(--brand); cursor: pointer; }
+    /* 积分明细标题：居中、去掉左右装饰横杠；查看全部灰字贴右 */
+    .section-title.log-title { position: relative; padding: 0 16px; }
+    .section-title.log-title::before, .section-title.log-title::after { display: none; }
+    .log-more {
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      font-size: 12px; font-weight: 500; color: var(--ink-3); cursor: pointer;
+    }
     .log-tabs { margin-top: 12px; }
     /* 赚积分页顶部积分总览：左右布局，突出大数字 */
     .pts-hero.pts-top {
@@ -3424,7 +3430,7 @@
               <button class="btn" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7)" onclick="switchTab('mall')">去兑换</button>
             </div>
           </div>
-          <div class="section-title" style="justify-content:space-between;padding:0 16px">
+          <div class="section-title log-title">
             <span>积分明细</span>
             <span class="log-more" onclick="go('points-logs')">查看全部 ›</span>
           </div>
@@ -3734,7 +3740,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261022.3';
+    const APP_VERSION = 'v20261022.4';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
