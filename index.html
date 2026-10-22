@@ -3715,7 +3715,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261021.5';
+    const APP_VERSION = 'v20261022.1';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -5815,12 +5815,13 @@
       const p = MEMBER_PLANS.find(x => x.id === id);
       if (!p) return;
       if (memberSub && memberSub.id === id) { toast('本周期已是该会员'); return; }
-      if (!confirm(`开通${p.name} ¥${p.price}/月？到账 ${p.points} 积分 + ${p.lottery}，确认后发放权益`)) return;
-      memberSub = { id: p.id, name: p.name };
-      addPoints(p.points, 'member_sub', p.name + '月订赠积分');
-      renderMemberPlans();
-      bindPoints();
-      toast('开通成功：+' + p.points + ' 积分 · 福彩待上线');
+      openLtDialog('确认开通', `开通${p.name} ¥${p.price}/月，到账 ${p.points} 积分 + ${p.lottery}。`, function () {
+        memberSub = { id: p.id, name: p.name };
+        addPoints(p.points, 'member_sub', p.name + '月订赠积分');
+        renderMemberPlans();
+        bindPoints();
+        toast('开通成功：+' + p.points + ' 积分 · ' + p.lottery + '权益已生效');
+      });
     }
 
     function renderAgent() {
@@ -5935,14 +5936,14 @@
     function redeemGoods() {
       const g = GOODS.find(x => x.id === state.goodsId); if (!g) return;
       const addr = currentAddr(); if (!addr) { addrPickSheet(() => redeemGoods()); toast('请先选择收货地址'); return; }
-      if (state.points < g.points) { toast('积分不足，先去看广告'); return; }
-      if (confirm(`消耗 ${g.points} 积分兑换「${g.title}」？`)) {
+      if (state.points < g.points) { pointsLowSheet(g.points - state.points, `兑换「${g.title}」需 ${g.points} 积分`); return; }
+      openLtDialog('确认兑换', `将消耗 ${g.points} 积分兑换「${g.title}」，兑换后不可取消。`, function () {
         addPoints(-g.points, 'redeem_goods', '兑换商品：' + g.title);
         const o = makeOrder('points', 'pending_ship', [{ gid: g.id, qty: 1 }], g.points, 0, addr);
         state.orderId = o.id;
         toast('兑换成功，订单待发货');
         go('order-detail');
-      }
+      });
     }
 
     /* ========== 购物车 / 订单（原型 mock） ========== */
@@ -6529,20 +6530,28 @@
 
     function unlockCourse() {
       const c = COURSES.find(x => x.id === state.courseId); if (!c) return;
-      if (state.points < c.points) { toast('积分不足，先去看广告'); return; }
-      if (confirm(`消耗 ${c.points} 积分观看「${c.title}」？`)) {
-        addPoints(-c.points, '解锁课程', c.title);
+      if (state.points < c.points) { pointsLowSheet(c.points - state.points, `观看「${c.title}」需 ${c.points} 积分`); return; }
+      openLtDialog('确认解锁', `将消耗 ${c.points} 积分观看「${c.title}」，解锁后长期有效。`, function () {
+        addPoints(-c.points, 'course_unlock', c.title);
         state.unlocked.add(c.id);
         openCourse(c.id); toast('解锁成功');
-      }
+      });
     }
+
+    /* 积分明细来源：内部 key → 用户可读文案（未知值原样显示） */
+    const LOG_SOURCE_LABELS = {
+      init: '新用户', daily_sign: '签到', daily_task: '日常任务', grab_ad: '限时抢积分',
+      free_meal: '饭点免单', life_pay: '生活缴费', bounty_task: '悬赏任务', member_sub: '会员',
+      redeem_goods: '商城兑换', aftersale_refund: '售后退款', watch_ad: '看广告', course_unlock: '课程解锁'
+    };
+    function logSourceLabel(s) { return LOG_SOURCE_LABELS[s] || s; }
 
     function renderLogs() {
       document.getElementById('pointsLogs').innerHTML = state.logs.map(l => `
         <div class="log-row">
           <div>
             <div class="note">${l.note}</div>
-            <div class="tm">${l.time} · ${l.source}</div>
+            <div class="tm">${l.time} · ${logSourceLabel(l.source)}</div>
           </div>
           <div class="amt ${l.amount > 0 ? 'in' : 'out'}">
             ${l.amount > 0 ? '+' : ''}${l.amount}
@@ -6718,6 +6727,22 @@
       const cost = n * LT.POINTS;
       if (state.points < cost) { ltLowSheet(n, cost); return; }
       openLtDialog('提示', `确定要兑换 ${n} 张双色球吗？将消耗 ${cost} 积分`, () => ltDoExchange(n, cost));
+    }
+    /* 通用「积分不足」弹层：商城兑换 / 课程解锁共用，提供两个赚积分入口 */
+    function pointsLowSheet(need, tip) {
+      document.getElementById('ltSheet').innerHTML = `
+        <div class="bs-head">
+          <div><div class="bs-title">积分不足</div><div class="bs-sub">${tip} · 你还差 ${need} 分</div></div>
+          <div class="bs-close" onclick="closeLtSheet()">✕</div>
+        </div>
+        <div class="bs-list">
+          <div class="bs-item on" onclick="closeLtSheet(); go('watch-ad')">
+            <div class="n">看广告赚积分</div><div class="p">每日最多可赚 100+ 积分</div></div>
+          <div class="bs-item" onclick="closeLtSheet(); go('bounty')">
+            <div class="n">做悬赏任务</div><div class="p">审核通过后发放积分</div></div>
+        </div>`;
+      document.getElementById('ltMask').classList.remove('hide');
+      document.getElementById('ltSheet').classList.remove('hide');
     }
     function ltLowSheet(n, cost) {
       const need = cost - state.points;
