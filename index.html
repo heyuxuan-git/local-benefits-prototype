@@ -1031,8 +1031,12 @@
     .bs-mask { position: absolute; inset: 0; background: rgba(0,0,0,.45); z-index: 70; }
     .bs-sheet {
       position: absolute; left: 0; right: 0; bottom: 0; background: #fff;
-      border-radius: 18px 18px 0 0; z-index: 71; padding: 16px 16px 24px;
+      border-radius: 18px 18px 0 0; z-index: 71; padding: 20px 16px 24px;
       max-height: 80%; overflow-y: auto; animation: drawer-up .22s ease;
+    }
+    .bs-sheet::before {
+      content: ''; position: absolute; top: 8px; left: 50%; margin-left: -18px;
+      width: 36px; height: 4px; border-radius: 2px; background: #dfe3e8;
     }
     .bs-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
     .bs-title { font-size: 16px; font-weight: 800; }
@@ -2559,6 +2563,29 @@
       .home-swiper { height: 120px; margin-top: 8px; }
       .quick { padding-top: 10px; padding-bottom: 10px; }
     }
+
+    /* ===== 可访问性：触控热区 / 焦点环 / 动效降级 ===== */
+    .add-btn, .bs-close, .stepper .stp, .capsule > span { position: relative; }
+    .navbar .back::before,
+    .add-btn::before,
+    .bs-close::before,
+    .stepper .stp::before,
+    .capsule > span::before {
+      content: ''; position: absolute; border-radius: 50%;
+    }
+    .navbar .back::before { inset: -4px; }          /* 36 → 44 */
+    .add-btn::before { inset: -7px; }               /* 30 → 44 */
+    .bs-close::before { inset: -9px; }              /* 26 → 44 */
+    .stepper .stp::before { inset: -9px; }          /* 26 → 44 */
+    .capsule > span::before { inset: -7px -10px; }  /* 触控高度 30 → 44 */
+    :focus-visible { outline: 2px solid var(--brand-ink); outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2699,7 +2726,7 @@
       <div class="navbar">
         <button class="back" id="backBtn" aria-label="返回">‹</button>
         <span class="title" id="navTitle">潮匠 TrendCraft</span>
-        <div class="capsule"><span onclick="toggleProtoMenu(event)">⋯</span><span>●</span></div>
+        <div class="capsule"><span aria-label="更多" onclick="toggleProtoMenu(event)">⋯</span><span aria-hidden="true">●</span></div>
       </div>
 
       <div class="screen" id="screen">
@@ -3571,7 +3598,7 @@
         </button>
       </div>
 
-      <div class="toast" id="toast"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
       <!-- 原型状态切换菜单（挂在右上角胶囊「⋯」上，按当前页面动态渲染，演示用） -->
       <div class="proto-menu" id="protoMenu"></div>
@@ -3785,7 +3812,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261022.6';
+    const APP_VERSION = 'v20261022.7';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -6090,7 +6117,10 @@
       const s = cartSummary();
       if (!s.count) { toast('请先选择商品'); return; }
       if (!currentAddr()) { addrPickSheet(() => checkoutFromCart()); toast('请先选择收货地址'); return; }
-      if (s.hasMixed && !confirm('积分商品与现金商品将拆成两笔订单，继续结算？')) return;
+      if (s.hasMixed) {
+        openLtDialog('结算提示', '积分商品与现金商品将拆成两笔订单，继续结算？', () => go('order-confirm'));
+        return;
+      }
       go('order-confirm');
     }
 
@@ -6142,19 +6172,21 @@
     }
     function receiveOrder(id) {
       const o = state.orders.find(x => x.id === id); if (!o || o.status !== 'shipped') return;
-      if (!confirm('确认已收到商品？')) return;
-      o.status = 'done'; o.doneAt = Date.now();
-      toast('交易完成'); renderOrders(); renderOrderDetail();
+      openLtDialog('确认收货', '确认已收到商品？', () => {
+        o.status = 'done'; o.doneAt = Date.now();
+        toast('交易完成'); renderOrders(); renderOrderDetail();
+      });
     }
     function cancelOrder(id) {
       const o = state.orders.find(x => x.id === id); if (!o || o.status !== 'unpaid') return;
-      if (!confirm('确定取消该订单？')) return;
-      state.orders = state.orders.filter(x => x.id !== id);
-      toast('已取消'); if (state.view === 'order-detail') back(); else renderOrders();
+      openLtDialog('取消订单', '确定取消该订单？', () => {
+        state.orders = state.orders.filter(x => x.id !== id);
+        toast('已取消'); if (state.view === 'order-detail') back(); else renderOrders();
+      });
     }
     function viewLogistics(id) {
       const o = state.orders.find(x => x.id === id); if (!o || !o.logistics) return;
-      alert(`${o.logistics.company}\n运单号 ${o.logistics.no}\n\n（物流信息展示中）`);
+      toast(`${o.logistics.company} · 运单号 ${o.logistics.no}`);
     }
 
     /* ---- 售后：提交后置为审核中，详情页「模拟审核通过」退回 ---- */
@@ -6216,11 +6248,12 @@
       toast('已保存'); back(); renderAddress();
     }
     function removeAddress(id) {
-      if (!confirm('确定删除该地址？')) return;
-      state.addresses = state.addresses.filter(a => a.id !== id);
-      if (state.addrId === id) state.addrId = null; /* 删除的是当前选用地址则回落默认 */
-      if (!state.addresses.some(a => a.def) && state.addresses[0]) state.addresses[0].def = true;
-      renderAddress();
+      openLtDialog('删除地址', '确定删除该地址？', () => {
+        state.addresses = state.addresses.filter(a => a.id !== id);
+        if (state.addrId === id) state.addrId = null; /* 删除的是当前选用地址则回落默认 */
+        if (!state.addresses.some(a => a.def) && state.addresses[0]) state.addresses[0].def = true;
+        renderAddress();
+      });
     }
     function setDefaultAddr(id) { state.addresses.forEach(a => a.def = a.id === id); state.addrId = id; renderAddress(); }
 
@@ -7114,11 +7147,62 @@
     document.addEventListener('visibilitychange', () => { if (!document.hidden) checkUpdate(); });
     setTimeout(checkUpdate, 5000);
 
+    /* ---- 可访问性增强：图标按钮标签 / 弹层下滑关闭 / 左边缘右滑返回 ---- */
+    function tagIconButtons() {
+      document.querySelectorAll('.add-btn:not([aria-label])').forEach(b => b.setAttribute('aria-label', '加入购物车'));
+      document.querySelectorAll('.bs-close:not([aria-label])').forEach(b => b.setAttribute('aria-label', '关闭'));
+      document.querySelectorAll('.stepper .stp:not([aria-label])').forEach(b => {
+        b.setAttribute('aria-label', /[−-]/.test(b.textContent) ? '减少数量' : '增加数量');
+      });
+    }
+    function initSheetDrag() {
+      document.querySelectorAll('.bs-sheet').forEach(sheet => {
+        const zone = sheet.querySelector('.bs-head') || sheet;
+        let sy = null, dy = 0;
+        zone.addEventListener('touchstart', e => {
+          sy = e.touches[0].clientY; dy = 0; sheet.style.transition = 'none';
+        }, { passive: true });
+        zone.addEventListener('touchmove', e => {
+          if (sy === null) return;
+          dy = Math.max(0, e.touches[0].clientY - sy);
+          sheet.style.transform = 'translateY(' + dy + 'px)';
+        }, { passive: true });
+        zone.addEventListener('touchend', () => {
+          if (sy === null) return;
+          sheet.style.transition = ''; sheet.style.transform = '';
+          if (dy > 80) {
+            const c = sheet.querySelector('.bs-close');
+            if (c) c.click(); else sheet.classList.add('hide');
+          }
+          sy = null;
+        });
+      });
+    }
+    function initEdgeBack() {
+      let sx = 0, sy = 0, active = false;
+      document.addEventListener('touchstart', e => {
+        const t = e.touches[0];
+        active = t.clientX <= 24 && !document.querySelector('.bs-mask:not(.hide), .lt-dmask:not(.hide), .fab-mask:not(.hide)');
+        if (active) { sx = t.clientX; sy = t.clientY; }
+      }, { passive: true });
+      document.addEventListener('touchmove', e => {
+        if (!active) return;
+        if (Math.abs(e.touches[0].clientY - sy) > 60) active = false;
+      }, { passive: true });
+      document.addEventListener('touchend', e => {
+        if (!active) return;
+        active = false;
+        if (e.changedTouches[0].clientX - sx >= 70 && document.getElementById('backBtn').classList.contains('show')) back();
+      }, { passive: true });
+    }
+
     /* 启动 */
     renderHome(); renderBenefits(); renderMall(); renderCourses(); renderAgent(); renderPull(); renderLogs();
     renderLife(); renderBounty(); seedOrders(); updateFab();
     renderFmEntries();
     bindPoints(); showView('home');
+    tagIconButtons(); initSheetDrag(); initEdgeBack();
+    new MutationObserver(tagIconButtons).observe(document.body, { childList: true, subtree: true });
   </script>
 </body>
 </html>
