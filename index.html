@@ -24,7 +24,7 @@
       --r-xs: 4px; --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
       /* iOS 扁平体系：按钮/卡片 12，底部弹层顶部 20 */
       --r-btn: 12px; --r-card: 12px; --r-sheet: 20px;
-      --sp-1: 8px; --sp-2: 12px; --sp-3: 16px; --sp-4: 24px;
+      --sp-0: 4px; --sp-1: 8px; --sp-2: 12px; --sp-3: 16px; --sp-4: 24px;
       /* 潮匠签名：琥珀金线（所有深色 hero 顶部的一道细高光） */
       --gold-line: linear-gradient(90deg, transparent, rgba(255,214,140,.9), transparent);
       /* iOS 中性色：系统分组背景 + 分隔线 + 浮层阴影 */
@@ -72,7 +72,7 @@
 
     .stage {
       flex: 1; display: flex; align-items: flex-start; justify-content: center;
-      padding: 16px 16px 40px;
+      padding: var(--sp-3) var(--sp-3) 40px;
     }
     .stage > .phone { margin: 0 auto; }
     .phone {
@@ -87,14 +87,14 @@
     /* 原型状态切换菜单（演示用：挂在手机右上角胶囊「⋯」上，相对手机框定位） */
     .proto-menu {
       position: absolute; top: 92px; right: 10px; width: 140px; z-index: 60;
-      background: #fff; border-radius: var(--r-md); padding: 8px;
+      background: #fff; border-radius: var(--r-md); padding: var(--sp-1);
       box-shadow: var(--shadow-float); border: 1px solid var(--line);
       display: none;
     }
     .proto-menu.open { display: block; }
     .proto-menu .pm-t { font-size: var(--fs-1); color: var(--ink-3); text-align: center; padding: 2px 0 6px; }
     .proto-menu button {
-      display: block; width: 100%; margin: 5px 0; padding: 8px 0;
+      display: block; width: 100%; margin: 5px 0; padding: var(--sp-1) 0;
       border: 1.5px solid #f0f1f3; background: #fff; border-radius: var(--r-sm);
       font-size: var(--fs-1); font-weight: 700; color: var(--ink-2); cursor: pointer;
     }
@@ -107,7 +107,7 @@
     }
     .status {
       height: 44px; display: flex; align-items: flex-end; justify-content: space-between;
-      padding: 0 22px 4px; font-size: var(--fs-1); font-weight: 600;
+      padding: 0 22px var(--sp-0); font-size: var(--fs-1); font-weight: 600;
       background: #fff; flex-shrink: 0; z-index: 40;
     }
     .status .sdots { letter-spacing: 1px; }
@@ -175,7 +175,7 @@
     .tab .ico { font-size: var(--fs-4); width: 24px; height: 24px; }
     .tab.on { color: var(--brand-text); font-weight: 600; }
 
-    .card { background: var(--card); border-radius: var(--r-card); margin: 12px 16px; padding: 16px; }
+    .card { background: var(--card); border-radius: var(--r-card); margin: var(--sp-2) var(--sp-3); padding: var(--sp-3); }
     .btn {
       border: none; cursor: pointer; border-radius: var(--r-btn); font-weight: 600;
       font-size: var(--fs-2); padding: 11px 18px; transition: transform .1s, opacity .15s;
@@ -190,11 +190,11 @@
     .muted { color: var(--ink-3); font-size: var(--fs-1); }
     .section-title {
       display: flex; align-items: center;
-      margin: 24px 16px 10px; font-size: var(--fs-3); font-weight: 600;
+      margin: var(--sp-4) var(--sp-3) 10px; font-size: var(--fs-3); font-weight: 600;
     }
     .toast {
       position: absolute; left: 50%; top: 45%; transform: translate(-50%, -50%);
-      background: rgba(0,0,0,.78); color: #fff; padding: 12px 18px; border-radius: var(--r-md);
+      background: rgba(0,0,0,.78); color: #fff; padding: var(--sp-2) 18px; border-radius: var(--r-md);
       font-size: var(--fs-2); z-index: 100; opacity: 0; pointer-events: none; transition: opacity .2s;
       max-width: 80%; text-align: center;
     }
@@ -202,7 +202,7 @@
 
     /* ===== 首页 ===== */
     .home-swiper {
-      position: relative; margin: 12px 16px 0; height: 170px;
+      position: relative; margin: var(--sp-2) var(--sp-3) 0; height: 170px;
       border-radius: var(--r-lg); overflow: hidden; background: #1a1f2b;
     }
     .home-swiper .slides {
@@ -210,7 +210,7 @@
       transition: transform .35s ease;
     }
     .home-swiper .slide {
-      min-width: 100%; height: 100%; padding: 26px 24px;
+      min-width: 100%; height: 100%; padding: 26px var(--sp-4);
       display: flex; flex-direction: column; justify-content: center; color: #fff;
       position: relative;
     }
@@ -218,11 +218,11 @@
       align-self: flex-start; font-size: var(--fs-1); background: rgba(0,0,0,.25);
       border: 1px solid rgba(255,255,255,.45); padding: 2px 10px; border-radius: var(--r-pill);
     }
-    .home-swiper .slide h3 { font-size: var(--fs-4); font-weight: 800; margin-top: 8px; line-height: 1.3; }
+    .home-swiper .slide h3 { font-size: var(--fs-4); font-weight: 800; margin-top: var(--sp-1); line-height: 1.3; }
     .home-swiper .slide p { font-size: var(--fs-1); opacity: .9; margin-top: 5px; }
     .home-swiper .slide .cta {
-      margin-top: 12px; align-self: flex-start; background: #fff; color: var(--brand-text);
-      font-size: var(--fs-1); font-weight: 700; padding: 7px 16px; border-radius: var(--r-pill); border: none; cursor: pointer;
+      margin-top: var(--sp-2); align-self: flex-start; background: #fff; color: var(--brand-text);
+      font-size: var(--fs-1); font-weight: 700; padding: 7px var(--sp-3); border-radius: var(--r-pill); border: none; cursor: pointer;
     }
     .s1 { background: var(--brand-red-grad); }
     .s2 { background: linear-gradient(135deg, #2f7cf6, #6c5ce7); }
@@ -241,7 +241,7 @@
 
     .quick {
       display: grid; grid-template-columns: repeat(4, 1fr);
-      background: #fff; margin: 12px 16px; border-radius: var(--r-card);
+      background: #fff; margin: var(--sp-2) var(--sp-3); border-radius: var(--r-card);
       padding: 18px 6px; row-gap: 14px;
     }
     .quick-item {
@@ -265,8 +265,8 @@
 
     /* ===== 限时抢积分 ===== */
     .grab-card {
-      margin: 4px 16px 10px;
-      padding: 12px 14px;
+      margin: var(--sp-0) var(--sp-3) 10px;
+      padding: var(--sp-2) 14px;
       border-radius: var(--r-card);
       display: flex;
       align-items: center;
@@ -289,7 +289,7 @@
       color: #1f2329;
     }
     .grab-l {
-      display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1;
+      display: flex; align-items: center; gap: var(--sp-1); min-width: 0; flex: 1;
     }
     .grab-badge {
       flex-shrink: 0;
@@ -306,7 +306,7 @@
       background: rgba(255,255,255,.28);
       border: 1.5px solid rgba(255,255,255,.55);
       color: #fff; font-size: var(--fs-1); font-weight: 700;
-      padding: 8px 12px; border-radius: var(--r-pill);
+      padding: var(--sp-1) var(--sp-2); border-radius: var(--r-pill);
       white-space: nowrap;
     }
     .grab-cta.on {
@@ -324,7 +324,7 @@
     /* 首页 / 本地生活页入口大卡 */
     .fm-entry {
       position: relative; overflow: hidden;
-      margin: 4px 16px 10px; padding: 13px 14px;
+      margin: var(--sp-0) var(--sp-3) 10px; padding: 13px 14px;
       border-radius: var(--r-card); cursor: pointer;
       background: #241a0b;
       color: #fff; border: none;
@@ -337,7 +337,7 @@
       pointer-events: none;
     }
     .fm-entry:active { transform: translateY(1px); }
-    .fm-entry .fe-top { display: flex; align-items: center; gap: 8px; }
+    .fm-entry .fe-top { display: flex; align-items: center; gap: var(--sp-1); }
     .fm-entry .fe-badge {
       flex-shrink: 0; background: #ff3b30; color: #fff;
       font-size: var(--fs-1); font-weight: 800; letter-spacing: 1px;
@@ -366,14 +366,14 @@
     .fm-entry .fe-cta {
       position: relative; z-index: 1;
       background: #e0ae4e; color: #1a1a1a;
-      font-size: var(--fs-1); font-weight: 800; padding: 8px 14px;
+      font-size: var(--fs-1); font-weight: 800; padding: var(--sp-1) 14px;
       border-radius: var(--r-pill); box-shadow: none; white-space: nowrap;
     }
 
     /* 落地页 hero */
     .fm-hero {
       position: relative; overflow: hidden;
-      margin: 12px 16px 10px; padding: 16px;
+      margin: var(--sp-2) var(--sp-3) 10px; padding: var(--sp-3);
       border-radius: var(--r-card);
       background: #241a0b;
       color: #fff;
@@ -383,18 +383,18 @@
       width: 180px; height: 180px; border-radius: 50%;
       background: rgba(240,212,140,.16);
     }
-    .fm-hero .fmh-top { display: flex; align-items: center; gap: 8px; position: relative; z-index: 1; }
+    .fm-hero .fmh-top { display: flex; align-items: center; gap: var(--sp-1); position: relative; z-index: 1; }
     .fm-hero .fmh-title { font-size: var(--fs-3); font-weight: 800; letter-spacing: 1px; }
     .fm-hero .fmh-title em { font-style: normal; color: #f0d48c; }
-    .fm-hero .fmh-sub { font-size: var(--fs-1); color: rgba(255,255,255,.75); margin-top: 8px; position: relative; z-index: 1; }
-    .fm-hero .fmh-stats { display: flex; gap: 18px; margin-top: 12px; position: relative; z-index: 1; }
+    .fm-hero .fmh-sub { font-size: var(--fs-1); color: rgba(255,255,255,.75); margin-top: var(--sp-1); position: relative; z-index: 1; }
+    .fm-hero .fmh-stats { display: flex; gap: 18px; margin-top: var(--sp-2); position: relative; z-index: 1; }
     .fm-hero .fmh-stats .v { font-size: var(--fs-3); font-weight: 800; color: #f0d48c; font-variant-numeric: tabular-nums; }
     .fm-hero .fmh-stats .v small { font-size: var(--fs-1); font-weight: 600; color: rgba(255,255,255,.6); margin-left: 2px; }
     .fm-hero .fmh-stats .l { font-size: var(--fs-1); color: rgba(255,255,255,.6); margin-top: 2px; }
 
     /* 时段切换 */
-    .fm-slots { display: flex; background: #fff; margin: 0 16px 10px; border-radius: var(--r-md); overflow: hidden; }
-    .fm-slots .s { flex: 1; text-align: center; padding: 9px 0 8px; cursor: pointer; }
+    .fm-slots { display: flex; background: #fff; margin: 0 var(--sp-3) 10px; border-radius: var(--r-md); overflow: hidden; }
+    .fm-slots .s { flex: 1; text-align: center; padding: 9px 0 var(--sp-1); cursor: pointer; }
     .fm-slots .s .n { font-size: var(--fs-1); font-weight: 700; color: var(--ink-2); }
     .fm-slots .s .w { font-size: var(--fs-1); color: var(--ink-3); margin-top: 2px; }
     .fm-slots .s.on { background: #faf3e2; }
@@ -403,14 +403,14 @@
 
     /* 场次时间轴 */
     .fm-sessions {
-      display: flex; gap: 8px; overflow-x: auto;
-      padding: 2px 16px 6px; scrollbar-width: none;
+      display: flex; gap: var(--sp-1); overflow-x: auto;
+      padding: 2px var(--sp-3) 6px; scrollbar-width: none;
     }
     .fm-sessions::-webkit-scrollbar { display: none; }
     .fm-pill {
       flex-shrink: 0; min-width: 62px; text-align: center;
       background: #fff; border: 1.5px solid #f0f1f3;
-      border-radius: var(--r-md); padding: 8px 9px; cursor: pointer;
+      border-radius: var(--r-md); padding: var(--sp-1) 9px; cursor: pointer;
     }
     .fm-pill .t { font-size: var(--fs-1); font-weight: 800; color: var(--ink-2); font-variant-numeric: tabular-nums; }
     .fm-pill .st { font-size: var(--fs-1); color: var(--ink-3); margin-top: 3px; white-space: nowrap; }
@@ -427,21 +427,21 @@
     /* 场次信息条 */
     .fm-note {
       display: flex; justify-content: space-between; align-items: center;
-      margin: 6px 16px 8px; font-size: var(--fs-1); color: var(--ink-2);
+      margin: 6px var(--sp-3) var(--sp-1); font-size: var(--fs-1); color: var(--ink-2);
     }
     .fm-note b { color: var(--brand-text); font-size: var(--fs-1); font-variant-numeric: tabular-nums; }
-    .fm-note b small { font-size: var(--fs-1); font-weight: 600; color: var(--ink-3); margin-right: 4px; }
+    .fm-note b small { font-size: var(--fs-1); font-weight: 600; color: var(--ink-3); margin-right: var(--sp-0); }
     .fm-note .fmn-cd { font-weight: 700; }
 
     /* 今日全部结束时的空态提示条 */
     .fm-empty {
-      margin: 10px 16px; padding: 10px 12px; text-align: center;
+      margin: 10px var(--sp-3); padding: 10px var(--sp-2); text-align: center;
       background: #faf3e2; border: 1px solid #ecd9b0; border-radius: var(--r-md);
       font-size: var(--fs-1); font-weight: 700; color: #8a6a2f;
     }
 
     /* 商家卡 */
-    .fm-mch { background: #fff; border-radius: var(--r-md); margin: 0 16px 10px; padding: 13px 14px; }
+    .fm-mch { background: #fff; border-radius: var(--r-md); margin: 0 var(--sp-3) 10px; padding: 13px 14px; }
     .fm-mch .hd { display: flex; align-items: center; gap: 9px; }
     .fm-mch .logo {
       width: 38px; height: 38px; border-radius: var(--r-md); flex-shrink: 0;
@@ -460,15 +460,15 @@
     }
     .fm-mch .stk b { color: var(--price); font-size: var(--fs-2); font-weight: 800; }
     .fm-mch .cb { font-size: var(--fs-1); color: var(--ink-2); margin-top: 9px; }
-    .fm-mch .pr { display: flex; align-items: baseline; gap: 8px; margin-top: 5px; }
+    .fm-mch .pr { display: flex; align-items: baseline; gap: var(--sp-1); margin-top: 5px; }
     .fm-mch .pr .old { font-size: var(--fs-1); color: var(--ink-3); text-decoration: line-through; }
     .fm-mch .pr .free { font-size: var(--fs-3); font-weight: 800; color: var(--price); }
     .fm-mch .pr .hint { font-size: var(--fs-1); color: var(--ink-3); }
-    .fm-prog { display: flex; align-items: center; gap: 8px; margin-top: 9px; }
+    .fm-prog { display: flex; align-items: center; gap: var(--sp-1); margin-top: 9px; }
     .fm-prog .bar { flex: 1; height: 6px; border-radius: var(--r-pill); background: #f0f1f3; overflow: hidden; }
     .fm-prog .bar i { display: block; height: 100%; background: #c1841a; border-radius: var(--r-pill); transition: width .3s; }
     .fm-prog .txt { font-size: var(--fs-1); color: var(--ink-3); white-space: nowrap; }
-    .fm-acts { display: flex; gap: 8px; margin-top: 10px; }
+    .fm-acts { display: flex; gap: var(--sp-1); margin-top: 10px; }
     .fm-acts button {
       flex: 1; height: 38px; border: none; border-radius: var(--r-md);
       font-size: var(--fs-1); font-weight: 700; cursor: pointer;
@@ -480,7 +480,7 @@
     .fm-acts .b-dead { background: #f2f3f5; color: #a8adb5; cursor: default; }
 
     /* 玩法规则 */
-    .fm-rules { margin: 4px 16px 0; background: #fff; border-radius: var(--r-md); padding: 13px 14px; }
+    .fm-rules { margin: var(--sp-0) var(--sp-3) 0; background: #fff; border-radius: var(--r-md); padding: 13px 14px; }
     .fm-rules .rt { font-size: var(--fs-1); font-weight: 700; margin-bottom: 7px; }
     .fm-rules li {
       list-style: none; font-size: var(--fs-1); color: var(--ink-2);
@@ -497,7 +497,7 @@
     /* ===== 外卖秒杀 · 商家入驻 ===== */
     .mch-entry {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      margin: 4px 16px 10px; padding: 12px 14px;
+      margin: var(--sp-0) var(--sp-3) 10px; padding: var(--sp-2) 14px;
       background: #fff; border: 1.5px dashed var(--brand);
       border-radius: var(--r-md); cursor: pointer;
     }
@@ -506,14 +506,14 @@
     .mch-entry .me-s { font-size: var(--fs-1); color: var(--ink-3); margin-top: 3px; }
     .mch-entry .me-b {
       flex-shrink: 0; background: var(--brand-ink); color: #fff;
-      font-size: var(--fs-1); font-weight: 800; padding: 8px 12px;
+      font-size: var(--fs-1); font-weight: 800; padding: var(--sp-1) var(--sp-2);
       border-radius: var(--r-pill); white-space: nowrap;
     }
 
     /* banner 下：定位/地址切换 + 我要入驻 */
     .fm-locbar {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      margin: 0 16px 10px; padding: 10px 12px;
+      margin: 0 var(--sp-3) 10px; padding: 10px var(--sp-2);
       background: #fff; border-radius: var(--r-md);
       border: 1px solid #f0f1f3;
     }
@@ -528,7 +528,7 @@
     }
     .fm-locbar .lb-loc .switch {
       flex-shrink: 0; font-size: var(--fs-1); font-weight: 600; color: var(--brand-text);
-      background: #faf3e2; padding: 3px 8px; border-radius: var(--r-pill);
+      background: #faf3e2; padding: 3px var(--sp-1); border-radius: var(--r-pill);
     }
     .fm-locbar .lb-caret {
       flex-shrink: 0; width: 16px; height: 16px;
@@ -537,13 +537,13 @@
     .fm-locbar .lb-mch {
       flex-shrink: 0; border: none; cursor: pointer;
       background: #e0ae4e; color: #1a1a1a;
-      font-size: var(--fs-1); font-weight: 800; padding: 8px 12px;
+      font-size: var(--fs-1); font-weight: 800; padding: var(--sp-1) var(--sp-2);
       border-radius: var(--r-pill); box-shadow: none;
-      display: inline-flex; align-items: center; gap: 4px;
+      display: inline-flex; align-items: center; gap: var(--sp-0);
     }
 
     .mch-hero {
-      margin: 12px 16px 10px; padding: 16px;
+      margin: var(--sp-2) var(--sp-3) 10px; padding: var(--sp-3);
       border-radius: var(--r-card); color: #fff; position: relative; overflow: hidden;
       background: #241a0b;
     }
@@ -554,18 +554,18 @@
     }
     .mch-hero .mh-tag {
       display: inline-block; background: #f0d48c; color: #1a1a1a;
-      font-size: var(--fs-1); font-weight: 800; padding: 3px 8px;
+      font-size: var(--fs-1); font-weight: 800; padding: 3px var(--sp-1);
       border-radius: var(--r-xs); letter-spacing: 1px;
     }
-    .mch-hero h2 { font-size: var(--fs-4); font-weight: 800; margin-top: 8px; letter-spacing: .5px; }
+    .mch-hero h2 { font-size: var(--fs-4); font-weight: 800; margin-top: var(--sp-1); letter-spacing: .5px; }
     .mch-hero p { font-size: var(--fs-1); color: rgba(255,255,255,.72); margin-top: 6px; line-height: 1.5; position: relative; z-index: 1; }
-    .mch-hero .pts { display: flex; gap: 14px; margin-top: 12px; position: relative; z-index: 1; }
+    .mch-hero .pts { display: flex; gap: 14px; margin-top: var(--sp-2); position: relative; z-index: 1; }
     .mch-hero .pts .c { font-size: var(--fs-1); font-weight: 800; color: #f0d48c; }
     .mch-hero .pts .l { font-size: var(--fs-1); color: rgba(255,255,255,.55); margin-top: 2px; }
 
     .mch-steps {
-      display: flex; background: #fff; margin: 0 16px 10px;
-      border-radius: var(--r-md); padding: 14px 8px;
+      display: flex; background: #fff; margin: 0 var(--sp-3) 10px;
+      border-radius: var(--r-md); padding: 14px var(--sp-1);
     }
     .mch-steps .st {
       flex: 1; text-align: center; position: relative;
@@ -583,8 +583,8 @@
     }
     .mch-steps .st b { display: block; color: var(--ink); font-weight: 700; margin-bottom: 2px; }
 
-    .mch-perks { margin: 0 16px 10px; background: #fff; border-radius: var(--r-md); padding: 14px; }
-    .mch-perks .pt { font-size: var(--fs-2); font-weight: 700; margin-bottom: 8px; }
+    .mch-perks { margin: 0 var(--sp-3) 10px; background: #fff; border-radius: var(--r-md); padding: 14px; }
+    .mch-perks .pt { font-size: var(--fs-2); font-weight: 700; margin-bottom: var(--sp-1); }
     .mch-perks li {
       list-style: none; font-size: var(--fs-1); color: var(--ink-2);
       padding: 6px 0 6px 20px; position: relative; line-height: 1.45;
@@ -595,12 +595,12 @@
       background: var(--brand); opacity: .85;
     }
 
-    .mch-form { margin: 0 16px 10px; background: #fff; border-radius: var(--r-md); padding: 16px 14px; }
-    .mch-form .ft { font-size: var(--fs-2); font-weight: 700; margin-bottom: 4px; }
-    .mch-form .fs { font-size: var(--fs-1); color: var(--ink-3); margin-bottom: 12px; }
+    .mch-form { margin: 0 var(--sp-3) 10px; background: #fff; border-radius: var(--r-md); padding: var(--sp-3) 14px; }
+    .mch-form .ft { font-size: var(--fs-2); font-weight: 700; margin-bottom: var(--sp-0); }
+    .mch-form .fs { font-size: var(--fs-1); color: var(--ink-3); margin-bottom: var(--sp-2); }
     .mf-row {
       display: flex; align-items: center; gap: 10px;
-      padding: 12px 0; border-bottom: 1px solid #f0f1f3;
+      padding: var(--sp-2) 0; border-bottom: 1px solid #f0f1f3;
     }
     .mf-row:last-of-type { border-bottom: none; }
     .mf-row label { width: 72px; font-size: var(--fs-1); color: var(--ink-2); flex-shrink: 0; }
@@ -610,41 +610,41 @@
     }
     .mf-row input::placeholder { color: #c9cdd4; }
     .mf-submit {
-      width: 100%; margin-top: 8px; height: 44px; border: none;
+      width: 100%; margin-top: var(--sp-1); height: 44px; border: none;
       background: #e0ae4e; color: #1a1a1a;
       font-size: var(--fs-2); font-weight: 800; border-radius: var(--r-md);
       box-shadow: none; cursor: pointer;
     }
     .mf-submit:disabled { opacity: .55; box-shadow: none; }
     .mch-ok {
-      margin: 0 16px 10px; background: #fff; border-radius: var(--r-md);
-      padding: 28px 16px; text-align: center;
+      margin: 0 var(--sp-3) 10px; background: #fff; border-radius: var(--r-md);
+      padding: 28px var(--sp-3); text-align: center;
     }
     .mch-ok .ok-ico {
-      width: 56px; height: 56px; margin: 0 auto 12px; border-radius: 50%;
+      width: 56px; height: 56px; margin: 0 auto var(--sp-2); border-radius: 50%;
       background: #e8faf3; color: #00b578; display: flex; align-items: center; justify-content: center;
     }
     .mch-ok .ok-ico .ico { width: 28px; height: 28px; }
     .mch-ok .t { font-size: var(--fs-3); font-weight: 800; }
-    .mch-ok .s { font-size: var(--fs-1); color: var(--ink-3); margin-top: 8px; line-height: 1.55; }
+    .mch-ok .s { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-1); line-height: 1.55; }
     .mch-ok .btns { display: flex; gap: 10px; margin-top: 18px; }
     .mch-ok .btns .btn { flex: 1; }
 
-    .mch-faq { margin: 0 16px 28px; background: #fff; border-radius: var(--r-md); padding: 14px; }
-    .mch-faq .qt { font-size: var(--fs-2); font-weight: 700; margin-bottom: 8px; }
+    .mch-faq { margin: 0 var(--sp-3) 28px; background: #fff; border-radius: var(--r-md); padding: 14px; }
+    .mch-faq .qt { font-size: var(--fs-2); font-weight: 700; margin-bottom: var(--sp-1); }
     .mch-faq .qa {
       font-size: var(--fs-1); color: var(--ink-2); line-height: 1.55;
-      padding: 8px 0; border-bottom: 1px solid #f5f6f8;
+      padding: var(--sp-1) 0; border-bottom: 1px solid #f5f6f8;
     }
     .mch-faq .qa:last-child { border-bottom: none; }
     .mch-faq .qa b { color: var(--ink); display: block; margin-bottom: 2px; }
 
     .mode-seg {
-      display: flex; background: #fff; margin: 0 16px 12px;
+      display: flex; background: #fff; margin: 0 var(--sp-3) var(--sp-2);
       border-radius: var(--r-md); overflow: hidden; border: 1px solid #f0f1f3;
     }
     .mode-item {
-      flex: 1; text-align: center; padding: 12px 0;
+      flex: 1; text-align: center; padding: var(--sp-2) 0;
       font-size: var(--fs-2); color: var(--ink-2); cursor: pointer;
     }
     .mode-item.on {
@@ -656,7 +656,7 @@
       box-shadow: none;
     }
     .gp-row {
-      display: flex; gap: 10px; padding: 8px 0;
+      display: flex; gap: 10px; padding: var(--sp-1) 0;
       font-size: var(--fs-1); border-bottom: 1px solid #f0f1f3;
     }
     .gp-row:last-of-type { border-bottom: none; }
@@ -676,7 +676,7 @@
       opacity: .55; box-shadow: none; cursor: default;
     }
     .grab-foot {
-      text-align: center; font-size: var(--fs-1); color: var(--ink-3); margin-top: 8px;
+      text-align: center; font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-1);
     }
     .grab-nudge {
       display: flex; align-items: center; gap: 10px;
@@ -688,13 +688,13 @@
     .gn-s { flex: 1; font-size: var(--fs-1); color: var(--ink-2); }
     .gn-btn {
       background: var(--brand-ink); color: #fff; font-size: var(--fs-1); font-weight: 700;
-      padding: 6px 12px; border-radius: var(--r-pill); border: none;
+      padding: 6px var(--sp-2); border-radius: var(--r-pill); border: none;
     }
 
     /* ===== 日常任务：积分总览 ===== */
 
     /* ===== 日常任务列表：统一顶对齐，图标与标题同线 ===== */
-    .task-card { display: flex; gap: 10px; align-items: flex-start; margin: 0 16px 10px; padding: 14px 12px; border-radius: var(--r-card); }
+    .task-card { display: flex; gap: 10px; align-items: flex-start; margin: 0 var(--sp-3) 10px; padding: 14px var(--sp-2); border-radius: var(--r-card); }
     /* 注意：图标修饰类不能复用 .course / .ai 等业务组件类名，否则会被全局样式串改尺寸与间距 */
     .task-card .task-ico {
       width: 40px; height: 40px; border-radius: var(--r-md); flex-shrink: 0;
@@ -707,30 +707,30 @@
     .task-card .task-ico.tk-ai { background: #f3e8ff; color: #9333ea; }
     .task-card .task-ico.tk-sign { background: #e8faf3; color: #00b578; }
     .task-body { flex: 1; min-width: 0; }
-    .task-head { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+    .task-head { display: flex; align-items: baseline; gap: var(--sp-1); min-width: 0; }
     .task-sum {
       display: flex; align-items: center; justify-content: space-between;
-      margin: 0 16px 8px; font-size: var(--fs-1); font-weight: 600; color: var(--ink-3);
+      margin: 0 var(--sp-3) var(--sp-1); font-size: var(--fs-1); font-weight: 600; color: var(--ink-3);
     }
     .task-sum .ts-r { color: var(--brand-text); font-weight: 700; font-variant-numeric: tabular-nums; }
     .task-sum.all .ts-l { color: #00b578; }
     .task-title { font-size: var(--fs-2); font-weight: 700; color: var(--ink); line-height: 1.35; margin-top: 1px; }
     .task-count { flex: none; font-size: var(--fs-1); font-weight: 700; color: var(--brand-text); }
-    .task-sub { font-size: var(--fs-1); color: var(--ink-3); margin-top: 4px; line-height: 1.4; }
+    .task-sub { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-0); line-height: 1.4; }
     .task-right {
       flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end;
-      gap: 8px; padding-top: 2px;
+      gap: var(--sp-1); padding-top: 2px;
     }
     .task-rew { font-size: var(--fs-1); color: #ff6600; font-weight: 700; white-space: nowrap; }
     .task-btn {
       border: none; border-radius: var(--r-pill); background: #2f7cf6; color: #fff;
-      font-size: var(--fs-1); font-weight: 700; padding: 7px 12px; cursor: pointer;
+      font-size: var(--fs-1); font-weight: 700; padding: 7px var(--sp-2); cursor: pointer;
       white-space: nowrap;
     }
     .task-btn.done, .task-btn:disabled { background: #f0f1f3; color: var(--ink-3); cursor: default; }
     .more-task {
       display: flex; align-items: center; justify-content: space-between;
-      margin: 0 16px 8px;
+      margin: 0 var(--sp-3) var(--sp-1);
       background: #fff9f0;
       border: 1px solid #ffe0c2; cursor: pointer;
     }
@@ -739,7 +739,7 @@
     .more-task .mt-go { font-size: var(--fs-1); color: #c1841a; font-weight: 700; }
     .risk-note {
       display: flex; align-items: center; gap: 6px;
-      margin: 4px 16px 10px; font-size: var(--fs-1); color: #00b578;
+      margin: var(--sp-0) var(--sp-3) 10px; font-size: var(--fs-1); color: #00b578;
     }
     .risk-dot { width: 7px; height: 7px; border-radius: 50%; background: #00b578; display: inline-block; }
 
@@ -748,7 +748,7 @@
     /* ===== 本地生活 ===== */
     .life-row {
       display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px;
-      margin: 0 16px 6px;
+      margin: 0 var(--sp-3) 6px;
     }
     .life-item {
       background: #fff; border-radius: var(--r-md); padding: 10px 2px;
@@ -767,14 +767,14 @@
       padding: 0 5px; border-radius: var(--r-xs);
     }
     .bounty-entry {
-      margin: 6px 16px 4px; padding: 11px 12px;
+      margin: 6px var(--sp-3) var(--sp-0); padding: 11px var(--sp-2);
       border-radius: var(--r-md);
       background: #fbf6ec;
       border: 1.5px solid #c1841a;
       display: flex; align-items: center; justify-content: space-between;
       cursor: pointer;
     }
-    .be-l { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
+    .be-l { display: flex; align-items: center; gap: var(--sp-1); min-width: 0; flex: 1; }
     .be-badge {
       flex-shrink: 0; background: #ff3b30; color: #fff;
       font-size: var(--fs-1); font-weight: 800; padding: 3px 7px; border-radius: var(--r-sm);
@@ -782,14 +782,14 @@
     .be-title { font-size: var(--fs-1); font-weight: 700; }
     .be-sub { font-size: var(--fs-1); color: var(--ink-2); margin-top: 1px; }
     .be-cta {
-      flex-shrink: 0; margin-left: 8px;
+      flex-shrink: 0; margin-left: var(--sp-1);
       background: var(--brand-red-grad);
       color: #fff; font-size: var(--fs-1); font-weight: 700;
-      padding: 7px 12px; border-radius: var(--r-pill);
+      padding: 7px var(--sp-2); border-radius: var(--r-pill);
     }
 
     .life-hero {
-      margin: 12px 16px; padding: 16px; border-radius: var(--r-lg);
+      margin: var(--sp-2) var(--sp-3); padding: var(--sp-3); border-radius: var(--r-lg);
       background: #2f7cf6; color: #fff;
     }
     .life-hero .row { display: flex; justify-content: space-between; align-items: center; }
@@ -797,28 +797,28 @@
     .life-hero .n { font-size: var(--fs-5); font-weight: 800; line-height: 1.15; }
     .life-hero .rule-pill {
       background: rgba(0,0,0,.22); border: 1px solid rgba(255,255,255,.45);
-      font-size: var(--fs-1); padding: 6px 8px; border-radius: var(--r-sm); text-align: right;
+      font-size: var(--fs-1); padding: 6px var(--sp-1); border-radius: var(--r-sm); text-align: right;
       max-width: 150px;
     }
-    .life-hero .sub { margin-top: 8px; font-size: var(--fs-1); opacity: .92; }
+    .life-hero .sub { margin-top: var(--sp-1); font-size: var(--fs-1); opacity: .92; }
     .svc-grid {
       display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px;
-      margin: 0 16px; padding-top: 4px;
+      margin: 0 var(--sp-3); padding-top: var(--sp-0);
     }
     .svc {
       background: #fff; border: 2px solid #f0f1f3; border-radius: var(--r-md);
       padding: 10px 2px; display: flex; flex-direction: column;
-      align-items: center; gap: 4px; cursor: pointer;
+      align-items: center; gap: var(--sp-0); cursor: pointer;
     }
     .svc.on { border-color: #c1841a; background: #faf3e2; }
     .svc .ico { width: 20px; height: 20px; color: #2f7cf6; }
     .svc-name { font-size: var(--fs-1); font-weight: 700; }
     .life-card {
-      background: #fff; border-radius: var(--r-md); margin: 12px 16px; padding: 14px;
+      background: #fff; border-radius: var(--r-md); margin: var(--sp-2) var(--sp-3); padding: 14px;
     }
     .life-card .ft { font-size: var(--fs-2); font-weight: 700; margin-bottom: 6px; }
     .lf-row {
-      display: flex; align-items: center; gap: 8px;
+      display: flex; align-items: center; gap: var(--sp-1);
       padding: 10px 0; border-bottom: 1px solid #f0f1f3; font-size: var(--fs-1);
     }
     .lf-row .lb { width: 72px; color: var(--ink-2); flex-shrink: 0; }
@@ -833,25 +833,25 @@
     .life-calc .r { display: flex; justify-content: space-between; padding: 5px 0; }
     .life-calc .accent { color: #c1841a; font-weight: 700; }
     .life-calc .cash { color: #ff3b30; font-weight: 800; font-size: var(--fs-2); }
-    .life-calc .tip { color: var(--ink-3); font-size: var(--fs-1); margin-top: 4px; }
+    .life-calc .tip { color: var(--ink-3); font-size: var(--fs-1); margin-top: var(--sp-0); }
     .life-order {
-      background: #fff; border-radius: var(--r-md); margin: 0 16px 8px; padding: 12px;
+      background: #fff; border-radius: var(--r-md); margin: 0 var(--sp-3) var(--sp-1); padding: var(--sp-2);
     }
     .life-order .t { display: flex; justify-content: space-between; font-size: var(--fs-1); font-weight: 600; }
     .life-order .t .st { color: #00b578; font-size: var(--fs-1); }
     .life-order .m { display: flex; gap: 10px; margin-top: 6px; font-size: var(--fs-1); color: var(--ink-2); }
     .life-order .m .off { color: #c1841a; }
-    .life-order .tm { font-size: var(--fs-1); color: var(--ink-3); margin-top: 4px; }
+    .life-order .tm { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-0); }
 
     /* ===== 到店点单 · 品牌单列大图卡 ===== */
-    .td-list { display: flex; flex-direction: column; gap: 12px; margin: 0 16px; }
+    .td-list { display: flex; flex-direction: column; gap: var(--sp-2); margin: 0 var(--sp-3); }
     .td-card {
       border-radius: var(--r-card); overflow: hidden; background: #fff; cursor: pointer;
       box-shadow: none;
     }
     .td-card:active { transform: scale(.99); }
     .td-cover {
-      height: 128px; padding: 0 16px; position: relative; overflow: hidden;
+      height: 128px; padding: 0 var(--sp-3); position: relative; overflow: hidden;
       display: flex; align-items: center; gap: 13px; color: #fff;
     }
     .td-cover .logo {
@@ -870,7 +870,7 @@
       font-size: var(--fs-1); font-weight: 800; color: #e8542a;
       background: #fff; border-radius: var(--r-pill); padding: 3px 10px;
     }
-    .td-foot { display: flex; align-items: center; gap: 8px; padding: 11px 14px; }
+    .td-foot { display: flex; align-items: center; gap: var(--sp-1); padding: 11px 14px; }
     .td-foot .start { font-size: var(--fs-2); font-weight: 800; color: var(--ink); }
     .td-foot .start small { font-size: var(--fs-1); color: var(--ink-3); font-weight: 600; }
     .td-foot .tags { flex: 1; display: flex; gap: 6px; flex-wrap: wrap; min-width: 0; }
@@ -879,15 +879,15 @@
 
     /* ===== 到店点单 · 选择门店 ===== */
     .td-hero {
-      margin: 0 16px; border-radius: var(--r-md) var(--r-md) 0 0; padding: 15px 16px;
-      color: #fff; display: flex; align-items: center; gap: 12px;
+      margin: 0 var(--sp-3); border-radius: var(--r-md) var(--r-md) 0 0; padding: 15px var(--sp-3);
+      color: #fff; display: flex; align-items: center; gap: var(--sp-2);
       position: relative; overflow: hidden;
     }
     .td-hero .h1 { font-size: var(--fs-3); font-weight: 800; }
-    .td-hero .h2 { font-size: var(--fs-1); opacity: .9; margin-top: 4px; }
+    .td-hero .h2 { font-size: var(--fs-1); opacity: .9; margin-top: var(--sp-0); }
     .td-hero .emo { font-size: var(--fs-5); margin-left: auto; z-index: 2; }
     .td-steps {
-      display: flex; background: #fff; margin: 0 16px 12px;
+      display: flex; background: #fff; margin: 0 var(--sp-3) var(--sp-2);
       border-radius: 0 0 var(--r-md) var(--r-md); padding: 13px 6px;
     }
     .td-step {
@@ -905,7 +905,7 @@
       content: ''; position: absolute; top: 11px; left: 66%; width: 68%;
       height: 1px; background: #e6e8eb;
     }
-    .td-search { display: flex; align-items: center; gap: 8px; margin: 0 16px 11px; }
+    .td-search { display: flex; align-items: center; gap: var(--sp-1); margin: 0 var(--sp-3) 11px; }
     .td-search .city { font-size: var(--fs-1); font-weight: 700; color: var(--ink); flex: none; }
     .td-search .box {
       flex: 1; display: flex; align-items: center; gap: 6px; background: #fff;
@@ -916,19 +916,19 @@
       flex: none; background: var(--bd); color: #fff; font-size: var(--fs-1);
       font-weight: 700; border-radius: var(--r-pill); padding: 9px 18px;
     }
-    .td-store { background: #fff; border-radius: var(--r-card); padding: 14px; margin: 0 16px 9px; cursor: pointer; transition: background .12s; }
+    .td-store { background: #fff; border-radius: var(--r-card); padding: 14px; margin: 0 var(--sp-3) 9px; cursor: pointer; transition: background .12s; }
     .td-store:active { background: #f2f2f7; }
-    .td-store .top { display: flex; align-items: center; gap: 8px; }
+    .td-store .top { display: flex; align-items: center; gap: var(--sp-1); }
     .td-store .nm { flex: 1; font-size: var(--fs-2); font-weight: 800; color: var(--ink); }
     .td-store .st { font-size: var(--fs-1); color: #00b578; background: #eafaf3; border-radius: var(--r-xs); padding: 2px 7px; }
     .td-store .hr { font-size: var(--fs-1); color: var(--ink-3); margin-top: 6px; }
     .td-store .ad { font-size: var(--fs-1); color: var(--ink-2); margin-top: 3px; line-height: 1.5; }
-    .td-store .ds { font-size: var(--fs-1); color: var(--ink-3); margin-top: 4px; text-align: right; }
+    .td-store .ds { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-0); text-align: right; }
 
     /* ===== 到店点单 · 下单选品 ===== */
-    .td-mhead { background: #fff; padding: 12px 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .td-mhead { background: #fff; padding: var(--sp-2) 14px; display: flex; align-items: center; gap: 10px; margin-bottom: var(--sp-1); }
     .td-mhead .nm { font-size: var(--fs-2); font-weight: 800; color: var(--ink); }
-    .td-mhead .sub { font-size: var(--fs-1); color: var(--ink-3); margin-top: 4px; }
+    .td-mhead .sub { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-0); }
     .td-mhead .ad { font-size: var(--fs-1); color: var(--ink-2); margin-top: 3px; line-height: 1.5; }
     .td-mhead .sw {
       margin-left: auto; flex: none; font-size: var(--fs-1); font-weight: 700;
@@ -942,8 +942,8 @@
       content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
       width: 3px; height: 16px; background: var(--bd); border-radius: 0 var(--r-xs) var(--r-xs) 0;
     }
-    .td-items { flex: 1; background: #fff; padding: 4px 12px 8px; min-width: 0; }
-    .td-item { display: flex; gap: 10px; padding: 12px 0; border-bottom: 1px solid #f4f5f7; }
+    .td-items { flex: 1; background: #fff; padding: var(--sp-0) var(--sp-2) var(--sp-1); min-width: 0; }
+    .td-item { display: flex; gap: 10px; padding: var(--sp-2) 0; border-bottom: 1px solid #f4f5f7; }
     .td-item:last-child { border-bottom: none; }
     .td-thumb {
       width: 64px; height: 64px; border-radius: var(--r-md); flex: none; background: #f6f7f9;
@@ -984,14 +984,14 @@
     .td-bar .cart .cnt {
       position: absolute; top: -5px; right: -9px; min-width: 17px; height: 17px;
       border-radius: var(--r-pill); background: #ff3b30; color: #fff; font-size: var(--fs-1);
-      font-weight: 700; display: flex; align-items: center; justify-content: center; padding: 0 4px;
+      font-weight: 700; display: flex; align-items: center; justify-content: center; padding: 0 var(--sp-0);
     }
     .td-bar .empty { flex: 1; font-size: var(--fs-1); color: var(--ink-3); }
     .td-bar .sum { flex: 1; font-size: var(--fs-1); color: var(--ink-2); }
     .td-bar .sum b { font-size: var(--fs-3); color: #e8542a; }
     .td-bar .ck {
       flex: none; background: var(--bd); color: #fff; font-size: var(--fs-1);
-      font-weight: 700; border-radius: var(--r-pill); padding: 10px 24px;
+      font-weight: 700; border-radius: var(--r-pill); padding: 10px var(--sp-4);
     }
     .td-bar .ck.off { background: #e2e5e9; }
     .td-bar .pay-sum { flex: 1; display: flex; flex-direction: column; }
@@ -1001,7 +1001,7 @@
     /* ===== 到店点单 · 已选商品弹层 ===== */
     .td-sel-head { display: flex; align-items: center; justify-content: space-between; }
     .td-clear { font-size: var(--fs-1); color: var(--ink-3); }
-    .td-srow { display: flex; gap: 10px; padding: 12px 0; border-bottom: 1px solid #f4f5f7; }
+    .td-srow { display: flex; gap: 10px; padding: var(--sp-2) 0; border-bottom: 1px solid #f4f5f7; }
     .td-srow .info { flex: 1; min-width: 0; }
     .td-srow .nm { font-size: var(--fs-2); font-weight: 700; color: var(--ink); }
     .td-srow .spec { font-size: var(--fs-1); color: var(--ink-3); margin-top: 3px; line-height: 1.4; }
@@ -1015,30 +1015,30 @@
     }
 
     /* ===== 到店点单 · 确认订单 ===== */
-    .td-ck { padding: 4px 16px 0; }
+    .td-ck { padding: var(--sp-0) var(--sp-3) 0; }
     .td-block { background: #fff; border-radius: var(--r-md); padding: 13px 14px; margin-bottom: 10px; }
     .td-block .t { font-size: var(--fs-2); font-weight: 800; color: var(--ink); }
     .td-block .t .r { float: right; font-size: var(--fs-1); font-weight: 400; color: var(--ink-3); }
     .td-block .ad { font-size: var(--fs-1); color: var(--ink-2); margin-top: 7px; line-height: 1.5; }
     .td-field {
       width: 100%; box-sizing: border-box; border: 1px solid transparent; background: #f5f6f8;
-      border-radius: var(--r-sm); padding: 12px; font-size: var(--fs-2); outline: none; margin-top: 10px;
+      border-radius: var(--r-sm); padding: var(--sp-2); font-size: var(--fs-2); outline: none; margin-top: 10px;
     }
     .td-field:focus { background: #fff; border-color: var(--bd); }
-    .td-hint { font-size: var(--fs-1); color: var(--ink-3); margin-top: 8px; line-height: 1.5; }
+    .td-hint { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-1); line-height: 1.5; }
     .td-crow { display: flex; gap: 10px; padding: 11px 0; border-bottom: 1px solid #f4f5f7; }
     .td-crow .info { flex: 1; min-width: 0; }
     .td-crow .nm { font-size: var(--fs-2); font-weight: 700; color: var(--ink); }
     .td-crow .spec { font-size: var(--fs-1); color: var(--ink-3); margin-top: 3px; }
     .td-crow .rt { flex: none; text-align: right; }
     .td-crow .rt .p { font-size: var(--fs-1); font-weight: 800; color: var(--ink); }
-    .td-crow .rt .q { font-size: var(--fs-1); color: var(--ink-3); margin-top: 4px; }
+    .td-crow .rt .q { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-0); }
     .td-orig { text-align: right; font-size: var(--fs-1); color: var(--ink-3); padding-top: 10px; }
     .td-frow { display: flex; justify-content: space-between; font-size: var(--fs-1); color: var(--ink-2); padding: 6px 0; }
     .td-frow .r { font-weight: 700; color: #e8542a; }
-    .td-frow.total { border-top: 1px solid #f4f5f7; margin-top: 4px; padding-top: 10px; }
+    .td-frow.total { border-top: 1px solid #f4f5f7; margin-top: var(--sp-0); padding-top: 10px; }
     .td-frow.total .r { font-size: var(--fs-3); }
-    .td-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 11px; }
+    .td-tags { display: flex; flex-wrap: wrap; gap: var(--sp-1); margin-top: 11px; }
     .td-tag {
       font-size: var(--fs-1); color: var(--ink-2); background: #f4f5f7;
       border: 1px solid transparent; border-radius: var(--r-pill); padding: 7px 14px;
@@ -1046,7 +1046,7 @@
     .td-tag.on { background: #faf3e2; border-color: var(--brand); color: var(--brand-text); font-weight: 700; }
 
     /* ===== 到店点单 · 支付成功 ===== */
-    .td-paid { margin: 26px 16px 0; text-align: center; }
+    .td-paid { margin: 26px var(--sp-3) 0; text-align: center; }
     .td-paid .ok {
       width: 66px; height: 66px; border-radius: 50%; margin: 0 auto;
       background: #eafaf3; color: #00b578; font-size: var(--fs-5);
@@ -1054,7 +1054,7 @@
     }
     .td-paid .t { font-size: var(--fs-3); font-weight: 800; color: var(--ink); margin-top: 14px; }
     .td-paid .s { font-size: var(--fs-1); color: var(--ink-3); margin-top: 7px; line-height: 1.6; }
-    .td-code { background: #fff; border-radius: var(--r-md); padding: 16px; margin-top: 18px; text-align: center; }
+    .td-code { background: #fff; border-radius: var(--r-md); padding: var(--sp-3); margin-top: 18px; text-align: center; }
     .td-code .k { font-size: var(--fs-1); color: var(--ink-3); }
     .td-code .v { font-size: var(--fs-4); font-weight: 800; color: var(--brand-text); letter-spacing: 3px; margin-top: 7px; }
     .td-code .m { font-size: var(--fs-1); color: var(--ink-2); margin-top: 9px; line-height: 1.6; }
@@ -1062,7 +1062,7 @@
     .bs-mask { position: absolute; inset: 0; background: rgba(0,0,0,.32); z-index: 70; }
     .bs-sheet {
       position: absolute; left: 0; right: 0; bottom: 0; background: #fff;
-      border-radius: var(--r-sheet) var(--r-sheet) 0 0; z-index: 71; padding: 20px 16px 24px;
+      border-radius: var(--r-sheet) var(--r-sheet) 0 0; z-index: 71; padding: 20px var(--sp-3) var(--sp-4);
       max-height: 80%; overflow-y: auto;
       box-shadow: var(--shadow-sheet);
       animation: sheet-up .32s cubic-bezier(.32,.72,0,1);
@@ -1080,23 +1080,23 @@
       color: var(--ink-2); display: flex; align-items: center; justify-content: center;
       cursor: pointer; font-size: var(--fs-2); flex-shrink: 0;
     }
-    .bs-list { margin-top: 12px; }
+    .bs-list { margin-top: var(--sp-2); }
     .bs-item {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      padding: 11px 12px; border: 1.5px solid #f0f1f3; border-radius: var(--r-md);
-      margin-bottom: 8px; cursor: pointer;
+      padding: 11px var(--sp-2); border: 1.5px solid #f0f1f3; border-radius: var(--r-md);
+      margin-bottom: var(--sp-1); cursor: pointer;
     }
     .bs-item.on { border-color: #c1841a; background: #faf3e2; }
     .bs-item .n { font-size: var(--fs-1); font-weight: 600; }
     .bs-item .p { font-size: var(--fs-1); color: var(--ink-3); white-space: nowrap; }
     .bs-item .p b { color: #ff3b30; font-size: var(--fs-2); margin-left: 6px; }
     .bs-pay { background: #f8f9fb; border-radius: var(--r-md); padding: 10px; font-size: var(--fs-1); }
-    .bs-pay .r { display: flex; justify-content: space-between; padding: 4px 0; }
+    .bs-pay .r { display: flex; justify-content: space-between; padding: var(--sp-0) 0; }
     .bs-pay .save { color: #00b578; font-weight: 700; }
     .bs-pay .cash { color: #ff3b30; font-weight: 800; font-size: var(--fs-2); }
-    .bs-pay .tip { color: var(--ink-3); font-size: var(--fs-1); margin-top: 4px; }
+    .bs-pay .tip { color: var(--ink-3); font-size: var(--fs-1); margin-top: var(--sp-0); }
     /* 下单弹层：菜品图 + 详情 */
-    .bs-dish { display: flex; gap: 12px; margin-top: 14px; }
+    .bs-dish { display: flex; gap: var(--sp-2); margin-top: 14px; }
     .bs-dish .ph {
       width: 84px; height: 84px; border-radius: var(--r-md); object-fit: cover;
       background: #f4f5f7; flex-shrink: 0;
@@ -1106,32 +1106,32 @@
     .bs-dish .nm { font-size: var(--fs-2); font-weight: 800; }
     .bs-dish .nm .tag {
       font-size: var(--fs-1); font-weight: 700; color: #fff; vertical-align: 2px;
-      background: #2b2f3a; border-radius: var(--r-xs); padding: 1px 6px; margin-left: 4px;
+      background: #2b2f3a; border-radius: var(--r-xs); padding: 1px 6px; margin-left: var(--sp-0);
     }
-    .bs-dish .cb { font-size: var(--fs-1); color: var(--ink-2); margin-top: 4px; font-weight: 600; }
-    .bs-dish .dt { font-size: var(--fs-1); color: var(--ink-3); margin-top: 4px; line-height: 1.5; }
+    .bs-dish .cb { font-size: var(--fs-1); color: var(--ink-2); margin-top: var(--sp-0); font-weight: 600; }
+    .bs-dish .dt { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-0); line-height: 1.5; }
     .bs-dish .pr { margin-top: 5px; font-size: var(--fs-1); }
-    .bs-dish .pr .old { color: var(--ink-3); text-decoration: line-through; margin-right: 8px; }
+    .bs-dish .pr .old { color: var(--ink-3); text-decoration: line-through; margin-right: var(--sp-1); }
     .bs-dish .pr .free { color: #00b578; font-weight: 800; }
     /* 下单弹层：收货地址确认 */
     .bs-addr {
       position: relative; border: 1.5px solid #f0f1f3; border-radius: var(--r-md);
-      padding: 10px 12px; margin-top: 12px; cursor: pointer;
+      padding: 10px var(--sp-2); margin-top: var(--sp-2); cursor: pointer;
     }
     .bs-addr:hover { border-color: #ecd9b0; }
     .bs-addr.warn { background: #fffaf0; border-color: #f2dfb4; }
     .bs-addr .lab { font-size: var(--fs-1); color: var(--ink-3); }
     .bs-addr .lab .chg { float: right; color: var(--brand-text); font-weight: 700; }
-    .bs-addr .top { display: flex; align-items: baseline; gap: 8px; margin-top: 4px; }
+    .bs-addr .top { display: flex; align-items: baseline; gap: var(--sp-1); margin-top: var(--sp-0); }
     .bs-addr .top .nm { font-size: var(--fs-2); font-weight: 700; }
     .bs-addr .top .ph { font-size: var(--fs-1); color: var(--ink-2); }
     .bs-addr .top .def { font-size: var(--fs-1); color: var(--brand-text); background: #faf3e2; border-radius: var(--r-xs); padding: 1px 5px; }
     .bs-addr .dt { font-size: var(--fs-1); color: var(--ink-2); margin-top: 3px; line-height: 1.5; }
 
     /* ===== 本地生活 · 功能选择卡（hub 页） ===== */
-    .life-grid { display: flex; flex-direction: column; gap: 10px; margin: 0 16px; }
+    .life-grid { display: flex; flex-direction: column; gap: 10px; margin: 0 var(--sp-3); }
     .lg-card {
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center; gap: var(--sp-2);
       background: #fff; border: 1.5px solid var(--line); border-radius: var(--r-md);
       padding: 13px 14px; cursor: pointer;
       transition: transform .12s ease, background .12s ease;
@@ -1153,25 +1153,25 @@
 
     /* ===== 本地生活 · 福彩兑换（积分焕彩） ===== */
     .lg-lottery .lg-ico { background: #fdeaea; }
-    .lt-hero { padding: 6px 16px 0; }
+    .lt-hero { padding: 6px var(--sp-3) 0; }
     .lt-top { display: flex; justify-content: space-between; align-items: center; }
     .lt-name { font-size: var(--fs-3); font-weight: 800; color: var(--ink); }
     .lt-rec {
       font-size: var(--fs-1); color: var(--ink-2); background: #fff;
-      border: 1px solid var(--line); border-radius: var(--r-pill); padding: 5px 12px; cursor: pointer;
+      border: 1px solid var(--line); border-radius: var(--r-pill); padding: 5px var(--sp-2); cursor: pointer;
     }
     .lt-issue { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
     .lt-issue-n { font-size: var(--fs-2); font-weight: 700; color: var(--ink); }
     .lt-count { font-size: var(--fs-1); color: #e23b3b; font-weight: 600; }
-    .lt-tip { margin: 12px 16px 0; font-size: var(--fs-1); color: var(--ink-3); }
+    .lt-tip { margin: var(--sp-2) var(--sp-3) 0; font-size: var(--fs-1); color: var(--ink-3); }
     .lt-pool {
-      margin: 12px 16px 0; border: 1.5px dashed #d8dbe0; border-radius: var(--r-md); background: #fff;
+      margin: var(--sp-2) var(--sp-3) 0; border: 1.5px dashed #d8dbe0; border-radius: var(--r-md); background: #fff;
       min-height: 150px; padding: 6px 14px;
     }
     .lt-empty { text-align: center; color: var(--ink-3); font-size: var(--fs-1); padding: 46px 0; }
     .lt-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid #f4f5f7; }
     .lt-row:last-child { border-bottom: none; }
-    .lt-nums { display: flex; flex-wrap: wrap; gap: 8px; }
+    .lt-nums { display: flex; flex-wrap: wrap; gap: var(--sp-1); }
     .lt-b {
       width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center;
       justify-content: center; font-size: var(--fs-1); font-weight: 800; color: #fff; flex: none;
@@ -1179,19 +1179,19 @@
     .lt-b.rt { background: #e23b3b; }
     .lt-b.bt { background: #2f7cf6; }
     .lt-b.s { width: 26px; height: 26px; font-size: var(--fs-1); }
-    .lt-del { color: #b8bcc2; font-size: var(--fs-2); padding: 4px 8px; cursor: pointer; }
+    .lt-del { color: #b8bcc2; font-size: var(--fs-2); padding: var(--sp-0) var(--sp-1); cursor: pointer; }
 
     /* 福彩兑换 · 底部操作栏（挂 .phone 层级） */
     .lt-bar {
       position: absolute; left: 0; right: 0; bottom: 0; z-index: 55; background: #fff;
-      border-top: 1px solid var(--line); padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--line); padding: var(--sp-1) var(--sp-2) calc(var(--sp-1) + env(safe-area-inset-bottom, 0px));
     }
     .lt-bar-c { display: flex; align-items: center; gap: 10px; }
     .lt-act { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: var(--fs-1); color: var(--ink-2); width: 58px; cursor: pointer; flex: none; }
     .lt-act .i { font-size: var(--fs-4); }
     .lt-ck {
       flex: 1; background: linear-gradient(135deg, #d13b34, #b3271f); color: #fff; font-size: var(--fs-2);
-      font-weight: 800; border-radius: var(--r-pill); padding: 12px 0; border: none; cursor: pointer;
+      font-weight: 800; border-radius: var(--r-pill); padding: var(--sp-2) 0; border: none; cursor: pointer;
     }
     .lt-ck.off { background: #e2e5e9; }
     .lt-note { text-align: center; font-size: var(--fs-1); color: var(--ink-3); margin-top: 6px; }
@@ -1201,9 +1201,9 @@
     .lt-pk-x { font-size: var(--fs-1); color: var(--ink-2); cursor: pointer; }
     .lt-pk-y { font-size: var(--fs-1); color: #e23b3b; font-weight: 700; cursor: pointer; }
     .lt-pk-t { font-size: var(--fs-3); font-weight: 800; }
-    .lt-pk-sec { font-size: var(--fs-2); font-weight: 700; margin: 16px 0 10px; }
+    .lt-pk-sec { font-size: var(--fs-2); font-weight: 700; margin: var(--sp-3) 0 10px; }
     .lt-pk-sec small { font-size: var(--fs-1); color: var(--ink-3); font-weight: 400; margin-left: 6px; }
-    .lt-balls { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    .lt-balls { display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--sp-1); }
     .lt-ball {
       height: 36px; border-radius: 50%; background: #f2f3f5; color: var(--ink-2);
       display: flex; align-items: center; justify-content: center; font-size: var(--fs-1); font-weight: 700; cursor: pointer;
@@ -1225,13 +1225,13 @@
     .lt-dlg-b .lt-dlg-y { color: #2f7cf6; font-weight: 700; }
 
     /* 福彩兑换 · 实名认证页 */
-    .lt-rn-tip { margin: 14px 16px 0; background: #fdecec; color: #e2504a; font-size: var(--fs-1); border-radius: var(--r-md); padding: 11px 13px; line-height: 1.5; }
-    .lt-field { margin: 18px 16px 0; }
-    .lt-lab { font-size: var(--fs-2); font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-    .lt-in { width: 100%; border: 1px solid var(--line); border-radius: var(--r-md); padding: 12px; font-size: var(--fs-2); background: #fff; }
+    .lt-rn-tip { margin: 14px var(--sp-3) 0; background: #fdecec; color: #e2504a; font-size: var(--fs-1); border-radius: var(--r-md); padding: 11px 13px; line-height: 1.5; }
+    .lt-field { margin: 18px var(--sp-3) 0; }
+    .lt-lab { font-size: var(--fs-2); font-weight: 700; color: var(--ink); margin-bottom: var(--sp-1); }
+    .lt-in { width: 100%; border: 1px solid var(--line); border-radius: var(--r-md); padding: var(--sp-2); font-size: var(--fs-2); background: #fff; }
 
     /* 福彩兑换 · 兑换记录 */
-    .lt-rec-card { background: #fff; border-radius: var(--r-md); padding: 14px; margin: 12px 16px 0; cursor: pointer; }
+    .lt-rec-card { background: #fff; border-radius: var(--r-md); padding: 14px; margin: var(--sp-2) var(--sp-3) 0; cursor: pointer; }
     .lt-rec-h { display: flex; justify-content: space-between; align-items: center; font-size: var(--fs-2); font-weight: 700; }
     .lt-st { font-size: var(--fs-1); font-weight: 700; }
     .lt-st.pend { color: #e6a23c; }
@@ -1241,38 +1241,38 @@
     .lt-rec-f { display: flex; justify-content: space-between; font-size: var(--fs-1); color: var(--ink-3); margin-top: 10px; }
 
     /* 福彩兑换 · 出票 / 开奖详情 */
-    .lt-det-head { margin: 0 16px 12px; padding: 18px 16px; border-radius: var(--r-md); color: #fff; background: #c0392b; }
+    .lt-det-head { margin: 0 var(--sp-3) var(--sp-2); padding: 18px var(--sp-3); border-radius: var(--r-md); color: #fff; background: #c0392b; }
     .lt-det-head.lt-win { background: #e2504a; }
     .lt-det-head.lt-lose { background: #9aa0a8; }
     .lt-det-head .t { font-size: var(--fs-4); font-weight: 800; }
     .lt-det-head .h { font-size: var(--fs-1); opacity: .92; margin-top: 5px; }
-    .lt-card { background: #fff; border-radius: var(--r-md); padding: 14px; margin: 10px 16px; }
+    .lt-card { background: #fff; border-radius: var(--r-md); padding: 14px; margin: 10px var(--sp-3); }
     .lt-det-t { font-size: var(--fs-2); font-weight: 800; }
-    .lt-det-t small { font-size: var(--fs-1); color: var(--ink-3); font-weight: 400; margin-left: 4px; }
-    .lt-det-lab { font-size: var(--fs-1); color: var(--ink-3); margin: 12px 0 8px; }
-    .lt-det-nums { display: flex; gap: 8px; flex-wrap: wrap; }
-    .lt-det-mul { font-size: var(--fs-1); color: var(--ink-3); margin-top: 10px; padding-top: 8px; border-top: 1px solid #f4f5f7; }
-    .lt-kv { display: flex; justify-content: space-between; gap: 12px; font-size: var(--fs-1); padding: 7px 0; color: var(--ink-2); }
+    .lt-det-t small { font-size: var(--fs-1); color: var(--ink-3); font-weight: 400; margin-left: var(--sp-0); }
+    .lt-det-lab { font-size: var(--fs-1); color: var(--ink-3); margin: var(--sp-2) 0 var(--sp-1); }
+    .lt-det-nums { display: flex; gap: var(--sp-1); flex-wrap: wrap; }
+    .lt-det-mul { font-size: var(--fs-1); color: var(--ink-3); margin-top: 10px; padding-top: var(--sp-1); border-top: 1px solid #f4f5f7; }
+    .lt-kv { display: flex; justify-content: space-between; gap: var(--sp-2); font-size: var(--fs-1); padding: 7px 0; color: var(--ink-2); }
     .lt-kv > span:last-child { color: var(--ink); font-weight: 600; text-align: right; }
     .lt-money { color: #e8542a !important; }
     .lt-copy { font-size: var(--fs-1); color: #2f7cf6; border: 1px solid #cddffb; background: #f2f7ff; border-radius: var(--r-sm); padding: 1px 6px; margin-left: 6px; cursor: pointer; }
 
     /* ===== 「我的」页 · 代理商 ↔ B 端联系横幅 / 拉新中心入口 ===== */
     .bd-banner {
-      margin: 14px 16px 0; display: flex; align-items: center; justify-content: space-between;
+      margin: 14px var(--sp-3) 0; display: flex; align-items: center; justify-content: space-between;
       background: #2b2f38; border-radius: var(--r-md);
-      padding: 14px 16px; cursor: pointer;
+      padding: 14px var(--sp-3); cursor: pointer;
     }
     .bd-banner .bd-t { color: #fff; font-size: var(--fs-2); font-weight: 800; }
-    .bd-banner .bd-s { color: rgba(255,255,255,.72); font-size: var(--fs-1); margin-top: 4px; }
+    .bd-banner .bd-s { color: rgba(255,255,255,.72); font-size: var(--fs-1); margin-top: var(--sp-0); }
     .bd-cta {
-      flex: none; margin-left: 12px; font-size: var(--fs-1); font-weight: 700; color: #1f2229;
+      flex: none; margin-left: var(--sp-2); font-size: var(--fs-1); font-weight: 700; color: #1f2229;
       background: #e2b45c; border-radius: var(--r-pill); padding: 7px 14px;
     }
     /* 入口行：标题在左，小箭头统一贴最右；副标题紧贴箭头左侧（超长时省略不挤压） */
     .entry-row { display: flex; align-items: center; min-height: 40px; font-size: var(--fs-3); font-weight: 600; }
     .entry-row .entry-t { flex: none; }
-    .entry-chev { flex: none; margin-left: 8px; font-size: var(--fs-3); font-weight: 600; color: var(--ink-3); line-height: 1; }
+    .entry-chev { flex: none; margin-left: var(--sp-1); font-size: var(--fs-3); font-weight: 600; color: var(--ink-3); line-height: 1; }
     .entry-chev.auto { margin-left: auto; }
     .pull-sub {
       margin-left: auto; min-width: 0; font-size: var(--fs-1); color: var(--ink-3); font-weight: 400;
@@ -1282,11 +1282,11 @@
     /* ===== 水电燃缴费（三 tab 表单流） ===== */
     .bill-tabs {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
-      margin: 4px 16px 0;
+      margin: var(--sp-0) var(--sp-3) 0;
     }
     .bill-tab {
       background: #fff; border: 2px solid #f0f1f3; border-radius: var(--r-md);
-      padding: 14px 0 12px; display: flex; flex-direction: column;
+      padding: 14px 0 var(--sp-2); display: flex; flex-direction: column;
       align-items: center; gap: 6px; cursor: pointer;
     }
     .bill-tab .ico-wrap { font-size: var(--fs-4); line-height: 1; display: flex; }
@@ -1296,7 +1296,7 @@
     .bill-tab.on.t-power { border-color: #f5b301; }
     .bill-tab.on.t-gas   { border-color: #ff4d4f; }
     .bill-banner {
-      margin: 12px 16px 0; padding: 14px 16px; border-radius: var(--r-md);
+      margin: var(--sp-2) var(--sp-3) 0; padding: 14px var(--sp-3); border-radius: var(--r-md);
       background: #2f7cf6; color: #fff;
       display: flex; align-items: center; justify-content: space-between;
     }
@@ -1307,27 +1307,27 @@
     }
     .bill-banner .rg { font-size: var(--fs-2); font-weight: 600; }
     .bill-form {
-      background: #fff; border-radius: var(--r-md); margin: 12px 16px; padding: 2px 16px;
+      background: #fff; border-radius: var(--r-md); margin: var(--sp-2) var(--sp-3); padding: 2px var(--sp-3);
     }
     .bf-item { padding: 14px 0; border-bottom: 1px solid #f0f1f3; }
     .bf-item:last-child { border-bottom: none; }
     .bf-lb { font-size: var(--fs-1); color: var(--ink-3); }
-    .bf-line { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+    .bf-line { display: flex; align-items: center; justify-content: space-between; margin-top: var(--sp-1); }
     .bf-val { font-size: var(--fs-2); font-weight: 600; color: var(--ink); }
     .bf-val.ph { color: #c3c7cd; font-weight: 400; }
-    .bf-chev { color: #c3c7cd; font-size: var(--fs-3); margin-left: 8px; }
+    .bf-chev { color: #c3c7cd; font-size: var(--fs-3); margin-left: var(--sp-1); }
     .bf-in {
       width: 100%; border: none; outline: none; background: transparent;
-      font-size: var(--fs-2); color: var(--ink); margin-top: 8px;
-      border-bottom: 1px solid #eceef1; padding-bottom: 8px;
+      font-size: var(--fs-2); color: var(--ink); margin-top: var(--sp-1);
+      border-bottom: 1px solid #eceef1; padding-bottom: var(--sp-1);
     }
     .bf-in::placeholder { color: #c3c7cd; }
     .bill-tip {
-      margin: 12px 16px 0; background: #fffbe8; border: 1px solid #ffe58f;
-      border-radius: var(--r-md); padding: 12px; font-size: var(--fs-1); color: #ad6b00;
-      line-height: 1.8; display: flex; gap: 8px;
+      margin: var(--sp-2) var(--sp-3) 0; background: #fffbe8; border: 1px solid #ffe58f;
+      border-radius: var(--r-md); padding: var(--sp-2); font-size: var(--fs-1); color: #ad6b00;
+      line-height: 1.8; display: flex; gap: var(--sp-1);
     }
-    .bill-acts { margin: 14px 16px 0; display: flex; flex-direction: column; gap: 10px; }
+    .bill-acts { margin: 14px var(--sp-3) 0; display: flex; flex-direction: column; gap: 10px; }
     .bill-back {
       background: none; border: none; color: var(--ink-3);
       font-size: var(--fs-1); cursor: pointer;
@@ -1335,19 +1335,19 @@
 
     /* ===== 加油站（附近油站列表） ===== */
     .fuel-banner {
-      margin: 4px 16px 0; border-radius: var(--r-md); overflow: hidden;
+      margin: var(--sp-0) var(--sp-3) 0; border-radius: var(--r-md); overflow: hidden;
       height: 108px; background: #dfeaf7;
     }
     .fuel-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .fuel-filters {
       display: flex; justify-content: space-around;
-      padding: 13px 16px; border-bottom: 1px solid #f0f1f3;
+      padding: 13px var(--sp-3); border-bottom: 1px solid #f0f1f3;
     }
     .fuel-filters span { font-size: var(--fs-2); font-weight: 600; color: var(--ink); cursor: pointer; }
     .fuel-filters span::after { content: "⌄"; margin-left: 5px; color: var(--ink-3); }
     .fuel-card {
-      display: flex; gap: 12px; align-items: center;
-      background: #fff; border-radius: var(--r-md); margin: 10px 16px 0; padding: 14px;
+      display: flex; gap: var(--sp-2); align-items: center;
+      background: #fff; border-radius: var(--r-md); margin: 10px var(--sp-3) 0; padding: 14px;
     }
     .fuel-ico {
       width: 52px; height: 52px; border-radius: var(--r-md); background: #fdecec;
@@ -1357,7 +1357,7 @@
     .fuel-main { flex: 1; min-width: 0; }
     .fuel-name { font-size: var(--fs-2); font-weight: 700; }
     .fuel-addr {
-      font-size: var(--fs-1); color: var(--ink-3); margin-top: 4px;
+      font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-0);
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
     .fuel-price { color: #ff3b30; font-size: var(--fs-3); font-weight: 800; margin-top: 6px; }
@@ -1365,16 +1365,16 @@
     .fuel-dist { font-size: var(--fs-1); color: var(--ink-3); white-space: nowrap; }
     .fuel-go {
       background: #ff5a4e; color: #fff; border: none; font-size: var(--fs-1);
-      font-weight: 700; padding: 8px 14px; border-radius: var(--r-sm); cursor: pointer;
+      font-weight: 700; padding: var(--sp-1) 14px; border-radius: var(--r-sm); cursor: pointer;
       white-space: nowrap;
     }
 
     /* ===== 充电桩（附近充电站列表） ===== */
-    .chg-search { display: flex; align-items: center; gap: 8px; margin: 4px 16px 0; }
+    .chg-search { display: flex; align-items: center; gap: var(--sp-1); margin: var(--sp-0) var(--sp-3) 0; }
     .chg-loc { font-size: var(--fs-1); font-weight: 700; white-space: nowrap; }
     .chg-in {
       flex: 1; display: flex; align-items: center; gap: 6px;
-      background: #f2f3f5; border-radius: var(--r-pill); padding: 8px 14px;
+      background: #f2f3f5; border-radius: var(--r-pill); padding: var(--sp-1) 14px;
       color: var(--ink-3); font-size: var(--fs-1);
     }
     .chg-in input {
@@ -1383,30 +1383,30 @@
     }
     .chg-btn {
       background: #2f7cf6; color: #fff; border: none; border-radius: var(--r-pill);
-      padding: 8px 18px; font-size: var(--fs-1); font-weight: 700; cursor: pointer;
+      padding: var(--sp-1) 18px; font-size: var(--fs-1); font-weight: 700; cursor: pointer;
     }
     .chg-filters {
-      display: flex; gap: 8px; margin: 12px 16px 0;
+      display: flex; gap: var(--sp-1); margin: var(--sp-2) var(--sp-3) 0;
       overflow-x: auto; scrollbar-width: none;
     }
     .chg-filters::-webkit-scrollbar { display: none; }
     .chg-filters span {
-      flex-shrink: 0; background: #fff; border-radius: var(--r-sm); padding: 8px 12px;
+      flex-shrink: 0; background: #fff; border-radius: var(--r-sm); padding: var(--sp-1) var(--sp-2);
       font-size: var(--fs-1); color: var(--ink); font-weight: 600; cursor: pointer;
     }
     .chg-filters span::after { content: " ⌄"; color: var(--ink-3); font-weight: 400; }
     .chg-wrap { position: relative; }
     .chg-card {
-      background: #fff; border-radius: var(--r-md); margin: 10px 16px 0; padding: 14px;
+      background: #fff; border-radius: var(--r-md); margin: 10px var(--sp-3) 0; padding: 14px;
       cursor: pointer;
     }
-    .chg-top { display: flex; justify-content: space-between; gap: 8px; }
+    .chg-top { display: flex; justify-content: space-between; gap: var(--sp-1); }
     .chg-name { font-size: var(--fs-2); font-weight: 700; flex: 1; min-width: 0; }
     .chg-dist { font-size: var(--fs-1); color: #2f7cf6; white-space: nowrap; }
-    .chg-price { color: #ff3b30; font-size: var(--fs-4); font-weight: 800; margin-top: 8px; }
+    .chg-price { color: #ff3b30; font-size: var(--fs-4); font-weight: 800; margin-top: var(--sp-1); }
     .chg-price small { font-size: var(--fs-1); color: var(--ink-2); font-weight: 600; }
     .chg-meta {
-      display: flex; align-items: center; gap: 8px; margin-top: 10px;
+      display: flex; align-items: center; gap: var(--sp-1); margin-top: 10px;
       font-size: var(--fs-1); color: var(--ink-3);
     }
     .chg-park {
@@ -1431,7 +1431,7 @@
 
     /* ===== 悬赏任务 ===== */
     .by-hero {
-      margin: 12px 16px; padding: 16px; border-radius: var(--r-lg);
+      margin: var(--sp-2) var(--sp-3); padding: var(--sp-3); border-radius: var(--r-lg);
       background: var(--brand-red-grad); color: #fff;
     }
     .by-hero .top { display: flex; justify-content: space-between; align-items: center; }
@@ -1440,34 +1440,34 @@
     .by-hero .n .yen { font-size: var(--fs-3); }
     .by-hero .wd {
       background: #fff; color: #c1841a; font-size: var(--fs-1); font-weight: 700;
-      padding: 7px 12px; border-radius: var(--r-pill); border: none; cursor: pointer;
+      padding: 7px var(--sp-2); border-radius: var(--r-pill); border: none; cursor: pointer;
     }
     .by-stats {
-      display: flex; margin-top: 12px; background: rgba(0,0,0,.15);
+      display: flex; margin-top: var(--sp-2); background: rgba(0,0,0,.15);
       border-radius: var(--r-md); padding: 10px 0;
     }
     .by-stats .cell { flex: 1; text-align: center; }
     .by-stats .v { font-size: var(--fs-2); font-weight: 700; }
     .by-stats .l { font-size: var(--fs-1); opacity: .85; margin-top: 2px; }
-    .by-filters { display: flex; gap: 8px; padding: 12px 16px 4px; }
+    .by-filters { display: flex; gap: var(--sp-1); padding: var(--sp-2) var(--sp-3) var(--sp-0); }
     .by-f {
       font-size: var(--fs-1); color: var(--ink-2); background: #fff;
-      padding: 5px 12px; border-radius: var(--r-pill); border: 1px solid #e5e6eb; cursor: pointer;
+      padding: 5px var(--sp-2); border-radius: var(--r-pill); border: 1px solid #e5e6eb; cursor: pointer;
     }
     .by-f.on { color: #fff; background: var(--brand-ink); border-color: var(--brand-ink); font-weight: 600; }
     .task {
       display: flex; justify-content: space-between; gap: 10px;
-      background: #fff; border-radius: var(--r-md); margin: 10px 16px; padding: 12px;
+      background: #fff; border-radius: var(--r-md); margin: 10px var(--sp-3); padding: var(--sp-2);
       cursor: pointer;
     }
     .task-title { font-size: var(--fs-2); font-weight: 700; }
-    .task-meta { margin-top: 4px; font-size: var(--fs-1); color: var(--ink-3); display: flex; gap: 6px; }
+    .task-meta { margin-top: var(--sp-0); font-size: var(--fs-1); color: var(--ink-3); display: flex; gap: 6px; }
     .task-meta .plat {
       color: #2f7cf6; background: #eef5ff; padding: 1px 6px; border-radius: var(--r-xs);
     }
     .status-chip {
       display: inline-block; margin-top: 6px; font-size: var(--fs-1);
-      padding: 2px 8px; border-radius: var(--r-sm);
+      padding: 2px var(--sp-1); border-radius: var(--r-sm);
     }
     .s-open { background: #e8faf3; color: #00b578; }
     .s-doing { background: #faf3e2; color: #c1841a; }
@@ -1484,7 +1484,7 @@
     }
     .record {
       display: flex; justify-content: space-between;
-      background: #fff; border-radius: var(--r-md); margin: 8px 16px; padding: 12px;
+      background: #fff; border-radius: var(--r-md); margin: var(--sp-1) var(--sp-3); padding: var(--sp-2);
     }
     .r-title { font-size: var(--fs-1); font-weight: 600; }
     .r-time { font-size: var(--fs-1); color: var(--ink-3); margin-top: 3px; }
@@ -1503,7 +1503,7 @@
     .by-sheet {
       width: 100%; max-width: 390px; margin: 0 auto;
       background: #fff; border-radius: var(--r-lg) var(--r-lg) 0 0;
-      padding: 18px 16px 24px; max-height: 85%;
+      padding: 18px var(--sp-3) var(--sp-4); max-height: 85%;
       overflow-y: auto; box-sizing: border-box;
     }
     .by-sheet-head { display: flex; justify-content: space-between; gap: 10px; }
@@ -1511,10 +1511,10 @@
     .sheet-sub { font-size: var(--fs-1); color: var(--ink-3); margin-top: 2px; }
     .sheet-cash { color: #ff3b30; font-size: var(--fs-4); font-weight: 800; }
     .sheet-desc { margin-top: 10px; font-size: var(--fs-1); color: var(--ink-2); line-height: 1.5; }
-    .steps { margin-top: 12px; background: #f8f9fb; border-radius: var(--r-md); padding: 4px 10px; }
+    .steps { margin-top: var(--sp-2); background: #f8f9fb; border-radius: var(--r-md); padding: var(--sp-0) 10px; }
     .step {
-      display: flex; align-items: center; gap: 8px;
-      padding: 8px 0; font-size: var(--fs-1); border-bottom: 1px solid #f0f1f3;
+      display: flex; align-items: center; gap: var(--sp-1);
+      padding: var(--sp-1) 0; font-size: var(--fs-1); border-bottom: 1px solid #f0f1f3;
     }
     .step:last-child { border-bottom: none; }
     .step-no {
@@ -1524,12 +1524,12 @@
     }
     .reject {
       margin-top: 10px; background: #ffecec; color: #ff3b30;
-      font-size: var(--fs-1); padding: 8px; border-radius: var(--r-sm);
+      font-size: var(--fs-1); padding: var(--sp-1); border-radius: var(--r-sm);
     }
     .upload {
-      margin-top: 12px; border: 1.5px dashed #c9cdd4; border-radius: var(--r-md);
+      margin-top: var(--sp-2); border: 1.5px dashed #c9cdd4; border-radius: var(--r-md);
       min-height: 90px; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 4px;
+      align-items: center; justify-content: center; gap: var(--sp-0);
       background: #fafbfc; cursor: pointer;
     }
     .upload-plus { font-size: var(--fs-5); color: #c9cdd4; line-height: 1; }
@@ -1542,12 +1542,12 @@
     }
     .sheet-actions { margin-top: 14px; display: flex; gap: 10px; }
     .sheet-actions .btn { flex: 1; }
-    .seg.by-seg { display: flex; background: #fff; margin: 0 16px; border-radius: var(--r-md); overflow: hidden; }
+    .seg.by-seg { display: flex; background: #fff; margin: 0 var(--sp-3); border-radius: var(--r-md); overflow: hidden; }
     .seg.by-seg .s { flex: 1; text-align: center; padding: 10px 0; font-size: var(--fs-1); color: var(--ink-2); cursor: pointer; }
     .seg.by-seg .s.on { color: #c1841a; font-weight: 700; background: #faf3e2; }
 
     .home-points {
-      margin: 0 16px 12px; padding: 14px 16px; border-radius: var(--r-md);
+      margin: 0 var(--sp-3) var(--sp-2); padding: 14px var(--sp-3); border-radius: var(--r-md);
       background: #faf3e2;
       display: flex; align-items: center; justify-content: space-between;
       cursor: pointer;
@@ -1558,25 +1558,25 @@
     .home-points .u { font-size: var(--fs-1); color: var(--brand-text); }
     .home-points .go {
       background: var(--brand-ink); color: #fff; font-size: var(--fs-1); font-weight: 600;
-      border: none; padding: 8px 14px; border-radius: var(--r-pill); cursor: pointer;
+      border: none; padding: var(--sp-1) 14px; border-radius: var(--r-pill); cursor: pointer;
     }
 
     .home-sec-head {
       display: flex; justify-content: space-between; align-items: center;
-      margin: 4px 20px 10px; font-size: var(--fs-2); font-weight: 700;
+      margin: var(--sp-0) 20px 10px; font-size: var(--fs-2); font-weight: 700;
     }
     .home-sec-head .more { font-size: var(--fs-1); color: var(--ink-3); font-weight: 400; cursor: pointer; }
     .home-coupons {
-      display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 4px;
+      display: flex; gap: 10px; overflow-x: auto; padding: 0 var(--sp-3) var(--sp-0);
       scrollbar-width: none;
     }
     .home-coupons::-webkit-scrollbar { display: none; }
     .hc {
-      min-width: 150px; border-radius: var(--r-md); padding: 12px; color: #fff;
+      min-width: 150px; border-radius: var(--r-md); padding: var(--sp-2); color: #fff;
       cursor: pointer; position: relative;
     }
     .hc .bt { font-size: var(--fs-1); opacity: .9; }
-    .hc .tt { font-size: var(--fs-2); font-weight: 700; margin-top: 4px; }
+    .hc .tt { font-size: var(--fs-2); font-weight: 700; margin-top: var(--sp-0); }
     .hc .ss { font-size: var(--fs-1); opacity: .9; margin-top: 2px; }
     .hc .btn-s {
       margin-top: 10px; background: #fff; color: var(--brand-text);
@@ -1593,7 +1593,7 @@
     .th-gold { background: #d9a243; color: #1f2329; }
     .th-gold .btn-s { background: #1f2329; color: #edc877; }
 
-    .home-goods { padding: 0 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .home-goods { padding: 0 var(--sp-3); display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .hg {
       background: #fff; border-radius: var(--r-md); padding: 10px; cursor: pointer;
     }
@@ -1602,7 +1602,7 @@
       display: flex; align-items: center; justify-content: center;
       color: var(--brand-text); font-size: var(--fs-1); text-align: center; padding: 6px; line-height: 1.3;
     }
-    .hg .t { font-size: var(--fs-1); font-weight: 600; margin-top: 8px; line-height: 1.35;
+    .hg .t { font-size: var(--fs-1); font-weight: 600; margin-top: var(--sp-1); line-height: 1.35;
       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 34px; }
     .hg .pr { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
     .hg .pt { color: var(--brand-text); font-size: var(--fs-1); font-weight: 700; }
@@ -1617,7 +1617,7 @@
     .points-pill {
       display: flex; align-items: center; gap: 5px;
       background: #faf3e2;
-      border-radius: var(--r-pill); padding: 8px 14px; color: var(--brand-text); cursor: pointer;
+      border-radius: var(--r-pill); padding: var(--sp-1) 14px; color: var(--brand-text); cursor: pointer;
     }
     .points-pill .ico { font-size: var(--fs-3); width: 18px; height: 18px; }
     .points-pill .n { font-size: var(--fs-3); font-weight: 700; }
@@ -1635,10 +1635,10 @@
       border-right: 1px solid #eceef1;
     }
     .side-item {
-      padding: 14px 4px; text-align: center; color: var(--ink-2);
+      padding: 14px var(--sp-0); text-align: center; color: var(--ink-2);
       font-size: var(--fs-1); cursor: pointer; border-left: 3px solid transparent; line-height: 1.3;
     }
-    .side-item .ico { font-size: var(--fs-4); width: 24px; height: 24px; margin: 0 auto 4px; display: block; color: inherit; }
+    .side-item .ico { font-size: var(--fs-4); width: 24px; height: 24px; margin: 0 auto var(--sp-0); display: block; color: inherit; }
     .side-item.on {
       background: #fff; color: var(--brand-text); font-weight: 700;
       border-left-color: var(--brand);
@@ -1646,14 +1646,14 @@
     .side-item.on .ico { color: var(--brand-text); }
 
     .main-col {
-      flex: 1; overflow-y: auto; padding: 8px 0 80px;
+      flex: 1; overflow-y: auto; padding: var(--sp-1) 0 80px;
       background: #fff; min-width: 0;
     }
 
     /* 活动秒杀条 */
     .activity-bar {
-      margin: 12px 14px 0;
-      padding: 12px 14px;
+      margin: var(--sp-2) 14px 0;
+      padding: var(--sp-2) 14px;
       background: #faf6eb;
       border: 1px solid #efe4c8;
       border-radius: var(--r-md);
@@ -1666,12 +1666,12 @@
 
     /* 品牌分区：白底金边 */
     .brand-tag {
-      margin: 16px 14px 0;
+      margin: var(--sp-3) 14px 0;
       background: #fff;
       border: 1.5px solid var(--brand);
       border-radius: var(--r-pill);
-      padding: 8px 14px;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: var(--sp-1) 14px;
+      display: flex; align-items: center; justify-content: center; gap: var(--sp-1);
       color: var(--ink); font-weight: 700; font-size: var(--fs-2);
     }
     .brand-tag .logo {
@@ -1691,7 +1691,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      padding: 10px 14px 4px;
+      padding: 10px 14px var(--sp-0);
       align-items: start;
     }
     .collage .span2 { grid-column: 1 / -1; }
@@ -1701,7 +1701,7 @@
       border: 1px solid #eceef1;
       border-radius: var(--r-md);
       min-height: 118px;
-      padding: 14px 10px 12px;
+      padding: 14px 10px var(--sp-2);
       display: flex; flex-direction: column;
       color: var(--ink); cursor: pointer;
       overflow: hidden;
@@ -1713,16 +1713,16 @@
       position: absolute; top: 0; left: 0;
       background: var(--brand-ink); color: #fff;
       font-size: var(--fs-1); font-weight: 700;
-      padding: 2px 8px;
+      padding: 2px var(--sp-1);
       border-bottom-right-radius: 8px;
       z-index: 1;
     }
     .pcard .ptitle {
       font-size: var(--fs-2); font-weight: 700; line-height: 1.25;
-      text-align: center; margin-top: 4px;
+      text-align: center; margin-top: var(--sp-0);
     }
     .pcard .psub {
-      font-size: var(--fs-1); text-align: center; color: var(--ink-3); margin-top: 4px;
+      font-size: var(--fs-1); text-align: center; color: var(--ink-3); margin-top: var(--sp-0);
       font-weight: 400;
     }
     .pcard .open-btn {
@@ -1739,7 +1739,7 @@
       border: 1px solid var(--brand);
       color: var(--brand-text); font-weight: 700; font-size: var(--fs-1);
       text-align: center;
-      padding: 8px 0;
+      padding: var(--sp-1) 0;
       border-radius: var(--r-pill);
     }
     .pcard .pill-btn.blue {
@@ -1781,12 +1781,12 @@
 
     /* 宽横幅卡 */
     .wide-banner {
-      margin: 12px 14px 4px;
+      margin: var(--sp-2) 14px var(--sp-0);
       border: 1px solid #eceef1;
       border-radius: var(--r-md);
       background: #fff;
       padding: 14px;
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center; gap: var(--sp-2);
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -1802,7 +1802,7 @@
     .wide-banner .wb-t { font-size: var(--fs-3); font-weight: 700; color: var(--ink); }
     .wide-banner .wb-s { font-size: var(--fs-1); color: var(--brand-text); margin-top: 2px; font-weight: 600; }
     .wide-banner .wb-btn {
-      margin-top: 8px;
+      margin-top: var(--sp-1);
       display: inline-block;
       background: var(--brand-ink); color: #fff;
       font-size: var(--fs-1); font-weight: 700;
@@ -1827,30 +1827,30 @@
 
     /* 双联小卡行（先领券/再下单） */
     .pair-row {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-      padding: 4px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-1);
+      padding: var(--sp-0);
     }
     .pair-row .pcard { min-height: 130px; }
 
     /* ===== 商城 ===== */
     .mall-hero {
-      margin: 12px 16px; padding: 18px; border-radius: var(--r-lg);
+      margin: var(--sp-2) var(--sp-3); padding: 18px; border-radius: var(--r-lg);
       background: var(--brand-ink);
       color: #fff; display: flex; justify-content: space-between; align-items: center;
     }
     .mall-hero .lab { font-size: var(--fs-1); opacity: .9; }
     .mall-hero .n { font-size: var(--fs-5); font-weight: 800; line-height: 1.15; }
     .mall-hero .sub { font-size: var(--fs-1); opacity: .85; }
-    .mall-hero .acts { display: flex; flex-direction: column; gap: 8px; }
-    .mall-hero .btn { font-size: var(--fs-1); padding: 8px 14px; }
+    .mall-hero .acts { display: flex; flex-direction: column; gap: var(--sp-1); }
+    .mall-hero .btn { font-size: var(--fs-1); padding: var(--sp-1) 14px; }
     .mall-hero .btn.w { background: #fff; color: var(--brand-text); }
     .mall-hero .btn.l { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.65); }
     .tabs-row {
-      display: flex; background: #fff; margin: 0 16px;
+      display: flex; background: #fff; margin: 0 var(--sp-3);
       border-radius: var(--r-md) var(--r-md) 0 0; overflow: hidden;
     }
     .tabs-row .t {
-      flex: 1; text-align: center; padding: 12px 0; color: var(--ink-2);
+      flex: 1; text-align: center; padding: var(--sp-2) 0; color: var(--ink-2);
       font-size: var(--fs-1); cursor: pointer; position: relative;
     }
     .tabs-row .t.on { color: var(--brand-text); font-weight: 700; }
@@ -1868,13 +1868,13 @@
     .tabs-row .t .arrows i { font-size: var(--fs-1); line-height: 1; color: #d3d6dc; font-style: normal; transition: color .15s; }
     .tabs-row .t .arrows i.on { color: var(--brand-text); }
     .hint-bar {
-      margin: 0 16px 10px; padding: 9px 12px; background: #faf3e2;
+      margin: 0 var(--sp-3) 10px; padding: 9px var(--sp-2); background: #faf3e2;
       color: var(--brand-text); font-size: var(--fs-1); border-radius: 0 0 var(--r-md) var(--r-md);
     }
     /* 商城两栏：左侧分类 + 右侧列表 */
     .mall-body { display: flex; align-items: flex-start; }
     .mall-cats {
-      width: 76px; flex-shrink: 0; margin-left: 8px;
+      width: 76px; flex-shrink: 0; margin-left: var(--sp-1);
       background: #f5f6f8; border-radius: var(--r-md) 0 0 0; overflow: hidden;
     }
     .mall-cats .c {
@@ -1888,13 +1888,13 @@
       content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
       width: 3px; height: 18px; background: var(--brand); border-radius: 0 var(--r-xs) var(--r-xs) 0;
     }
-    .mall-right { flex: 1; min-width: 0; padding-right: 8px; }
-    .mall-right .tabs-row { margin: 0; border-radius: var(--r-md) var(--r-md) 0 0; padding: 0 4px; }
+    .mall-right { flex: 1; min-width: 0; padding-right: var(--sp-1); }
+    .mall-right .tabs-row { margin: 0; border-radius: var(--r-md) var(--r-md) 0 0; padding: 0 var(--sp-0); }
     .mall-right .goods { margin-left: 0; margin-right: 0; padding: 10px; gap: 9px; }
     .mall-right .goods .thumb { width: 60px; height: 60px; font-size: var(--fs-1); }
     .goods {
-      display: flex; gap: 12px; background: #fff; border-radius: var(--r-md);
-      margin: 0 16px 12px; padding: 12px; cursor: pointer;
+      display: flex; gap: var(--sp-2); background: #fff; border-radius: var(--r-md);
+      margin: 0 var(--sp-3) var(--sp-2); padding: var(--sp-2); cursor: pointer;
     }
     .goods .thumb {
       width: 92px; height: 92px; border-radius: var(--r-md); flex-shrink: 0;
@@ -1906,12 +1906,12 @@
     .goods .title { font-size: var(--fs-2); font-weight: 600; line-height: 1.35; }
     .goods .meta {
       display: flex; justify-content: space-between; font-size: var(--fs-1);
-      color: var(--ink-3); margin-top: 4px;
+      color: var(--ink-3); margin-top: var(--sp-0);
       /* 右侧留出加购按钮位，避免「已售 xx」被按钮遮盖 */
       padding-right: 38px;
     }
     .goods .meta .retail { color: var(--ink-3); text-decoration: line-through; }
-    .goods .prices { display: flex; gap: 8px; margin-top: auto; padding-top: 8px; }
+    .goods .prices { display: flex; gap: var(--sp-1); margin-top: auto; padding-top: var(--sp-1); }
     .goods .pbox { flex: 1; border-radius: var(--r-sm); text-align: center; padding: 6px 2px; }
     .goods .pbox.l { background: #faf3e2; }
     .goods .pbox.r { background: var(--brand-red-grad); color: #fff; }
@@ -1921,8 +1921,8 @@
     .goods .pbox.r .h { color: rgba(255,255,255,.85); }
 
     /* 商品卡片：数字价格 + 右侧加购列 */
-    .goods { padding-right: 8px; }
-    .goods .prices { gap: 4px; align-items: baseline; white-space: nowrap; padding-right: 34px; }
+    .goods { padding-right: var(--sp-1); }
+    .goods .prices { gap: var(--sp-0); align-items: baseline; white-space: nowrap; padding-right: 34px; }
     .goods .pbox { flex: 0 0 auto; background: none !important; text-align: left; padding: 0; color: inherit !important; display: flex; align-items: baseline; gap: 3px; }
     .goods .pbox.l .v { color: var(--brand-text); }
     .goods .pbox.r .v { color: #ff3b30; }
@@ -1943,15 +1943,15 @@
     @keyframes ub-drop { from { transform: translateY(-100%); } to { transform: translateY(0); } }
     .update-bar .ub-btn { margin-left: auto; background: var(--brand-ink); border-radius: var(--r-pill); padding: 3px 14px; font-size: var(--fs-1); font-weight: 700; cursor: pointer; }
     .update-bar .ub-close { color: rgba(255,255,255,.6); cursor: pointer; padding: 0 2px; }
-    .fab-badge { position: absolute; top: -5px; right: -5px; min-width: 18px; height: 18px; line-height: 18px; text-align: center; background: #ff3b30; color: #fff; font-size: var(--fs-1); font-weight: 700; border-radius: var(--r-pill); padding: 0 4px; border: 2px solid #fff; box-sizing: border-box; }
+    .fab-badge { position: absolute; top: -5px; right: -5px; min-width: 18px; height: 18px; line-height: 18px; text-align: center; background: #ff3b30; color: #fff; font-size: var(--fs-1); font-weight: 700; border-radius: var(--r-pill); padding: 0 var(--sp-0); border: 2px solid #fff; box-sizing: border-box; }
     .fab-badge.bump { animation: badge-pop .4s ease; }
     @keyframes badge-pop { 0%{transform:scale(1)} 40%{transform:scale(1.5)} 100%{transform:scale(1)} }
     .fab-mask { position: absolute; inset: 0; background: rgba(0,0,0,.32); z-index: 61; }
     .fab-drawer { position: absolute; left: 0; right: 0; bottom: 0; max-height: min(75vh, 620px); background: #fff; border-radius: var(--r-sheet) var(--r-sheet) 0 0; z-index: 62; display: flex; flex-direction: column; box-shadow: var(--shadow-sheet); animation: drawer-up .32s cubic-bezier(.32,.72,0,1); }
     @keyframes drawer-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
-    .fd-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px 10px; border-bottom: 1px solid var(--line); }
+    .fd-head { display: flex; justify-content: space-between; align-items: center; padding: 14px var(--sp-3) 10px; border-bottom: 1px solid var(--line); }
     .fd-close { color: var(--ink-3); font-size: var(--fs-4); line-height: 1; padding: 0 6px; cursor: pointer; }
-    .fd-body { overflow-y: auto; padding: 4px 16px; max-height: min(50vh, 420px); }
+    .fd-body { overflow-y: auto; padding: var(--sp-0) var(--sp-3); max-height: min(50vh, 420px); }
     .fd-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); }
     .fd-item .thumb { width: 54px; height: 54px; border-radius: var(--r-sm); background: #f4f5f7; display: flex; align-items: center; justify-content: center; font-size: var(--fs-1); color: var(--ink-3); flex-shrink: 0; text-align: center; padding: 2px; }
     .fd-info { flex: 1; min-width: 0; }
@@ -1963,7 +1963,7 @@
     .stepper .stp { width: 26px; height: 26px; line-height: 26px; text-align: center; font-size: var(--fs-2); cursor: pointer; }
     .stepper .stp.off { color: var(--ink-3); }
     .stepper .qty { min-width: 28px; text-align: center; font-size: var(--fs-1); }
-    .fd-bar { display: flex; align-items: center; gap: 10px; border-top: 1px solid var(--line); padding: 10px 16px; background: #fff; }
+    .fd-bar { display: flex; align-items: center; gap: 10px; border-top: 1px solid var(--line); padding: 10px var(--sp-3); background: #fff; }
     .fd-total { flex: 1; font-size: var(--fs-1); color: var(--ink-2); }
     .fd-total b { font-size: var(--fs-2); }
     .fd-total .pts { color: var(--brand-text); } .fd-total .cs { color: #ff3b30; }
@@ -1974,46 +1974,46 @@
     .cbox.on::after { content: '✓'; position: absolute; inset: 0; color: #fff; font-size: var(--fs-1); text-align: center; line-height: 14px; }
 
     /* 订单 / 表单通用 */
-    .order-card { background: #fff; border-radius: var(--r-card); padding: 14px 16px; margin-bottom: 10px; }
-    .oc-head { display: flex; justify-content: space-between; font-size: var(--fs-1); color: var(--ink-3); padding-bottom: 8px; }
+    .order-card { background: #fff; border-radius: var(--r-card); padding: 14px var(--sp-3); margin-bottom: 10px; }
+    .oc-head { display: flex; justify-content: space-between; font-size: var(--fs-1); color: var(--ink-3); padding-bottom: var(--sp-1); }
     .oc-head .st { font-weight: 700; font-size: var(--fs-1); color: var(--brand-text); }
     .oc-head .st.unpaid { color: #ff3b30; } .oc-head .st.shipped { color: #2f7cf6; } .oc-head .st.done { color: #34c759; }
-    .oc-goods { display: flex; gap: 10px; border-top: 1px solid var(--line); padding-top: 8px; }
+    .oc-goods { display: flex; gap: 10px; border-top: 1px solid var(--line); padding-top: var(--sp-1); }
     .oc-goods .thumb { width: 52px; height: 52px; border-radius: var(--r-sm); background: #f4f5f7; font-size: var(--fs-1); color: var(--ink-3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-align: center; padding: 2px; }
     .oc-total { text-align: right; font-size: var(--fs-1); margin-top: 6px; }
     .oc-total b.pts { color: var(--brand-text); font-size: var(--fs-2); } .oc-total b.cs { color: #ff3b30; font-size: var(--fs-2); }
-    .oc-acts { display: flex; justify-content: flex-end; gap: 8px; border-top: 1px solid var(--line); margin-top: 8px; padding-top: 8px; flex-wrap: wrap; }
+    .oc-acts { display: flex; justify-content: flex-end; gap: var(--sp-1); border-top: 1px solid var(--line); margin-top: var(--sp-1); padding-top: var(--sp-1); flex-wrap: wrap; }
     .oc-acts .btn { font-size: var(--fs-1); padding: 6px 14px; }
-    .aft-tag { display: inline-block; font-size: var(--fs-1); color: var(--ink-2); background: #f2f3f5; border-radius: var(--r-xs); padding: 1px 7px; margin-top: 4px; }
+    .aft-tag { display: inline-block; font-size: var(--fs-1); color: var(--ink-2); background: #f2f3f5; border-radius: var(--r-xs); padding: 1px 7px; margin-top: var(--sp-0); }
     .empty-state { text-align: center; color: var(--ink-3); padding: 50px 0; font-size: var(--fs-1); }
-    .addr-card { background: #fff; border-radius: var(--r-md); padding: 12px 14px; margin-bottom: 10px; position: relative; }
+    .addr-card { background: #fff; border-radius: var(--r-md); padding: var(--sp-2) 14px; margin-bottom: 10px; position: relative; }
     .addr-card .top { display: flex; align-items: baseline; gap: 10px; }
     .addr-card .nm { font-weight: 700; font-size: var(--fs-2); }
     .addr-card .ph { font-size: var(--fs-1); color: var(--ink-2); }
     .addr-card .def-tag { font-size: var(--fs-1); color: var(--brand-text); background: #faf3e2; border-radius: var(--r-xs); padding: 1px 6px; }
     .addr-card .dt { font-size: var(--fs-1); margin-top: 5px; line-height: 1.5; }
-    .addr-card .acts { display: flex; gap: 16px; border-top: 1px solid var(--line); margin-top: 8px; padding-top: 7px; font-size: var(--fs-1); color: var(--ink-2); }
+    .addr-card .acts { display: flex; gap: var(--sp-3); border-top: 1px solid var(--line); margin-top: var(--sp-1); padding-top: 7px; font-size: var(--fs-1); color: var(--ink-2); }
     .addr-card .acts span { cursor: pointer; } .addr-card .acts span:hover { color: var(--brand-text); }
     .addr-card .acts .dgr { color: #ff3b30; }
-    .form-row { display: flex; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--line); gap: 12px; }
+    .form-row { display: flex; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--line); gap: var(--sp-2); }
     .form-row:last-child { border-bottom: none; }
     .f-label { width: 88px; flex-shrink: 0; font-size: var(--fs-2); font-weight: 600; }
     .f-input { flex: 1; border: none; outline: none; font-size: var(--fs-2); background: transparent; }
     .f-val { flex: 1; display: flex; gap: 14px; font-size: var(--fs-2); color: var(--ink-2); }
     .f-val select { border: none; background: transparent; font-size: var(--fs-2); outline: none; flex: 1; }
-    .f-textarea { width: 100%; min-height: 80px; border: 1px solid var(--line); border-radius: var(--r-sm); padding: 8px; font-size: var(--fs-1); box-sizing: border-box; outline: none; resize: none; }
-    .oc-bar { position: absolute; left: 0; right: 0; bottom: 0; background: #fff; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); z-index: 55; }
+    .f-textarea { width: 100%; min-height: 80px; border: 1px solid var(--line); border-radius: var(--r-sm); padding: var(--sp-1); font-size: var(--fs-1); box-sizing: border-box; outline: none; resize: none; }
+    .oc-bar { position: absolute; left: 0; right: 0; bottom: 0; background: #fff; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: flex-end; gap: var(--sp-2); padding: 10px var(--sp-3) calc(10px + env(safe-area-inset-bottom)); z-index: 55; }
     .oc-bar .sum { flex: 1; text-align: right; font-size: var(--fs-1); }
     .oc-bar .sum b { font-size: var(--fs-3); } .oc-bar .sum .pts { color: var(--brand-text); } .oc-bar .sum .cs { color: #ff3b30; }
-    .tl { position: relative; padding-left: 4px; }
-    .tl-item { display: flex; gap: 12px; padding-bottom: 14px; position: relative; }
+    .tl { position: relative; padding-left: var(--sp-0); }
+    .tl-item { display: flex; gap: var(--sp-2); padding-bottom: 14px; position: relative; }
     .tl-item::before { content: ''; position: absolute; left: 5px; top: 14px; bottom: 0; width: 1.5px; background: var(--line); }
     .tl-item:last-child { padding-bottom: 0; } .tl-item:last-child::before { display: none; }
-    .tl-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--ink-3); flex-shrink: 0; margin-top: 4px; z-index: 1; }
+    .tl-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--ink-3); flex-shrink: 0; margin-top: var(--sp-0); z-index: 1; }
     .tl-dot.cur { background: var(--brand); }
     .tl-t { font-size: var(--fs-1); color: var(--ink-2); } .tl-t.cur { color: #111827; font-weight: 600; }
     .tl-tm { font-size: var(--fs-1); color: var(--ink-3); margin-top: 3px; }
-    .status-head { position: relative; padding: 20px 16px; border-radius: var(--r-md); color: #fff; margin-bottom: 10px; background: var(--brand-grad); }
+    .status-head { position: relative; padding: 20px var(--sp-3); border-radius: var(--r-md); color: #fff; margin-bottom: 10px; background: var(--brand-grad); }
     .status-head.shipped { background: linear-gradient(135deg,#2c6fc4,#1e55a0); }
     .status-head.done { background: linear-gradient(135deg,#22793f,#1a6634); }
     .status-head .st-t { font-size: var(--fs-4); font-weight: 700; }
@@ -2025,7 +2025,7 @@
     .detail-hero {
       height: 240px; background: #faf3e2;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 8px; color: var(--brand-text); padding: 24px; text-align: center;
+      gap: var(--sp-1); color: var(--brand-text); padding: var(--sp-4); text-align: center;
     }
     .detail-hero .ico { font-size: var(--fs-5); width: 64px; height: 64px; }
     .detail-hero .name { font-size: var(--fs-3); font-weight: 700; color: var(--ink); }
@@ -2033,11 +2033,11 @@
     .detail-price-row { display: flex; align-items: baseline; gap: 10px; margin-top: 10px; }
     .detail-price-row .num { font-size: var(--fs-5); }
     .strike { color: var(--ink-3); text-decoration: line-through; font-size: var(--fs-2); }
-    .meta-row { display: flex; gap: 14px; margin-top: 8px; font-size: var(--fs-1); color: var(--ink-3); }
+    .meta-row { display: flex; gap: 14px; margin-top: var(--sp-1); font-size: var(--fs-1); color: var(--ink-3); }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
     .tag {
       background: #faf3e2; color: var(--brand-text); font-size: var(--fs-1);
-      padding: 3px 8px; border-radius: var(--r-xs);
+      padding: 3px var(--sp-1); border-radius: var(--r-xs);
     }
     .points-box {
       display: flex; align-items: center; justify-content: space-between;
@@ -2048,39 +2048,39 @@
     .compare { display: flex; }
     .compare .cell { flex: 1; text-align: center; }
     .compare .k { font-size: var(--fs-1); color: var(--ink-3); }
-    .compare .v { margin-top: 4px; font-size: var(--fs-2); font-weight: 600; }
+    .compare .v { margin-top: var(--sp-0); font-size: var(--fs-2); font-weight: 600; }
     .detail-footer {
       position: absolute; left: 0; right: 0;
       bottom: env(safe-area-inset-bottom, 0px);
       background: #fff;
-      display: flex; gap: 10px; padding: 12px 16px;
+      display: flex; gap: 10px; padding: var(--sp-2) var(--sp-3);
       box-shadow: 0 -1px 0 var(--separator); z-index: 44;
     }
     .detail-footer .btn { flex: 1; min-height: 44px; font-size: var(--fs-1); padding: 10px 6px; white-space: nowrap; }
 
     /* ===== 课程 ===== */
     .course-hero {
-      margin: 12px 16px; padding: 20px; border-radius: var(--r-lg);
+      margin: var(--sp-2) var(--sp-3); padding: 20px; border-radius: var(--r-lg);
       background: #1f2329; color: #fff;
     }
     .course-hero h2 { font-size: var(--fs-4); font-weight: 700; }
-    .course-hero p { font-size: var(--fs-1); opacity: .8; margin-top: 4px; }
+    .course-hero p { font-size: var(--fs-1); opacity: .8; margin-top: var(--sp-0); }
     .course-hero .bar {
       margin-top: 14px; display: flex; justify-content: space-between;
-      background: rgba(255,255,255,.12); border-radius: var(--r-sm); padding: 10px 12px;
+      background: rgba(255,255,255,.12); border-radius: var(--r-sm); padding: 10px var(--sp-2);
       font-size: var(--fs-1);
     }
     .course-hero .bar .go { color: var(--gold); font-weight: 600; cursor: pointer; }
 
     /* ===== 潮知馆：板块大卡 + 资讯流 ===== */
     .tc-top {
-      padding: 14px 16px 10px;
+      padding: 14px var(--sp-3) 10px;
       background: #fff;
     }
     .tc-h1 { font-size: var(--fs-4); font-weight: 800; color: var(--ink); letter-spacing: 1px; }
     .tc-bar {
       display: flex; justify-content: space-between; align-items: center;
-      margin-top: 10px; padding: 10px 12px;
+      margin-top: 10px; padding: 10px var(--sp-2);
       background: #faf6eb; border-radius: var(--r-md);
       font-size: var(--fs-1); color: var(--ink-2);
     }
@@ -2091,13 +2091,13 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      padding: 12px 16px 4px;
+      padding: var(--sp-2) var(--sp-3) var(--sp-0);
       background: #fff;
     }
     .tc-card {
       border-radius: var(--r-md);
       min-height: 96px;
-      padding: 14px 12px;
+      padding: 14px var(--sp-2);
       color: #fff;
       cursor: pointer;
       display: flex;
@@ -2115,7 +2115,7 @@
     }
     .tc-card .tc-ico .ico { width: 28px; height: 28px; }
     .tc-card .tc-name { font-size: var(--fs-4); font-weight: 800; letter-spacing: 2px; }
-    .tc-card .tc-sub { font-size: var(--fs-1); opacity: 0.9; margin-top: 4px; }
+    .tc-card .tc-sub { font-size: var(--fs-1); opacity: 0.9; margin-top: var(--sp-0); }
     .tc-ai { background: #2f7cf6; }
     .tc-pet { background: #e85d2c; }
     .tc-travel { background: #a8841a; }
@@ -2126,8 +2126,8 @@
     .tc-more .tc-name { color: #f0d48c; }
 
     .tc-divider {
-      display: flex; align-items: center; gap: 12px;
-      margin: 18px 16px 6px;
+      display: flex; align-items: center; gap: var(--sp-2);
+      margin: 18px var(--sp-3) 6px;
       color: var(--ink); font-weight: 800; font-size: var(--fs-2);
     }
     .tc-divider::before, .tc-divider::after {
@@ -2136,10 +2136,10 @@
     }
 
     .tc-news {
-      display: flex; gap: 12px;
+      display: flex; gap: var(--sp-2);
       background: #fff;
-      margin: 0 16px 8px;
-      padding: 14px 12px;
+      margin: 0 var(--sp-3) var(--sp-1);
+      padding: 14px var(--sp-2);
       border-radius: var(--r-md);
       cursor: pointer;
       align-items: flex-start;
@@ -2156,7 +2156,7 @@
       line-height: 1.4; margin-top: 6px;
       display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
     }
-    .tn-meta { font-size: var(--fs-1); color: var(--ink-3); margin-top: 8px; }
+    .tn-meta { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-1); }
     .tn-thumb {
       width: 88px; height: 66px; border-radius: var(--r-sm); flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
@@ -2168,16 +2168,16 @@
     .tn-travel { background: #a8841a; }
 
     .cate-head {
-      padding: 16px 16px 8px;
+      padding: var(--sp-3) var(--sp-3) var(--sp-1);
       background: #fff;
       border-bottom: 1px solid #f0f1f3;
     }
     .ch-title { font-size: var(--fs-4); font-weight: 800; }
-    .ch-sub { font-size: var(--fs-1); color: var(--ink-3); margin-top: 4px; }
+    .ch-sub { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-0); }
 
     .news-cta {
       display: flex; align-items: center; justify-content: space-between;
-      margin: 8px 16px 24px; padding: 14px;
+      margin: var(--sp-1) var(--sp-3) var(--sp-4); padding: 14px;
       background: #fff9f0;
       border: 1.5px solid var(--brand);
       border-radius: var(--r-md); cursor: pointer;
@@ -2192,8 +2192,8 @@
     }
 
     .course {
-      display: flex; gap: 12px; background: #fff; border-radius: var(--r-md);
-      margin: 0 16px 12px; padding: 14px; cursor: pointer;
+      display: flex; gap: var(--sp-2); background: #fff; border-radius: var(--r-md);
+      margin: 0 var(--sp-3) var(--sp-2); padding: 14px; cursor: pointer;
     }
     .course .cover {
       width: 86px; height: 86px; border-radius: var(--r-md); flex-shrink: 0;
@@ -2204,11 +2204,11 @@
     .course .cover .ai { font-size: var(--fs-4); font-weight: 800; letter-spacing: 1px; }
     .course .cover .lv {
       font-size: var(--fs-1); background: rgba(0,0,0,.28); padding: 1px 7px;
-      border-radius: var(--r-pill); margin-top: 4px;
+      border-radius: var(--r-pill); margin-top: var(--sp-0);
     }
     .course .info { flex: 1; display: flex; flex-direction: column; min-width: 0; }
     .course .title { font-size: var(--fs-2); font-weight: 600; line-height: 1.35; }
-    .course .meta { font-size: var(--fs-1); color: var(--ink-3); margin-top: 4px; }
+    .course .meta { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-0); }
     .course .bottom {
       margin-top: auto; display: flex; justify-content: space-between; align-items: center;
     }
@@ -2223,9 +2223,9 @@
     .agent-head {
       background: transparent;
       color: var(--ink);
-      padding: 16px 16px 4px;
+      padding: var(--sp-3) var(--sp-3) var(--sp-0);
     }
-    .agent-head .user-row { display: flex; align-items: center; gap: 12px; }
+    .agent-head .user-row { display: flex; align-items: center; gap: var(--sp-2); }
     .agent-head .avatar {
       width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
       background: #faf6eb; border: 1.5px solid var(--brand);
@@ -2242,35 +2242,35 @@
     .agent-head .level-badge {
       background: #faf6eb; border: 1px solid var(--brand);
       color: var(--brand-text);
-      padding: 1px 8px; border-radius: var(--r-pill); font-size: var(--fs-1); font-weight: 600;
+      padding: 1px var(--sp-1); border-radius: var(--r-pill); font-size: var(--fs-1); font-weight: 600;
       flex-shrink: 0;
     }
     .pts-mini {
       font-size: var(--fs-1); background: #faf6eb; color: var(--brand-text);
       border: 1px solid #efe4c8;
-      padding: 6px 12px; border-radius: var(--r-pill); cursor: pointer;
-      display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0;
+      padding: 6px var(--sp-2); border-radius: var(--r-pill); cursor: pointer;
+      display: inline-flex; align-items: center; gap: var(--sp-0); flex-shrink: 0;
     }
-    .invite { margin-top: 16px; display: flex; gap: 10px; align-items: center; }
+    .invite { margin-top: var(--sp-3); display: flex; gap: 10px; align-items: center; }
     .invite .code {
       flex: 1; background: #fff;
       border: 1px dashed var(--brand); border-radius: var(--r-sm);
-      padding: 12px; font-size: var(--fs-1); cursor: pointer; color: var(--ink);
+      padding: var(--sp-2); font-size: var(--fs-1); cursor: pointer; color: var(--ink);
     }
     .invite .share {
       background: var(--brand-ink); color: #fff; border: none; border-radius: var(--r-pill);
-      font-size: var(--fs-1); font-weight: 700; padding: 10px 16px; cursor: pointer;
+      font-size: var(--fs-1); font-weight: 700; padding: 10px var(--sp-3); cursor: pointer;
       display: inline-flex; align-items: center; gap: 6px;
     }
     .invite .share .ico { width: 14px; height: 14px; color: #fff; }
-    .agent-sub { margin-top: 12px; font-size: var(--fs-1); color: var(--ink-3); }
+    .agent-sub { margin-top: var(--sp-2); font-size: var(--fs-1); color: var(--ink-3); }
 
     /* ===== 会员等级入口 / 二级页 ===== */
     .member-level {
       background: #fff;
-      margin: 14px 16px;
+      margin: 14px var(--sp-3);
       border-radius: var(--r-card);
-      padding: 16px;
+      padding: var(--sp-3);
       display: flex; align-items: center; justify-content: space-between;
       box-shadow: none;
       cursor: pointer;
@@ -2286,48 +2286,48 @@
     }
     .member-hero {
       background: var(--brand-ink);
-      margin: 14px 16px !important;
+      margin: 14px var(--sp-3) !important;
       padding: 22px 18px !important;
       border-radius: var(--r-card) !important;
     }
     .hero-lab { font-size: var(--fs-1); opacity: .9; }
-    .hero-level { font-size: var(--fs-5); font-weight: 800; margin-top: 4px; }
+    .hero-level { font-size: var(--fs-5); font-weight: 800; margin-top: var(--sp-0); }
     .hero-sub { font-size: var(--fs-1); opacity: .9; margin-top: 6px; }
 
     /* ===== 会员套餐（二级页） ===== */
     .member-block {
       background: #fff;
-      margin: 14px 16px;
+      margin: 14px var(--sp-3);
       border-radius: var(--r-card);
-      padding: 16px;
+      padding: var(--sp-3);
       box-shadow: none;
     }
-    .member-head { margin-bottom: 12px; }
+    .member-head { margin-bottom: var(--sp-2); }
     .member-title { font-size: var(--fs-3); font-weight: 700; }
     .member-note { font-size: var(--fs-1); color: var(--ink-3); margin-top: 3px; }
     .member-plans { display: flex; gap: 10px; }
     .mp-card {
       flex: 1; border: 1.5px solid #eceef1; border-radius: var(--r-md);
-      padding: 12px 10px; display: flex; flex-direction: column;
+      padding: var(--sp-2) 10px; display: flex; flex-direction: column;
       background: #fff; min-width: 0;
     }
     .mp-card.hot { border-color: var(--brand); background: #fffdf5; }
     .mp-card.on { border-color: #00b578; }
     .mp-name { font-size: var(--fs-1); font-weight: 700; text-align: center; }
-    .mp-price { text-align: center; margin-top: 4px; color: #ff6600; font-weight: 800; font-size: var(--fs-4); line-height: 1.1; }
+    .mp-price { text-align: center; margin-top: var(--sp-0); color: #ff6600; font-weight: 800; font-size: var(--fs-4); line-height: 1.1; }
     .mp-price .yen { font-size: var(--fs-1); }
     .mp-price .unit { font-size: var(--fs-1); font-weight: 500; color: var(--ink-3); }
     .mp-gift {
-      margin-top: 8px; background: #fff4e8; border-radius: var(--r-sm);
+      margin-top: var(--sp-1); background: #fff4e8; border-radius: var(--r-sm);
       padding: 6px; text-align: center; font-size: var(--fs-1); color: #ff6600; font-weight: 600;
       line-height: 1.5;
     }
-    .mp-perks { margin-top: 8px; font-size: var(--fs-1); color: var(--ink-2); min-height: 42px; }
+    .mp-perks { margin-top: var(--sp-1); font-size: var(--fs-1); color: var(--ink-2); min-height: 42px; }
     .mp-perks div { line-height: 1.5; }
     .mp-btn {
       margin-top: 10px; width: 100%; border: none; cursor: pointer;
       background: #ff6600; color: #fff;
-      font-size: var(--fs-1); padding: 8px 0; border-radius: var(--r-pill); font-weight: 600;
+      font-size: var(--fs-1); padding: var(--sp-1) 0; border-radius: var(--r-pill); font-weight: 600;
     }
     .mp-btn.ghost { background: #f0f1f3; color: var(--ink-3); }
     .member-foot { margin-top: 10px; font-size: var(--fs-1); color: var(--ink-3); line-height: 1.45; }
@@ -2337,19 +2337,19 @@
       border: 1px solid #ffe0c2;
     }
     .invite-title { font-size: var(--fs-2); font-weight: 700; margin-bottom: 10px; }
-    .invite-tip { margin-top: 8px; font-size: var(--fs-1); color: var(--ink-3); }
-    .section-hint { font-size: var(--fs-1); color: var(--ink-3); line-height: 1.45; padding: 0 4px; }
+    .invite-tip { margin-top: var(--sp-1); font-size: var(--fs-1); color: var(--ink-3); }
+    .section-hint { font-size: var(--fs-1); color: var(--ink-3); line-height: 1.45; padding: 0 var(--sp-0); }
 
     .stat-bar {
       display: flex; background: #fff; border-radius: var(--r-md);
-      margin: 0 16px 16px; padding: 16px 0; position: relative; z-index: 2;
+      margin: 0 var(--sp-3) var(--sp-3); padding: var(--sp-3) 0; position: relative; z-index: 2;
       box-shadow: none;
     }
     .stat-bar .cell { flex: 1; text-align: center; }
     .stat-bar .v { font-size: var(--fs-2); font-weight: 700; }
     .stat-bar .l { font-size: var(--fs-1); color: var(--ink-3); margin-top: 2px; }
     .seg {
-      display: flex; background: #fff; margin: 0 16px 18px;
+      display: flex; background: #fff; margin: 0 var(--sp-3) 18px;
       border-radius: var(--r-md); overflow: hidden;
     }
     .seg .s {
@@ -2358,7 +2358,7 @@
     }
     .seg .s.on { color: var(--brand-text); font-weight: 700; background: #faf3e2; }
     .menu-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 16px;
+      display: grid; grid-template-columns: repeat(4, 1fr); row-gap: var(--sp-3);
     }
     .menu-item { text-align: center; cursor: pointer; }
     .menu-item .mi {
@@ -2375,37 +2375,37 @@
     .cta .tt { font-size: var(--fs-2); font-weight: 700; }
     .cta .ss { font-size: var(--fs-1); color: var(--ink-2); margin-top: 3px; }
     .order {
-      background: #fff; border-radius: var(--r-md); margin: 0 16px 10px; padding: 14px;
+      background: #fff; border-radius: var(--r-md); margin: 0 var(--sp-3) 10px; padding: 14px;
     }
     .order .top { display: flex; justify-content: space-between; font-size: var(--fs-1); }
     .order .st.settled { color: var(--ok); }
     .order .st.pending { color: var(--brand-text); }
-    .order .g { font-size: var(--fs-1); color: var(--ink-2); margin-top: 4px; }
-    .order .bot { display: flex; justify-content: space-between; margin-top: 8px; font-size: var(--fs-1); }
+    .order .g { font-size: var(--fs-1); color: var(--ink-2); margin-top: var(--sp-0); }
+    .order .bot { display: flex; justify-content: space-between; margin-top: var(--sp-1); font-size: var(--fs-1); }
     .order .c { color: var(--brand-text); font-weight: 700; }
-    .order .tm { font-size: var(--fs-1); color: var(--ink-3); margin-top: 4px; }
+    .order .tm { font-size: var(--fs-1); color: var(--ink-3); margin-top: var(--sp-0); }
     .tier {
-      background: #fff; border-radius: var(--r-md); margin: 0 16px 10px; padding: 16px;
+      background: #fff; border-radius: var(--r-md); margin: 0 var(--sp-3) 10px; padding: var(--sp-3);
     }
     .tier .th { display: flex; justify-content: space-between; align-items: center; }
     .tier .tn { font-size: var(--fs-2); font-weight: 700; color: var(--brand-text); }
     .tier .tq { font-size: var(--fs-1); color: var(--ink-3); }
-    .tier .rate { margin-top: 8px; font-size: var(--fs-2); font-weight: 600; }
+    .tier .rate { margin-top: var(--sp-1); font-size: var(--fs-2); font-weight: 600; }
     .tier .bt { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
     .tier .bt span {
       background: var(--bg); color: var(--ink-2); font-size: var(--fs-1);
-      padding: 4px 8px; border-radius: var(--r-xs);
+      padding: var(--sp-0) var(--sp-1); border-radius: var(--r-xs);
     }
 
     /* ===== 看广告 ===== */
-    .prog { margin: 0 16px 12px; background: #fff; border-radius: var(--r-md); padding: 16px; }
+    .prog { margin: 0 var(--sp-3) var(--sp-2); background: #fff; border-radius: var(--r-md); padding: var(--sp-3); }
     .prog .bar { height: 10px; background: #f0f1f3; border-radius: var(--r-pill); overflow: hidden; }
     .prog .fill {
       height: 100%; background: var(--brand);
       border-radius: var(--r-pill); transition: width .3s;
     }
-    .prog .txt { text-align: center; font-size: var(--fs-1); color: var(--ink-2); margin-top: 8px; }
-    .slot { margin: 0 16px 12px; background: #fff; border-radius: var(--r-md); padding: 16px; }
+    .prog .txt { text-align: center; font-size: var(--fs-1); color: var(--ink-2); margin-top: var(--sp-1); }
+    .slot { margin: 0 var(--sp-3) var(--sp-2); background: #fff; border-radius: var(--r-md); padding: var(--sp-3); }
     .slot-box {
       display: flex; flex-direction: column; align-items: center; gap: 6px;
       padding: 28px 0; background: var(--bg); border-radius: var(--r-md);
@@ -2422,12 +2422,12 @@
 
     /* ===== 积分明细 ===== */
     .pts-hero {
-      margin: 12px 16px; padding: 22px; border-radius: var(--r-lg); position: relative;
+      margin: var(--sp-2) var(--sp-3); padding: 22px; border-radius: var(--r-lg); position: relative;
       background: var(--brand-grad); color: #fff;
     }
     .pts-rule-link {
       position: absolute; top: 12px; right: 14px;
-      display: inline-flex; align-items: center; gap: 4px;
+      display: inline-flex; align-items: center; gap: var(--sp-0);
       font-size: var(--fs-1); font-weight: 600; color: rgba(255,255,255,.94); cursor: pointer;
     }
     .pts-rule-link .prq {
@@ -2438,24 +2438,24 @@
     }
     .pts-hero .lab { font-size: var(--fs-1); opacity: .9; }
     .pts-hero .n { font-size: var(--fs-5); font-weight: 800; line-height: 1.15; }
-    .pts-hero .acts { display: flex; gap: 10px; margin-top: 12px; }
+    .pts-hero .acts { display: flex; gap: 10px; margin-top: var(--sp-2); }
     /* 积分明细标题：居中、去掉左右装饰横杠；查看全部灰字贴右 */
-    .section-title.log-title { position: relative; justify-content: center; margin: 24px 0 10px; padding: 0 16px; }
+    .section-title.log-title { position: relative; justify-content: center; margin: var(--sp-4) 0 10px; padding: 0 var(--sp-3); }
     .section-title.log-title::before, .section-title.log-title::after { display: none; }
     .log-more {
       position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
       font-size: var(--fs-1); font-weight: 500; color: var(--ink-3); cursor: pointer;
     }
-    .log-tabs { margin-top: 12px; }
+    .log-tabs { margin-top: var(--sp-2); }
     /* 赚积分页顶部积分总览：左右布局，突出大数字 */
     .pts-hero.pts-top {
       display: flex; align-items: center; justify-content: space-between;
-      margin: 12px 16px 12px; padding: 18px 20px; cursor: pointer;
+      margin: var(--sp-2) var(--sp-3) var(--sp-2); padding: 18px 20px; cursor: pointer;
     }
     .pts-top .n { font-size: var(--fs-5); }
     .pts-top .ph-more {
       font-size: var(--fs-1); font-weight: 700; color: #fff;
-      background: rgba(255,255,255,.18); padding: 7px 12px; border-radius: var(--r-pill);
+      background: rgba(255,255,255,.18); padding: 7px var(--sp-2); border-radius: var(--r-pill);
     }
     .log-row {
       display: flex; justify-content: space-between; align-items: center; padding: 13px 0;
@@ -2488,8 +2488,8 @@
     }
     .chap {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 0; border-bottom: 1px solid #f0f1f3; font-size: var(--fs-2);
-      cursor: pointer; gap: 8px;
+      padding: var(--sp-2) 0; border-bottom: 1px solid #f0f1f3; font-size: var(--fs-2);
+      cursor: pointer; gap: var(--sp-1);
     }
     .chap:last-child { border: none; }
     .chap .nm { display: flex; align-items: center; gap: 6px; }
@@ -2548,7 +2548,7 @@
       /* 状态栏：适配刘海/灵动岛，高度随安全区 */
       .status {
         height: calc(20px + env(safe-area-inset-top, 12px));
-        padding: env(safe-area-inset-top, 12px) 16px 4px;
+        padding: env(safe-area-inset-top, var(--sp-2)) var(--sp-3) var(--sp-0);
         align-items: flex-end;
         font-size: var(--fs-1);
         /* 真实手机上可隐藏系统样式差异：背景与导航一致 */
@@ -2570,10 +2570,10 @@
       }
 
       /* 触控热区加大 */
-      .btn { min-height: 42px; padding-top: 12px; padding-bottom: 12px; }
+      .btn { min-height: 42px; padding-top: var(--sp-2); padding-bottom: var(--sp-2); }
       .home-swiper { height: 162px; }
       .side { width: 88px; }
-      .side-item { padding: 16px 6px; min-height: 56px; }
+      .side-item { padding: var(--sp-3) 6px; min-height: 56px; }
       .goods, .course, .hg, .hc, .coupon { -webkit-user-select: none; user-select: none; }
 
       /* 横滑列表：允许横向惯性滚动 */
@@ -2594,7 +2594,7 @@
     /* 高度极小的横屏手机：略收紧 */
     @media (max-height: 500px) and (orientation: landscape) and (max-width: 900px) {
       .status { display: none; }
-      .home-swiper { height: 120px; margin-top: 8px; }
+      .home-swiper { height: 120px; margin-top: var(--sp-1); }
       .quick { padding-top: 10px; padding-bottom: 10px; }
     }
 
@@ -2844,12 +2844,12 @@
           </div>
           <div class="home-coupons" id="homeCoupons"></div>
 
-          <div class="home-sec-head" style="margin-top:18px">
+          <div class="home-sec-head" style="margin-top: 18px">
             <span>积分好物</span>
             <span class="more" onclick="switchTab('mall')">更多 ›</span>
           </div>
           <div class="home-goods" id="homeGoods"></div>
-          <div style="height:12px"></div>
+          <div style="height:var(--sp-2)"></div>
         </div>
 
         <!-- ========== 权益 ========== -->
@@ -2894,7 +2894,7 @@
           <!-- 饭点免单：本地生活页入口 -->
           <div class="fm-entry" id="fmEntryLife" onclick="go('free-meal')"></div>
 
-          <div class="home-sec-head" style="margin-top:4px">
+          <div class="home-sec-head" style="margin-top:var(--sp-0)">
             <span>选择服务</span>
             <span class="more">点选进入对应功能</span>
           </div>
@@ -2932,7 +2932,7 @@
 
         <!-- ========== 本地生活 · 到店点单（品牌单列大图卡） ========== -->
         <div class="view" id="view-life-order" data-tab="home">
-          <div class="home-sec-head" style="margin-top:4px">
+          <div class="home-sec-head" style="margin-top:var(--sp-0)">
             <span>选择品牌</span>
             <span class="more">云上供应链 · 到店自取</span>
           </div>
@@ -3111,7 +3111,7 @@
 
           <div class="mch-perks">
             <div class="pt">入驻你能得到</div>
-            <ul style="margin:0;padding:0">
+            <ul style="margin: 0;padding: 0">
               <li>进入「饭点免单 / 外卖秒杀」场次列表，触达精准到店客</li>
               <li>自主设置每场份数、套餐内容与下单时段</li>
               <li>消费者核销后，订单与客流数据可查</li>
@@ -3278,7 +3278,7 @@
             <div class="ml-r"><span class="ml-cta">去开通 ›</span></div>
           </div>
 
-          <div class="stat-bar" style="margin-top:0">
+          <div class="stat-bar" style="margin-top: 0">
             <div class="cell"><div class="v">3,260</div><div class="l">累计拉新积分</div></div>
             <div class="cell"><div class="v">860</div><div class="l">本月拉新积分</div></div>
             <div class="cell"><div class="v">18</div><div class="l">团队人数</div></div>
@@ -3294,7 +3294,7 @@
           </div>
 
           <!-- 拉新中心入口（工作台 / 拉新积分 / 等级规则 收进二级页） -->
-          <div class="card" style="margin:14px 16px 16px;cursor:pointer" onclick="go('pull')">
+          <div class="card" style="margin:14px var(--sp-3) var(--sp-3);cursor:pointer" onclick="go('pull')">
             <div class="entry-row">
               <span class="entry-t">拉新中心</span>
               <span class="pull-sub">工作台 · 拉新积分 · 等级规则</span>
@@ -3302,22 +3302,22 @@
             </div>
           </div>
 
-          <div class="card" style="margin:0 16px 16px">
-            <div class="entry-row" style="margin-bottom:4px;cursor:pointer" onclick="state.orderTab='all';go('orders')">
+          <div class="card" style="margin: 0 var(--sp-3) var(--sp-3)">
+            <div class="entry-row" style="margin-bottom:var(--sp-0);cursor:pointer" onclick="state.orderTab='all';go('orders')">
               <span class="entry-t">我的订单</span>
               <span class="entry-chev auto">›</span>
             </div>
-            <div style="display:flex;gap:18px;margin-top:14px;font-size: var(--fs-1);color:var(--ink-2)">
+            <div style="display:flex;gap: 18px;margin-top: 14px;font-size: var(--fs-1);color:var(--ink-2)">
               <span onclick="event.stopPropagation();state.orderTab='unpaid';go('orders')">待付款</span>
               <span onclick="event.stopPropagation();state.orderTab='pending_ship';go('orders')">待发货</span>
               <span onclick="event.stopPropagation();state.orderTab='shipped';go('orders')">已发货</span>
               <span onclick="event.stopPropagation();state.orderTab='done';go('orders')">已完成</span>
-              <span style="margin-left:auto;color:var(--brand)" onclick="event.stopPropagation();go('address')">收货地址</span>
+              <span style="margin-left: auto;color:var(--brand)" onclick="event.stopPropagation();go('address')">收货地址</span>
             </div>
           </div>
 
-          <div class="card" style="margin:0 16px 16px">
-            <div style="font-size:var(--fs-2);font-weight:600;margin-bottom:14px">必备工具</div>
+          <div class="card" style="margin: 0 var(--sp-3) var(--sp-3)">
+            <div style="font-size:var(--fs-2);font-weight:600;margin-bottom: 14px">必备工具</div>
             <div class="menu-grid" id="agentMenus"></div>
           </div>
         </div>
@@ -3330,7 +3330,7 @@
             <div class="s" data-seg="tier">等级规则</div>
           </div>
           <div id="agentHome">
-            <div class="card invite-card" style="margin:0 16px 16px">
+            <div class="card invite-card" style="margin:0 var(--sp-3) var(--sp-3)">
               <div class="invite-title">邀请好友 · 得积分</div>
               <div class="invite" style="margin-top:0">
                 <div class="code" onclick="copyCode()">邀请码 LB8888（点按复制）</div>
@@ -3340,7 +3340,7 @@
               </div>
               <div class="invite-tip">好友通过邀请码注册，你得拉新积分（非佣金）</div>
             </div>
-            <div class="card cta" style="margin:0 16px 16px">
+            <div class="card cta" style="margin:0 var(--sp-3) var(--sp-3)">
               <div>
                 <div class="tt">今日战报</div>
                 <div class="ss">新邀 2 人 · 活跃 5 人</div>
@@ -3359,14 +3359,14 @@
             <div class="hero-level" id="memLevel">普通用户</div>
             <div class="hero-sub">可用积分 <span data-bind="points">20</span> · 按月订阅发放</div>
           </div>
-          <div class="member-plans" id="memberPlans" style="margin:0 16px"></div>
-          <div class="member-foot" style="margin:12px 16px 0">订阅按月发放 · 积分仅可兑换商城 · 福彩板块上线后自动到账</div>
-          <div class="card" style="margin:16px">
-            <div style="font-size:var(--fs-2);font-weight:700;margin-bottom:8px">会员说明</div>
+          <div class="member-plans" id="memberPlans" style="margin:0 var(--sp-3)"></div>
+          <div class="member-foot" style="margin:var(--sp-2) var(--sp-3) 0">订阅按月发放 · 积分仅可兑换商城 · 福彩板块上线后自动到账</div>
+          <div class="card" style="margin:var(--sp-3)">
+            <div style="font-size:var(--fs-2);font-weight:700;margin-bottom: var(--sp-1)">会员说明</div>
             <div class="rule-item">· 按月发放，mock 不自动续费</div>
             <div class="rule-item">· 积分仅可兑换商城商品，不可提现</div>
             <div class="rule-item">· 福彩一注：功能上线后到账</div>
-            <button class="btn btn-ghost btn-block" style="margin-top:12px" onclick="go('points')">查看积分明细</button>
+            <button class="btn btn-ghost btn-block" style="margin-top:var(--sp-2)" onclick="go('points')">查看积分明细</button>
           </div>
         </div>
 
@@ -3425,7 +3425,7 @@
             </div>
           </div>
           <div class="card">
-            <div class="f-label" style="margin-bottom:8px">补充说明（选填）</div>
+            <div class="f-label" style="margin-bottom:var(--sp-1)">补充说明（选填）</div>
             <textarea id="asNote" class="f-textarea" placeholder="请描述遇到的问题，有助于更快审核"></textarea>
           </div>
           <div style="height:80px"></div>
@@ -3452,7 +3452,7 @@
             <div class="form-row"><span class="f-label">详细地址</span><input class="f-input" id="afDetail" placeholder="街道、楼牌号等"></div>
             <div class="form-row"><span class="f-label">设为默认地址</span><input type="checkbox" id="afDef"></div>
           </div>
-          <div id="afRemove" style="text-align:center;margin-top:16px"></div>
+          <div id="afRemove" style="text-align:center;margin-top: var(--sp-3)"></div>
           <div style="height:80px"></div>
           <div class="detail-footer">
             <button class="btn btn-primary" style="flex:1" onclick="saveAddressView()">保存</button>
@@ -3520,7 +3520,7 @@
           </div>
 
           <div class="card">
-            <div style="font-size:var(--fs-2);font-weight:700;margin-bottom:8px">积分用途</div>
+            <div style="font-size:var(--fs-2);font-weight:700;margin-bottom: var(--sp-1)">积分用途</div>
             <div class="rule-item">· 看广告 / 完成任务攒积分</div>
             <div class="rule-item">· 仅可兑换商城商品与生活权益（不可提现）</div>
             <div class="rule-item">· 观看潮知馆 AI / 文旅视频</div>
@@ -3535,7 +3535,7 @@
             <span class="pts-rule-link" onclick="openPointsRules()"><i class="prq">?</i>积分规则</span>
             <div class="lab">当前可用积分</div>
             <div class="n" data-bind="points">20</div>
-            <div style="display:inline-block;margin-top:6px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.45);font-size: var(--fs-1);padding:3px 10px;border-radius: var(--r-pill)">仅限商城兑换 · 不可提现</div>
+            <div style="display:inline-block;margin-top: 6px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.45);font-size: var(--fs-1);padding: 3px 10px;border-radius: var(--r-pill)">仅限商城兑换 · 不可提现</div>
             <div class="acts">
               <button class="btn" style="background:#fff;color:var(--brand-text)" onclick="go('watch-ad')">去赚积分 ›</button>
               <button class="btn" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.7)" onclick="switchTab('mall')">立即兑换</button>
@@ -3546,7 +3546,7 @@
             <span class="log-more" onclick="go('points-logs')">查看全部 ›</span>
           </div>
           <div class="card" id="pointsLogs"></div>
-          <div style="text-align:center;padding:8px 0 24px">
+          <div style="text-align:center;padding: var(--sp-1) 0 var(--sp-4)">
             <button class="btn btn-ghost" onclick="switchTab('mall')">去积分商城 ›</button>
           </div>
         </div>
@@ -3559,7 +3559,7 @@
             <div class="mode-item" data-log-tab="out" onclick="setLogTab('out')">消耗</div>
           </div>
           <div class="card" id="pointsLogsAll"></div>
-          <div id="logsEmpty" class="hide" style="text-align:center;padding:44px 16px;color:var(--ink-3);font-size: var(--fs-1)">
+          <div id="logsEmpty" class="hide" style="text-align:center;padding: 44px var(--sp-3);color:var(--ink-3);font-size: var(--fs-1)">
             暂无相关积分记录
           </div>
         </div>
@@ -3851,7 +3851,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.1';
+    const APP_VERSION = 'v20261023.2';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -4628,7 +4628,7 @@
           <div class="r"><span>配送费</span><span class="save">-¥0（平台补贴）</span></div>
           <div class="r"><span>实付</span><span class="cash">¥0</span></div>
         </div>
-        <div style="display:flex;gap:10px;margin-top:14px">
+        <div style="display:flex;gap: 10px;margin-top: 14px">
           <button class="btn btn-ghost" style="flex:1" onclick="closeFmSheet()">再想想</button>
           <button class="btn btn-primary" style="flex:1" onclick="fmConfirmOrder('${cid}')">确认下单</button>
         </div>`);
@@ -5404,7 +5404,7 @@
           <div class="bs-title">已选商品</div>
           <div class="td-clear" onclick="spClear()"><svg class="ico"><use href="#i-trash"/></svg>清空</div>
         </div>
-        <div class="bs-list" style="margin-top:6px">${rows || '<div class="section-hint">还没有选择商品</div>'}</div>
+        <div class="bs-list" style="margin-top: 6px">${rows || '<div class="section-hint">还没有选择商品</div>'}</div>
         <div class="td-sfoot">
           <div class="sum">合计 <b>¥${spTotal().toFixed(2)}</b></div>
           <span class="ck" onclick="goCheckout()">去下单</span>
@@ -5441,7 +5441,7 @@
       const cnt = spCount(), orig = spOrigTotal(), pay = spTotal();
       const save = Math.round((orig - pay) * 100) / 100;
       document.getElementById('coBody').innerHTML = `
-        <div class="td-block" style="padding-bottom:10px">
+        <div class="td-block" style="padding-bottom: 10px">
           <div class="t">${b.name} · ${st.name}</div>
           <div class="ad"><svg class="ico"><use href="#i-pin"/></svg>${st.addr}</div>
         </div>
@@ -5451,7 +5451,7 @@
                  value="${coPhone}" oninput="onCoPhone(this.value)" />
           <div class="td-hint">将作为出餐异常联系和取餐码发放，请保持手机畅通</div>
         </div>
-        <div class="td-block" style="padding-bottom:5px">
+        <div class="td-block" style="padding-bottom: 5px">
           ${rows}
           <div class="td-orig">共计 ${cnt} 件 · 原价 ¥${orig.toFixed(2)}</div>
         </div>
@@ -5515,15 +5515,15 @@
             <div class="v">${d.code}</div>
             <div class="m">${d.brand} · ${d.store}<br/>${d.addr}</div>
           </div>
-          <div class="td-block" style="text-align:left;margin-top:12px">
-            ${d.items.map(x => `<div style="display:flex;gap:10px;padding:7px 0">
+          <div class="td-block" style="text-align:left;margin-top: var(--sp-2)">
+            ${d.items.map(x => `<div style="display:flex;gap: 10px;padding: 7px 0">
               <div class="info" style="flex:1;min-width:0"><div class="nm">${x.n}</div><div class="spec">${x.spec}</div></div>
               <div class="rt" style="flex:none;text-align:right"><div class="p">¥${x.p.toFixed(1)}</div><div class="q">×${x.qty}</div></div>
             </div>`).join('')}
             <div class="td-frow total"><span>实付</span><span class="r">¥${d.pay.toFixed(2)}</span></div>
             <div class="td-hint">比官方门店价省 ¥${d.save.toFixed(2)}${d.tags.length ? ' · 特殊要求：' + d.tags.join('、') : ''}</div>
           </div>
-          <div style="display:flex;gap:10px;margin:16px 0 24px">
+          <div style="display:flex;gap: 10px;margin: var(--sp-3) 0 var(--sp-4)">
             <button class="btn btn-ghost" style="flex:1" onclick="go('life')">查看消费记录</button>
             <button class="btn btn-primary" style="flex:1" onclick="openStorePick('${b ? b.id : ''}')">再点一单</button>
           </div>
@@ -5570,7 +5570,7 @@
           <div class="cell"><div class="v">${BY_STATS.reviewing}</div><div class="l">审核中</div></div>
           <div class="cell"><div class="v">${BY_STATS.done}</div><div class="l">已完成</div></div>
         </div>
-        <div style="margin-top:10px;font-size: var(--fs-1);opacity:.9;background:rgba(0,0,0,.12);border-radius: var(--r-sm);padding:6px 8px">
+        <div style="margin-top: 10px;font-size: var(--fs-1);opacity:.9;background:rgba(0,0,0,.12);border-radius: var(--r-sm);padding: 6px var(--sp-1)">
           完成任务得积分 · 仅可兑换商城商品 · 请按要求提交真实截图
         </div>`;
 
@@ -5611,7 +5611,7 @@
               <div class="r-status st-${r.status}">${r.statusText}</div>
               <div class="r-cash ${r.status === 'approved' ? '' : 'muted'}">${r.status === 'approved' ? '+' : ''}${r.points} 分</div>
             </div>
-          </div>`).join('') || '<div class="muted" style="text-align:center;padding:40px 0">还没有悬赏记录</div>';
+          </div>`).join('') || '<div class="muted" style="text-align:center;padding: 40px 0">还没有悬赏记录</div>';
       }
     }
 
@@ -5880,13 +5880,13 @@
           <div class="info">
             <div class="title">${c.title}</div>
             <div class="meta">${c.categoryLabel} · ${c.lessons} 集 · ${c.duration}</div>
-            ${c.convertHint ? `<div style="margin-top:6px;font-size: var(--fs-1);background:#faf6eb;color:#c1841a;padding:3px 8px;border-radius: var(--r-sm);align-self:flex-start">${c.convertHint}</div>` : ''}
+            ${c.convertHint ? `<div style="margin-top: 6px;font-size: var(--fs-1);background:#faf6eb;color:#c1841a;padding: 3px var(--sp-1);border-radius: var(--r-sm);align-self:flex-start">${c.convertHint}</div>` : ''}
             <div class="bottom">
               <div class="cost">${c.points} <span>积分观看</span></div>
               <div class="go">去观看</div>
             </div>
           </div>
-        </div>`).join('') || '<div class="muted" style="text-align:center;padding:40px 16px">该板块视频整理中</div>';
+        </div>`).join('') || '<div class="muted" style="text-align:center;padding: 40px var(--sp-3)">该板块视频整理中</div>';
     }
 
     function openNews(id) {
@@ -5894,12 +5894,12 @@
       if (!n) return;
       const cat = TC_CATS.find(c => c.id === n.cat);
       document.getElementById('newsBody').innerHTML = `
-        <div class="card" style="margin:12px 16px">
-          <div class="tn-cat" style="margin-bottom:8px">${n.catName}</div>
+        <div class="card" style="margin: var(--sp-2) var(--sp-3)">
+          <div class="tn-cat" style="margin-bottom:var(--sp-1)">${n.catName}</div>
           <div style="font-size:var(--fs-3);font-weight:800;line-height:1.4">${n.title}</div>
-          <div class="tn-meta" style="margin-top:8px">${n.source} · ${n.time} · ${n.read}阅读</div>
-          <div style="margin-top:14px;font-size: var(--fs-2);color:var(--ink-2);line-height:1.7;font-weight:600">${n.digest}</div>
-          ${n.body.map(p => `<div style="margin-top:12px;font-size: var(--fs-2);color:var(--ink-2);line-height:1.75">${p}</div>`).join('')}
+          <div class="tn-meta" style="margin-top: var(--sp-1)">${n.source} · ${n.time} · ${n.read}阅读</div>
+          <div style="margin-top: 14px;font-size: var(--fs-2);color:var(--ink-2);line-height:1.7;font-weight:600">${n.digest}</div>
+          ${n.body.map(p => `<div style="margin-top: var(--sp-2);font-size: var(--fs-2);color:var(--ink-2);line-height:1.75">${p}</div>`).join('')}
         </div>
         <div class="news-cta" onclick="newsToVideos('${n.cat}')">
           <div class="nc-l">
@@ -5972,18 +5972,18 @@
     /* 拉新中心（二级页）：工作台 / 拉新积分 / 等级规则 */
     function renderPull() {
       document.getElementById('agentOrders').innerHTML =
-        `<div class="section-hint" style="margin:0 16px 12px;font-size:var(--fs-1);color:var(--ink-3)">团队长拉新仅发放积分，不产生佣金结算</div>` +
+        `<div class="section-hint" style="margin: 0 var(--sp-3) var(--sp-2);font-size:var(--fs-1);color:var(--ink-3)">团队长拉新仅发放积分，不产生佣金结算</div>` +
         INVITE_LOGS.map(o => `
-        <div class="order" style="margin:0 16px 14px">
+        <div class="order" style="margin: 0 var(--sp-3) 14px">
           <div class="top"><span>${o.user}</span><span class="st ${o.status}">${o.statusText}</span></div>
           <div class="g">${o.source}</div>
           <div class="bot"><span>团队拉新</span><span class="c">积分 +${o.points}</span></div>
           <div class="tm">${o.time}</div>
         </div>`).join('');
       document.getElementById('agentTier').innerHTML =
-        `<div class="section-hint" style="margin:0 16px 12px;font-size:var(--fs-1);color:var(--ink-3)">拉新奖励积分，积分仅可兑换商城，不可提现</div>` +
+        `<div class="section-hint" style="margin: 0 var(--sp-3) var(--sp-2);font-size:var(--fs-1);color:var(--ink-3)">拉新奖励积分，积分仅可兑换商城，不可提现</div>` +
         TIERS.map(t => `
-        <div class="tier" style="margin:0 16px 14px">
+        <div class="tier" style="margin: 0 var(--sp-3) 14px">
           <div class="th"><span class="tn">${t.name}</span><span class="tq">${t.th}</span></div>
           <div class="rate">${t.rate}</div>
           <div class="bt">${t.b.map(x => `<span>${x}</span>`).join('')}</div>
@@ -6057,7 +6057,7 @@
         <div class="tags">${g.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
       document.getElementById('gdPoints').innerHTML = `
         <div><div class="pt">${g.points} 积分</div><div class="tip">积分不足？看广告每天最多 +100</div></div>
-        <button class="btn btn-primary" style="font-size:var(--fs-1);padding:8px 14px" onclick="go('watch-ad')">去赚积分</button>`;
+        <button class="btn btn-primary" style="font-size:var(--fs-1);padding: var(--sp-1) 14px" onclick="go('watch-ad')">去赚积分</button>`;
       document.getElementById('gdCompare').innerHTML = `
         <div class="cell"><div class="k">批发价</div><div class="v">¥${g.ws}</div></div>
         <div class="cell"><div class="k">利润参考</div><div class="v">¥${g.profit}</div></div>
@@ -6100,13 +6100,13 @@
           ${state.addresses.map(a => `
             <div class="bs-item ${cur && a.id === cur.id ? 'on' : ''}" onclick="setCurAddr('${a.id}')">
               <div class="n">${a.name} · ${a.phone}${a.def ? ' <span style="font-size: var(--fs-1);color:var(--brand)">默认</span>' : ''}
-                <div style="font-weight:400;font-size: var(--fs-1);color:var(--ink-3);margin-top:3px">${a.region.join('')} ${a.detail}</div>
+                <div style="font-weight:400;font-size: var(--fs-1);color:var(--ink-3);margin-top: 3px">${a.region.join('')} ${a.detail}</div>
               </div>
               <div class="p">${cur && a.id === cur.id ? '✓' : ''}</div>
             </div>`).join('')}
           ${state.addresses.length ? '' : '<div class="section-hint" style="font-size:var(--fs-1)">还没有地址，点下方「＋ 新增地址」</div>'}
         </div>
-        <div style="display:flex;gap:10px;margin-top:6px">
+        <div style="display:flex;gap: 10px;margin-top: 6px">
           <button class="btn btn-ghost" style="flex:1" onclick="closeFmSheet(); go('address')">管理收货地址</button>
           <button class="btn btn-primary" style="flex:1" onclick="closeFmSheet(); editAddress(null)">＋ 新增地址</button>
         </div>`);
@@ -6314,7 +6314,7 @@
         return;
       }
       listEl.innerHTML = rows.map(({ g, c }) => `
-        <div class="fd-item" style="margin:0 16px;background:#fff;border-radius: var(--r-md);margin-bottom:8px;padding:12px">
+        <div class="fd-item" style="margin: 0 var(--sp-3);background:#fff;border-radius: var(--r-md);margin-bottom: var(--sp-1);padding: var(--sp-2)">
           <div class="cbox ${c.selected ? 'on' : ''}" onclick="cartToggle('${g.id}','${c.pay}');renderCart()"></div>
           <div class="thumb">${g.cat}</div>
           <div class="fd-info">
@@ -6334,7 +6334,7 @@
       barEl.innerHTML = `
         <div class="oc-bar">
           <span class="cbox ${all ? 'on' : ''}" style="position:static" onclick="cartToggleAll();renderCart()"></span>
-          <span style="font-size:var(--fs-1);margin-right:6px" onclick="cartToggleAll();renderCart()">全选</span>
+          <span style="font-size:var(--fs-1);margin-right: 6px" onclick="cartToggleAll();renderCart()">全选</span>
           <span class="sum">
             ${s.points ? `<span class="pts"><b>${s.points}</b> 积分</span>` : ''}
             ${s.cash ? `<span class="cs"> <b>¥${s.cash}</b></span>` : ''}
@@ -6346,7 +6346,7 @@
     function renderOrderConfirm() {
       const addr = currentAddr();
       document.getElementById('ocAddr').innerHTML = `
-        <div class="addr-card" style="margin:10px 16px" onclick="addrPickSheet(() => renderOrderConfirm())">
+        <div class="addr-card" style="margin: 10px var(--sp-3)" onclick="addrPickSheet(() => renderOrderConfirm())">
           ${addr
             ? `<div class="top"><span class="nm">${addr.name}</span><span class="ph">${addr.phone}</span>${addr.def ? '<span class="def-tag">默认</span>' : ''}</div>
                <div class="dt">${addr.region.join('')} ${addr.detail}</div>`
@@ -6361,27 +6361,27 @@
       document.getElementById('ocGroups').innerHTML = groups.map(gp => {
         const total = gp.items.reduce((s, c) => s + (gp.key === 'points' ? GOODS.find(x => x.id === c.gid).points : GOODS.find(x => x.id === c.gid).cash) * c.qty, 0);
         return `
-        <div class="card" style="margin:10px 16px">
-          <div style="font-size:var(--fs-2);font-weight:700;margin-bottom:8px">${gp.title}</div>
+        <div class="card" style="margin: 10px var(--sp-3)">
+          <div style="font-size:var(--fs-2);font-weight:700;margin-bottom: var(--sp-1)">${gp.title}</div>
           ${gp.items.map(c => { const g = GOODS.find(x => x.id === c.gid); return `
-            <div class="oc-goods" style="border-top:none;padding-top:4px">
+            <div class="oc-goods" style="border-top:none;padding-top: var(--sp-0)">
               <div class="thumb">${g.cat}</div>
               <div style="flex:1">
                 <div style="font-size:var(--fs-1);line-height:1.4">${g.title}</div>
-                <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:var(--fs-1)">
+                <div style="display:flex;justify-content:space-between;margin-top: 6px;font-size:var(--fs-1)">
                   <span style="font-weight:700;color:${gp.key === 'points' ? 'var(--brand)' : '#ff3b30'}">${gp.key === 'points' ? g.points + ' 积分' : '¥' + g.cash}</span>
                   <span style="color:var(--ink-3)">×${c.qty}</span>
                 </div>
               </div>
             </div>`; }).join('')}
-          <div class="oc-total" style="border-top:1px solid var(--line);padding-top:8px;margin-top:8px">
+          <div class="oc-total" style="border-top:1px solid var(--line);padding-top: var(--sp-1);margin-top: var(--sp-1)">
             ${gp.key === 'points' ? '积分合计' : '现金合计'}：
             <b class="${gp.key === 'points' ? 'pts' : 'cs'}">${gp.key === 'points' ? total : '¥' + total.toFixed(2)}</b>
           </div>
-          ${gp.key === 'cash' ? '<div style="font-size: var(--fs-1);color:var(--ink-3);margin-top:6px">下单后进入「待付款」，可在订单列表模拟支付</div>' : ''}
+          ${gp.key === 'cash' ? '<div style="font-size: var(--fs-1);color:var(--ink-3);margin-top: 6px">下单后进入「待付款」，可在订单列表模拟支付</div>' : ''}
         </div>`;
       }).join('') + (groups.length > 1
-        ? `<div class="card" style="margin:10px 16px;text-align:center;color:var(--brand);font-size: var(--fs-1);background:#faf3e2">积分与现金将拆成两笔订单</div>` : '');
+        ? `<div class="card" style="margin: 10px var(--sp-3);text-align:center;color:var(--brand);font-size: var(--fs-1);background:#faf3e2">积分与现金将拆成两笔订单</div>` : '');
       const s = cartSummary();
       document.getElementById('ocBar').innerHTML = `
         <span class="sum">
@@ -6403,13 +6403,13 @@
         const price = o.type === 'points' ? `${o.pointsTotal} 积分` : `¥${o.cashTotal.toFixed(2)}`;
         const aft = o.aftersale ? (o.aftersale.status === 'reviewing' ? '售后审核中' : '售后已完成') : '';
         return `
-        <div class="order-card" style="margin:10px 16px">
+        <div class="order-card" style="margin: 10px var(--sp-3)">
           <div class="oc-head" onclick="openOrder('${o.id}')"><span>订单号 ${o.id}</span><span class="st ${o.status}">${STATUS_TEXT[o.status]}</span></div>
           <div class="oc-goods" onclick="openOrder('${o.id}')">
             ${o.items.slice(0, 3).map(i => `<div class="thumb">${i.cat}</div>`).join('')}
             <div style="flex:1;min-width:0">
               <div style="font-size:var(--fs-1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${sum}</div>
-              <div style="font-size:var(--fs-1);color:var(--ink-3);margin-top:4px">共 ${qty} 件</div>
+              <div style="font-size:var(--fs-1);color:var(--ink-3);margin-top: var(--sp-0)">共 ${qty} 件</div>
             </div>
           </div>
           <div class="oc-total">合计：<b class="${o.type === 'points' ? 'pts' : 'cs'}">${price}</b></div>
@@ -6446,45 +6446,45 @@
 
       body.innerHTML = `
         ${o.aftersale ? `
-        <div class="card" style="margin-bottom:10px">
+        <div class="card" style="margin-bottom: 10px">
           <div style="display:flex;justify-content:space-between;font-size:var(--fs-2);font-weight:700">
             <span>售后：${o.aftersale.type === 'refund' ? '仅退款' : '退货退款'}</span>
             <span style="color:${o.aftersale.status === 'approved' ? '#34c759' : 'var(--ink-3)'};font-size:var(--fs-1)">${o.aftersale.status === 'reviewing' ? '审核中' : '已通过'}</span>
           </div>
-          <div style="font-size:var(--fs-1);color:var(--ink-2);margin-top:7px">原因：${o.aftersale.reason}</div>
-          ${o.aftersale.result ? `<div style="font-size:var(--fs-1);color:var(--ink-2);margin-top:5px">结果：${o.aftersale.result}</div>` : ''}
-          ${o.aftersale.status === 'reviewing' ? `<button class="btn btn-ghost" style="margin-top:10px;font-size:var(--fs-1)" onclick="approveAftersale('${o.id}')">模拟审核通过</button>` : ''}
+          <div style="font-size:var(--fs-1);color:var(--ink-2);margin-top: 7px">原因：${o.aftersale.reason}</div>
+          ${o.aftersale.result ? `<div style="font-size:var(--fs-1);color:var(--ink-2);margin-top: 5px">结果：${o.aftersale.result}</div>` : ''}
+          ${o.aftersale.status === 'reviewing' ? `<button class="btn btn-ghost" style="margin-top: 10px;font-size:var(--fs-1)" onclick="approveAftersale('${o.id}')">模拟审核通过</button>` : ''}
         </div>` : ''}
         ${timeline.length ? `
-        <div class="card" style="margin-bottom:10px">
-          <div style="font-size:var(--fs-2);font-weight:700;margin-bottom:10px">物流信息</div>
+        <div class="card" style="margin-bottom: 10px">
+          <div style="font-size:var(--fs-2);font-weight:700;margin-bottom: 10px">物流信息</div>
           <div class="tl">${timeline.map((it, i) => `
             <div class="tl-item"><div class="tl-dot ${i === timeline.length - 1 ? 'cur' : ''}"></div>
               <div><div class="tl-t ${i === timeline.length - 1 ? 'cur' : ''}">${it.t}</div><div class="tl-tm">${it.tm}</div></div>
             </div>`).join('')}</div>
         </div>` : ''}
-        <div class="card" style="margin-bottom:10px">
-          <div style="font-size:var(--fs-2);font-weight:700;margin-bottom:8px">收货信息</div>
+        <div class="card" style="margin-bottom: 10px">
+          <div style="font-size:var(--fs-2);font-weight:700;margin-bottom: var(--sp-1)">收货信息</div>
           <div class="addr-card" style="padding:0;background:none">
             <div class="top"><span class="nm">${o.address.name}</span><span class="ph">${o.address.phone}</span></div>
             <div class="dt">${o.address.region.join('')} ${o.address.detail}</div>
           </div>
         </div>
-        <div class="card" style="margin-bottom:10px">
-          <div style="font-size:var(--fs-2);font-weight:700;margin-bottom:8px">商品清单</div>
+        <div class="card" style="margin-bottom: 10px">
+          <div style="font-size:var(--fs-2);font-weight:700;margin-bottom: var(--sp-1)">商品清单</div>
           ${o.items.map(i => `
-            <div class="oc-goods" style="border-top:none;padding-top:4px">
+            <div class="oc-goods" style="border-top:none;padding-top: var(--sp-0)">
               <div class="thumb">${i.cat}</div>
               <div style="flex:1">
                 <div style="font-size:var(--fs-1)">${i.title}</div>
-                <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:var(--fs-1)">
+                <div style="display:flex;justify-content:space-between;margin-top: 6px;font-size:var(--fs-1)">
                   <span style="font-weight:700;color:${o.type === 'points' ? 'var(--brand)' : '#ff3b30'}">${o.type === 'points' ? i.points + ' 积分' : '¥' + i.cash}</span>
                   <span style="color:var(--ink-3)">×${i.qty}</span>
                 </div>
               </div>
             </div>`).join('')}
         </div>
-        <div class="card" style="margin-bottom:10px">
+        <div class="card" style="margin-bottom: 10px">
           <div class="info-row"><span class="k">订单编号</span><span class="v">${o.id}</span></div>
           <div class="info-row"><span class="k">下单时间</span><span class="v">${fmtTime(o.createdAt)}</span></div>
           <div class="info-row"><span class="k">支付方式</span><span class="v">${o.type === 'points' ? '积分兑换' : '现金支付'}</span></div>
@@ -6510,14 +6510,14 @@
     function renderAftersaleApply() {
       const o = state.orders.find(x => x.id === state.orderId); if (!o) return;
       document.getElementById('asGoods').innerHTML = `
-        <div class="card" style="margin:10px 16px">
+        <div class="card" style="margin: 10px var(--sp-3)">
           ${o.items.map(i => `
-            <div class="oc-goods" style="border-top:none;padding-top:4px">
+            <div class="oc-goods" style="border-top:none;padding-top: var(--sp-0)">
               <div class="thumb">${i.cat}</div>
               <div style="flex:1"><div style="font-size:var(--fs-1)">${i.title}</div>
-              <div style="font-size: var(--fs-1);color:var(--ink-3);margin-top:5px">×${i.qty}</div></div>
+              <div style="font-size: var(--fs-1);color:var(--ink-3);margin-top: 5px">×${i.qty}</div></div>
             </div>`).join('')}
-          <div class="oc-total" style="border-top:1px solid var(--line);padding-top:8px;margin-top:6px">
+          <div class="oc-total" style="border-top:1px solid var(--line);padding-top: var(--sp-1);margin-top: 6px">
             可退：<b class="${o.type === 'points' ? 'pts' : 'cs'}">${o.type === 'points' ? o.pointsTotal + ' 积分' : '¥' + o.cashTotal.toFixed(2)}</b>
           </div>
         </div>`;
@@ -6530,7 +6530,7 @@
       if (!state.addresses.length) { el.innerHTML = '<div class="empty-state">还没有收货地址</div>'; return; }
       const curId = (currentAddr() || {}).id;
       el.innerHTML = state.addresses.map(a => `
-        <div class="addr-card" style="margin:10px 16px;${a.id === curId ? 'border:1.5px solid #c1841a' : ''}">
+        <div class="addr-card" style="margin: 10px var(--sp-3);${a.id === curId ? 'border:1.5px solid #c1841a' : ''}">
           <div class="top"><span class="nm">${a.name}</span><span class="ph">${a.phone}</span>${a.def ? '<span class="def-tag">默认</span>' : ''}${a.id === curId ? '<span class="def-tag" style="background:#e8f7f0;color:#00b578">使用中</span>' : ''}</div>
           <div class="dt">${a.region.join('')} ${a.detail}</div>
           <div class="acts">
@@ -6603,7 +6603,7 @@
               </span>
             </div>
           </div>
-        </div>`).join('') + `<div style="text-align:center;color:var(--brand);font-size:var(--fs-1);padding:12px 0 6px;cursor:pointer" onclick="toggleFab();go('cart')">管理购物车 ›</div>`
+        </div>`).join('') + `<div style="text-align:center;color:var(--brand);font-size:var(--fs-1);padding: var(--sp-2) 0 6px;cursor:pointer" onclick="toggleFab();go('cart')">管理购物车 ›</div>`
         : '<div class="empty-state">购物车还是空的</div>';
       const s = cartSummary();
       const all = state.cart.length && state.cart.every(c => c.selected);
@@ -6635,18 +6635,18 @@
       document.getElementById('cdPlayTip').textContent = unlocked ? '已解锁 · 点击剧集播放' : '试看免费 · 未解锁';
       document.getElementById('cdInfo').innerHTML = `
         <div style="font-size:var(--fs-3);font-weight:700">${c.title}</div>
-        <div class="muted" style="margin-top:6px">${c.categoryLabel || ''} · ${c.lessons} 集 · ${c.duration} · ${c.teacher}</div>
-        <div style="margin-top:10px;font-size: var(--fs-2);color:var(--ink-2);line-height:1.6">${c.desc}</div>
-        ${c.convertHint ? `<div style="margin-top:10px;font-size:var(--fs-1);background:#faf6eb;color:#c1841a;padding:8px 10px;border-radius: var(--r-sm)">${c.convertHint}</div>` : ''}`;
+        <div class="muted" style="margin-top: 6px">${c.categoryLabel || ''} · ${c.lessons} 集 · ${c.duration} · ${c.teacher}</div>
+        <div style="margin-top: 10px;font-size: var(--fs-2);color:var(--ink-2);line-height:1.6">${c.desc}</div>
+        ${c.convertHint ? `<div style="margin-top: 10px;font-size:var(--fs-1);background:#faf6eb;color:#c1841a;padding: var(--sp-1) 10px;border-radius: var(--r-sm)">${c.convertHint}</div>` : ''}`;
       const box = document.getElementById('cdUnlock');
       box.style.display = '';
       if (!unlocked) {
         box.style.background = '';
         box.innerHTML = `
           <div><div class="pt">${c.points} 积分观看</div><div class="tip">当前积分 ${state.points}</div></div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-ghost" style="font-size:var(--fs-1);padding:8px 12px" onclick="go('watch-ad')">赚积分</button>
-            <button class="btn btn-primary" style="font-size:var(--fs-1);padding:8px 14px" onclick="unlockCourse()">立即观看</button>
+          <div style="display:flex;gap: var(--sp-1)">
+            <button class="btn btn-ghost" style="font-size:var(--fs-1);padding: var(--sp-1) var(--sp-2)" onclick="go('watch-ad')">赚积分</button>
+            <button class="btn btn-primary" style="font-size:var(--fs-1);padding: var(--sp-1) 14px" onclick="unlockCourse()">立即观看</button>
           </div>`;
       } else {
         box.style.background = '#fff';
@@ -6658,7 +6658,7 @@
 
     function renderChapters(c, unlocked) {
       document.getElementById('cdChapters').innerHTML =
-        `<div style="font-size:var(--fs-2);font-weight:600;margin-bottom:6px">剧集目录</div>` +
+        `<div style="font-size:var(--fs-2);font-weight:600;margin-bottom: 6px">剧集目录</div>` +
         c.chapters.map(ch => {
           let right = ch.free ? `<span class="free">免费</span>`
             : unlocked ? `<span class="play">播放</span>`
@@ -6688,7 +6688,7 @@
           <div class="bs-close" onclick="closeLtSheet()">✕</div>
         </div>
         <div class="bs-list">
-          <div class="rule-item" style="color:#ff3b30;font-weight:600;background:#fff5f5;border-radius: var(--r-sm);padding:8px 10px;border-bottom:none">积分仅用于兑换商城商品 / 生活权益，不可提现、不可转账</div>
+          <div class="rule-item" style="color:#ff3b30;font-weight:600;background:#fff5f5;border-radius: var(--r-sm);padding: var(--sp-1) 10px;border-bottom:none">积分仅用于兑换商城商品 / 生活权益，不可提现、不可转账</div>
           <div class="rule-item">获取：看广告 +10/条（每日最多 10 条，今日已看 <b id="ptsAdToday">${state.adToday}</b>）</div>
           <div class="rule-item">获取：完成悬赏任务，审核通过后发放积分</div>
           <div class="rule-item">限时抢：每 15 分钟看 1 条广告抢 +20 积分（冷却后可再抢）</div>
@@ -6992,14 +6992,14 @@
         : (r.win ? { c: 'lt-win', t: '已中奖', h: `${r.win.name} · 奖金 ¥${r.win.amount}（原型模拟）` }
                  : { c: 'lt-lose', t: '未中奖', h: '本注未中奖，下期再战' });
       head.innerHTML = `<div class="lt-det-head ${st.c}"><div class="t">${st.t}</div><div class="h">${st.h}</div></div>`;
-      const bets = r.bets.map(b => `<div class="lt-det-nums" style="margin-bottom:8px">${b.reds.map(ltRed).join('')}${ltBlue(b.blue)}</div>`).join('');
+      const bets = r.bets.map(b => `<div class="lt-det-nums" style="margin-bottom: var(--sp-1)">${b.reds.map(ltRed).join('')}${ltBlue(b.blue)}</div>`).join('');
       body.innerHTML = `
         <div class="lt-card">
           <div class="lt-det-t">${LT.NAME} <small>${r.issue}</small></div>
           <div class="lt-det-lab">选号详情</div>
           ${bets}
           <div class="lt-det-mul">共 ${r.count} 注 1 倍</div>
-          ${r.draw ? `<div class="lt-det-lab" style="margin-top:12px">开奖号码</div>
+          ${r.draw ? `<div class="lt-det-lab" style="margin-top: var(--sp-2)">开奖号码</div>
             <div class="lt-det-nums">${r.draw.reds.map(ltRed).join('')}${ltBlue(r.draw.blue)}</div>` : ''}
         </div>
         <div class="lt-card">
@@ -7008,7 +7008,7 @@
         </div>
         <div class="lt-card">
           <div class="lt-det-t">订单信息</div>
-          <div class="lt-kv" style="margin-top:4px"><span>总计</span><span class="lt-money">¥${r.cash.toFixed(2)} · ${r.points} 积分</span></div>
+          <div class="lt-kv" style="margin-top: var(--sp-0)"><span>总计</span><span class="lt-money">¥${r.cash.toFixed(2)} · ${r.points} 积分</span></div>
           <div class="lt-kv"><span>订单编号</span><span>${r.id}<button class="lt-copy" onclick="ltCopy('${r.id}')">复制</button></span></div>
           <div class="lt-kv"><span>下单时间</span><span>${r.time}</span></div>
         </div>`;
