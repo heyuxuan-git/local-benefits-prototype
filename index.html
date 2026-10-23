@@ -1878,29 +1878,33 @@
       color: var(--brand-text); font-size: var(--fs-1); border-radius: 0 0 var(--r-lg) var(--r-lg);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    /* 商城：分类胶囊 + 吸顶排序，单列媒体流 */
-    .mall-chips {
-      position: sticky; top: 0; z-index: 20;
-      display: flex; align-items: center; gap: var(--sp-1);
-      height: 52px; padding: 0 var(--sp-3);
-      background: #fff; overflow-x: auto; overflow-y: hidden;
-      scrollbar-width: none;
+    /* 商城两栏：左侧分类 + 右侧列表（老板指定保留） */
+    .mall-body {
+      display: flex; align-items: stretch;
+      margin: 0 var(--sp-1) var(--sp-2);
+      background: #fff; border-radius: var(--r-md); overflow: hidden;
     }
-    .mall-chips::-webkit-scrollbar { display: none; }
-    .mall-chips .c {
-      flex: none; display: flex; align-items: center; gap: 3px;
-      height: 32px; padding: 0 var(--sp-2); border-radius: var(--r-pill);
-      background: #f5f6f8; color: var(--ink-2); font-size: var(--fs-1); cursor: pointer;
-      white-space: nowrap;
+    .mall-cats {
+      width: 76px; flex-shrink: 0;
+      background: #f5f6f8; overflow: hidden;
     }
-    .mall-chips .c .n { color: var(--ink-3); }
-    .mall-chips .c.on { background: var(--brand-ink); color: #fff; font-weight: 700; }
-    .mall-chips .c.on .n { color: rgba(255,255,255,.72); }
-    .mall-filter { position: sticky; top: 52px; z-index: 19; background: #fff; }
-    .mall-filter .tabs-row { margin: 0; border-radius: 0; }
-    #mallList { background: #fff; }
-    #mallList .goods { margin: 0; border-radius: 0; padding: 14px var(--sp-3); gap: var(--sp-2); }
-    #mallList .goods .thumb { width: 88px; height: 88px; border-radius: 10px; }
+    .mall-cats .c {
+      position: relative; padding: 13px 6px; text-align: center;
+      font-size: var(--fs-1); color: var(--ink-2); cursor: pointer; line-height: 1.3;
+    }
+    .mall-cats .c .n { font-size: var(--fs-1); color: var(--ink-3); margin-top: 2px; }
+    .mall-cats .c.on { background: #fff; color: var(--brand-text); font-weight: 700; }
+    .mall-cats .c.on .n { color: var(--brand-text); opacity: .75; }
+    .mall-cats .c.on::before {
+      content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 3px; height: 18px; background: var(--brand); border-radius: 0 var(--r-xs) var(--r-xs) 0;
+    }
+    .mall-right { flex: 1; min-width: 0; background: #fff; }
+    .mall-right .tabs-row { margin: 0; border-radius: 0; padding: 0 var(--sp-0); background: transparent; }
+    .mall-right .goods {
+      margin: 0; padding: var(--sp-2); background: transparent; border-radius: 0; gap: 9px;
+    }
+    .mall-right .goods .thumb { width: 60px; height: 60px; font-size: var(--fs-1); }
     .goods {
       display: flex; gap: var(--sp-2); background: #fff; border-radius: var(--r-md);
       margin: 0 var(--sp-3) var(--sp-2); padding: var(--sp-2); cursor: pointer;
@@ -3197,15 +3201,17 @@
             </div>
           </div>
           <div class="hint-bar">海量好物 · 约 300 积分/件起 · 积分不可提现</div>
-          <div class="mall-chips" id="mallCats"></div>
-          <div class="mall-filter">
-            <div class="tabs-row" id="mallTabs">
-              <div class="t on" data-mtab="all">综合</div>
-              <div class="t" data-mtab="sales">销量<span class="arrows" data-f="sales"><i class="au">▲</i><i class="ad">▼</i></span></div>
-              <div class="t" data-mtab="price">价格<span class="arrows" data-f="price"><i class="au">▲</i><i class="ad">▼</i></span></div>
+          <div class="mall-body">
+            <div class="mall-cats" id="mallCats"></div>
+            <div class="mall-right">
+              <div class="tabs-row" id="mallTabs">
+                <div class="t on" data-mtab="all">综合</div>
+                <div class="t" data-mtab="sales">销量<span class="arrows" data-f="sales"><i class="au">▲</i><i class="ad">▼</i></span></div>
+                <div class="t" data-mtab="price">价格<span class="arrows" data-f="price"><i class="au">▲</i><i class="ad">▼</i></span></div>
+              </div>
+              <div id="mallList"></div>
             </div>
           </div>
-          <div id="mallList"></div>
         </div>
 
         <!-- ========== 潮知馆（板块大卡 + 资讯流） ========== -->
@@ -3843,7 +3849,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.9';
+    const APP_VERSION = 'v20261023.10';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
