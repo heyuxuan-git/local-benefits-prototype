@@ -300,7 +300,7 @@
     .grab-claimed .grab-badge { background: #1f2329; color: #fff; }
     .grab-body { min-width: 0; }
     .grab-title { font-size: var(--fs-2); font-weight: 800; }
-    .grab-tip { font-size: var(--fs-1); opacity: .92; margin-top: 2px; }
+    .grab-tip { font-size: var(--fs-1); opacity: .92; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .grab-cta {
       flex-shrink: 0; margin-left: 10px;
       background: rgba(255,255,255,.28);
@@ -346,14 +346,14 @@
     .fm-entry .fe-badge.wait { background: #1a1a1a; color: #f0d48c; animation: none; }
     .fm-entry .fe-badge.off { background: rgba(255,255,255,.22); color: rgba(255,255,255,.8); animation: none; }
     @keyframes fm-blink { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
-    .fm-entry .fe-name { font-size: var(--fs-3); font-weight: 800; letter-spacing: .5px; }
+    .fm-entry .fe-name { font-size: var(--fs-3); font-weight: 800; letter-spacing: .5px; white-space: nowrap; }
     .fm-entry .fe-name em { font-style: normal; color: #f0d48c; }
     .fm-entry .fe-tag {
       font-size: var(--fs-1); font-weight: 800; color: #1a1a1a;
       background: #e0ae4e;
       padding: 2px 6px; border-radius: var(--r-xs); letter-spacing: 1px;
     }
-    .fm-entry .fe-sub { font-size: var(--fs-1); color: rgba(255,255,255,.72); margin-top: 6px; }
+    .fm-entry .fe-sub { font-size: var(--fs-1); color: rgba(255,255,255,.72); margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .fm-entry .fe-row { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 7px; }
     .fm-entry .fe-cd { font-size: var(--fs-3); font-weight: 800; color: #f0d48c; font-variant-numeric: tabular-nums; }
     .fm-entry .fe-cd small { font-size: var(--fs-1); font-weight: 600; color: rgba(255,255,255,.65); margin-right: 5px; }
@@ -386,7 +386,7 @@
     .fm-hero .fmh-top { display: flex; align-items: center; gap: var(--sp-1); position: relative; z-index: 1; }
     .fm-hero .fmh-title { font-size: var(--fs-3); font-weight: 800; letter-spacing: 1px; }
     .fm-hero .fmh-title em { font-style: normal; color: #f0d48c; }
-    .fm-hero .fmh-sub { font-size: var(--fs-1); color: rgba(255,255,255,.75); margin-top: var(--sp-1); position: relative; z-index: 1; }
+    .fm-hero .fmh-sub { font-size: var(--fs-1); color: rgba(255,255,255,.75); margin-top: var(--sp-1); position: relative; z-index: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .fm-hero .fmh-stats { display: flex; gap: 18px; margin-top: var(--sp-2); position: relative; z-index: 1; }
     .fm-hero .fmh-stats .v { font-size: var(--fs-3); font-weight: 800; color: #f0d48c; font-variant-numeric: tabular-nums; }
     .fm-hero .fmh-stats .v small { font-size: var(--fs-1); font-weight: 600; color: rgba(255,255,255,.6); margin-left: 2px; }
@@ -660,9 +660,9 @@
       font-size: var(--fs-1); border-bottom: 1px solid #f0f1f3;
     }
     .gp-row:last-of-type { border-bottom: none; }
-    .gp-k { color: var(--ink-3); width: 52px; flex-shrink: 0; }
-    .gp-v { color: var(--ink); flex: 1; }
-    .gp-v.accent { color: var(--brand-text); font-weight: 600; }
+    .gp-k { color: var(--ink-3); width: 52px; flex-shrink: 0; white-space: nowrap; }
+    .gp-v { color: var(--ink); flex: 1; min-width: 0; }
+    .gp-v.accent { color: var(--brand-text); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .grab-btn-main {
       width: 100%;
       background: #e0ae4e !important;
@@ -800,7 +800,7 @@
       font-size: var(--fs-1); padding: 6px var(--sp-1); border-radius: var(--r-sm); text-align: right;
       max-width: 150px;
     }
-    .life-hero .sub { margin-top: var(--sp-1); font-size: var(--fs-1); opacity: .92; }
+    .life-hero .sub { margin-top: var(--sp-1); font-size: var(--fs-1); opacity: .92; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .svc-grid {
       display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px;
       margin: 0 var(--sp-3); padding-top: var(--sp-0);
@@ -1163,7 +1163,7 @@
     .lt-issue { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
     .lt-issue-n { font-size: var(--fs-2); font-weight: 700; color: var(--ink); }
     .lt-count { font-size: var(--fs-1); color: #e23b3b; font-weight: 600; }
-    .lt-tip { margin: var(--sp-2) var(--sp-3) 0; font-size: var(--fs-1); color: var(--ink-3); }
+    .lt-tip { margin: var(--sp-2) var(--sp-3) 0; font-size: var(--fs-1); color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .lt-pool {
       margin: var(--sp-2) var(--sp-3) 0; border: 1.5px dashed #d8dbe0; border-radius: var(--r-md); background: #fff;
       min-height: 150px; padding: 6px 14px;
@@ -1441,7 +1441,15 @@
     .by-hero .wd {
       background: #fff; color: #c1841a; font-size: var(--fs-1); font-weight: 700;
       padding: 7px var(--sp-2); border-radius: var(--r-pill); border: none; cursor: pointer;
+      flex: none; margin-left: var(--sp-1); white-space: nowrap;
     }
+    .by-hero .by-note {
+      margin-top: 10px; font-size: var(--fs-1); opacity: .9;
+      background: rgba(0,0,0,.12); border-radius: var(--r-sm); padding: 6px var(--sp-1);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .by-hero .top > div:first-child { min-width: 0; flex: 1; }
+    .by-hero .top .lab { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .by-stats {
       display: flex; margin-top: var(--sp-2); background: rgba(0,0,0,.15);
       border-radius: var(--r-md); padding: 10px 0;
@@ -1577,7 +1585,7 @@
     }
     .hc .bt { font-size: var(--fs-1); opacity: .9; }
     .hc .tt { font-size: var(--fs-2); font-weight: 700; margin-top: var(--sp-0); }
-    .hc .ss { font-size: var(--fs-1); opacity: .9; margin-top: 2px; }
+    .hc .ss { font-size: var(--fs-1); opacity: .9; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .hc .btn-s {
       margin-top: 10px; background: #fff; color: var(--brand-text);
       font-size: var(--fs-1); font-weight: 700; text-align: center;
@@ -1627,6 +1635,7 @@
       color: #fff; font-size: var(--fs-1); font-weight: 600;
       padding: 9px 14px; border-radius: var(--r-pill); border: none; cursor: pointer;
       display: inline-flex; align-items: center; gap: 6px;
+      white-space: nowrap; flex: none;
     }
     .ad-entry .ico { width: 16px; height: 16px; }
     .benefit-layout { display: flex; min-height: 520px; background: #fff; }
@@ -1660,9 +1669,10 @@
       display: flex; align-items: center; justify-content: space-between;
       cursor: pointer;
     }
-    .activity-bar .at { font-size: var(--fs-1); font-weight: 700; color: var(--ink); }
-    .activity-bar .as { font-size: var(--fs-1); color: var(--brand-text); margin-top: 2px; }
-    .activity-bar .ago { font-size: var(--fs-1); color: var(--brand-text); font-weight: 600; }
+    .activity-bar .at { font-size: var(--fs-1); font-weight: 700; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .activity-bar .as { font-size: var(--fs-1); color: var(--brand-text); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .activity-bar > div:first-child { min-width: 0; flex: 1; }
+    .activity-bar .ago { font-size: var(--fs-1); color: var(--brand-text); font-weight: 600; flex: none; margin-left: var(--sp-1); white-space: nowrap; }
 
     /* 品牌分区：白底金边 */
     .brand-tag {
@@ -1838,10 +1848,11 @@
       background: var(--brand-ink);
       color: #fff; display: flex; justify-content: space-between; align-items: center;
     }
-    .mall-hero .lab { font-size: var(--fs-1); opacity: .9; }
+    .mall-hero .lab { font-size: var(--fs-1); opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .mall-hero .n { font-size: var(--fs-5); font-weight: 800; line-height: 1.15; }
-    .mall-hero .sub { font-size: var(--fs-1); opacity: .85; }
-    .mall-hero .acts { display: flex; flex-direction: column; gap: var(--sp-1); }
+    .mall-hero .sub { font-size: var(--fs-1); opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mall-hero > div:first-child { min-width: 0; flex: 1; }
+    .mall-hero .acts { display: flex; flex-direction: column; gap: var(--sp-1); flex: none; margin-left: var(--sp-1); }
     .mall-hero .btn { font-size: var(--fs-1); padding: var(--sp-1) 14px; }
     .mall-hero .btn.w { background: #fff; color: var(--brand-text); }
     .mall-hero .btn.l { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.65); }
@@ -1870,6 +1881,7 @@
     .hint-bar {
       margin: 0 var(--sp-3) 10px; padding: 9px var(--sp-2); background: #faf3e2;
       color: var(--brand-text); font-size: var(--fs-1); border-radius: 0 0 var(--r-md) var(--r-md);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     /* 商城两栏：左侧分类 + 右侧列表 */
     .mall-body { display: flex; align-items: flex-start; }
@@ -2869,7 +2881,7 @@
               <div class="activity-bar" onclick="toast('限时秒杀 / 砍价 / 拼团（业态位，mock）')">
                 <div>
                   <div class="at">限时秒杀 · 活动专区</div>
-                  <div class="as">砍价 / 拼团 / 秒杀 同步入口</div>
+                  <div class="as">砍价 / 拼团 / 秒杀</div>
                 </div>
                 <span class="ago">去逛逛 ›</span>
               </div>
@@ -2888,7 +2900,7 @@
               </div>
               <div class="rule-pill">到店点单低至 6 折<br/>缴费最高抵 50%</div>
             </div>
-            <div class="sub">咖啡点单 · 水电燃气 · 加油充电，线下生活一站搞定</div>
+            <div class="sub">咖啡点单 · 缴费 · 加油充电 一站搞定</div>
           </div>
 
           <!-- 饭点免单：本地生活页入口 -->
@@ -3020,7 +3032,7 @@
               <span class="lt-count" id="ltCount">—</span>
             </div>
           </div>
-          <div class="lt-tip">仅限积分兑换，不支持现金购买 · 每注 300 积分兑 1 张双色球</div>
+          <div class="lt-tip">仅限积分兑换 · 每注 300 积分兑 1 张双色球</div>
           <div class="lt-pool" id="ltPool"></div>
           <div style="height:104px"></div>
         </div>
@@ -3196,13 +3208,13 @@
             <div>
               <div class="lab">我的积分 <span class="lab-link" onclick="go('points')">明细 ›</span></div>
               <div class="n" data-bind="points">20</div>
-              <div class="sub">看广告 / 完成任务 / 会员加成可得 · 不可提现</div>
+              <div class="sub">看广告 / 做任务可得 · 不可提现</div>
             </div>
             <div class="acts">
               <button class="btn w" onclick="go('watch-ad')">赚积分</button>
             </div>
           </div>
-          <div class="hint-bar">海量好物 · 积分兑换 · 约 300 积分/件起 · 积分不可提现</div>
+          <div class="hint-bar">海量好物 · 约 300 积分/件起 · 积分不可提现</div>
           <div class="mall-body">
             <div class="mall-cats" id="mallCats"></div>
             <div class="mall-right">
@@ -3425,7 +3437,7 @@
             </div>
           </div>
           <div class="card">
-            <div class="f-label" style="margin-bottom:var(--sp-1)">补充说明（选填）</div>
+            <div class="f-label" style="margin-bottom:var(--sp-1);width:auto">补充说明（选填）</div>
             <textarea id="asNote" class="f-textarea" placeholder="请描述遇到的问题，有助于更快审核"></textarea>
           </div>
           <div style="height:80px"></div>
@@ -3751,7 +3763,7 @@
       { id:2, cat:'takeout', brand:'淘宝闪购', title:'10-18元百亿补贴', subtitle:'疯抢大额补贴', theme:'taobao', tag:'NEW', action:'点击领取' },
       { id:3, cat:'takeout', brand:'通用', title:'叠加红包', subtitle:'同时使用更优惠', theme:'orange', action:'点击下单' },
       { id:4, cat:'takeout', brand:'闪购', title:'天天领红包', subtitle:'天天必领', theme:'blue', tag:'NEW', action:'点击领取' },
-      { id:5, cat:'taxi', brand:'腾讯地图', title:'大额打车神券', subtitle:'抢腾讯地图/滴滴出行神券', theme:'didi', action:'点击领取' },
+      { id:5, cat:'taxi', brand:'腾讯地图', title:'大额打车神券', subtitle:'打车神券天天领', theme:'didi', action:'点击领取' },
       { id:6, cat:'taxi', brand:'通用', title:'打车叠加券', subtitle:'行程更省一点', theme:'orange', action:'点击下单' },
       { id:7, cat:'hotel', brand:'酒店', title:'特惠酒店 8 折起', subtitle:'周末出游提前订', theme:'gold', action:'去预订' },
       { id:8, cat:'order', brand:'到店', title:'到店点餐满 30 减 5', subtitle:'扫码点单直减', theme:'orange', action:'去点餐' },
@@ -3851,7 +3863,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.2';
+    const APP_VERSION = 'v20261023.3';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -3883,7 +3895,7 @@
       const canClaim = remainMs <= 0;
       const remainText = formatRemain(remainMs);
       const tip = canClaim
-        ? '每 ' + GRAB.INTERVAL_MIN + ' 分钟可抢 1 次 · 看 1 条广告抢 +' + GRAB.REWARD + ' 分'
+        ? '每 ' + GRAB.INTERVAL_MIN + ' 分钟可抢 1 次'
         : '冷却中 · ' + remainText + ' 后可再抢';
       const cta = canClaim
         ? '立即抢 +' + GRAB.REWARD
@@ -4175,13 +4187,13 @@
       let badge, sub;
       if (info.phase === 'live') {
         badge = '<span class="fe-badge">LIVE</span>';
-        sub = slot.name + '场 ' + sess.label + ' 场抢购中 · 每商家 10 份 · 30 积分 / 看广告免费抢';
+        sub = slot.name + '场 ' + sess.label + ' · 每商家 10 份 · 30 积分 / 看广告免费';
       } else if (info.phase === 'upcoming') {
         badge = '<span class="fe-badge wait">即将开抢</span>';
         sub = slot.name + '场 ' + sess.label + ' 开抢 · ' + slot.cuisine + ' · 每商家 10 份';
       } else {
         badge = '<span class="fe-badge off">今日已结束</span>';
-        sub = '明日 11:00 再开抢 · 午餐 / 下午茶 / 晚餐 场场免单';
+        sub = '明日 11:00 再开抢 · 场场免费';
       }
       /* 有可用免单券时入口直接亮出死线，避免用户离开后忘记下单作废 */
       const tick = state.fmTickets.find(t => t.status === 'unused' && fmTicketState(t) === 'ok');
@@ -4242,7 +4254,7 @@
         <div class="fmh-top">
           <span class="fmh-title">饭点<em>免单</em></span>
         </div>
-        <div class="fmh-sub">${slot.name}场 ${slot.window} · 每 15 分钟一场 · ${FM.COST} 积分抢 / 看广告免费</div>
+        <div class="fmh-sub">${slot.name}场 ${slot.window} · ${FM.COST} 积分抢 / 看广告免费</div>
         <div class="fmh-stats">
           <div><div class="v">${slot.merchants.length}<small>家</small></div><div class="l">本时段商家</div></div>
           <div><div class="v">${FM.PER_SESSION}<small>份/家</small></div><div class="l">每场库存</div></div>
@@ -5570,9 +5582,7 @@
           <div class="cell"><div class="v">${BY_STATS.reviewing}</div><div class="l">审核中</div></div>
           <div class="cell"><div class="v">${BY_STATS.done}</div><div class="l">已完成</div></div>
         </div>
-        <div style="margin-top: 10px;font-size: var(--fs-1);opacity:.9;background:rgba(0,0,0,.12);border-radius: var(--r-sm);padding: 6px var(--sp-1)">
-          完成任务得积分 · 仅可兑换商城商品 · 请按要求提交真实截图
-        </div>`;
+        <div class="by-note">完成任务得积分 · 仅可兑换商城商品</div>`;
 
       document.querySelectorAll('#bySeg .s').forEach(el => {
         el.classList.toggle('on', el.dataset.bytab === byTab);
