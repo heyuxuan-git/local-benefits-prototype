@@ -1842,7 +1842,7 @@
 
     /* ===== 商城 ===== */
     .mall-hero {
-      margin: var(--sp-2) var(--sp-3); padding: 18px; border-radius: var(--r-lg);
+      margin: var(--sp-2) var(--sp-3) 0; padding: 18px; border-radius: var(--r-lg) var(--r-lg) 0 0;
       background: var(--brand-ink);
       color: #fff; display: flex; justify-content: space-between; align-items: center;
     }
@@ -1877,15 +1877,19 @@
     .tabs-row .t .arrows i { font-size: var(--fs-1); line-height: 1; color: #d3d6dc; font-style: normal; transition: color .15s; }
     .tabs-row .t .arrows i.on { color: var(--brand-text); }
     .hint-bar {
-      margin: 0 var(--sp-3) 10px; padding: 9px var(--sp-2); background: #faf3e2;
-      color: var(--brand-text); font-size: var(--fs-1); border-radius: 0 0 var(--r-md) var(--r-md);
+      margin: 0 var(--sp-3) var(--sp-2); padding: 9px var(--sp-2); background: #faf3e2;
+      color: var(--brand-text); font-size: var(--fs-1); border-radius: 0 0 var(--r-lg) var(--r-lg);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     /* 商城两栏：左侧分类 + 右侧列表 */
-    .mall-body { display: flex; align-items: flex-start; }
+    .mall-body {
+      display: flex; align-items: stretch;
+      margin: 0 var(--sp-1) var(--sp-2);
+      background: #fff; border-radius: var(--r-md); overflow: hidden;
+    }
     .mall-cats {
-      width: 76px; flex-shrink: 0; margin-left: var(--sp-1);
-      background: #f5f6f8; border-radius: var(--r-md) 0 0 0; overflow: hidden;
+      width: 76px; flex-shrink: 0;
+      background: #f5f6f8; border-right: 1px solid var(--separator); overflow: hidden;
     }
     .mall-cats .c {
       position: relative; padding: 13px 6px; text-align: center;
@@ -1898,9 +1902,13 @@
       content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
       width: 3px; height: 18px; background: var(--brand); border-radius: 0 var(--r-xs) var(--r-xs) 0;
     }
-    .mall-right { flex: 1; min-width: 0; padding-right: var(--sp-1); }
-    .mall-right .tabs-row { margin: 0; border-radius: var(--r-md) var(--r-md) 0 0; padding: 0 var(--sp-0); }
-    .mall-right .goods { margin-left: 0; margin-right: 0; padding: 10px; gap: 9px; }
+    .mall-right { flex: 1; min-width: 0; background: #fff; }
+    .mall-right .tabs-row { margin: 0; border-radius: 0; padding: 0 var(--sp-0); background: transparent; border-bottom: 1px solid var(--separator); }
+    .mall-right .goods {
+      margin: 0; padding: var(--sp-2); background: transparent; border-radius: 0;
+      border-bottom: 1px solid var(--separator); gap: 9px;
+    }
+    .mall-right #mallList .goods:last-child { border-bottom: 0; }
     .mall-right .goods .thumb { width: 60px; height: 60px; font-size: var(--fs-1); }
     .goods {
       display: flex; gap: var(--sp-2); background: #fff; border-radius: var(--r-md);
@@ -3854,7 +3862,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.6';
+    const APP_VERSION = 'v20261023.7';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
