@@ -108,7 +108,9 @@
     .status {
       height: 44px; display: flex; align-items: flex-end; justify-content: space-between;
       padding: 0 22px var(--sp-0); font-size: var(--fs-1); font-weight: 600;
-      background: #fff; flex-shrink: 0; z-index: 40;
+      background: var(--bar-bg); flex-shrink: 0; z-index: 40;
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
     }
     .status .sdots { letter-spacing: 1px; }
 
@@ -2564,7 +2566,7 @@
         align-items: flex-end;
         font-size: var(--fs-1);
         /* 真实手机上可隐藏系统样式差异：背景与导航一致 */
-        background: #fff;
+        background: var(--bar-bg);
       }
       .status .sdots { display: none; }
 
@@ -3863,7 +3865,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.4';
+    const APP_VERSION = 'v20261023.5';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
