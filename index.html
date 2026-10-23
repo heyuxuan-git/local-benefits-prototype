@@ -140,6 +140,17 @@
       display: flex; align-items: center; justify-content: space-around;
       background: rgba(255,255,255,.6); font-size: var(--fs-1); color: #646a73;
     }
+    /* 首页导航左侧积分胶囊：与「权益」页积分胶囊同一套视觉语言 */
+    .navbar .nav-points {
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+      height: 30px; padding: 0 10px; display: none; align-items: center; gap: var(--sp-0);
+      border: 1px solid #e5e6eb; border-radius: var(--r-pill);
+      background: rgba(255,255,255,.6); color: var(--brand-text);
+      font-size: var(--fs-1); font-weight: 700; cursor: pointer;
+    }
+    .navbar .nav-points::before { content: ''; position: absolute; inset: -7px -6px; }
+    .navbar .nav-points.show { display: flex; }
+    .navbar .nav-points .ico { width: 16px; height: 16px; color: var(--brand-text); }
 
     .screen {
       flex: 1; overflow-y: auto; overflow-x: hidden; background: var(--bg);
@@ -1556,21 +1567,6 @@
     .seg.by-seg .s { flex: 1; text-align: center; padding: 10px 0; font-size: var(--fs-1); color: var(--ink-2); cursor: pointer; }
     .seg.by-seg .s.on { color: #c1841a; font-weight: 700; background: #faf3e2; }
 
-    .home-points {
-      margin: 0 var(--sp-3) var(--sp-2); padding: 14px var(--sp-3); border-radius: var(--r-md);
-      background: #faf3e2;
-      display: flex; align-items: center; justify-content: space-between;
-      cursor: pointer;
-    }
-    .home-points .l { display: flex; align-items: center; gap: 10px; }
-    .home-points .ico { font-size: var(--fs-4); color: var(--brand-text); width: 28px; height: 28px; }
-    .home-points .n { font-size: var(--fs-4); font-weight: 800; color: var(--brand-text); }
-    .home-points .u { font-size: var(--fs-1); color: var(--brand-text); }
-    .home-points .go {
-      background: var(--brand-ink); color: #fff; font-size: var(--fs-1); font-weight: 600;
-      border: none; padding: var(--sp-1) 14px; border-radius: var(--r-pill); cursor: pointer;
-    }
-
     .home-sec-head {
       display: flex; justify-content: space-between; align-items: center;
       margin: var(--sp-0) 20px 10px; font-size: var(--fs-2); font-weight: 700;
@@ -2778,6 +2774,10 @@
       <div class="status"><span>9:41</span><span class="sdots">•••• 5G ▮</span></div>
       <div class="navbar">
         <button class="back" id="backBtn" aria-label="返回">‹</button>
+        <button class="nav-points show" id="navPoints" aria-label="我的积分" onclick="go('points')">
+          <svg class="ico" aria-hidden="true"><use href="#i-coin"/></svg>
+          <span class="n" data-bind="points">20</span>
+        </button>
         <span class="title" id="navTitle">潮匠 TrendCraft</span>
         <div class="capsule"><span aria-label="更多" onclick="toggleProtoMenu(event)">⋯</span><span aria-hidden="true">●</span></div>
       </div>
@@ -2839,17 +2839,6 @@
               </div>
             </div>
             <div class="grab-cta" id="homeGrabCta">立即抢 +20</div>
-          </div>
-
-          <div class="home-points" onclick="go('points')">
-            <div class="l">
-              <svg class="ico"><use href="#i-coin"/></svg>
-              <div>
-                <div><span class="n" data-bind="points">20</span> <span class="u">积分可用</span></div>
-                <div class="muted" style="color:var(--brand);font-size: var(--fs-1)">明细 · 购买 · 会员加成</div>
-              </div>
-            </div>
-            <button class="go">去查看</button>
           </div>
 
           <div class="home-sec-head">
@@ -3865,7 +3854,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.5';
+    const APP_VERSION = 'v20261023.6';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -7091,6 +7080,7 @@
       document.getElementById('protoMenu').classList.remove('open');
       const isTab = TAB_VIEWS.includes(id);
       document.getElementById('backBtn').classList.toggle('show', !isTab);
+      document.getElementById('navPoints').classList.toggle('show', id === 'home');
       /* 二级页面（有返回键的页面）隐藏底部导航栏；带底部结算栏的页面保留底部留白 */
       document.getElementById('tabbar').classList.toggle('hide', !isTab);
       const bottomBarViews = ['cart', 'order-confirm'];
