@@ -1637,6 +1637,7 @@
     .benefit-layout { display: flex; min-height: 520px; background: #fff; }
     .side {
       width: 72px; background: #f7f8fa; flex-shrink: 0; overflow-y: auto; padding-bottom: 80px;
+      position: sticky; top: 0; align-self: flex-start;
     }
     .side-item {
       padding: 14px var(--sp-0); text-align: center; color: var(--ink-2);
@@ -1659,7 +1660,7 @@
       margin: var(--sp-2) 14px 0;
       padding: var(--sp-2) 14px;
       background: #faf6eb;
-      border: 1px solid #efe4c8;
+      border: 0;
       border-radius: var(--r-md);
       display: flex; align-items: center; justify-content: space-between;
       cursor: pointer;
@@ -1669,14 +1670,14 @@
     .activity-bar > div:first-child { min-width: 0; flex: 1; }
     .activity-bar .ago { font-size: var(--fs-1); color: var(--brand-text); font-weight: 600; flex: none; margin-left: var(--sp-1); white-space: nowrap; }
 
-    /* 品牌分区：白底金边 */
+    /* 品牌分区：扁平标题（logo + 品牌名），不再用描边胶囊 */
     .brand-tag {
-      margin: var(--sp-3) 14px 0;
-      background: #fff;
-      border: 1.5px solid var(--brand);
-      border-radius: var(--r-pill);
-      padding: var(--sp-1) 14px;
-      display: flex; align-items: center; justify-content: center; gap: var(--sp-1);
+      margin: var(--sp-3) 0 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      display: flex; align-items: center; justify-content: flex-start; gap: var(--sp-1);
       color: var(--ink); font-weight: 700; font-size: var(--fs-2);
     }
     .brand-tag .logo {
@@ -1695,7 +1696,7 @@
     .collage {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px;
+      gap: 8px 6px;
       padding: 10px 6px var(--sp-0);
       align-items: stretch;
     }
@@ -3885,7 +3886,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.11';
+    const APP_VERSION = 'v20261023.12';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -5820,7 +5821,15 @@
       toast(title + '（正式版跳转渠道）');
     }
 
-    function setCat(id) { state.cat = id; renderBenefits(); }
+    function setCat(id) {
+      state.cat = id; renderBenefits();
+      const sc = document.getElementById('screen'); const lay = document.querySelector('.benefit-layout');
+      if (!sc || !lay) return;
+      const top = lay.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop;
+      if (sc.scrollTop <= top + 4) return;
+      if (sc.scrollTo) sc.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      else sc.scrollTop = Math.max(0, top);
+    }
 
     /* ---- 商城 ---- */
     function renderMall() {
