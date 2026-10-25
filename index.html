@@ -76,12 +76,14 @@
     }
     .stage > .phone { margin: 0 auto; }
     .phone {
-      /* iPhone 13 mini 逻辑分辨率 375×812；窗口较矮时自动缩放，避免整页滚动 */
-      width: 375px; height: min(812px, calc(100dvh - 56px)); background: var(--bg);
+      /* iPhone 18 Pro 逻辑分辨率 402×874（6.3 英寸 2622×1206 像素 @3x）；
+         窗口装不下时由 fitPhone() 整机等比缩放，机身比例始终保持不变 */
+      width: 402px; height: 874px; background: var(--bg);
       border-radius: 40px; border: 10px solid #1a1f2b;
       box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 0 0 2px #2a3142;
       overflow: hidden; position: relative;
       display: flex; flex-direction: column; flex-shrink: 0;
+      transform-origin: top center;
     }
 
     /* 原型状态切换菜单（演示用：挂在手机右上角胶囊「⋯」上，相对手机框定位） */
@@ -2535,10 +2537,6 @@
     /* 平板/窄桌面：仍用手机壳 */
     @media (max-width: 900px) and (min-width: 481px) {
       .stage { flex-direction: column; align-items: center; }
-      .phone {
-        width: min(375px, calc(100vw - 32px));
-        height: min(812px, calc(100dvh - 40px));
-      }
     }
 
     /* ========== 手机端：全屏交互 ========== */
@@ -3885,7 +3883,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.13';
+    const APP_VERSION = 'v20261023.14';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -7276,12 +7274,32 @@
       }, { passive: true });
     }
 
+    /* 手机壳等比分身：窗口装不下 iPhone 18 Pro 机身（402×874 + 边框）时整体缩放，
+       transform 只改视觉尺寸不触发内部重排，382px 的页面布局在任何窗口下都不被压缩 */
+    function fitPhone() {
+      const phone = document.querySelector('.stage > .phone');
+      if (!phone) return;
+      if (window.matchMedia && window.matchMedia('(max-width: 480px)').matches) {
+        phone.style.transform = '';
+        phone.style.marginBottom = '';
+        return;
+      }
+      const outerW = phone.offsetWidth, outerH = phone.offsetHeight;
+      const availW = window.innerWidth - 2 * 16;   /* .stage 左右各 16 */
+      const availH = window.innerHeight - 16 - 40; /* .stage 上 16 下 40 */
+      const s = Math.min(1, availW / outerW, availH / outerH);
+      phone.style.transform = 'scale(' + s.toFixed(4) + ')';
+      /* 缩放后补回占位高度差，避免出现整页纵向滚动条 */
+      phone.style.marginBottom = s < 1 ? -Math.round(outerH * (1 - s)) + 'px' : '';
+    }
+
     /* 启动 */
     renderHome(); renderBenefits(); renderMall(); renderCourses(); renderAgent(); renderPull(); renderLogs();
     renderLife(); renderBounty(); seedOrders(); updateFab();
     renderFmEntries();
     bindPoints(); showView('home');
-    tagIconButtons(); initSheetDrag(); initEdgeBack();
+    tagIconButtons(); initSheetDrag(); initEdgeBack(); fitPhone();
+    window.addEventListener('resize', fitPhone);
     new MutationObserver(tagIconButtons).observe(document.body, { childList: true, subtree: true });
   </script>
 </body>
