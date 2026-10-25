@@ -1617,27 +1617,28 @@
     .hg .cash { color: var(--price); font-size: var(--fs-2); font-weight: 800; }
     .hg .cash span { font-size: var(--fs-1); }
 
-    /* ===== 权益 · 扁平拼贴 ===== */
-    .top-bar {
+    /* ===== 统一积分条（权益 / 积分商城 / 潮知馆 共用，由 renderPtsBar() 填充） ===== */
+    .pts-bar {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 14px; background: #fff;
+      gap: var(--sp-2); height: 52px; padding: 0 var(--sp-3);
+      background: #fff; flex: none;
     }
-    .points-pill {
-      display: flex; align-items: center; gap: 5px;
-      background: #faf3e2;
-      border-radius: var(--r-pill); padding: var(--sp-1) 14px; color: var(--brand-text); cursor: pointer;
+    .pts-bar .pb-l {
+      display: flex; align-items: center; gap: 5px; min-width: 0;
+      height: 32px; padding: 0 var(--sp-2); border-radius: var(--r-pill);
+      background: #faf3e2; color: var(--brand-text); cursor: pointer;
     }
-    .points-pill .ico { font-size: var(--fs-3); width: 18px; height: 18px; }
-    .points-pill .n { font-size: var(--fs-3); font-weight: 700; }
-    .points-pill .u { font-size: var(--fs-1); }
-    .ad-entry {
-      background: var(--brand-ink);
-      color: #fff; font-size: var(--fs-1); font-weight: 600;
-      padding: 9px 14px; border-radius: var(--r-pill); border: none; cursor: pointer;
+    .pts-bar .pb-l .ico { width: 16px; height: 16px; }
+    .pts-bar .pb-l .n { font-size: var(--fs-3); font-weight: 700; }
+    .pts-bar .pb-l .u { font-size: var(--fs-1); }
+    .pts-bar .pb-more { font-size: var(--fs-1); font-weight: 600; opacity: .9; white-space: nowrap; }
+    .pts-bar .pb-cta {
+      flex: none; height: 32px; padding: 0 14px; border: 0; border-radius: var(--r-pill);
+      background: var(--brand-ink); color: #fff; font-size: var(--fs-1); font-weight: 600;
       display: inline-flex; align-items: center; gap: 6px;
-      white-space: nowrap; flex: none;
+      white-space: nowrap; cursor: pointer;
     }
-    .ad-entry .ico { width: 16px; height: 16px; }
+    .pts-bar .pb-cta .ico { width: 15px; height: 15px; }
     .benefit-layout { display: flex; min-height: 520px; background: #fff; }
     .side {
       width: 72px; background: #f7f8fa; flex-shrink: 0; overflow-y: auto; padding-bottom: 80px;
@@ -1843,19 +1844,6 @@
     .pair-row .pcard { min-height: 130px; }
 
     /* ===== 商城 ===== */
-    .mall-hero {
-      margin: var(--sp-2) var(--sp-3) 0; padding: 18px; border-radius: var(--r-lg) var(--r-lg) 0 0;
-      background: var(--brand-ink);
-      color: #fff; display: flex; justify-content: space-between; align-items: center;
-    }
-    .mall-hero .lab { font-size: var(--fs-1); opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .mall-hero .n { font-size: var(--fs-5); font-weight: 800; line-height: 1.15; }
-    .mall-hero .sub { font-size: var(--fs-1); opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .mall-hero > div:first-child { min-width: 0; flex: 1; }
-    .mall-hero .acts { display: flex; flex-direction: column; gap: var(--sp-1); flex: none; margin-left: var(--sp-1); }
-    .mall-hero .btn { font-size: var(--fs-1); padding: var(--sp-1) 14px; }
-    .mall-hero .btn.w { background: #fff; color: var(--brand-text); }
-    .mall-hero .btn.l { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.65); }
     .tabs-row {
       display: flex; background: #fff; margin: 0 var(--sp-3);
       border-radius: var(--r-md) var(--r-md) 0 0; overflow: hidden;
@@ -1878,11 +1866,6 @@
     .tabs-row .t.on .arrows { display: inline-flex; }
     .tabs-row .t .arrows i { font-size: var(--fs-1); line-height: 1; color: #d3d6dc; font-style: normal; transition: color .15s; }
     .tabs-row .t .arrows i.on { color: var(--brand-text); }
-    .hint-bar {
-      margin: 0 var(--sp-3) var(--sp-2); padding: 9px var(--sp-2); background: #faf3e2;
-      color: var(--brand-text); font-size: var(--fs-1); border-radius: 0 0 var(--r-lg) var(--r-lg);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
     /* 商城两栏：左侧分类 + 右侧列表（老板指定保留） */
     .mall-body {
       display: flex; align-items: stretch;
@@ -1950,7 +1933,6 @@
     .goods .prices .v::first-letter { font-size: var(--fs-1); font-weight: 400; }
     .goods .cart-col { position: absolute; right: 12px; bottom: 14px; text-align: center; }
     .goods { position: relative; }
-    .lab-link { font-size: var(--fs-1); color: rgba(255,255,255,.85); font-weight: 400; cursor: pointer; }
     .add-btn { width: 30px; height: 30px; border-radius: 50%; background: var(--brand-ink); display: flex; align-items: center; justify-content: center; font-size: var(--fs-3); font-weight: 300; color: #fff; line-height: 1; }
 
     /* 购物车悬浮球：相对手机边框定位（.phone 为定位祖先） */
@@ -2089,20 +2071,6 @@
     .course-hero .bar .go { color: var(--gold); font-weight: 600; cursor: pointer; }
 
     /* ===== 潮知馆：板块大卡 + 资讯流 ===== */
-    .tc-top {
-      padding: 14px var(--sp-3) 10px;
-      background: #fff;
-    }
-    .tc-h1 { font-size: var(--fs-4); font-weight: 800; color: var(--ink); letter-spacing: 1px; }
-    .tc-bar {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-top: 10px; padding: 10px var(--sp-2);
-      background: #faf6eb; border-radius: var(--r-md);
-      font-size: var(--fs-1); color: var(--ink-2);
-    }
-    .tc-bar b { color: var(--brand-text); font-size: var(--fs-3); font-variant-numeric: tabular-nums; }
-    .tc-bar .go { color: var(--brand-text); font-weight: 700; cursor: pointer; }
-
     .tc-cards {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -2878,15 +2846,7 @@
 
         <!-- ========== 权益 ========== -->
         <div class="view" id="view-benefits" data-tab="benefits">
-          <div class="top-bar">
-            <div class="points-pill" onclick="go('points')">
-              <svg class="ico"><use href="#i-coin"/></svg>
-              <span class="n" data-bind="points">20</span><span class="u">积分</span>
-            </div>
-            <button class="ad-entry" onclick="go('watch-ad')">
-              <svg class="ico"><use href="#i-ad"/></svg>看广告赚积分 ›
-            </button>
-          </div>
+          <div class="pts-bar" data-ptsbar></div>
           <div class="benefit-layout">
             <div class="side" id="benefitSide"></div>
             <div class="main-col">
@@ -3216,17 +3176,7 @@
 
         <!-- ========== 积分商城 ========== -->
         <div class="view" id="view-mall" data-tab="mall">
-          <div class="mall-hero">
-            <div>
-              <div class="lab">我的积分 <span class="lab-link" onclick="go('points')">明细 ›</span></div>
-              <div class="n" data-bind="points">20</div>
-              <div class="sub">看广告 / 做任务可得 · 不可提现</div>
-            </div>
-            <div class="acts">
-              <button class="btn w" onclick="go('watch-ad')">赚积分</button>
-            </div>
-          </div>
-          <div class="hint-bar">海量好物 · 约 300 积分/件起 · 积分不可提现</div>
+          <div class="pts-bar" data-ptsbar></div>
           <div class="mall-body">
             <div class="mall-cats" id="mallCats"></div>
             <div class="mall-right">
@@ -3242,12 +3192,7 @@
 
         <!-- ========== 潮知馆（板块大卡 + 资讯流） ========== -->
         <div class="view" id="view-courses" data-tab="courses">
-          <div class="tc-top">
-            <div class="tc-bar">
-              <span>积分 <b data-bind="points">20</b></span>
-              <span class="go" onclick="go('watch-ad')">去赚积分 ›</span>
-            </div>
-          </div>
+          <div class="pts-bar" data-ptsbar></div>
 
           <!-- 板块大卡 -->
           <div class="tc-cards" id="tcCards"></div>
@@ -3885,10 +3830,24 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.15';
+    const APP_VERSION = 'v20261023.16';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
+    }
+
+    /* 统一积分条：三处 [data-ptsbar] 共用同一份结构，左进积分明细、右进去看广告 */
+    function renderPtsBar() {
+      const html =
+        `<div class="pb-l" onclick="go('points')">` +
+          `<svg class="ico"><use href="#i-coin"/></svg>` +
+          `<span class="n" data-bind="points">${state.points}</span><span class="u">积分</span>` +
+          `<span class="pb-more">明细 ›</span>` +
+        `</div>` +
+        `<button class="pb-cta" onclick="go('watch-ad')">` +
+          `<svg class="ico"><use href="#i-ad"/></svg>看广告赚积分 ›` +
+        `</button>`;
+      document.querySelectorAll('[data-ptsbar]').forEach(el => { el.innerHTML = html; });
     }
 
     function bindPoints() {
@@ -7299,7 +7258,7 @@
     renderHome(); renderBenefits(); renderMall(); renderCourses(); renderAgent(); renderPull(); renderLogs();
     renderLife(); renderBounty(); seedOrders(); updateFab();
     renderFmEntries();
-    bindPoints(); showView('home');
+    renderPtsBar(); bindPoints(); showView('home');
     tagIconButtons(); initSheetDrag(); initEdgeBack(); fitPhone();
     window.addEventListener('resize', fitPhone);
     new MutationObserver(tagIconButtons).observe(document.body, { childList: true, subtree: true });
