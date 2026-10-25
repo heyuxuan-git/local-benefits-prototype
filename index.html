@@ -215,7 +215,7 @@
     /* ===== 首页 ===== */
     /* 首页首屏：全幅视觉，直接接到导航栏下方 */
     .home-swiper {
-      position: relative; margin: 0; height: 196px;
+      position: relative; margin: 0; aspect-ratio: 16 / 9;
       border-radius: 0 0 var(--r-lg) var(--r-lg); overflow: hidden; background: #1a1f2b;
     }
     .home-swiper .slides {
@@ -2600,7 +2600,6 @@
 
       /* 触控热区加大 */
       .btn { min-height: 42px; padding-top: var(--sp-2); padding-bottom: var(--sp-2); }
-      .home-swiper { height: 162px; }
       .side { width: 88px; }
       .side-item { padding: var(--sp-3) 6px; min-height: 56px; }
       .goods, .course, .hg, .hc, .coupon { -webkit-user-select: none; user-select: none; }
@@ -3886,7 +3885,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.12';
+    const APP_VERSION = 'v20261023.13';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
