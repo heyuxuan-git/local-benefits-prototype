@@ -1996,7 +1996,14 @@
     .oc-acts { display: flex; justify-content: flex-end; gap: var(--sp-1); margin-top: var(--sp-1); padding-top: var(--sp-1); flex-wrap: wrap; }
     .oc-acts .btn { font-size: var(--fs-1); padding: 6px 14px; }
     .aft-tag { display: inline-block; font-size: var(--fs-1); color: var(--ink-2); background: #f2f3f5; border-radius: var(--r-xs); padding: 1px 7px; margin-top: var(--sp-0); }
-    .empty-state { text-align: center; color: var(--ink-3); padding: 50px 0; font-size: var(--fs-1); }
+    /* 统一空态：图标 + 一句话（可选按钮），全站只此一套 */
+    .empty {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 44px var(--sp-3) 48px; text-align: center; color: var(--ink-3);
+    }
+    .empty .ico { width: 34px; height: 34px; color: #c9ced6; margin-bottom: 10px; }
+    .empty .empty-t { font-size: var(--fs-1); line-height: 1.5; }
+    .empty .empty-btn { margin-top: var(--sp-3); min-height: 40px; padding: 0 18px; font-size: var(--fs-1); }
     .addr-card { background: #fff; border-radius: var(--r-md); padding: var(--sp-2) 14px; margin-bottom: 10px; position: relative; }
     .addr-card .top { display: flex; align-items: baseline; gap: 10px; }
     .addr-card .nm { font-weight: 700; font-size: var(--fs-2); }
@@ -3549,8 +3556,9 @@
             <div class="mode-item" data-log-tab="out" onclick="setLogTab('out')">消耗</div>
           </div>
           <div class="card" id="pointsLogsAll"></div>
-          <div id="logsEmpty" class="hide" style="text-align:center;padding: 44px var(--sp-3);color:var(--ink-3);font-size: var(--fs-1)">
-            暂无相关积分记录
+          <div id="logsEmpty" class="hide empty">
+            <svg class="ico"><use href="#i-box"/></svg>
+            <div class="empty-t">暂无相关积分记录</div>
           </div>
         </div>
       </div>
@@ -3841,10 +3849,20 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v1.0.1';
+    const APP_VERSION = 'v1.0.2';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
+    }
+
+    /* 统一空态渲染：图标（默认空盒）+ 一句话 + 可选按钮，所有列表页共用 */
+    function emptyBlock(text, o) {
+      const opt = o || {};
+      return `<div class="empty">` +
+        ico(opt.icon || 'i-box') +
+        `<div class="empty-t">${text}</div>` +
+        (opt.action ? `<button class="btn btn-ghost empty-btn" onclick="${opt.action.onclick}">${opt.action.label}</button>` : '') +
+        `</div>`;
     }
 
     /* 统一积分条：三处 [data-ptsbar] 共用同一份结构，左进积分明细、右进去看广告 */
@@ -5039,7 +5057,7 @@
             <span>实付 ¥${o.payCash}</span>
           </div>
           <div class="tm">${o.time}</div>
-        </div>`).join('') : '<div class="empty-state">暂无消费记录，去上方选个服务试试</div>';
+        </div>`).join('') : emptyBlock('暂无消费记录，去上方选个服务试试');
     }
 
     /* 到店点单子页：品牌单列大图卡（点卡进入「选门店 → 选品」流程） */
@@ -5600,7 +5618,7 @@
               <div class="cash"><span class="yen">+</span>${t.points}<span class="yen">分</span></div>
               <div class="go">${t.status === 'open' ? '去接单' : t.status === 'doing' ? '去提交' : t.status === 'rejected' ? '重新提交' : '查看'}</div>
             </div>
-          </div>`).join('') || '<div class="empty-state">暂无匹配任务</div>';
+          </div>`).join('') || emptyBlock('暂无匹配任务');
       } else {
         const records = byLocalRecords.concat(BY_RECORDS);
         document.getElementById('byRecords').innerHTML = records.map(r => `
@@ -5613,7 +5631,7 @@
               <div class="r-status st-${r.status}">${r.statusText}</div>
               <div class="r-cash ${r.status === 'approved' ? '' : 'muted'}">${r.status === 'approved' ? '+' : ''}${r.points} 分</div>
             </div>
-          </div>`).join('') || '<div class="muted" style="text-align:center;padding: 40px 0">还没有悬赏记录</div>';
+          </div>`).join('') || emptyBlock('还没有悬赏记录');
       }
     }
 
@@ -5783,7 +5801,7 @@
       const blocks = COLLAGE[state.cat] || [];
       const html = blocks.map(renderCollageBlock).join('');
       document.getElementById('benefitList').innerHTML =
-        html || '<div class="empty-state">暂无权益</div>';
+        html || emptyBlock('暂无权益');
     }
 
     function tapCollageCard(id, title) {
@@ -5833,7 +5851,7 @@
           <div class="cart-col" onclick="event.stopPropagation();cartAdd('${g.id}',1)">
             <div class="add-btn">＋</div>
           </div>
-        </div>`).join('') : '<div class="empty-state">该分类暂无商品</div>';
+        </div>`).join('') : emptyBlock('该分类暂无商品');
     }
     document.getElementById('mallTabs').addEventListener('click', e => {
       const t = e.target.closest('[data-mtab]');
@@ -6319,7 +6337,7 @@
       const listEl = document.getElementById('cartList');
       const barEl = document.getElementById('cartBar');
       if (!rows.length) {
-        listEl.innerHTML = '<div class="empty-state">购物车还是空的</div>';
+        listEl.innerHTML = emptyBlock('购物车还是空的', { action: { label: '去逛积分商城', onclick: "switchTab('mall')" } });
         barEl.innerHTML = '';
         return;
       }
@@ -6406,7 +6424,7 @@
       tabs.forEach(t => t.classList.toggle('on', t.dataset.otab === state.orderTab));
       let list = state.orders.filter(o => state.orderTab === 'all' ? o.status !== 'closed' : o.status === state.orderTab);
       const el = document.getElementById('orderList');
-      if (!list.length) { el.innerHTML = '<div class="empty-state">暂无订单</div>'; return; }
+      if (!list.length) { el.innerHTML = emptyBlock('暂无订单'); return; }
       el.innerHTML = list.map(o => {
         const qty = o.items.reduce((s, i) => s + i.qty, 0);
         const sum = o.items.map(i => i.title).join('、');
@@ -6445,7 +6463,7 @@
       const head = document.getElementById('odHead');
       const body = document.getElementById('odBody');
       const bar = document.getElementById('odBar');
-      if (!o) { head.innerHTML = ''; body.innerHTML = '<div class="empty-state">订单不存在</div>'; bar.style.display = 'none'; return; }
+      if (!o) { head.innerHTML = ''; body.innerHTML = emptyBlock('订单不存在'); bar.style.display = 'none'; return; }
       const hint = { unpaid: '请在 24 小时内完成支付（原型模拟）', pending_ship: '商家备货中，可点「模拟发货」演示', shipped: '包裹运输中，请注意查收', done: '交易已完成，感谢惠顾' }[o.status] || '';
       head.innerHTML = `<div class="status-head ${o.status}"><div class="st-t">${STATUS_TEXT[o.status]}</div><div class="st-h">${hint}</div></div>`;
 
@@ -6537,7 +6555,7 @@
 
     function renderAddress() {
       const el = document.getElementById('addrList');
-      if (!state.addresses.length) { el.innerHTML = '<div class="empty-state">还没有收货地址</div>'; return; }
+      if (!state.addresses.length) { el.innerHTML = emptyBlock('还没有收货地址，点下方按钮新增'); return; }
       const curId = (currentAddr() || {}).id;
       el.innerHTML = state.addresses.map(a => `
         <div class="addr-card" style="margin: 10px var(--sp-3);${a.id === curId ? 'border:1.5px solid #c1841a' : ''}">
@@ -6614,7 +6632,7 @@
             </div>
           </div>
         </div>`).join('') + `<div style="text-align:center;color:var(--brand);font-size:var(--fs-1);padding: var(--sp-2) 0 6px;cursor:pointer" onclick="toggleFab();go('cart')">管理购物车 ›</div>`
-        : '<div class="empty-state">购物车还是空的</div>';
+        : emptyBlock('购物车还是空的');
       const s = cartSummary();
       const all = state.cart.length && state.cart.every(c => c.selected);
       document.getElementById('fdBar').innerHTML = `
@@ -6746,7 +6764,9 @@
       document.querySelectorAll('#view-points-logs .mode-item').forEach(el => {
         el.classList.toggle('on', el.dataset.logTab === ptsLogTab);
       });
-      document.getElementById('pointsLogsAll').innerHTML = list.map(logRowHtml).join('');
+      const cardEl = document.getElementById('pointsLogsAll');
+      cardEl.innerHTML = list.map(logRowHtml).join('');
+      cardEl.classList.toggle('hide', !list.length);
       document.getElementById('logsEmpty').classList.toggle('hide', list.length > 0);
     }
 
@@ -6972,7 +6992,7 @@
     function renderLotteryRecords() {
       const el = document.getElementById('ltRecList');
       if (!el) return;
-      if (!state.lotteryRecords.length) { el.innerHTML = '<div class="empty-state">暂无兑换记录</div>'; return; }
+      if (!state.lotteryRecords.length) { el.innerHTML = emptyBlock('暂无兑换记录'); return; }
       el.innerHTML = state.lotteryRecords.map(r => {
         const st = r.status === 'pending'
           ? '<span class="lt-st pend">待开奖</span>'
@@ -6996,7 +7016,7 @@
       const head = document.getElementById('ltDetHead');
       const body = document.getElementById('ltDetBody');
       const bar = document.getElementById('ltDetBar');
-      if (!r) { head.innerHTML = ''; body.innerHTML = '<div class="empty-state">记录不存在</div>'; bar.innerHTML = ''; return; }
+      if (!r) { head.innerHTML = ''; body.innerHTML = emptyBlock('记录不存在'); bar.innerHTML = ''; return; }
       const st = r.status === 'pending'
         ? { c: 'lt-pend', t: '待开奖', h: '开奖后自动核奖，中奖金额发放至账户（原型模拟）' }
         : (r.win ? { c: 'lt-win', t: '已中奖', h: `${r.win.name} · 奖金 ¥${r.win.amount}（原型模拟）` }
