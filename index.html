@@ -102,6 +102,16 @@
     }
     .proto-menu button:hover { border-color: #ecd9b0; }
     .proto-menu button.on { background: #faf3e2; border-color: #ecd9b0; color: var(--brand-text); }
+
+    /* 演示模式：去掉机身外壳、不再等比缩放，内容保持 402×874，窗口不够高时才压高度 */
+    body.demo { background: var(--bg); }
+    body.demo .stage { padding: 0; align-items: center; }
+    body.demo .phone {
+      width: min(402px, 100vw); height: min(874px, 100dvh); max-height: none;
+      border: 0; border-radius: 0; box-shadow: none;
+      transform: none !important; margin-bottom: 0 !important;
+    }
+    body.demo .notch { display: none; }
     .notch {
       position: absolute; top: 0; left: 50%; transform: translateX(-50%);
       width: 140px; height: 28px; background: #1a1f2b;
@@ -3849,7 +3859,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v1.0.2';
+    const APP_VERSION = 'v1.0.3';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
@@ -4547,20 +4557,44 @@
       }
     };
     let protoCur = '';
+    let demoMode = false;
+    try { demoMode = localStorage.getItem('tc-demo') === '1'; } catch (e) {}
+
+    /* 演示模式：隐藏手机外壳，页面按窗口高度铺满，尺寸不再随窗口等比缩放 */
+    function applyDemoMode() {
+      document.body.classList.toggle('demo', demoMode);
+      const phone = document.querySelector('.stage > .phone');
+      if (phone) {
+        phone.style.transform = '';
+        phone.style.marginBottom = '';
+      }
+      fitPhone();
+    }
+    function toggleDemo() {
+      demoMode = !demoMode;
+      try { localStorage.setItem('tc-demo', demoMode ? '1' : '0'); } catch (e) {}
+      document.getElementById('protoMenu').classList.remove('open');
+      applyDemoMode();
+      toast(demoMode ? '演示模式：机身外壳已隐藏' : '已恢复手机外壳');
+    }
+
     function toggleProtoMenu(e) {
       if (e) e.stopPropagation();
       const menu = document.getElementById('protoMenu');
       const page = PROTO_PAGES[state.view];
-      if (!page) { toast('当前页面暂无原型状态演示'); return; }
       if (menu.classList.contains('open')) { menu.classList.remove('open'); return; }
-      /* 按当前页面渲染菜单项 */
-      menu.innerHTML = `<div class="pm-t">${page.title}</div>` + page.items.map(it =>
-        `<button data-k="${it.k}" onclick="protoState('${it.k}')">${it.label}</button>`).join('');
+      /* 按当前页面渲染菜单项；演示模式开关对所有页面可用 */
+      menu.innerHTML = `<div class="pm-t">${page ? page.title : '演示设置'}</div>` +
+        `<button data-demo="1" onclick="toggleDemo()">${demoMode ? '退出演示模式' : '演示模式（全屏）'}</button>` +
+        (page ? page.items.map(it =>
+          `<button data-k="${it.k}" onclick="protoState('${it.k}')">${it.label}</button>`).join('') : '');
       menu.classList.add('open');
       protoMark();
     }
     function protoMark() {
-      document.querySelectorAll('#protoMenu button').forEach(b => b.classList.toggle('on', b.dataset.k === protoCur));
+      document.querySelectorAll('#protoMenu button').forEach(b => {
+        b.classList.toggle('on', b.dataset.demo ? demoMode : b.dataset.k === protoCur);
+      });
     }
     function protoState(kind) {
       const page = PROTO_PAGES[state.view];
@@ -7271,6 +7305,7 @@
     function fitPhone() {
       const phone = document.querySelector('.stage > .phone');
       if (!phone) return;
+      if (demoMode) { phone.style.transform = ''; phone.style.marginBottom = ''; return; }
       if (window.matchMedia && window.matchMedia('(max-width: 480px)').matches) {
         phone.style.transform = '';
         phone.style.marginBottom = '';
@@ -7290,7 +7325,7 @@
     renderLife(); renderBounty(); seedOrders(); updateFab();
     renderFmEntries();
     renderPtsBar(); bindPoints(); showView('home');
-    tagIconButtons(); initSheetDrag(); initEdgeBack(); fitPhone();
+    tagIconButtons(); initSheetDrag(); initEdgeBack(); applyDemoMode(); fitPhone();
     window.addEventListener('resize', fitPhone);
     new MutationObserver(tagIconButtons).observe(document.body, { childList: true, subtree: true });
   </script>
