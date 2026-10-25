@@ -198,6 +198,17 @@
     .btn-primary { background: var(--brand-ink); color: #fff; }
     .btn-ghost { background: rgba(193,132,26,.08); color: var(--brand-text); border: none; }
     .btn-block { width: 100%; min-height: 50px; font-size: var(--fs-3); }
+    /* 触控热区：小尺寸控件用透明伪元素补足 44pt，视觉尺寸不变 */
+    .pts-bar .pb-l, .pts-bar .pb-cta, .add-btn, .home-sec-head .more { position: relative; }
+    .navbar .back::after, .pts-bar .pb-l::after, .pts-bar .pb-cta::after,
+    .add-btn::after, .home-sec-head .more::after {
+      content: ''; position: absolute; pointer-events: auto;
+    }
+    .navbar .back::after { inset: -4px; }
+    .pts-bar .pb-l::after, .pts-bar .pb-cta::after { inset: -6px; }
+    .add-btn::after { inset: -7px; }
+    .home-sec-head .more::after { inset: -14px -8px; }
+
     .price { color: var(--price); font-weight: 700; }
     .price .yen { font-size: var(--fs-1); }
     .price .num { font-size: var(--fs-4); }
@@ -1923,8 +1934,8 @@
 
     /* 商品卡片：数字价格 + 右侧加购列 */
     .goods { padding-right: var(--sp-1); }
-    .goods .prices { gap: var(--sp-0); align-items: baseline; white-space: nowrap; padding-right: 44px; }
-    .goods .pbox { flex: 0 0 auto; background: none !important; text-align: left; padding: 0; color: inherit !important; display: flex; align-items: baseline; gap: 3px; }
+    .goods .prices { gap: var(--sp-0); align-items: baseline; flex-wrap: wrap; row-gap: 2px; padding-right: 48px; }
+    .goods .pbox { flex: 0 0 auto; background: none !important; text-align: left; padding: 0; color: inherit !important; display: flex; align-items: baseline; gap: 3px; white-space: nowrap; }
     .goods .pbox.l .v { color: var(--brand-text); }
     .goods .pbox.r .v { color: #ff3b30; }
     .goods .pbox .h { display: none; }
@@ -3830,7 +3841,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v1.0';
+    const APP_VERSION = 'v1.0.1';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
