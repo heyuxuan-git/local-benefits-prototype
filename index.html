@@ -2229,31 +2229,32 @@
       font-size: var(--fs-1); padding: 6px 14px; border-radius: var(--r-pill);
     }
 
-    /* ===== 我的：无顶部色块，与下方卡片左右对齐（16px） ===== */
-    .agent-head {
-      background: transparent;
-      color: var(--ink);
-      padding: var(--sp-3) var(--sp-3) var(--sp-0);
+    /* ===== 我的：账号页骨架（整块白色表面 + 灰色分区，不做卡片堆叠） ===== */
+    .mine-head {
+      background: #fff; padding: var(--sp-4) var(--sp-3) var(--sp-3);
     }
-    .agent-head .user-row { display: flex; align-items: center; gap: var(--sp-2); }
-    .agent-head .avatar {
-      width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
-      background: #faf6eb; border: 1.5px solid var(--brand);
+    .mine-id { display: flex; align-items: center; gap: var(--sp-2); }
+    .mine-id .avatar {
+      position: relative; width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0;
+      background: #faf6eb; border: 2px solid var(--brand);
       display: flex; align-items: center; justify-content: center;
       font-size: var(--fs-4); font-weight: 700; color: var(--brand-text);
     }
-    .agent-head .uinfo { flex: 1; min-width: 0; }
-    .agent-head .uname {
-      font-size: var(--fs-3); font-weight: 700; color: var(--ink);
-      display: flex; align-items: center; gap: 6px;
+    .mine-id .uinfo { flex: 1; min-width: 0; }
+    .mine-id .uname {
+      font-size: var(--fs-4); font-weight: 700; color: var(--ink);
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-    .agent-head .uid { font-size: var(--fs-1); color: var(--ink-3); margin-top: 3px; }
-    .agent-head .level-badge {
+    .mine-id .uid {
+      margin-top: var(--sp-0); font-size: var(--fs-1); color: var(--ink-3);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    /* 等级标压在头像下沿，给名字与 ID 让出整行宽度 */
+    .mine-id .level-badge {
+      position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%);
       background: #faf6eb; border: 1px solid var(--brand);
-      color: var(--brand-text);
+      color: var(--brand-text); white-space: nowrap;
       padding: 1px var(--sp-1); border-radius: var(--r-pill); font-size: var(--fs-1); font-weight: 600;
-      flex-shrink: 0;
     }
     .pts-mini {
       font-size: var(--fs-1); background: #faf6eb; color: var(--brand-text);
@@ -2273,16 +2274,14 @@
       display: inline-flex; align-items: center; gap: 6px;
     }
     .invite .share .ico { width: 14px; height: 14px; color: #fff; }
-    .agent-sub { margin-top: var(--sp-2); font-size: var(--fs-1); color: var(--ink-3); }
 
-    /* ===== 会员等级入口 / 二级页 ===== */
-    .member-level {
-      background: #fff;
-      margin: 14px var(--sp-3);
-      border-radius: var(--r-card);
-      padding: var(--sp-3);
+
+    /* ===== 会员等级（账号页底部的暖色带） ===== */
+    .mine-member {
+      margin: var(--sp-3) calc(-1 * var(--sp-3)) calc(-1 * var(--sp-3));
+      padding: var(--sp-2) var(--sp-3);
+      background: #fdfaf2;
       display: flex; align-items: center; justify-content: space-between;
-      box-shadow: none;
       cursor: pointer;
     }
     .ml-lab { font-size: var(--fs-1); color: var(--ink-3); }
@@ -2350,14 +2349,38 @@
     .invite-tip { margin-top: var(--sp-1); font-size: var(--fs-1); color: var(--ink-3); }
     .section-hint { font-size: var(--fs-1); color: var(--ink-3); line-height: 1.45; padding: 0 var(--sp-0); }
 
-    .stat-bar {
-      display: flex; background: #fff; border-radius: var(--r-md);
-      margin: 0 var(--sp-3) var(--sp-3); padding: var(--sp-3) 0; position: relative; z-index: 2;
-      box-shadow: none;
+    .mine-stats { display: flex; margin-top: var(--sp-3); }
+    .mine-stats .cell { flex: 1; text-align: center; }
+    .mine-stats .v { font-size: var(--fs-3); font-weight: 700; }
+    .mine-stats .l { font-size: var(--fs-1); color: var(--ink-3); margin-top: 2px; }
+
+    /* 我的：分区（白底通栏 + 12px 灰缝） */
+    .mine-sec { background: #fff; margin-top: var(--sp-2); padding: var(--sp-3); }
+    .mine-sec-head {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: var(--fs-3); font-weight: 600;
     }
-    .stat-bar .cell { flex: 1; text-align: center; }
-    .stat-bar .v { font-size: var(--fs-2); font-weight: 700; }
-    .stat-bar .l { font-size: var(--fs-1); color: var(--ink-3); margin-top: 2px; }
+    .mine-sec-head .more { font-size: var(--fs-1); color: var(--ink-3); font-weight: 400; cursor: pointer; }
+    .order-acts { display: flex; margin-top: var(--sp-3); }
+    .order-acts .oa {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 7px;
+      font-size: var(--fs-1); color: var(--ink-2); cursor: pointer;
+    }
+    .order-acts .oa-i {
+      width: 42px; height: 42px; border-radius: var(--r-md); background: #f7f7f9;
+      display: flex; align-items: center; justify-content: center; color: var(--ink-2);
+    }
+    .order-acts .oa-i .ico { width: 21px; height: 21px; }
+    .mine-row {
+      display: flex; align-items: center; min-height: 44px; margin-top: var(--sp-2);
+      cursor: pointer;
+    }
+    .mine-row .mr-l {
+      display: flex; align-items: center; gap: var(--sp-1);
+      font-size: var(--fs-2); color: var(--ink); min-width: 0;
+    }
+    .mine-row .mr-l .ico { width: 18px; height: 18px; color: var(--ink-2); }
+    .mine-sec .menu-grid { margin-top: var(--sp-3); }
     .seg {
       display: flex; background: #fff; margin: 0 var(--sp-3) 18px;
       border-radius: var(--r-md); overflow: hidden;
@@ -2692,6 +2715,9 @@
     </symbol>
     <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M4 14h16v3H4v-3z"/><path d="M6 14l1.5-4h9L18 14"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>
+    </symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 6h11v10H2z"/><path d="M13 9h4l4 4v3h-8"/><circle cx="6.5" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/>
     </symbol>
     <symbol id="i-hotel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <rect x="5" y="4" width="14" height="17" rx="1"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2"/><path d="M10 21v-4h4v4"/>
@@ -3252,35 +3278,32 @@
 
         <!-- ========== 我的（原推广） ========== -->
         <div class="view" id="view-mine" data-tab="mine">
-          <div class="agent-head">
-            <div class="user-row">
-              <div class="avatar">潮</div>
+          <!-- 身份 + 数据 + 会员等级：同一块白色表面 -->
+          <header class="mine-head">
+            <div class="mine-id">
+              <div class="avatar">潮<span class="level-badge">L1 推手</span></div>
               <div class="uinfo">
-                <div class="uname">潮友8862 <span class="level-badge">L1 推手</span></div>
+                <div class="uname">潮友8862</div>
                 <div class="uid">ID：TC8862001 · 已实名</div>
               </div>
               <div class="pts-mini" onclick="go('points')">
                 积分 <span data-bind="points">20</span> ›
               </div>
             </div>
-            <div class="agent-sub">邀请好友一起玩 · 拉新得积分 · 社群组队</div>
-          </div>
-
-          <!-- 会员等级入口（开通在二级页） -->
-          <div class="member-level" onclick="go('member')">
-            <div class="ml-l">
-              <div class="ml-lab">会员等级</div>
-              <div class="ml-name" id="mlName">普通用户</div>
-              <div class="ml-note" id="mlNote">查看套餐与权益</div>
+            <div class="mine-stats">
+              <div class="cell"><div class="v">3,260</div><div class="l">累计拉新积分</div></div>
+              <div class="cell"><div class="v">860</div><div class="l">本月拉新积分</div></div>
+              <div class="cell"><div class="v">18</div><div class="l">团队人数</div></div>
             </div>
-            <div class="ml-r"><span class="ml-cta">去开通 ›</span></div>
-          </div>
-
-          <div class="stat-bar" style="margin-top: 0">
-            <div class="cell"><div class="v">3,260</div><div class="l">累计拉新积分</div></div>
-            <div class="cell"><div class="v">860</div><div class="l">本月拉新积分</div></div>
-            <div class="cell"><div class="v">18</div><div class="l">团队人数</div></div>
-          </div>
+            <div class="mine-member" onclick="go('member')">
+              <div>
+                <div class="ml-lab">会员等级</div>
+                <div class="ml-name" id="mlName">普通用户</div>
+                <div class="ml-note" id="mlNote">查看套餐与权益</div>
+              </div>
+              <span class="ml-cta">去开通 ›</span>
+            </div>
+          </header>
 
           <!-- 代理商 · B 端联系横幅 -->
           <div class="bd-banner" onclick="openAgentContact()">
@@ -3291,33 +3314,46 @@
             <div class="bd-cta">立即联系 ›</div>
           </div>
 
-          <!-- 拉新中心入口（工作台 / 拉新积分 / 等级规则 收进二级页） -->
-          <div class="card" style="margin:14px var(--sp-3) var(--sp-3);cursor:pointer" onclick="go('pull')">
-            <div class="entry-row">
-              <span class="entry-t">拉新中心</span>
-              <span class="pull-sub">工作台 · 拉新积分 · 等级规则</span>
-              <span class="entry-chev">›</span>
+          <!-- 订单：四种状态一眼看全 + 地址 -->
+          <section class="mine-sec">
+            <div class="mine-sec-head">
+              <span>我的订单</span>
+              <span class="more" onclick="state.orderTab='all';go('orders')">全部订单 ›</span>
             </div>
-          </div>
-
-          <div class="card" style="margin: 0 var(--sp-3) var(--sp-3)">
-            <div class="entry-row" style="margin-bottom:var(--sp-0);cursor:pointer" onclick="state.orderTab='all';go('orders')">
-              <span class="entry-t">我的订单</span>
+            <div class="order-acts">
+              <div class="oa" onclick="state.orderTab='unpaid';go('orders')">
+                <div class="oa-i"><svg class="ico"><use href="#i-wallet"/></svg></div><span>待付款</span>
+              </div>
+              <div class="oa" onclick="state.orderTab='pending_ship';go('orders')">
+                <div class="oa-i"><svg class="ico"><use href="#i-box"/></svg></div><span>待发货</span>
+              </div>
+              <div class="oa" onclick="state.orderTab='shipped';go('orders')">
+                <div class="oa-i"><svg class="ico"><use href="#i-truck"/></svg></div><span>已发货</span>
+              </div>
+              <div class="oa" onclick="state.orderTab='done';go('orders')">
+                <div class="oa-i"><svg class="ico"><use href="#i-check"/></svg></div><span>已完成</span>
+              </div>
+            </div>
+            <div class="mine-row" onclick="go('address')">
+              <span class="mr-l"><svg class="ico"><use href="#i-pin"/></svg>收货地址</span>
               <span class="entry-chev auto">›</span>
             </div>
-            <div style="display:flex;gap: 18px;margin-top: 14px;font-size: var(--fs-1);color:var(--ink-2)">
-              <span onclick="event.stopPropagation();state.orderTab='unpaid';go('orders')">待付款</span>
-              <span onclick="event.stopPropagation();state.orderTab='pending_ship';go('orders')">待发货</span>
-              <span onclick="event.stopPropagation();state.orderTab='shipped';go('orders')">已发货</span>
-              <span onclick="event.stopPropagation();state.orderTab='done';go('orders')">已完成</span>
-              <span style="margin-left: auto;color:var(--brand)" onclick="event.stopPropagation();go('address')">收货地址</span>
-            </div>
-          </div>
+          </section>
 
-          <div class="card" style="margin: 0 var(--sp-3) var(--sp-3)">
-            <div style="font-size:var(--fs-2);font-weight:600;margin-bottom: 14px">必备工具</div>
+          <!-- 拉新中心入口（工作台 / 拉新积分 / 等级规则 收进二级页） -->
+          <section class="mine-sec">
+            <div class="mine-sec-head"><span>拉新中心</span></div>
+            <div class="mine-row" onclick="go('pull')">
+              <span class="mr-l">工作台 · 拉新积分 · 等级规则</span>
+              <span class="entry-chev auto">›</span>
+            </div>
+          </section>
+
+          <!-- 必备工具 -->
+          <section class="mine-sec">
+            <div class="mine-sec-head"><span>必备工具</span></div>
             <div class="menu-grid" id="agentMenus"></div>
-          </div>
+          </section>
         </div>
 
         <!-- ========== 拉新中心（二级页：工作台 / 拉新积分 / 等级规则） ========== -->
@@ -3849,7 +3885,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.10';
+    const APP_VERSION = 'v20261023.11';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
