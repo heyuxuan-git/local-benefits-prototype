@@ -285,7 +285,7 @@
 
     /* ===== 限时抢积分 ===== */
     .grab-card {
-      margin: var(--sp-0) var(--sp-3) 10px;
+      margin: var(--sp-2) var(--sp-3) 0;
       padding: var(--sp-2) 14px;
       border-radius: var(--r-card);
       display: flex;
@@ -350,6 +350,8 @@
       color: #fff; border: none;
       box-shadow: none;
     }
+    /* 首页板块节奏：板块之间统一 12px（原为顶部 0 间距，饭点免单会贴住上面的入口区） */
+    #view-home > .fm-entry { margin: var(--sp-2) var(--sp-3) 0; }
     .fm-entry::after {
       content: ""; position: absolute; right: -34px; top: -46px;
       width: 130px; height: 130px; border-radius: 50%;
@@ -1569,11 +1571,11 @@
 
     .home-sec-head {
       display: flex; justify-content: space-between; align-items: center;
-      margin: var(--sp-0) 20px 10px; font-size: var(--fs-2); font-weight: 700;
+      margin: var(--sp-2) 20px 10px; font-size: var(--fs-2); font-weight: 700;
     }
     .home-sec-head .more { font-size: var(--fs-1); color: var(--ink-3); font-weight: 400; cursor: pointer; }
     .home-coupons {
-      display: flex; gap: 10px; overflow-x: auto; padding: 0 var(--sp-3) var(--sp-0);
+      display: flex; gap: 10px; overflow-x: auto; padding: 0 var(--sp-3);
       scrollbar-width: none;
     }
     .home-coupons::-webkit-scrollbar { display: none; }
@@ -2866,7 +2868,7 @@
           </div>
           <div class="home-coupons" id="homeCoupons"></div>
 
-          <div class="home-sec-head" style="margin-top: 18px">
+          <div class="home-sec-head">
             <span>积分好物</span>
             <span class="more" onclick="switchTab('mall')">更多 ›</span>
           </div>
@@ -3883,7 +3885,7 @@
     };
 
     /* 版本号：每次发布由维护者更新，用于 CDN 缓存自检 */
-    const APP_VERSION = 'v20261023.14';
+    const APP_VERSION = 'v20261023.15';
 
     function ico(id, cls) {
       return `<svg class="ico ${cls||''}"><use href="#${id}"/></svg>`;
