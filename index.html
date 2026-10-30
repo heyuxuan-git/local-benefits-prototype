@@ -4840,11 +4840,10 @@
       state.swIndex = ((i % 3) + 3) % 3;
       document.getElementById('slides').style.transform = `translateX(-${state.swIndex * 100}%)`;
       document.querySelectorAll('#swDots i').forEach((d, idx) => d.classList.toggle('on', idx === state.swIndex));
-      // dots on light slide
-      const onLight = state.swIndex === 2;
+      // 白底轮播：点统一用品牌色/浅灰，不依赖深浅底
       document.querySelectorAll('#swDots i').forEach(d => {
-        if (d.classList.contains('on')) d.style.background = onLight ? '#1f2329' : '#fff';
-        else d.style.background = onLight ? 'rgba(0,0,0,.25)' : 'rgba(255,255,255,.4)';
+        if (d.classList.contains('on')) d.style.background = 'var(--brand, #8b7355)';
+        else d.style.background = 'rgba(31,35,41,.22)';
       });
     }
 
