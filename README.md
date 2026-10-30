@@ -1,4 +1,4 @@
-# 潮匠 TrendCraft · 可点击原型 v1.0
+# 潮匠 TrendCraft · 可点击原型 v1.1
 
 在线预览：https://heyuxuan-git.github.io/local-benefits-prototype/
 
