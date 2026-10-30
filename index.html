@@ -1632,14 +1632,18 @@
       padding: 8px 0; border-radius: var(--r-pill);
     }
     .th-orange { background: #8b7355; }
-    .th-meituan { background: #9a8a6a; color: #1f2329; }
-    .th-meituan .btn-s { background: #1f2329; color: #e6b85a; }
-    .th-taobao { background: #9a8a6a; }
-    .th-blue { background: #6b8fc4; }
-    .th-didi { background: #8b7355; }
+    /* 第三方品牌：恢复品牌主题色（识别位） */
+    .th-meituan { background: #ffd100; color: #1f2329; }
+    .th-meituan .btn-s { background: #1f2329; color: #ffd100; }
+    .th-taobao { background: #ff5000; }
+    .th-blue { background: #1a9bff; }
+    .th-didi { background: #ff5a1f; }
     .th-green { background: #4a9b6e; }
     .th-gold { background: #9a8a6a; color: #1f2329; }
     .th-gold .btn-s { background: #1f2329; color: #edc877; }
+    .th-flash { background: #00a6ff; }
+    .th-jd { background: #e1251b; }
+    .th-try { background: #ff6b6b; }
 
     .home-goods { padding: 0 var(--sp-3); display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .hg {
@@ -1731,11 +1735,12 @@
       display: flex; align-items: center; justify-content: center; font-weight: 800;
       flex-shrink: 0;
     }
-    .brand-tag .logo.mt { background: #fff8e0; color: #c9a000; }
-    .brand-tag .logo.tb { background: #fff4f0; color: #ff5000; }
-    .brand-tag .logo.flash { background: #eef7ff; color: #00a6ff; }
-    .brand-tag .logo.jd { background: #ffecec; color: #e1251b; }
+    .brand-tag .logo.mt { background: #ffd100; color: #1f2329; }
+    .brand-tag .logo.tb { background: #ff5000; color: #fff; }
+    .brand-tag .logo.flash { background: #00a6ff; color: #fff; }
+    .brand-tag .logo.jd { background: #e1251b; color: #fff; }
     .brand-tag .logo.generic { background: #faf6eb; color: var(--brand-text); }
+    .brand-tag.is-brand { color: var(--ink); }
 
     /* 双列白卡 */
     .collage {
@@ -1800,34 +1805,83 @@
     }
     .pcard .pill-btn.wide { width: 92%; }
 
-    /* 白底圆角矩形：去掉顶色点缀，仅统一浅边框 */
-    .pcard.th-taobao,
-    .pcard.th-meituan,
+    /* 通用主题：白底浅边；第三方品牌主题恢复品牌色 */
     .pcard.th-orange,
     .pcard.th-blue,
     .pcard.th-deepred,
     .pcard.th-gold,
     .pcard.th-green,
-    .pcard.th-didi,
-    .pcard.th-try,
-    .pcard.th-flash,
-    .pcard.th-jd {
+    .pcard.th-didi {
       background: #fff;
       border: 1px solid #eceef1;
       border-top: 1px solid #eceef1;
     }
-    .pcard.th-taobao .ptitle,
-    .pcard.th-meituan .ptitle,
     .pcard.th-orange .ptitle,
     .pcard.th-blue .ptitle,
     .pcard.th-deepred .ptitle,
     .pcard.th-gold .ptitle,
     .pcard.th-green .ptitle,
-    .pcard.th-didi .ptitle,
-    .pcard.th-try .ptitle,
-    .pcard.th-flash .ptitle,
-    .pcard.th-jd .ptitle {
+    .pcard.th-didi .ptitle {
       color: var(--ink);
+    }
+
+    /* 品牌主题卡：品牌底 + 高对比字/按钮 */
+    .pcard.th-meituan {
+      background: #ffd100;
+      border: 1px solid #e6b800;
+      color: #1f2329;
+    }
+    .pcard.th-meituan .ptitle { color: #1f2329; }
+    .pcard.th-meituan .psub { color: #5a4a00; }
+    .pcard.th-taobao {
+      background: #ff5000;
+      border: 1px solid #e64700;
+      color: #fff;
+    }
+    .pcard.th-taobao .ptitle { color: #fff; }
+    .pcard.th-taobao .psub { color: rgba(255,255,255,.9); }
+    .pcard.th-taobao .open-btn {
+      background: #fff; color: #ff5000; border: none;
+    }
+    .pcard.th-taobao .pill-btn {
+      background: #fff; color: #ff5000; border: none;
+    }
+    .pcard.th-flash {
+      background: #00a6ff;
+      border: 1px solid #0090e0;
+      color: #fff;
+    }
+    .pcard.th-flash .ptitle { color: #fff; }
+    .pcard.th-flash .psub { color: rgba(255,255,255,.9); }
+    .pcard.th-flash .open-btn {
+      background: #fff; color: #0090e0; border: none;
+    }
+    .pcard.th-flash .pill-btn {
+      background: #fff; color: #0090e0; border: none;
+    }
+    .pcard.th-jd {
+      background: #e1251b;
+      border: 1px solid #c8102e;
+      color: #fff;
+    }
+    .pcard.th-jd .ptitle { color: #fff; }
+    .pcard.th-jd .psub { color: rgba(255,255,255,.9); }
+    .pcard.th-jd .open-btn {
+      background: #fff; color: #e1251b; border: none;
+    }
+    .pcard.th-jd .pill-btn {
+      background: #fff; color: #e1251b; border: none;
+    }
+    .pcard.th-try {
+      background: #ff6b6b;
+      border: 1px solid #e85a5a;
+      color: #fff;
+    }
+    .pcard.th-try .ptitle { color: #fff; }
+    .pcard.th-try .psub { color: rgba(255,255,255,.9); }
+    .pcard.th-try .open-btn,
+    .pcard.th-try .pill-btn {
+      background: #fff; color: #e85a5a; border: none;
     }
 
     /* 宽横幅卡 */
